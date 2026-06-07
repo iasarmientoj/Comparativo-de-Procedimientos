@@ -1,6 +1,6 @@
 /* ============================================================
    STYLES.CSS — Sistema de Análisis Comparativo de Procedimientos
-   Estética: Gov.co + Premium Dark + Glassmorphism
+   Estética: Gov.co + Premium Light
    ============================================================ */
 
 /* ---- Google Fonts ---- */
@@ -9,40 +9,40 @@
 /* ---- Design Tokens ---- */
 :root {
   /* Government Colors */
-  --gov-gold: #FDD835;
-  --gov-gold-dim: rgba(253, 216, 53, 0.25);
+  --gov-gold: #F9A825;
+  --gov-gold-dim: rgba(249, 168, 37, 0.18);
   --gov-navy: #0a1628;
   --gov-navy-light: #111d33;
   --gov-blue: #1565C0;
   --gov-blue-bright: #2196F3;
 
   /* Backgrounds */
-  --bg-body: #060d18;
-  --bg-surface: #0c1525;
-  --bg-surface-2: #111d33;
-  --bg-glass: rgba(255, 255, 255, 0.03);
-  --bg-glass-hover: rgba(255, 255, 255, 0.06);
+  --bg-body: #F5F6FA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-2: #EEF0F5;
+  --bg-glass: rgba(255, 255, 255, 0.75);
+  --bg-glass-hover: rgba(255, 255, 255, 0.95);
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.1);
-  --border-accent: rgba(253, 216, 53, 0.3);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --border-medium: rgba(0, 0, 0, 0.13);
+  --border-accent: rgba(249, 168, 37, 0.4);
 
   /* Text */
-  --text-primary: #E8EAED;
-  --text-secondary: #9AA0A6;
-  --text-tertiary: #5F6368;
-  --text-inverse: #0a1628;
+  --text-primary: #1A1D23;
+  --text-secondary: #4A5568;
+  --text-tertiary: #8892A4;
+  --text-inverse: #FFFFFF;
 
   /* Status */
-  --success: #00C853;
-  --success-bg: rgba(0, 200, 83, 0.1);
-  --warning: #FF9100;
-  --warning-bg: rgba(255, 145, 0, 0.1);
-  --danger: #FF1744;
-  --danger-bg: rgba(255, 23, 68, 0.1);
-  --info: #448AFF;
-  --info-bg: rgba(68, 138, 255, 0.1);
+  --success: #16A34A;
+  --success-bg: rgba(22, 163, 74, 0.08);
+  --warning: #D97706;
+  --warning-bg: rgba(217, 119, 6, 0.08);
+  --danger: #DC2626;
+  --danger-bg: rgba(220, 38, 38, 0.06);
+  --info: #2563EB;
+  --info-bg: rgba(37, 99, 235, 0.07);
 
   /* Typography */
   --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -88,11 +88,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.12);
+  background: rgba(0, 0, 0, 0.15);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(0, 0, 0, 0.25);
 }
 
 
@@ -140,7 +140,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--text-primary);
+  color: #FFFFFF;
   margin-bottom: 0.15rem;
 }
 
@@ -150,7 +150,7 @@ body {
 
 .header-content p {
   font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.65);
   letter-spacing: 0.04em;
   font-weight: 400;
 }
@@ -187,7 +187,7 @@ body {
 }
 
 .case-card {
-  background: var(--bg-glass);
+  background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 1rem 1rem 0.85rem;
@@ -195,6 +195,7 @@ body {
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .case-card::before {
@@ -220,14 +221,14 @@ body {
 }
 
 .case-card.selected {
-  border-color: var(--gov-gold);
-  background: rgba(253, 216, 53, 0.04);
-  box-shadow: 0 0 20px rgba(253, 216, 53, 0.08), inset 0 0 20px rgba(253, 216, 53, 0.02);
+  border-color: var(--gov-blue);
+  background: rgba(21, 101, 192, 0.05);
+  box-shadow: 0 2px 12px rgba(21, 101, 192, 0.12);
 }
 
 .case-card.selected::before {
   opacity: 1;
-  background: linear-gradient(90deg, transparent, var(--gov-gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--gov-blue), transparent);
 }
 
 .case-card .case-icon {
@@ -253,8 +254,8 @@ body {
 .case-card .case-value {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--gov-gold);
+  font-weight: 600;
+  color: var(--gov-navy);
   margin-bottom: 0.35rem;
 }
 
@@ -282,8 +283,8 @@ body {
 }
 
 .btn-simulate {
-  background: linear-gradient(135deg, var(--gov-gold), #FFA000);
-  color: var(--text-inverse);
+  background: linear-gradient(135deg, var(--gov-blue), #1976D2);
+  color: #FFFFFF;
   border: none;
   padding: 0.7rem 2.5rem;
   border-radius: 8px;
@@ -313,7 +314,7 @@ body {
 
 .btn-simulate:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(253, 216, 53, 0.3);
+  box-shadow: 0 4px 16px rgba(21, 101, 192, 0.25);
 }
 
 .btn-simulate:disabled {
@@ -366,12 +367,13 @@ body {
 }
 
 .procedure-panel {
-  background: var(--bg-glass);
+  background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .panel-header {
@@ -485,7 +487,7 @@ body {
   height: 24px;
   border-radius: 50%;
   border: 2px solid var(--border-medium);
-  background: var(--bg-body);
+  background: var(--bg-surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -613,7 +615,7 @@ body {
 .step-node.approved .step-dot {
   border-color: var(--success);
   background: var(--success);
-  color: var(--bg-body);
+  color: #FFFFFF;
 }
 .step-node.approved .step-dot::after {
   content: '✓';
@@ -858,9 +860,9 @@ body {
 }
 
 .vs-divider.active .vs-badge {
-  border-color: var(--gov-gold);
-  color: var(--gov-gold);
-  box-shadow: 0 0 15px rgba(253, 216, 53, 0.15);
+  border-color: var(--gov-blue);
+  color: var(--gov-blue);
+  box-shadow: 0 0 10px rgba(21, 101, 192, 0.15);
 }
 
 
@@ -871,7 +873,7 @@ body {
 .loading-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(6, 13, 24, 0.92);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(8px);
   z-index: 1000;
   display: flex;
@@ -894,8 +896,8 @@ body {
 .loader-ring {
   width: 60px;
   height: 60px;
-  border: 3px solid var(--border-subtle);
-  border-top-color: var(--gov-gold);
+  border: 3px solid var(--border-medium);
+  border-top-color: var(--gov-blue);
   border-radius: 50%;
   margin: 0 auto 1.25rem;
   animation: spin 1s linear infinite;
@@ -909,7 +911,7 @@ body {
 
 .loader .loader-case {
   font-size: 0.75rem;
-  color: var(--gov-gold);
+  color: var(--gov-blue);
   margin-top: 0.35rem;
   font-weight: 600;
 }
@@ -958,7 +960,7 @@ body {
 
 .stat-card.stat-old .stat-value { color: var(--danger); }
 .stat-card.stat-new .stat-value { color: var(--success); }
-.stat-card.stat-neutral .stat-value { color: var(--gov-gold); }
+.stat-card.stat-neutral .stat-value { color: var(--gov-blue); }
 
 
 /* ============================================================
@@ -975,8 +977,8 @@ body {
 }
 
 @keyframes pulseBtn {
-  0%, 100% { box-shadow: 0 0 0 rgba(253, 216, 53, 0); }
-  50% { box-shadow: 0 0 20px rgba(253, 216, 53, 0.2); }
+  0%, 100% { box-shadow: 0 0 0 rgba(21, 101, 192, 0); }
+  50% { box-shadow: 0 0 20px rgba(21, 101, 192, 0.2); }
 }
 
 @keyframes fadeInUp {

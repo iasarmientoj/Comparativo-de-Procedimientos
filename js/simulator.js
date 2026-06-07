@@ -57,8 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.case-card').forEach(c => c.classList.remove('selected'));
     document.getElementById(`case-${caseId}`).classList.add('selected');
 
-    // Enable simulate button
+    // Enable simulate button and reset its text
     btnSimulate.disabled = false;
+    btnSimulate.classList.remove('running');
+    btnSimulate.textContent = 'Iniciar Simulación';
 
     // Render steps
     renderOldSteps();
