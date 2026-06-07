@@ -120,3 +120,21 @@ A medida que el usuario revisa visualmente, puede marcar manualmente *"Validado 
 Este enfoque no solo cumple con el entregable legal que le pidieron, sino que entrega una **herramienta de gobernanza**. Al gobierno saliente le encantará porque lo presentará como un hito de transparencia antes de irse, y al gobierno entrante le parecerá la herramienta perfecta para auditar lo que reciben.
 
 ¿Qué tipo de interfaz visual crees que resuene más con el perfil de los directivos del ministerio: algo extremadamente corporativo y financiero (estilo terminal de Bloomberg) o algo más cercano a un ecosistema digital moderno de software de gestión?
+
+
+-------------------
+
+CONTEXTO PROBLEMA
+
+
+[20:59, 27/5/2026] Juan Pablo García: Básicamente me dieron vía libre para modificar un procedimiento que está mal hecho en el ministerio de hacienda
+[20:59, 27/5/2026] Juan Pablo García: Claramente de contratación
+[21:00, 27/5/2026] Juan Pablo García: Ese procedimiento en particular deriva en contratos grandotes, y me parece que lo están haciendo mal, y ocultando cosas, para Dios sabe qué fines
+[21:01, 27/5/2026] Juan Pablo García: Entonces hace una semana más o menos, modificaron mi contrato para meterle un producto entregable y obvio cobraré por eso aparte
+[21:01, 27/5/2026] Juan Pablo García: El producto es el nuevo procedimiento ajustado a la ley y a la transparencia
+[21:01, 27/5/2026] Juan Pablo García: Usualmente esos procedimientos se hacen en una burda tabla en Excel y es un documento Word que se aprueba al final, pero acá entra su Merced
+[21:02, 27/5/2026] Juan Pablo García: Yo quiero destacar, entonces además de ese entregable común y corriente, quiero hacer algo que impacte para que mis superiores se den cuenta de lo importante que es cambiarlo
+[21:02, 27/5/2026] Juan Pablo García: Básicamente quiero reconocimiento
+[21:03, 27/5/2026] Juan Pablo García: Entonces estoy pensando en que debo hacer una presentación del entregable, pero el material de apoyo de esa presentación quiero que sea algo que nadie más haya hecho (ni PowerPoint ni Canva ni nada así común)
+[21:05, 27/5/2026] Juan Pablo García: Para eso quiero reclutar vuestros servicios ajjaja
+[21:06, 27/5/2026] Juan Pablo García: Quedé de entregarlo en un mes para dejarlo como producto del gobierno saliente en ese ministerio (y claramente para que el gobierno entrante lo vea y me quiera mantener ahí)
