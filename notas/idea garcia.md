@@ -1,7 +1,7 @@
 
 
 
-
+"Y para demostrar nuestro compromiso con la transparencia, en la web les dejamos una herramienta gratuita. Entran a tuusuario.github.io/web-garcia/herramienta, pegan su llave de Gemini y pueden auditar cualquier pliego de condiciones en tiempo real sin instalar absolutamente nada".
 
 
 
