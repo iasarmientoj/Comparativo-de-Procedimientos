@@ -1,0 +1,17 @@
+# Dependencias de Node
+node_modules/
+
+# Archivos de empaquetado/compilación locales
+dist/
+.vite-inspect
+.vite/
+
+# Archivos del sistema operativo y logs
+.DS_Store
+Thumbs.db
+*.log
+
+# Archivos de configuración local/llaves de API (opcional)
+.env
+.env.local
+.env.*.local
