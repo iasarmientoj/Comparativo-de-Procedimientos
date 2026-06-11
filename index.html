@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacienda Transparente - Rediseño de AMP</title>
+    <title>Sistema de Análisis Comparativo de Procedimientos - MHCP</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,365 +13,293 @@
         rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="landing.css">
 </head>
 
-<body class="dark-theme">
-    <div class="bg-glow"></div>
+<body class="light-theme">
+    <!-- Mouse-following Particle Background Canvas -->
+    <canvas id="particle-canvas"></canvas>
 
-    <header class="app-header">
-        <div class="header-container">
-            <div class="logo-area" id="headerLogo">
-                <i class="fa-solid fa-shield-halved logo-icon"></i>
-                <div class="logo-text">
-                    <h1>HACIENDA <span>TRANSPARENTE</span></h1>
-                    <p>Rediseño de Procedimientos de Contratación • AMP</p>
-                </div>
+    <!-- Floating Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- HERO SCREEN (First Viewport) -->
+    <section class="hero-screen" id="heroSec">
+        <div class="hero-diagram-container">
+            <div class="hero-logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Ministerio de Hacienda y Crédito Público</span>
             </div>
-            <div class="meta-info">
-                <span class="badge badge-version">v2.0 Beta</span>
-                <span class="badge badge-status"><span class="pulse-dot"></span> Fase de Adopción</span>
+
+            <h1 class="hero-title">Sistema de Análisis Comparativo de Procedimientos<br>Contratación por Acuerdo Marco
+                de Precios — MHCP</h1>
+
+            <!-- SVG Diagram Connector Lines -->
+            <div class="diagram-connector-wrap">
+                <svg class="diagram-svg" viewBox="0 0 800 80" preserveAspectRatio="none">
+                    <!-- Main vertical drop from title -->
+                    <line x1="400" y1="0" x2="400" y2="40" class="diagram-line" />
+                    <!-- Junction circle/dot -->
+                    <circle cx="400" cy="40" r="5" class="diagram-junction" />
+                    <!-- Horizontal branching line -->
+                    <line x1="120" y1="40" x2="680" y2="40" class="diagram-line" />
+                    <!-- Vertical drops to buttons -->
+                    <line x1="120" y1="40" x2="120" y2="80" class="diagram-line" />
+                    <line x1="400" y1="40" x2="400" y2="80" class="diagram-line" />
+                    <line x1="680" y1="40" x2="680" y2="80" class="diagram-line" />
+                </svg>
+            </div>
+
+            <div class="hero-buttons-grid">
+                <a href="index2.html#actual" class="hero-card-btn">
+                    <span>Procedimiento Actual</span>
+                </a>
+                <a href="index2.html#mejorado" class="hero-card-btn">
+                    <span>Procedimiento Mejorado</span>
+                </a>
+                <a href="index2.html#simulador" class="hero-card-btn">
+                    <span>Simulador</span>
+                </a>
             </div>
         </div>
-    </header>
+    </section>
 
+    <!-- MAIN PANEL SECTION (Temporarily hidden for clean landing layout)
     <main class="main-container">
-        <!-- Hero Section -->
-        <section class="hero-section" id="heroSec">
-            <div class="hero-content">
-                <h2>Blindaje Jurídico & Control de Riesgo Fiscal</h2>
-                <p>Ecosistema interactivo para el análisis y reestructuración del proceso de Selección Abreviada
-                    mediante Acuerdos Marco de Precios (AMP) en el Ministerio de Hacienda.</p>
+
+        <section class="section-panel" id="panelViejo">
+            <div class="section-header">
+                <span class="section-tag">[ Procedimiento Viejo ]</span>
+                <h2>Flujo de Trabajo Anterior & Vulnerabilidades</h2>
+                <p>Análisis de cómo la total concentración del trámite en el área técnica (Ingenieros de Sistemas) diluía la gobernanza y exponía a la entidad a nulidades contractuales.</p>
             </div>
-            <div class="hero-stats">
-                <div class="stat-card card-alert">
-                    <span class="stat-val">100%</span>
-                    <span class="stat-lbl">Riesgo en Proc. Anterior</span>
+
+            <div class="diagram-flow-container">
+                <div class="diagram-canvas-card">
+                    <div class="diagram-connection-line"></div>
+                    <div class="diagram-nodes-grid" id="oldFlowNodes">
+                    </div>
                 </div>
-                <div class="stat-card card-safe">
-                    <span class="stat-val">0%</span>
-                    <span class="stat-lbl">Puntos Ciegos Propuestos</span>
-                </div>
+
+                <aside class="light-sidebar" id="oldDetailSidebar">
+                    <div class="sidebar-placeholder" id="oldSidebarPlaceholder">
+                        <i class="fa-solid fa-circle-nodes"></i>
+                        <h4>Detalle del Proceso</h4>
+                        <p>Haz clic en cualquier nodo del diagrama de la izquierda para desplegar su análisis de vulnerabilidad, responsables y normativa colombiana afectada.</p>
+                    </div>
+                    <div class="sidebar-content hidden" id="oldSidebarContent">
+                        <div class="sidebar-header">
+                            <span class="sidebar-header-badge" id="oldStepTag">
+                                <span class="diagram-tag">Paso A</span>
+                            </span>
+                            <h3 id="oldStepTitle">Título del Paso</h3>
+                        </div>
+                        <div class="sidebar-group">
+                            <h5>Responsable Real:</h5>
+                            <p id="oldStepResp">Cargando...</p>
+                        </div>
+                        <div class="sidebar-group alert-group">
+                            <h5>Diagnóstico de Vulnerabilidad:</h5>
+                            <p id="oldStepDiag">Cargando...</p>
+                        </div>
+                        <div class="sidebar-group">
+                            <h5>Normativa Implicada (Decreto 1082 / Ley 80):</h5>
+                            <p id="oldStepLaw">Cargando...</p>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
 
-        <!-- Navigation Tabs -->
-        <nav class="tab-navigation" id="tabNav">
-            <button class="tab-btn active" id="tabBtnActual" onclick="switchTab('actual')">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <span>Procedimiento Viejo</span>
-            </button>
-            <button class="tab-btn" id="tabBtnMejorado" onclick="switchTab('mejorado')">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>Procedimiento Nuevo</span>
-            </button>
-            <button class="tab-btn" id="tabBtnSimulador" onclick="switchTab('simulador')">
-                <i class="fa-solid fa-gauge-high"></i>
-                <span>Simulador & Auditor</span>
-            </button>
-        </nav>
+        <section class="section-panel" id="panelNuevo">
+            <div class="section-header">
+                <span class="section-tag">[ Procedimiento Propuesto ]</span>
+                <h2>Metodología de Control y Matriz de Roles (PHVA)</h2>
+                <p>El nuevo procedimiento incorpora un Comité Evaluador formal (Técnico, Abogado, Financiero), puntos de control obligatorios, y verificación previa de deudores alimentarios (REDAM).</p>
+            </div>
 
-        <!-- Tab Contents -->
-        <div class="tab-content-container">
+            <div class="phva-tabs-control">
+                <button class="phva-tab-btn active" onclick="filterNewSteps('all')">Todos los Pasos</button>
+                <button class="phva-tab-btn" onclick="filterNewSteps('P')"><span class="phva-dot P"></span> Planear (P)</button>
+                <button class="phva-tab-btn" onclick="filterNewSteps('H')"><span class="phva-dot H"></span> Hacer (H)</button>
+                <button class="phva-tab-btn" onclick="filterNewSteps('V')"><span class="phva-dot V"></span> Verificar (V)</button>
+                <button class="phva-tab-btn" onclick="filterNewSteps('A')"><span class="phva-dot A"></span> Actuar (A)</button>
+            </div>
 
-            <!-- SECTION 1: PROCEDIMIENTO ACTUAL (VIEJO) -->
-            <section class="tab-panel active" id="panelActual">
-                <div class="panel-header-desc">
-                    <div class="title-wrap">
-                        <h3>Procedimiento Viejo (Vulnerabilidades)</h3>
-                        <p>Análisis del flujo anterior donde el área técnica asumía la totalidad del trámite y la
-                            responsabilidad jurídica en solitario.</p>
+            <div class="new-steps-container">
+                <div class="new-steps-grid-layout" id="newStepsGrid">
+                </div>
+
+                <aside class="light-sidebar" id="newDetailSidebar">
+                    <div class="sidebar-placeholder" id="newSidebarPlaceholder">
+                        <i class="fa-solid fa-list-check"></i>
+                        <h4>Ficha de Actividad</h4>
+                        <p>Selecciona cualquier actividad del listado para ver su descripción formal, responsable asignado, puntos de control obligatorios y registros exigidos.</p>
                     </div>
-                    <div class="workload-summary old-workload">
-                        <div class="wl-bar" style="width: 85%;"></div>
-                        <span>Carga del Ingeniero: <strong>85% (Sobrecargado)</strong></span>
+                    <div class="sidebar-content hidden" id="newSidebarContent">
+                        <div class="sidebar-header">
+                            <span class="sidebar-header-badge" id="newStepTag">
+                                <span class="phva-badge P">Planear</span>
+                            </span>
+                            <h3 id="newStepTitle">Actividad</h3>
+                        </div>
+                        <div class="sidebar-group">
+                            <h5>Responsable Asignado:</h5>
+                            <p id="newStepResp">Cargando...</p>
+                        </div>
+                        <div class="sidebar-group">
+                            <h5>Descripción y Plazo:</h5>
+                            <p id="newStepDesc">Cargando...</p>
+                        </div>
+                        <div class="sidebar-group success-group hidden" id="newStepControlBox">
+                            <h5>Mecanismo de Control del Riesgo:</h5>
+                            <p id="newStepControl">Cargando...</p>
+                        </div>
+                        <div class="sidebar-group">
+                            <h5>Registros y Soportes Exigidos:</h5>
+                            <p id="newStepRegs">Cargando...</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section-panel" id="panelSimulador">
+            <div class="section-header">
+                <span class="section-tag">[ Simulaciones y Herramientas ]</span>
+                <h2>Simulador de Estrés y Pre-Auditor Jurídico</h2>
+                <p>Compara el impacto de contingencias contractuales típicas bajo ambas metodologías o audita la transparencia de un pliego de condiciones en tiempo real.</p>
+            </div>
+
+            <div class="light-grid-2col">
+                
+                <div class="light-simulator-card" id="simulatorContainer">
+                    <div class="sim-box-header">
+                        <i class="fa-solid fa-flask-bubble"></i>
+                        <div>
+                            <h3>Simulador de Estrés Contractual</h3>
+                            <p>Somete un contrato público a contingencias reales para verificar el blindaje del procedimiento.</p>
+                        </div>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <label for="simulationScenario">Selecciona un Escenario de Riesgo:</label>
+                        <select id="simulationScenario" onchange="loadScenarioInfo()">
+                            <option value="iva">Error de IVA en Oferta (Caso Nuevo Pangea)</option>
+                            <option value="inhabilidad">Inhabilidad Sobrevenida del Representante Legal (REDAM/RUES)</option>
+                            <option value="cambio">Modificación de Vigencias y Cantidades (Simulador)</option>
+                        </select>
+                    </div>
+
+                    <div class="scenario-info-panel" id="scenarioDesc">
+                    </div>
+
+                    <div class="sim-actions-grid">
+                        <button class="btn btn-danger" id="runOldSimBtn" onclick="runSimulation('old')">
+                            <i class="fa-solid fa-circle-play"></i> Simular Proc. Viejo
+                        </button>
+                        <button class="btn btn-success" id="runNewSimBtn" onclick="runSimulation('new')">
+                            <i class="fa-solid fa-circle-play"></i> Simular Proc. Nuevo
+                        </button>
+                    </div>
+
+                    <div class="viewport-wrapper">
+                        <div class="sim-indicator-text" id="simStageIndicator">Selecciona un escenario e inicia la simulación.</div>
+                        <div class="viewport-progress-bar">
+                            <div class="viewport-progress-fill" id="visualProgressFill"></div>
+                        </div>
+                        <div class="viewport-nodes-row" id="visualNodesRow">
+                        </div>
+                        
+                        <div class="sim-output-box hidden" id="simResultBox">
+                            <div class="result-icon-wrap" id="simResultIcon">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </div>
+                            <div class="result-text-wrap">
+                                <h5 id="simResultTitle">Título</h5>
+                                <p id="simResultText">Contenido del resultado...</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="flow-layout">
-                    <!-- Flow Map -->
-                    <div class="flow-map-container card-glass">
-                        <div class="flow-map-header">
-                            <h4>Mapa del Proceso Viejo</h4>
-                            <span class="hint-text"><i class="fa-solid fa-circle-info"></i> Selecciona un nodo para ver
-                                sus riesgos</span>
-                        </div>
-                        <div class="flow-nodes-wrapper" id="oldFlowNodes">
-                            <!-- JS will inject nodes here -->
+                <div class="light-auditor-card" id="auditorContainer">
+                    <div class="audit-box-header">
+                        <i class="fa-solid fa-brain"></i>
+                        <div>
+                            <h3>Auditor de Pliegos e IA</h3>
+                            <p>Audita cualquier documento de pliego de condiciones o estudio previo bajo el Decreto 1082.</p>
                         </div>
                     </div>
 
-                    <!-- Risk details sidebar -->
-                    <aside class="detail-sidebar card-glass" id="oldDetailSidebar">
-                        <div class="sidebar-placeholder" id="oldSidebarPlaceholder">
-                            <i class="fa-solid fa-circle-nodes placeholder-icon"></i>
-                            <h5>Detalle del Proceso</h5>
-                            <p>Haz clic en cualquier paso del flujo de la izquierda para ver su análisis de
-                                vulnerabilidad, responsables y normativa afectada.</p>
-                        </div>
-                        <div class="sidebar-content hidden" id="oldSidebarContent">
-                            <div class="sidebar-header">
-                                <span class="step-letter" id="oldStepLetter">A</span>
-                                <h4 id="oldStepTitle">Título del Paso</h4>
-                            </div>
-                            <div class="risk-meter-wrap">
-                                <span>Nivel de Riesgo:</span>
-                                <div class="risk-meter">
-                                    <div class="risk-fill" id="oldStepRiskFill"></div>
-                                </div>
-                                <span class="risk-label" id="oldStepRiskLabel">Crítico</span>
-                            </div>
-                            <div class="detail-group">
-                                <h5><i class="fa-solid fa-user-ninja"></i> Responsable Real:</h5>
-                                <p id="oldStepResp">Ingeniero de Sistemas (Área de Tecnología)</p>
-                            </div>
-                            <div class="detail-group alert-box">
-                                <h5><i class="fa-solid fa-triangle-exclamation"></i> Diagnóstico de Vulnerabilidad:</h5>
-                                <p id="oldStepDiag">El ingeniero chatea directamente con el proveedor...</p>
-                            </div>
-                            <div class="detail-group">
-                                <h5><i class="fa-solid fa-book"></i> Normativa Afectada (Ley 80 / D. 1082):</h5>
-                                <p id="oldStepLaw">Inexistencia de selección objetiva...</p>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            </section>
-
-            <!-- SECTION 2: PROCEDIMIENTO MEJORADO (NUEVO) -->
-            <section class="tab-panel" id="panelMejorado">
-                <div class="panel-header-desc">
-                    <div class="title-wrap">
-                        <h3>Procedimiento Ajustado (PHVA y Matriz de Roles)</h3>
-                        <p>Nueva metodología que involucra al Grupo de Contratos, Presupuesto y Ordenador del Gasto en
-                            un esquema de comité y filtros de control.</p>
+                    <div class="input-field-wrap">
+                        <label for="geminiKey"><i class="fa-solid fa-key"></i> Llave de API Gemini (Opcional):</label>
+                        <input type="password" id="geminiKey" placeholder="Pega tu llave de API de Gemini para auditoría por IA..." />
+                        <span class="input-helper">Si no ingresas una llave, el sistema realizará un análisis de cumplimiento local mediante keywords.</span>
                     </div>
-                    <div class="workload-summary new-workload">
-                        <div class="wl-split">
-                            <span class="wl-part" style="flex: 25%; background: var(--cyan);"
-                                title="Área Técnica: 25%"></span>
-                            <span class="wl-part" style="flex: 45%; background: var(--blue);"
-                                title="Grupo de Contratos: 45%"></span>
-                            <span class="wl-part" style="flex: 15%; background: var(--pink);"
-                                title="Presupuesto: 15%"></span>
-                            <span class="wl-part" style="flex: 15%; background: var(--green);"
-                                title="Ordenador: 15%"></span>
+
+                    <div class="light-drop-zone" id="dropZone" ondragover="event.preventDefault()" ondrop="handleFileDrop(event)">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Arrastra y suelta aquí tu archivo de estudio previo (PDF o TXT)</p>
+                        <span>o</span>
+                        <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
+                            <i class="fa-solid fa-file-import"></i> Buscar Archivo
+                        </button>
+                        <input type="file" id="fileInput" class="hidden" accept=".txt,.pdf,.md" onchange="handleFileSelect(event)" />
+                    </div>
+
+                    <div class="input-field-wrap">
+                        <label for="pasteText">O pega el texto del pliego aquí:</label>
+                        <textarea id="pasteText" rows="5" placeholder="Pega el objeto contractual, la capacidad financiera o la matriz de riesgos del pliego a auditar..."></textarea>
+                    </div>
+
+                    <button class="btn btn-primary btn-full" id="runAuditBtn" onclick="runDocumentAudit()">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Ejecutar Auditoría de Transparencia
+                    </button>
+
+                    <div class="audit-loading-box hidden" id="auditLoadingBox">
+                        <div class="spinner"></div>
+                        <p id="auditLoadingText">Analizando contenido frente al Decreto 1082 de 2015...</p>
+                    </div>
+
+                    <div class="audit-results-card hidden" id="auditResultsBox">
+                        <h5>Resultado de la Auditoría</h5>
+                        <div class="score-radial-wrapper">
+                            <span>Índice de Blindaje Normativo:</span>
+                            <div class="score-radial">
+                                <svg viewBox="0 0 36 36" class="circular-chart">
+                                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <path class="circle" id="radialProgress" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                    <text x="18" y="20.35" class="percentage" id="scorePercent">0%</text>
+                                </svg>
+                            </div>
                         </div>
-                        <span>Carga Balanceada (Comité): <strong>Área Técnica 25% | Contratos 45% | Otros
-                                30%</strong></span>
+
+                        <div class="light-checklist-results" id="checklistResults">
+                        </div>
                     </div>
                 </div>
 
-                <div class="new-proc-layout">
-                    <!-- Steps navigation -->
-                    <div class="phva-steps-container card-glass">
-                        <div class="phva-header">
-                            <div class="phva-filters">
-                                <button class="filter-btn active" onclick="filterNewSteps('all')">Todos</button>
-                                <button class="filter-btn" onclick="filterNewSteps('P')">Planear (P)</button>
-                                <button class="filter-btn" onclick="filterNewSteps('H')">Hacer (H)</button>
-                                <button class="filter-btn" onclick="filterNewSteps('V')">Verificar (V)</button>
-                                <button class="filter-btn" onclick="filterNewSteps('A')">Actuar (A)</button>
-                            </div>
-                            <span class="hint-text"><i class="fa-solid fa-shield-halved"></i> Los pasos con escudo son
-                                Puntos de Control</span>
-                        </div>
-                        <div class="new-steps-grid" id="newStepsGrid">
-                            <!-- JS will inject 25 steps here -->
-                        </div>
-                    </div>
+            </div>
+        </section>
 
-                    <!-- Step details sidebar -->
-                    <aside class="detail-sidebar card-glass" id="newDetailSidebar">
-                        <div class="sidebar-placeholder" id="newSidebarPlaceholder">
-                            <i class="fa-solid fa-list-check placeholder-icon"></i>
-                            <h5>Ficha del Nuevo Paso</h5>
-                            <p>Selecciona cualquier actividad de la izquierda para ver en detalle su descripción,
-                                responsable formal, puntos de control asociados y registros exigidos.</p>
-                        </div>
-                        <div class="sidebar-content hidden" id="newSidebarContent">
-                            <div class="sidebar-header">
-                                <span class="step-num" id="newStepNum">1</span>
-                                <span class="phva-badge" id="newStepPhva">Planear</span>
-                                <h4 id="newStepTitle">Actividad</h4>
-                            </div>
-                            <div class="detail-group">
-                                <h5><i class="fa-solid fa-user-tie"></i> Responsable Formal:</h5>
-                                <p id="newStepResp">Coordinador del Grupo de Contratos</p>
-                            </div>
-                            <div class="detail-group">
-                                <h5><i class="fa-solid fa-circle-info"></i> Descripción y Plazo:</h5>
-                                <p id="newStepDesc">El abogado asigna el caso...</p>
-                            </div>
-                            <div class="detail-group control-box hidden" id="newStepControlBox">
-                                <h5><i class="fa-solid fa-shield-halved"></i> Mecanismo de Control:</h5>
-                                <p id="newStepControl">Control Riesgo / Control RC...</p>
-                            </div>
-                            <div class="detail-group">
-                                <h5><i class="fa-solid fa-file-signature"></i> Registros de Calidad:</h5>
-                                <p id="newStepRegs">Estudios previos, lista de chequeo...</p>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            </section>
-
-            <!-- SECTION 3: SIMULADOR & AUDITOR -->
-            <section class="tab-panel" id="panelSimulador">
-                <div class="grid-2col">
-
-                    <!-- LEFT COLUMN: STRESS SIMULATOR -->
-                    <div class="card-glass simulation-card" id="simulatorContainer">
-                        <div class="card-header">
-                            <i class="fa-solid fa-flask-bubble header-icon"></i>
-                            <div>
-                                <h4>Simulador de Estrés Contractual</h4>
-                                <p>Evalúa el impacto de contingencias típicas de contratación bajo ambos procedimientos.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="simulation-selector-box">
-                            <label for="simulationScenario">Selecciona un Escenario de Riesgo:</label>
-                            <select id="simulationScenario" onchange="loadScenarioInfo()">
-                                <option value="iva">Error de IVA en Oferta (Caso Nuevo Pangea)</option>
-                                <option value="inhabilidad">Inhabilidad Sobrevenida del Representante Legal (REDAM/RUES)
-                                </option>
-                                <option value="cambio">Modificación de Vigencias y Cantidades (Simulador)</option>
-                            </select>
-                        </div>
-
-                        <div class="scenario-description" id="scenarioDesc">
-                            <!-- Scenario details injected by JS -->
-                        </div>
-
-                        <div class="simulation-actions">
-                            <button class="btn btn-danger" id="runOldSimBtn" onclick="runSimulation('old')">
-                                <i class="fa-solid fa-circle-play"></i> Simular Proc. Viejo
-                            </button>
-                            <button class="btn btn-success" id="runNewSimBtn" onclick="runSimulation('new')">
-                                <i class="fa-solid fa-circle-play"></i> Simular Proc. Nuevo
-                            </button>
-                        </div>
-
-                        <!-- Visual simulation area -->
-                        <div class="sim-visual-viewport">
-                            <div class="sim-path-visual" id="simPathVisual">
-                                <div class="sim-stage-indicator" id="simStageIndicator">Iniciando simulación...</div>
-                                <div class="visual-progress-bar">
-                                    <div class="visual-progress-fill" id="visualProgressFill"></div>
-                                </div>
-                                <div class="visual-nodes-row" id="visualNodesRow">
-                                    <!-- Nodes dynamically loaded -->
-                                </div>
-                            </div>
-
-                            <!-- Result Announcement -->
-                            <div class="sim-result-box hidden" id="simResultBox">
-                                <div class="result-icon-wrap" id="simResultIcon">
-                                    <i class="fa-solid fa-circle-xmark"></i>
-                                </div>
-                                <div class="result-text-wrap">
-                                    <h5 id="simResultTitle">Contrato Aprobado con Hallazgo Fiscal</h5>
-                                    <p id="simResultText">El contrato fue adjudicado de forma irregular...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- RIGHT COLUMN: PRE-AUDITOR DE PLIEGOS -->
-                    <div class="card-glass auditor-card" id="auditorContainer">
-                        <div class="card-header">
-                            <i class="fa-solid fa-brain header-icon"></i>
-                            <div>
-                                <h4>Auditor de Pliegos con IA</h4>
-                                <p>Sube o pega un Estudio Previo y analízalo en tiempo real frente al Decreto 1082.</p>
-                            </div>
-                        </div>
-
-                        <div class="auditor-controls">
-                            <div class="api-key-box">
-                                <label for="geminiKey"><i class="fa-solid fa-key"></i> Llave de API Gemini
-                                    (Opcional):</label>
-                                <input type="password" id="geminiKey"
-                                    placeholder="Pega tu llave AI de Gemini para auditoría en vivo..." />
-                                <span class="input-helper">Si no tienes llave, se ejecutará una auditoría simulada
-                                    avanzada.</span>
-                            </div>
-                        </div>
-
-                        <!-- Drag and Drop or Text Paste -->
-                        <div class="drop-zone" id="dropZone" ondragover="event.preventDefault()"
-                            ondrop="handleFileDrop(event)">
-                            <i class="fa-solid fa-cloud-arrow-up cloud-icon"></i>
-                            <p>Arrastra y suelta tu Estudio Previo (PDF/TXT) aquí</p>
-                            <span>o</span>
-                            <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
-                                <i class="fa-solid fa-file-import"></i> Cargar Archivo
-                            </button>
-                            <input type="file" id="fileInput" class="hidden" accept=".txt,.pdf,.md"
-                                onchange="handleFileSelect(event)" />
-                        </div>
-
-                        <div class="text-paste-area">
-                            <label for="pasteText">O pega el texto del documento directamente aquí:</label>
-                            <textarea id="pasteText" rows="6"
-                                placeholder="Pega las secciones de capacidad financiera, objeto, matriz de riesgos, o el texto completo del pliego..."></textarea>
-                        </div>
-
-                        <div class="audit-action-row">
-                            <button class="btn btn-primary btn-full" id="runAuditBtn" onclick="runDocumentAudit()">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> Ejecutar Auditoría de Transparencia
-                            </button>
-                        </div>
-
-                        <!-- Audit Progress -->
-                        <div class="audit-loading-box hidden" id="auditLoadingBox">
-                            <div class="spinner"></div>
-                            <p id="auditLoadingText">Analizando contenido frente al Decreto 1082 de 2015...</p>
-                        </div>
-
-                        <!-- Audit Results Area -->
-                        <div class="audit-results-box hidden" id="auditResultsBox">
-                            <h5>Resultado de la Auditoría</h5>
-                            <div class="compliance-score-wrap">
-                                <span>Índice de Blindaje Normativo:</span>
-                                <div class="score-radial">
-                                    <svg viewBox="0 0 36 36" class="circular-chart">
-                                        <path class="circle-bg"
-                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                        <path class="circle" id="radialProgress" stroke-dasharray="0, 100"
-                                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                                        <text x="18" y="20.35" class="percentage" id="scorePercent">0%</text>
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <div class="checklist-results" id="checklistResults">
-                                <!-- Bullet checklist results injected by JS -->
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
-        </div>
     </main>
 
     <footer class="app-footer">
         <div class="footer-container">
-            <p>&copy; 2026 Ministerio de Hacienda y Crédito Público - Consultoría de Gobernanza Pública. Prototipo
-                Funcional.</p>
+            <p>&copy; 2026 Ministerio de Hacienda y Crédito Público - Consultoría de Gobernanza Pública. Prototipo de Adopción.</p>
             <div class="footer-links">
                 <a href="#"><i class="fa-solid fa-book-bookmark"></i> Manual de Contratación</a>
-                <a href="#"><i class="fa-solid fa-gavel"></i> Ley 80 de 1993</a>
+                <a href="#"><i class="fa-solid fa-gavel"></i> Decreto 1082 de 2015</a>
             </div>
         </div>
     </footer>
+    -->
 
     <!-- Core Logic -->
-    <script src="app.js"></script>
+    <script src="landing-app.js"></script>
 </body>
 
 </html>

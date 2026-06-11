@@ -367,6 +367,20 @@ document.addEventListener("DOMContentLoaded", () => {
     renderOldProcedure();
     renderNewProcedure();
     loadScenarioInfo();
+    
+    // Hash routing for tabs
+    const handleHash = () => {
+        const hash = window.location.hash;
+        if (hash === "#actual" || hash === "#viejo") {
+            switchTab("actual");
+        } else if (hash === "#mejorado" || hash === "#nuevo") {
+            switchTab("mejorado");
+        } else if (hash === "#simulador") {
+            switchTab("simulador");
+        }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
 });
 
 /* Tab Switching Logic */
