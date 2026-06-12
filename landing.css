@@ -98,8 +98,6 @@ body.light-theme {
     padding: 40px 20px;
     position: relative;
     z-index: 10;
-    /* Soft glowing orb effect behind the main content for depth */
-    background: radial-gradient(circle at 50% 15%, rgba(240, 247, 255, 1) 0%, rgba(255, 255, 255, 0) 65%);
 }
 
 .hero-diagram-container {
@@ -113,41 +111,27 @@ body.light-theme {
 }
 
 .hero-logo {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 2rem;
+    gap: 10px;
+    margin-bottom: 20px;
     font-family: var(--font-heading);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    color: #1e40af; /* Deeper blue for better contrast */
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--accent-blue);
     text-transform: uppercase;
-    /* Premium Pill Styling */
-    background: rgba(59, 130, 246, 0.08);
-    padding: 6px 16px;
-    border-radius: 100px;
-    border: 1px solid rgba(59, 130, 246, 0.15);
-    backdrop-filter: blur(8px);
 }
 
 .hero-title {
-    font-size: 2.3rem; /* Slightly larger */
-    font-weight: 800; /* Bolder */
-    line-height: 1.25; /* Tighter line height */
-    color: #0f172a; /* Slate 900 for serious dark tone */
-    max-width: 850px;
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text-main);
+    max-width: 800px;
     margin-bottom: 5px;
     font-family: var(--font-heading);
-    letter-spacing: -0.03em; /* Tighter tracking */
-}
-
-.title-gradient {
-    background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: -0.02em;
 }
 
 /* SVG Connector Style */
@@ -167,16 +151,17 @@ body.light-theme {
 }
 
 .diagram-line {
-    stroke: #cbd5e1; /* Elegant subtle gray instead of bright blue */
-    stroke-width: 2px;
+    stroke: #3b82f6;
+    /* Slate Blue / Accent Blue for diagram line */
+    stroke-width: 2.5px;
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 .diagram-junction {
-    fill: #cbd5e1; /* Match the line color */
+    fill: #3b82f6;
     stroke: #ffffff;
     stroke-width: 2px;
 }
@@ -195,34 +180,29 @@ body.light-theme {
 /* Floating Card Buttons */
 .hero-card-btn {
     text-decoration: none;
-    /* Glassmorphism background */
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.85) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+    border: 3px solid #ffffff;
     padding: 15px 20px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 1.1rem;
     font-weight: 600;
     letter-spacing: -0.02em;
-    border-radius: 14px;
+    border-radius: 15px;
     cursor: pointer;
     color: #334155;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* Refined, softer shadow with an inner white edge */
-    box-shadow: 0 10px 40px -10px rgba(148, 163, 184, 0.25), inset 0 1px 0 rgba(255, 255, 255, 1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 15px 30px rgba(148, 163, 184, 0.4);
+    transition: all 0.3s ease;
     position: relative;
 }
 
 .hero-card-btn:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 1);
-    box-shadow: 0 20px 40px -10px rgba(148, 163, 184, 0.35), inset 0 1px 0 rgba(255, 255, 255, 1);
-    color: #0f172a;
+    transform: translateY(-5px);
+    box-shadow: 0 30px 35px rgba(148, 163, 184, 0.3);
+    color: #1e293b;
 }
 
 /* Responsive design */
