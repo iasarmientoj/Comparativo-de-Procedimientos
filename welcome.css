@@ -47,46 +47,63 @@ body.welcome-body {
     pointer-events: none;
 }
 
-.blur-circle {
+.blur-circle-wrapper {
     position: absolute;
+    pointer-events: none;
+}
+
+.blur-circle-inner {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     filter: blur(120px);
     opacity: 0.75;
     pointer-events: none;
+    will-change: transform;
 }
 
 .circle-1 {
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(15, 82, 186, 0.45) 0%, rgba(147, 197, 253, 0.18) 60%, transparent 100%);
     top: -150px;
     left: -100px;
-    animation: float-slow-1 25s infinite alternate ease-in-out;
+    animation: float-slow-1 12s infinite alternate ease-in-out;
+}
+
+.circle-1 .blur-circle-inner {
+    background: radial-gradient(circle, rgba(15, 82, 186, 0.45) 0%, rgba(147, 197, 253, 0.18) 60%, transparent 100%);
 }
 
 .circle-2 {
     width: 1050px;
     height: 1050px;
-    background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(224, 242, 254, 0.14) 60%, transparent 100%);
     bottom: -250px;
     right: -150px;
-    animation: float-slow-2 35s infinite alternate ease-in-out;
+    animation: float-slow-2 16s infinite alternate ease-in-out;
+}
+
+.circle-2 .blur-circle-inner {
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(224, 242, 254, 0.14) 60%, transparent 100%);
 }
 
 .circle-3 {
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(191, 219, 254, 0.14) 60%, transparent 100%);
     top: 30%;
     left: 40%;
-    animation: float-slow-3 28s infinite alternate ease-in-out;
+    animation: float-slow-3 14s infinite alternate ease-in-out;
+}
+
+.circle-3 .blur-circle-inner {
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(191, 219, 254, 0.14) 60%, transparent 100%);
 }
 
 /* Base layout container */
 .welcome-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers Bienvenidos and body content vertically */
+    justify-content: center;
+    /* Centers Bienvenidos and body content vertically */
     min-height: 100vh;
     padding: 80px;
     width: 100%;
@@ -101,7 +118,8 @@ body.welcome-body {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-bottom: 30px; /* Kept close to body text */
+    margin-bottom: 30px;
+    /* Kept close to body text */
 }
 
 .welcome-title {
@@ -110,7 +128,7 @@ body.welcome-body {
     font-size: clamp(4.5rem, 9vw, 7.5rem);
     /* Made larger as requested */
     font-weight: 400;
-    color: var(--text-color-main);
+    color: var(--primary-blue);
     line-height: 0.9;
     letter-spacing: -0.01em;
     user-select: none;
@@ -122,7 +140,8 @@ body.welcome-body {
     align-items: flex-start;
     justify-content: flex-start;
     padding-left: 10px;
-    margin-bottom: 80px; /* Prevent overlapping with the absolutely positioned button */
+    margin-bottom: 80px;
+    /* Prevent overlapping with the absolutely positioned button */
 }
 
 .info-block {
@@ -161,7 +180,8 @@ body.welcome-body {
 /* Bottom Right: Entrar button */
 .welcome-footer {
     position: absolute;
-    bottom: 130px; /* Raised button up as requested */
+    bottom: 130px;
+    /* Raised button up as requested */
     right: 80px;
 }
 
@@ -169,23 +189,46 @@ body.welcome-body {
     display: inline-flex;
     align-items: center;
     gap: 14px;
-    background-color: var(--primary-blue);
-    color: #ffffff;
+    background-color: transparent;
+    color: var(--primary-blue);
     text-decoration: none;
     padding: 16px 36px;
-    border-radius: 20px;
-    font-weight: 500;
+    border-radius: 0px;
+    font-weight: 600;
     font-size: 1.05rem;
-    box-shadow: 0 10px 25px rgba(15, 82, 186, 0.2);
-    /* Soft blue shadow */
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(15, 82, 186, 0.15);
+    letter-spacing: 0.03em;
+    border: 1.5px solid var(--primary-blue);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(15, 82, 186, 0.05);
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-blue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
 }
 
 .enter-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(15, 82, 186, 0.35);
-    background-color: var(--primary-blue-hover);
+    color: #ffffff;
+    border-color: var(--primary-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(15, 82, 186, 0.22);
+}
+
+.enter-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .arrow-icon {
@@ -235,6 +278,7 @@ body.welcome-body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -245,9 +289,11 @@ body.welcome-body {
     0% {
         transform: translate(0, 0) scale(1);
     }
+
     50% {
         transform: translate(80px, 60px) scale(1.05);
     }
+
     100% {
         transform: translate(-40px, 100px) scale(0.95);
     }
@@ -257,9 +303,11 @@ body.welcome-body {
     0% {
         transform: translate(0, 0) scale(1);
     }
+
     50% {
         transform: translate(-100px, -80px) scale(1.1);
     }
+
     100% {
         transform: translate(50px, 40px) scale(0.9);
     }
@@ -269,9 +317,11 @@ body.welcome-body {
     0% {
         transform: translate(0, 0) scale(0.95);
     }
+
     50% {
         transform: translate(60px, -100px) scale(1.05);
     }
+
     100% {
         transform: translate(-60px, 50px) scale(1);
     }
