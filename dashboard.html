@@ -128,6 +128,18 @@
 
     <!-- JS to handle sidebar switching and background circle repulsion -->
     <script>
+        // Force repaint of the backdrop-filter element to fix Chrome rendering bug
+        function triggerRepaint(panel) {
+            if (!panel) return;
+            const placeholder = panel.querySelector('.structure-placeholder');
+            if (placeholder) {
+                const originalFilter = placeholder.style.backdropFilter || '';
+                placeholder.style.backdropFilter = 'none';
+                placeholder.offsetHeight; // Force layout recalculation
+                placeholder.style.backdropFilter = originalFilter;
+            }
+        }
+
         // Switch between dashboard panels
         function switchPanel(panelId) {
             // Update active state in nav buttons
@@ -142,7 +154,10 @@
                 panel.classList.remove('active');
             });
             const activePanel = document.getElementById(`panel-${panelId}`);
-            if (activePanel) activePanel.classList.add('active');
+            if (activePanel) {
+                activePanel.classList.add('active');
+                triggerRepaint(activePanel);
+            }
 
             // Update titles
             const titleEl = document.getElementById('viewport-title');
@@ -167,6 +182,64 @@
                     break;
             }
         }
+
+        // Initialize background circle repulsion and force initial repaint on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const inners = document.querySelectorAll('.blur-circle-inner');
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            const circleStates = Array.from(inners).map(inner => ({
+                element: inner,
+                parent: inner.parentElement,
+                currentX: 0,
+                currentY: 0,
+                targetX: 0,
+                targetY: 0
+            }));
+
+            function animate() {
+                circleStates.forEach(state => {
+                    const rect = state.parent.getBoundingClientRect();
+                    const circleX = rect.left + rect.width / 2;
+                    const circleY = rect.top + rect.height / 2;
+
+                    const dx = circleX - mouseX;
+                    const dy = circleY - mouseY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    const repelRadius = 750; // repel distance
+                    if (distance < repelRadius && distance > 0) {
+                        const force = (repelRadius - distance) / repelRadius;
+                        const maxRepel = 160; // repel strength
+                        state.targetX = (dx / distance) * maxRepel * force;
+                        state.targetY = (dy / distance) * maxRepel * force;
+                    } else {
+                        state.targetX = 0;
+                        state.targetY = 0;
+                    }
+
+                    // Lerp for high-end fluid motion
+                    state.currentX += (state.targetX - state.currentX) * 0.08;
+                    state.currentY += (state.targetY - state.currentY) * 0.08;
+
+                    state.element.style.transform = `translate(${state.currentX}px, ${state.currentY}px)`;
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            // Trigger initial repaint on load for the active panel
+            const initialPanel = document.querySelector('.dashboard-panel.active');
+            triggerRepaint(initialPanel);
+        });
     </script>
 </body>
 </html>
