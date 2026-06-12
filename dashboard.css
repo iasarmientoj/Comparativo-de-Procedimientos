@@ -43,6 +43,7 @@
     left: -150px;
     animation: float-dash-1 28s infinite alternate ease-in-out;
 }
+
 .circle-1 .blur-circle-inner {
     background: radial-gradient(circle, rgba(15, 82, 186, 0.38) 0%, rgba(147, 197, 253, 0.12) 60%, transparent 100%);
 }
@@ -54,6 +55,7 @@
     right: -100px;
     animation: float-dash-2 36s infinite alternate ease-in-out;
 }
+
 .circle-2 .blur-circle-inner {
     background: radial-gradient(circle, rgba(56, 189, 248, 0.32) 0%, rgba(224, 242, 254, 0.1) 60%, transparent 100%);
 }
@@ -65,6 +67,7 @@
     right: 20%;
     animation: float-dash-3 30s infinite alternate ease-in-out;
 }
+
 .circle-3 .blur-circle-inner {
     background: radial-gradient(circle, rgba(99, 102, 241, 0.32) 0%, rgba(191, 219, 254, 0.1) 60%, transparent 100%);
 }
@@ -75,7 +78,8 @@
     height: 100vh;
     width: 100vw;
     position: relative;
-    z-index: 3; /* Above background blur and dots */
+    z-index: 3;
+    /* Above background blur and dots */
     padding: 0;
     gap: 0;
 }
@@ -83,7 +87,7 @@
 /* Sidebar styling with solid brand blue */
 .dashboard-sidebar {
     width: 340px;
-    background: linear-gradient(180deg, #0a3d8f 0%, #0f52ba 100%);
+    background: linear-gradient(180deg, #0f52ba 0%, #1a66db 100%);
     border-right: 1px solid var(--primary-blue-hover);
     border-top: none;
     border-bottom: none;
@@ -314,18 +318,20 @@
     text-align: center;
     height: 100%;
     min-height: 400px;
-    border: 2px dashed rgba(15, 82, 186, 0.15);
-    border-radius: 20px;
+    border: 1.5px solid rgba(15, 82, 186, 0.15);
+    border-radius: 0px;
     padding: 48px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(15, 82, 186, 0.04);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .structure-placeholder:hover {
     border-color: var(--primary-blue);
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 12px 40px 0 rgba(15, 82, 186, 0.08);
 }
 
 .placeholder-icon {
@@ -360,6 +366,7 @@
         opacity: 0;
         transform: translateY(12px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -370,9 +377,11 @@
     0% {
         transform: translate(0, 0) scale(1);
     }
+
     50% {
         transform: translate(120px, -80px) scale(1.08);
     }
+
     100% {
         transform: translate(-60px, 150px) scale(0.92);
     }
@@ -382,9 +391,11 @@
     0% {
         transform: translate(0, 0) scale(0.95);
     }
+
     50% {
         transform: translate(-150px, -120px) scale(1.05);
     }
+
     100% {
         transform: translate(80px, 80px) scale(1);
     }
@@ -394,9 +405,11 @@
     0% {
         transform: translate(0, 0) scale(1);
     }
+
     50% {
         transform: translate(140px, 160px) scale(0.95);
     }
+
     100% {
         transform: translate(-80px, -60px) scale(1.05);
     }
@@ -412,7 +425,7 @@
         padding: 0;
         gap: 0;
     }
-    
+
     .dashboard-sidebar {
         width: 100%;
         height: auto;
@@ -424,7 +437,7 @@
     .sidebar-header {
         margin-bottom: 24px;
     }
-    
+
     .dashboard-viewport {
         height: auto;
         padding: 24px;
