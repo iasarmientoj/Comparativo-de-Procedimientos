@@ -89,10 +89,40 @@
             <div class="viewport-content">
                 <!-- PANEL: PROCEDIMIENTO ANTERIOR -->
                 <div class="dashboard-panel active" id="panel-proc-anterior">
-                    <div class="structure-placeholder">
-                        <i class="fa-solid fa-clock-rotate-left placeholder-icon"></i>
-                        <h3>Procedimiento Anterior</h3>
-                        <p>Estructura lista para el análisis de flujos anteriores, riesgos y vulnerabilidades.</p>
+                    <div class="old-proc-grid">
+                        <!-- Left Panel: Steps Flow (Scrollable) -->
+                        <div class="old-steps-panel card-glass">
+                            <div class="panel-section-header">
+                                <h3><i class="fa-solid fa-list-ol"></i> Pasos del Flujo Viejo</h3>
+                                <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un paso</span>
+                            </div>
+                            <div class="old-steps-list" id="old-steps-list">
+                                <!-- Injectado por JS -->
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Roles and Details -->
+                        <div class="old-details-column">
+                            <!-- Roles Panel -->
+                            <div class="old-roles-panel card-glass">
+                                <div class="panel-section-header">
+                                    <h3><i class="fa-solid fa-users-viewfinder"></i> Carga de Trabajo y Roles</h3>
+                                </div>
+                                <div class="roles-container" id="old-roles-container">
+                                    <!-- Injectado por JS -->
+                                </div>
+                            </div>
+
+                            <!-- Detail & Diagnosis Panel -->
+                            <div class="old-diagnosis-panel card-glass">
+                                <div class="panel-section-header">
+                                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Diagnóstico Jurídico y Riesgos</h3>
+                                </div>
+                                <div class="diagnosis-container" id="old-diagnosis-container">
+                                    <!-- Injectado por JS -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -126,11 +156,12 @@
         </main>
     </div>
 
-    <!-- JS to handle sidebar switching and background circle repulsion -->
+    <!-- JS to handle sidebar switching, old procedure rendering and background circle repulsion -->
     <script>
         // Force repaint of the backdrop-filter element to fix Chrome rendering bug
         function triggerRepaint(panel) {
             if (!panel) return;
+            // Repaint structure-placeholder
             const placeholder = panel.querySelector('.structure-placeholder');
             if (placeholder) {
                 const originalFilter = placeholder.style.backdropFilter || '';
@@ -138,6 +169,13 @@
                 placeholder.offsetHeight; // Force layout recalculation
                 placeholder.style.backdropFilter = originalFilter;
             }
+            // Repaint card-glass
+            panel.querySelectorAll('.card-glass').forEach(card => {
+                const originalFilter = card.style.backdropFilter || '';
+                card.style.backdropFilter = 'none';
+                card.offsetHeight; // Force layout recalculation
+                card.style.backdropFilter = originalFilter;
+            });
         }
 
         // Switch between dashboard panels
@@ -180,6 +218,311 @@
                     titleEl.textContent = 'Sistema de Autogestión';
                     subtitleEl.textContent = 'Generación asistida de estudios previos y mitigación activa';
                     break;
+            }
+        }
+
+        /* ==========================================================================
+           PROCEDURE DATA STRUCTURES (OLD FLOW)
+           ========================================================================== */
+        const oldProcedureSteps = [
+            {
+                letter: "A",
+                title: "Identificación de Necesidad y AMP",
+                risk: "medium",
+                riskScore: 45,
+                responsible: "Área Técnica (Dependencia Solicitante)",
+                diagnostic: "El área técnica busca en internet el Acuerdo Marco de Precios (AMP) de forma autónoma. No hay participación formal del área de licitaciones ni acompañamiento jurídico en la etapa de planeación.",
+                law: "Decreto 1082 de 2015 - Vacío de planeación coordinada.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Encargado Único ⚠️", score: 100, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "B",
+                title: "Verificación de Existencia en SECOP",
+                risk: "low",
+                riskScore: 20,
+                responsible: "Área Técnica",
+                diagnostic: "El funcionario de sistemas entra al SECOP a verificar la vigencia. Si asume erróneamente que no existe, la entidad podría quedar libre para contratar directamente, perdiendo el beneficio de la agregación de demanda (como ocurrió recientemente con un caso de combustibles).",
+                law: "Ley 1150 de 2007 (Obligatoriedad de uso de AMP).",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Encargado Único ⚠️", score: 100, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "C",
+                title: "Adelantar Tareas de Adquisición en AMP",
+                risk: "medium",
+                riskScore: 50,
+                responsible: "Área Técnica",
+                diagnostic: "La dependencia interesada ejecuta las tareas previas de forma aislada, sin doble check de las reglas del catálogo.",
+                law: "Decreto 1082 de 2015 - Principio de Selección Objetiva.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Encargado Único ⚠️", score: 100, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "D",
+                title: "Solicitud de Expedición de CDP",
+                risk: "low",
+                riskScore: 15,
+                responsible: "Área Técnica / Presupuesto",
+                diagnostic: "Trámite estándar de asignación de presupuesto. Sin riesgos particulares si los rubros están correctos.",
+                law: "Estatuto Orgánico de Presupuesto.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Solicitante 📝", score: 50, class: "warning" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Trámite Contable 📄", score: 50, class: "success" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "E",
+                title: "Autorización de Creación de Roles",
+                risk: "low",
+                riskScore: 25,
+                responsible: "Ordenador del Gasto",
+                diagnostic: "Se aprueban los accesos para la Tienda Virtual en base a la solicitud técnica sin mayores filtros de idoneidad.",
+                law: "Decreto 1082 de 2015 (Roles de Comprador).",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Solicitante 📝", score: 20, class: "warning" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firma Formal ✍️", score: 80, class: "success" }
+                ]
+            },
+            {
+                letter: "F",
+                title: "Registro en la Tienda Virtual (TVEC)",
+                risk: "high",
+                riskScore: 75,
+                responsible: "Área Técnica (Usuario del Ingeniero)",
+                diagnostic: "Toda la administración del evento, el chat, y la carga documental se realiza desde el usuario individual de un solo ingeniero. No hay bitácora ni trazabilidad de accesos cruzados.",
+                law: "Principios de transparencia y seguridad de la información.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Encargado Único ⚠️", score: 100, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "G",
+                title: "Búsqueda de Catálogo y Selección",
+                risk: "high",
+                riskScore: 90,
+                responsible: "Área Técnica (Ingeniero Solitario)",
+                diagnostic: "El ingeniero analiza las cotizaciones en su propio computador y negocia solo por chat. No existe comité evaluador, lo que genera riesgos extremos de subjetividad y omisiones críticas (como el cálculo de IVA omitido de Nuevo Pangea).",
+                law: "Ley 1150 de 2007 (Selección objetiva) y Decreto 1082 (Comités asesores).",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Encargado Único ⚠️", score: 100, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "H",
+                title: "Elaboración de Estudios Previos (Posteriores)",
+                risk: "high",
+                riskScore: 85,
+                responsible: "Área Técnica",
+                diagnostic: "PARADOJA LEGAL: El documento se redacta y firma DESPUÉS de seleccionar al proveedor en la plataforma, únicamente para justificar formalmente lo decidido. Carece de función preventiva.",
+                law: "Decreto 1082 de 2015 (Estudios previos obligatorios antes de iniciar el proceso).",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Encargado Único ⚠️", score: 100, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "I",
+                title: "Radicación en Licitaciones",
+                risk: "medium",
+                riskScore: 60,
+                responsible: "Área Técnica",
+                diagnostic: "El expediente contractual cerrado se radica en Licitaciones cuando el evento ya finalizó en la plataforma. Si se detecta un error de fondo, la única opción legal es cancelar y rehacer todo.",
+                law: "Manual de Contratación del Ministerio.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Solicitante 📝", score: 90, class: "danger" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Recepción Pasiva 📥", score: 10, class: "warning" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "J",
+                title: "Informe de Viabilidad Jurídica",
+                risk: "medium",
+                riskScore: 40,
+                responsible: "Grupo de Licitaciones (Abogados)",
+                diagnostic: "Los abogados emiten viabilidad basándose únicamente en los papeles aportados física o digitalmente. Generalmente no validan la plataforma en vivo ni verifican inhabilidades de última hora.",
+                law: "Responsabilidad civil y disciplinaria de los evaluadores.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Viabilidad Formal ⚖️", score: 100, class: "warning" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "K",
+                title: "Aprobación/Rechazo de la Orden de Compra",
+                risk: "high",
+                riskScore: 95,
+                responsible: "Ordenador del Gasto (Directora)",
+                diagnostic: "El ordenador firma basándose en la fe del área técnica. Si el proveedor tiene una inhabilidad sobrevenida registrada horas antes (ej. REDAM o RUES) y no se verificó, el firmante asume la responsabilidad legal de firmar un contrato nulo.",
+                law: "Artículo 44 de la Ley 80 de 1993 (Nulidad absoluta) y Código Penal (Contrato sin cumplimiento de requisitos legales).",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firma a Ciegas ✍️", score: 100, class: "danger" }
+                ]
+            },
+            {
+                letter: "L",
+                title: "Registro Presupuestal (RP)",
+                risk: "low",
+                riskScore: 10,
+                responsible: "Subdirección Financiera",
+                diagnostic: "Afectación de la apropiación presupuestal. Proceso meramente contable sin verificación de legalidad.",
+                law: "Estatuto Orgánico de Presupuesto.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Financiera (Presupuesto)", status: "Trámite Contable 📄", score: 100, class: "success" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "M",
+                title: "Designación de Supervisión",
+                risk: "low",
+                riskScore: 20,
+                responsible: "Grupo de Licitaciones",
+                diagnostic: "Se formaliza la resolución de supervisión una vez el contrato está legalizado.",
+                law: "Ley 1474 de 2011 (Estatuto Anticorrupción).",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Proyección Formal 📑", score: 100, class: "success" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firma Formal ✍️", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "N",
+                title: "Remisión de Soportes al Supervisor",
+                risk: "low",
+                riskScore: 15,
+                responsible: "Grupo de Licitaciones",
+                diagnostic: "Entrega física o digital del expediente para iniciar la ejecución del contrato.",
+                law: "Ley 1474 de 2011.",
+                roles: [
+                    { name: "Área Técnica (Ingeniero)", status: "Receptor 📥", score: 10, class: "success" },
+                    { name: "Grupo de Contratos (Abogados)", status: "Envío Formal 📤", score: 90, class: "success" },
+                    { name: "Financiera (Presupuesto)", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            }
+        ];
+
+        // Render steps list
+        function renderOldProcedure() {
+            const stepsList = document.getElementById('old-steps-list');
+            if (!stepsList) return;
+            stepsList.innerHTML = '';
+            
+            oldProcedureSteps.forEach((step, index) => {
+                const item = document.createElement('div');
+                item.className = 'old-step-item';
+                item.id = `old-step-item-${index}`;
+                item.setAttribute('onclick', `selectOldStep(${index})`);
+                
+                item.innerHTML = `
+                    <div class="old-step-letter risk-${step.risk}">${step.letter}</div>
+                    <div class="old-step-info">
+                        <div class="old-step-title">${step.title}</div>
+                        <div class="old-step-resp"><i class="fa-solid fa-user"></i> ${step.responsible}</div>
+                    </div>
+                    <span class="old-step-risk-badge ${step.risk}">${step.risk === 'high' ? 'Crítico' : step.risk === 'medium' ? 'Medio' : 'Bajo'}</span>
+                `;
+                stepsList.appendChild(item);
+            });
+        }
+
+        // Select specific step and update roles and details
+        function selectOldStep(index) {
+            document.querySelectorAll('.old-step-item').forEach((item, i) => {
+                if (i === index) item.classList.add('selected');
+                else item.classList.remove('selected');
+            });
+
+            const step = oldProcedureSteps[index];
+
+            // Update Roles Panel
+            const rolesContainer = document.getElementById('old-roles-container');
+            if (rolesContainer) {
+                rolesContainer.innerHTML = '';
+                step.roles.forEach(role => {
+                    const icon = role.name.includes("Ingeniero") ? "fa-laptop-code" :
+                                 role.name.includes("Contratos") ? "fa-user-shield" :
+                                 role.name.includes("Financiera") ? "fa-file-invoice-dollar" : "fa-user-tie";
+                    
+                    rolesContainer.innerHTML += `
+                        <div class="role-workload-item">
+                            <div class="role-name-row">
+                                <span class="role-name"><i class="fa-solid ${icon}"></i> ${role.name}</span>
+                                <span class="role-status status-${role.class}">${role.status}</span>
+                            </div>
+                            <div class="workload-bar-bg">
+                                <div class="workload-bar-fill ${role.class}" style="width: ${role.score}%;"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Update Diagnosis Panel
+            const diagnosisContainer = document.getElementById('old-diagnosis-container');
+            if (diagnosisContainer) {
+                const isAlert = step.risk === 'high';
+                diagnosisContainer.innerHTML = `
+                    <div class="diagnosis-header">
+                        <div class="diagnosis-title-wrap">
+                            <div class="diagnosis-step-badge old-step-letter risk-${step.risk}">${step.letter}</div>
+                            <div class="diagnosis-step-title">${step.title}</div>
+                        </div>
+                        <div class="diagnosis-risk-meter">
+                            <div class="diagnosis-risk-label risk-${step.risk}" style="color: ${step.risk === 'high' ? '#ef4444' : step.risk === 'medium' ? '#f59e0b' : '#3b82f6'};">
+                                Riesgo: ${step.risk === 'high' ? 'Crítico' : step.risk === 'medium' ? 'Moderado' : 'Bajo'}
+                            </div>
+                            <div class="diagnosis-risk-bar-bg">
+                                <div class="diagnosis-risk-bar-fill ${step.risk}" style="width: ${step.riskScore}%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="diagnosis-section ${isAlert ? 'alert-box' : ''}">
+                        <h5><i class="fa-solid fa-triangle-exclamation"></i> Diagnóstico de Vulnerabilidad:</h5>
+                        <p>${step.diagnostic}</p>
+                    </div>
+
+                    <div class="diagnosis-section">
+                        <h5><i class="fa-solid fa-book"></i> Normativa Afectada / Implicación Legal:</h5>
+                        <p>${step.law}</p>
+                    </div>
+                `;
             }
         }
 
@@ -235,6 +578,10 @@
             }
 
             animate();
+
+            // Render old procedure steps and select the first step initially
+            renderOldProcedure();
+            selectOldStep(0);
 
             // Trigger initial repaint on load for the active panel
             const initialPanel = document.querySelector('.dashboard-panel.active');

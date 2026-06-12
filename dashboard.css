@@ -422,6 +422,368 @@
     }
 }
 
+/* Card Glass style */
+.card-glass {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1.5px solid rgba(15, 82, 186, 0.15);
+    box-shadow: 0 10px 30px 0 rgba(15, 82, 186, 0.05);
+    border-radius: 0px;
+    padding: 24px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Old Procedure Grid and Panels */
+.old-proc-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.1fr;
+    gap: 24px;
+    height: calc(100vh - 200px);
+    min-height: 580px;
+}
+
+.old-steps-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.old-steps-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.old-details-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.old-roles-panel {
+    flex: 0 0 auto;
+}
+
+.old-diagnosis-panel {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1.5px solid rgba(15, 82, 186, 0.1);
+    padding-bottom: 12px;
+}
+
+.panel-section-header h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.hint-text {
+    font-size: 0.78rem;
+    color: var(--text-color-muted);
+}
+
+/* Old Step Item */
+.old-step-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.old-step-item:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateX(4px);
+}
+
+.old-step-item.selected {
+    background: rgba(255, 255, 255, 0.6);
+    border-left-color: var(--primary-blue);
+    box-shadow: 0 6px 18px rgba(15, 82, 186, 0.06);
+}
+
+.old-step-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.old-step-letter.risk-high {
+    background-color: #ef4444;
+}
+
+.old-step-letter.risk-medium {
+    background-color: #f59e0b;
+}
+
+.old-step-letter.risk-low {
+    background-color: #3b82f6;
+}
+
+.old-step-info {
+    flex-grow: 1;
+}
+
+.old-step-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-color-main);
+    margin-bottom: 2px;
+}
+
+.old-step-resp {
+    font-size: 0.78rem;
+    color: var(--text-color-muted);
+}
+
+.old-step-risk-badge {
+    padding: 4px 8px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.old-step-risk-badge.high {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.old-step-risk-badge.medium {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.old-step-risk-badge.low {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+/* Roles Workload Styles */
+.roles-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.role-workload-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.role-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+}
+
+.role-name {
+    font-weight: 600;
+    color: var(--text-color-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.role-status {
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.role-status.status-danger {
+    color: #ef4444;
+}
+
+.role-status.status-warning {
+    color: #f59e0b;
+}
+
+.role-status.status-success {
+    color: #10b981;
+}
+
+.role-status.status-muted {
+    color: var(--text-color-muted);
+}
+
+.workload-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(15, 82, 186, 0.08);
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.workload-bar-fill {
+    height: 100%;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.workload-bar-fill.danger {
+    background-color: #ef4444;
+}
+
+.workload-bar-fill.warning {
+    background-color: #f59e0b;
+}
+
+.workload-bar-fill.success {
+    background-color: #10b981;
+}
+
+.workload-bar-fill.muted {
+    background-color: var(--text-color-muted);
+    opacity: 0.3;
+}
+
+/* Diagnosis Detail Styles */
+.diagnosis-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-grow: 1;
+}
+
+.diagnosis-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.diagnosis-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.diagnosis-step-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.diagnosis-step-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color-main);
+}
+
+.diagnosis-risk-meter {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 130px;
+}
+
+.diagnosis-risk-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.diagnosis-risk-bar-bg {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(15, 82, 186, 0.08);
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.diagnosis-risk-bar-fill {
+    height: 100%;
+}
+
+.diagnosis-risk-bar-fill.high {
+    background-color: #ef4444;
+}
+
+.diagnosis-risk-bar-fill.medium {
+    background-color: #f59e0b;
+}
+
+.diagnosis-risk-bar-fill.low {
+    background-color: #3b82f6;
+}
+
+.diagnosis-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.diagnosis-section h5 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+}
+
+.diagnosis-section p {
+    font-size: 0.88rem;
+    color: var(--text-color-main);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.diagnosis-section.alert-box {
+    background-color: rgba(239, 68, 68, 0.04);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    padding: 12px;
+    border-radius: 0px;
+}
+
+.diagnosis-section.alert-box h5 {
+    color: #ef4444;
+}
+
+.diagnosis-section.alert-box p {
+    color: #b91c1c;
+    font-weight: 500;
+}
+
 /* Responsiveness */
 @media (max-width: 1024px) {
     .dashboard-container {
@@ -448,5 +810,14 @@
     .dashboard-viewport {
         height: auto;
         padding: 24px;
+    }
+
+    .old-proc-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    
+    .old-details-column {
+        height: auto;
     }
 }
