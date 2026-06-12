@@ -87,7 +87,7 @@
 /* Sidebar styling with solid brand blue */
 .dashboard-sidebar {
     width: 340px;
-    background: linear-gradient(180deg, #0f52ba 0%, #1a66db 100%);
+    background: linear-gradient(180deg, #0a3d8f 0%, #0f52ba 100%);
     border-right: 1px solid var(--primary-blue-hover);
     border-top: none;
     border-bottom: none;
