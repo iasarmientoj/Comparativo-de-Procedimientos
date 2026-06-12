@@ -24,6 +24,9 @@
         </div>
     </div>
 
+    <!-- Subtle dot grid background pattern -->
+    <div class="bg-grid-pattern"></div>
+
     <!-- Clean, minimalist particle container for future effects -->
     <div class="welcome-container">
         <!-- Top Left: Bienvenidos -->
@@ -82,10 +85,10 @@
                     const dy = circleY - mouseY;
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     
-                    const repelRadius = 450; // Distance of repulsion
+                    const repelRadius = 750; // Increased distance of repulsion
                     if (distance < repelRadius && distance > 0) {
                         const force = (repelRadius - distance) / repelRadius;
-                        const maxRepel = 90; // Pixels to repel
+                        const maxRepel = 160; // Increased pixels to repel
                         state.targetX = (dx / distance) * maxRepel * force;
                         state.targetY = (dy / distance) * maxRepel * force;
                     } else {
