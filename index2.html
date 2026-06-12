@@ -14,6 +14,19 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body class="welcome-body dashboard-body">
+    <!-- Moving background blur circles -->
+    <div class="bg-blur-container">
+        <div class="blur-circle-wrapper circle-1">
+            <div class="blur-circle-inner"></div>
+        </div>
+        <div class="blur-circle-wrapper circle-2">
+            <div class="blur-circle-inner"></div>
+        </div>
+        <div class="blur-circle-wrapper circle-3">
+            <div class="blur-circle-inner"></div>
+        </div>
+    </div>
+
     <!-- Subtle dot grid background pattern -->
     <div class="bg-grid-pattern"></div>
 
@@ -22,9 +35,11 @@
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <div class="sidebar-header">
-                <div class="logo-text">
-                    <span class="logo-title">MHCP</span>
-                    <span class="logo-subtitle">Gobernanza & Análisis</span>
+                <div class="logo-area">
+                    <img src="logo.jpeg" alt="Logo MHCP" class="logo-img">
+                    <div class="logo-text">
+                        <span class="logo-title-full">Sistema de Análisis Comparativo de Procedimientos</span>
+                    </div>
                 </div>
             </div>
             
@@ -46,6 +61,22 @@
                     <span>Sistema de Autogestión</span>
                 </button>
             </nav>
+
+            <!-- Bottom buttons with light borders -->
+            <div class="sidebar-footer">
+                <button class="footer-btn" id="btn-guardar">
+                    <i class="fa-regular fa-floppy-disk"></i>
+                    <span>Guardar</span>
+                </button>
+                <button class="footer-btn" id="btn-exportar">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span>Exportar</span>
+                </button>
+                <a href="index.html" class="footer-btn" id="btn-salir">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Salir</span>
+                </a>
+            </div>
         </aside>
 
         <!-- Main Content Viewport -->
