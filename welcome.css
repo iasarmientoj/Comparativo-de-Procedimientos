@@ -1,0 +1,183 @@
+/* welcome.css */
+:root {
+    --bg-color: #faf9f6;
+    /* Premium off-white, gallery-like color */
+    --text-color-main: #1c1917;
+    /* Warm charcoal dark stone */
+    --text-color-muted: #6b7280;
+    /* Neutral gray */
+    --text-color-light: #9ca3af;
+    /* Soft light gray */
+
+    /* Brand Accent Blue */
+    --primary-blue: #0f52ba;
+    /* Sapphire / Royal Blue */
+    --primary-blue-hover: #08439e;
+
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.welcome-body {
+    background-color: var(--bg-color);
+    color: var(--text-color-main);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Base layout container */
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers Bienvenidos and body content vertically */
+    min-height: 100vh;
+    padding: 80px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Top Left: Bienvenidos */
+.welcome-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 30px; /* Kept close to body text */
+}
+
+.welcome-title {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(4.5rem, 9vw, 7.5rem);
+    /* Made larger as requested */
+    font-weight: 400;
+    color: var(--text-color-main);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    user-select: none;
+}
+
+/* Center Content: Main text lines */
+.welcome-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 10px;
+    margin-bottom: 80px; /* Prevent overlapping with the absolutely positioned button */
+}
+
+.info-block {
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-line {
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+}
+
+.info-line.primary-line {
+    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: var(--text-color-main);
+}
+
+.info-line.secondary-line {
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    font-weight: 400;
+    color: var(--text-color-muted);
+}
+
+.info-line.tertiary-line {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-color-light);
+    margin-top: 12px;
+}
+
+/* Bottom Right: Entrar button */
+.welcome-footer {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+}
+
+.enter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 1.05rem;
+    box-shadow: 0 10px 25px rgba(15, 82, 186, 0.2);
+    /* Soft blue shadow */
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(15, 82, 186, 0.15);
+}
+
+.enter-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(15, 82, 186, 0.35);
+    background-color: var(--primary-blue-hover);
+}
+
+.arrow-icon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enter-btn:hover .arrow-icon {
+    transform: translateX(6px);
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .welcome-container {
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .welcome-header {
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+
+    .welcome-content {
+        padding-left: 0;
+        margin-bottom: 40px;
+    }
+
+    .welcome-footer {
+        position: static;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .enter-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
