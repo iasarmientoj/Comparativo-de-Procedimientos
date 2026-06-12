@@ -35,6 +35,53 @@ body.welcome-body {
     position: relative;
 }
 
+/* Background blur container and animated circles */
+.bg-blur-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.blur-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.circle-1 {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(15, 82, 186, 0.45) 0%, rgba(147, 197, 253, 0.18) 60%, transparent 100%);
+    top: -150px;
+    left: -100px;
+    animation: float-slow-1 25s infinite alternate ease-in-out;
+}
+
+.circle-2 {
+    width: 1050px;
+    height: 1050px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(224, 242, 254, 0.14) 60%, transparent 100%);
+    bottom: -250px;
+    right: -150px;
+    animation: float-slow-2 35s infinite alternate ease-in-out;
+}
+
+.circle-3 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, rgba(191, 219, 254, 0.14) 60%, transparent 100%);
+    top: 30%;
+    left: 40%;
+    animation: float-slow-3 28s infinite alternate ease-in-out;
+}
+
 /* Base layout container */
 .welcome-container {
     display: flex;
@@ -114,7 +161,7 @@ body.welcome-body {
 /* Bottom Right: Entrar button */
 .welcome-footer {
     position: absolute;
-    bottom: 80px;
+    bottom: 130px; /* Raised button up as requested */
     right: 80px;
 }
 
@@ -179,5 +226,53 @@ body.welcome-body {
     .enter-btn {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* Subtle premium animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float-slow-1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(80px, 60px) scale(1.05);
+    }
+    100% {
+        transform: translate(-40px, 100px) scale(0.95);
+    }
+}
+
+@keyframes float-slow-2 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(-100px, -80px) scale(1.1);
+    }
+    100% {
+        transform: translate(50px, 40px) scale(0.9);
+    }
+}
+
+@keyframes float-slow-3 {
+    0% {
+        transform: translate(0, 0) scale(0.95);
+    }
+    50% {
+        transform: translate(60px, -100px) scale(1.05);
+    }
+    100% {
+        transform: translate(-60px, 50px) scale(1);
     }
 }
