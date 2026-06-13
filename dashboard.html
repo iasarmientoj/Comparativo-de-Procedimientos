@@ -32,6 +32,17 @@
 
     <!-- Dashboard Container -->
     <div class="dashboard-container">
+        <!-- Mobile Header Bar -->
+        <div class="mobile-header">
+            <div class="mobile-logo-area">
+                <img src="logo.jpeg" alt="Logo MHCP" class="mobile-logo-img">
+                <span class="mobile-logo-title">Sistema de Análisis Comparativo de Procedimientos</span>
+            </div>
+            <button class="sandwich-btn" id="sandwich-btn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
         <!-- Sidebar -->
         <aside class="dashboard-sidebar">
             <div class="sidebar-header">
@@ -178,6 +189,20 @@
             });
         }
 
+        // Toggle mobile hamburger menu
+        function toggleMobileMenu() {
+            const sidebar = document.querySelector('.dashboard-sidebar');
+            const sandwichIcon = document.querySelector('#sandwich-btn i');
+            if (sidebar) {
+                sidebar.classList.toggle('open');
+                if (sidebar.classList.contains('open')) {
+                    if (sandwichIcon) sandwichIcon.className = 'fa-solid fa-xmark';
+                } else {
+                    if (sandwichIcon) sandwichIcon.className = 'fa-solid fa-bars';
+                }
+            }
+        }
+
         // Switch between dashboard panels
         function switchPanel(panelId) {
             // Update active state in nav buttons
@@ -218,6 +243,14 @@
                     titleEl.textContent = 'Sistema de Autogestión';
                     subtitleEl.textContent = 'Generación asistida de estudios previos y mitigación activa';
                     break;
+            }
+
+            // Close mobile menu if open
+            const sidebar = document.querySelector('.dashboard-sidebar');
+            const sandwichIcon = document.querySelector('#sandwich-btn i');
+            if (sidebar && sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                if (sandwichIcon) sandwichIcon.className = 'fa-solid fa-bars';
             }
         }
 
