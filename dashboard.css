@@ -509,7 +509,7 @@
     padding: 14px 18px;
     background: rgba(255, 255, 255, 0.45);
     border: 1px solid rgba(15, 82, 186, 0.12);
-    border-left: 4px solid rgba(15, 82, 186, 0.2);
+    border-left: 5px solid rgba(15, 82, 186, 0.2);
     box-shadow: 0 3px 10px rgba(15, 82, 186, 0.02);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -524,10 +524,17 @@
 }
 
 .old-step-item.selected {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(15, 82, 186, 0.3);
+    background: linear-gradient(90deg, #ffffff 0%, rgba(203, 220, 255, 0.85) 100%);
+    border-color: rgba(15, 82, 186, 0.35);
     border-left-color: var(--primary-blue);
-    box-shadow: 0 8px 24px rgba(15, 82, 186, 0.12);
+    transform: translateX(6px);
+    box-shadow: 0 10px 25px rgba(15, 82, 186, 0.15);
+}
+
+.old-step-item.selected:hover {
+    transform: translateX(6px) translateY(-2px);
+    background: linear-gradient(90deg, #ffffff 0%, rgba(235, 242, 255, 0.98) 100%);
+    box-shadow: 0 12px 28px rgba(15, 82, 186, 0.18);
 }
 
 .old-step-letter {
@@ -540,6 +547,12 @@
     font-size: 0.95rem;
     color: #ffffff;
     flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.old-step-item.selected .old-step-letter {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .old-step-letter.risk-high {
@@ -563,6 +576,12 @@
     font-weight: 600;
     color: var(--text-color-main);
     margin-bottom: 2px;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.old-step-item.selected .old-step-title {
+    color: var(--primary-blue);
+    font-weight: 700;
 }
 
 .old-step-resp {
@@ -576,6 +595,10 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+.old-step-item.selected .old-step-risk-badge {
+    background-color: #fdfdfd;
 }
 
 .old-step-risk-badge.high {
