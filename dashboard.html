@@ -46,7 +46,7 @@
             <nav class="sidebar-nav">
                 <button class="nav-btn active" id="btn-proc-anterior" onclick="switchPanel('proc-anterior')">
                     <i class="fa-solid fa-clock-rotate-left"></i>
-                    <span>Procedimiento Anterior</span>
+                    <span>Procedimiento Vigente</span>
                 </button>
                 <button class="nav-btn" id="btn-proc-mejorado" onclick="switchPanel('proc-mejorado')">
                     <i class="fa-solid fa-shield-halved"></i>
@@ -82,18 +82,18 @@
         <!-- Main Content Viewport -->
         <main class="dashboard-viewport">
             <header class="viewport-header">
-                <h1 id="viewport-title" class="viewport-title">Procedimiento Anterior</h1>
+                <h1 id="viewport-title" class="viewport-title">Procedimiento Vigente</h1>
                 <p id="viewport-subtitle" class="viewport-subtitle">Análisis estructurado y diagnóstico de vulnerabilidades</p>
             </header>
 
             <div class="viewport-content">
-                <!-- PANEL: PROCEDIMIENTO ANTERIOR -->
+                <!-- PANEL: PROCEDIMIENTO VIGENTE -->
                 <div class="dashboard-panel active" id="panel-proc-anterior">
                     <div class="old-proc-grid">
                         <!-- Left Panel: Steps Flow (Scrollable) -->
                         <div class="old-steps-panel card-glass">
                             <div class="panel-section-header">
-                                <h3><i class="fa-solid fa-list-ol"></i> Pasos del Flujo Viejo</h3>
+                                <h3><i class="fa-solid fa-list-ol"></i> Pasos del Flujo Vigente</h3>
                                 <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un paso</span>
                             </div>
                             <div class="old-steps-list" id="old-steps-list">
@@ -203,7 +203,7 @@
             
             switch (panelId) {
                 case 'proc-anterior':
-                    titleEl.textContent = 'Procedimiento Anterior';
+                    titleEl.textContent = 'Procedimiento Vigente';
                     subtitleEl.textContent = 'Análisis estructurado y diagnóstico de vulnerabilidades';
                     break;
                 case 'proc-mejorado':
@@ -437,6 +437,8 @@
             }
         ];
 
+        let currentOldStepIndex = 0;
+
         // Render steps list
         function renderOldProcedure() {
             const stepsList = document.getElementById('old-steps-list');
@@ -463,6 +465,7 @@
 
         // Select specific step and update roles and details
         function selectOldStep(index) {
+            currentOldStepIndex = index;
             document.querySelectorAll('.old-step-item').forEach((item, i) => {
                 if (i === index) item.classList.add('selected');
                 else item.classList.remove('selected');
@@ -586,6 +589,41 @@
             // Trigger initial repaint on load for the active panel
             const initialPanel = document.querySelector('.dashboard-panel.active');
             triggerRepaint(initialPanel);
+
+            // Keyboard navigation for steps
+            window.addEventListener('keydown', (e) => {
+                const panel = document.getElementById('panel-proc-anterior');
+                if (panel && panel.classList.contains('active')) {
+                    // Ignore keydown if focused on an input/textarea/editable
+                    if (document.activeElement && (
+                        document.activeElement.tagName === 'INPUT' || 
+                        document.activeElement.tagName === 'TEXTAREA' || 
+                        document.activeElement.isContentEditable
+                    )) {
+                        return;
+                    }
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (currentOldStepIndex < oldProcedureSteps.length - 1) {
+                            selectOldStep(currentOldStepIndex + 1);
+                            const activeItem = document.getElementById(`old-step-item-${currentOldStepIndex}`);
+                            if (activeItem) {
+                                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                        }
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (currentOldStepIndex > 0) {
+                            selectOldStep(currentOldStepIndex - 1);
+                            const activeItem = document.getElementById(`old-step-item-${currentOldStepIndex}`);
+                            if (activeItem) {
+                                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>
