@@ -820,19 +820,31 @@
 
 /* Responsiveness */
 @media (max-width: 1024px) {
+    html {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
     .dashboard-body {
-        overflow: visible !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
         height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     .dashboard-container {
         flex-direction: column;
         height: auto !important;
         min-height: 100vh;
-        overflow: visible !important;
+        overflow-x: hidden !important;
+        overflow-y: visible !important;
         padding: 0;
         gap: 0;
         position: relative;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     /* Mobile Header */
@@ -957,7 +969,7 @@
         font-size: 0.95rem;
     }
 
-    /* 3 panels (Steps, Roles, Diagnosis) layout & equal height */
+    /* 3 panels (Steps, Roles, Diagnosis) layout */
     .old-proc-grid {
         grid-template-columns: 1fr;
         height: auto !important;
@@ -969,22 +981,42 @@
         gap: 24px;
     }
 
-    .old-steps-panel,
-    .old-roles-panel,
-    .old-diagnosis-panel {
-        height: 400px !important; /* enforce equal height */
+    /* Steps list: 400px height with scroll */
+    .old-steps-panel {
+        height: 400px !important;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
     }
 
-    .old-steps-list,
-    .roles-container,
-    .diagnosis-container {
+    .old-steps-list {
         flex-grow: 1;
         overflow-y: auto !important;
         padding-right: 8px;
         box-sizing: border-box;
+    }
+
+    /* Roles: auto-height to fit items, no scroll needed */
+    .old-roles-panel {
+        height: auto !important;
+        box-sizing: border-box;
+    }
+
+    .roles-container {
+        overflow: visible !important;
+        padding-right: 0;
+    }
+
+    /* Diagnosis: adaptive height matching content, no scroll needed */
+    .old-diagnosis-panel {
+        height: auto !important;
+        box-sizing: border-box;
+    }
+
+    .diagnosis-container {
+        height: auto !important;
+        overflow: visible !important;
+        padding-right: 0;
     }
 }
 
