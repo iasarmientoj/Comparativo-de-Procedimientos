@@ -1397,3 +1397,67 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Simulation Results Styles */
+.sim-result-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.sim-result-container.visible {
+    max-height: 300px;
+}
+
+.result-box {
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 12px;
+    animation: simFadeInUp 0.5s ease forwards;
+}
+
+.result-box.result-danger {
+    background: rgba(239, 68, 68, 0.04);
+    border: 1.5px solid rgba(239, 68, 68, 0.15);
+}
+
+.result-box.result-warning {
+    background: rgba(16, 185, 129, 0.03);
+    border: 1.5px solid rgba(16, 185, 129, 0.15);
+}
+
+.result-box .result-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.result-box.result-danger .result-title {
+    color: #ef4444;
+}
+
+.result-box.result-warning .result-title {
+    color: #10b981;
+}
+
+.result-box .result-text {
+    font-size: 0.8rem;
+    color: var(--text-color-main);
+    line-height: 1.5;
+}
+
+.result-box .result-count {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+}
+
+.result-box.result-danger .result-count {
+    color: #ef4444;
+}
+
+.result-box.result-warning .result-count {
+    color: #10b981;
+}

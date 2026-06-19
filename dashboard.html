@@ -985,6 +985,17 @@
             document.getElementById('sim-stats-bar').style.display = 'none';
             document.getElementById('btn-reiniciar-sim').style.display = 'none';
             
+            const oldResultEl = document.getElementById('sim-result-vigente');
+            if (oldResultEl) {
+                oldResultEl.classList.remove('visible');
+                oldResultEl.innerHTML = '';
+            }
+            const newResultEl = document.getElementById('sim-result-mejorado');
+            if (newResultEl) {
+                newResultEl.classList.remove('visible');
+                newResultEl.innerHTML = '';
+            }
+
             const btnIniciar = document.getElementById('btn-iniciar-sim');
             if (btnIniciar) {
                 if (selectedSimCase) {
@@ -995,6 +1006,21 @@
                     btnIniciar.disabled = true;
                     btnIniciar.style.opacity = '0.5';
                 }
+            }
+        }
+
+        // Helper function to scroll element smoothly inside container
+        function scrollToElement(el, container) {
+            if (!el || !container) return;
+            const containerRect = container.getBoundingClientRect();
+            const elRect = el.getBoundingClientRect();
+            
+            if (elRect.top < containerRect.top || elRect.bottom > containerRect.bottom) {
+                const scrollTopDiff = elRect.top - containerRect.top;
+                container.scrollTo({
+                    top: container.scrollTop + scrollTopDiff - (containerRect.height / 2) + (elRect.height / 2),
+                    behavior: 'smooth'
+                });
             }
         }
 
@@ -1028,13 +1054,14 @@
 
         // Run Old Procedure
         async function runSimOldProcedure() {
+            const container = document.getElementById('sim-list-vigente');
             // Phase 1: All steps process and approve
             for (let i = 0; i < SIM_OLD_STEPS.length; i++) {
                 const step = SIM_OLD_STEPS[i];
                 const node = document.getElementById(step.id);
                 if (node) {
                     node.classList.add('processing');
-                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    scrollToElement(node, container);
                     await new Promise(resolve => setTimeout(resolve, 180));
                     node.classList.remove('processing');
                     node.classList.add('approved');
@@ -1060,7 +1087,7 @@
                             </div>
                         `;
                     }
-                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    scrollToElement(node, container);
                     await new Promise(resolve => setTimeout(resolve, 500));
                 }
             }
@@ -1068,6 +1095,7 @@
 
         // Run New Procedure
         async function runSimNewProcedure() {
+            const container = document.getElementById('sim-list-mejorado');
             const blockIndex = selectedSimCase.newBlockIndex;
 
             for (let i = 0; i < SIM_NEW_STEPS.length; i++) {
@@ -1078,7 +1106,7 @@
                 if (i === blockIndex) {
                     // Processing block index
                     node.classList.add('processing');
-                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    scrollToElement(node, container);
                     await new Promise(resolve => setTimeout(resolve, 600));
 
                     // Block it
@@ -1095,7 +1123,7 @@
                             </div>
                         `;
                     }
-                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    scrollToElement(node, container);
                     await new Promise(resolve => setTimeout(resolve, 300));
 
                     // Skip the remaining steps
@@ -1111,14 +1139,14 @@
 
                 // Normal process and approve
                 node.classList.add('processing');
-                node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                scrollToElement(node, container);
                 await new Promise(resolve => setTimeout(resolve, 250));
                 node.classList.remove('processing');
                 node.classList.add('approved');
             }
         }
 
-        // Show Sim Results Bar
+        // Show Sim Results Bar and Box Containers
         function showSimResults() {
             const statsBar = document.getElementById('sim-stats-bar');
             if (!statsBar) return;
@@ -1132,6 +1160,41 @@
             savedLabel.title = SIM_NEW_STEPS[selectedSimCase.newBlockIndex].title;
 
             statsBar.style.display = 'grid';
+
+            // Update old procedure result box
+            const oldResultEl = document.getElementById('sim-result-vigente');
+            if (oldResultEl) {
+                const warningCount = selectedSimCase.oldWarnings.length;
+                oldResultEl.innerHTML = `
+                    <div class="result-box result-danger">
+                        <div class="result-count">${warningCount}</div>
+                        <div class="result-title">Riesgos No Detectados</div>
+                        <div class="result-text">
+                            El procedimiento vigente aprobó y perfeccionó el trámite de <strong>${selectedSimCase.value}</strong> 
+                            sin detectar <strong>${warningCount}</strong> punto${warningCount > 1 ? 's' : ''} crítico${warningCount > 1 ? 's' : ''} de riesgo. 
+                            Tipo de vulnerabilidad: <strong>${selectedSimCase.riskType}</strong>.
+                        </div>
+                    </div>
+                `;
+                oldResultEl.classList.add('visible');
+            }
+
+            // Update new procedure result box
+            const newResultEl = document.getElementById('sim-result-mejorado');
+            if (newResultEl) {
+                const blockStep = SIM_NEW_STEPS[selectedSimCase.newBlockIndex];
+                newResultEl.innerHTML = `
+                    <div class="result-box result-warning">
+                        <div class="result-count">Fase ${blockStep.number}</div>
+                        <div class="result-title">Proceso Detenido Exitosamente</div>
+                        <div class="result-text">
+                            El procedimiento mejorado contuvo el riesgo en la fase <strong>${blockStep.number} — ${blockStep.title}</strong>, 
+                            evitando la materialización del riesgo contractual y salvaguardando recursos públicos por <strong>${selectedSimCase.value}</strong>.
+                        </div>
+                    </div>
+                `;
+                newResultEl.classList.add('visible');
+            }
         }
 
         let currentOldStepIndex = 0;
@@ -1382,6 +1445,20 @@
             // Render new procedure steps and select the first step initially
             renderNewProcedure();
             selectNewStep(0);
+
+            // Render simulation cases and steps
+            renderSimCases();
+            renderSimSteps();
+
+            // Bind simulation control buttons
+            const btnIniciarSim = document.getElementById('btn-iniciar-sim');
+            if (btnIniciarSim) {
+                btnIniciarSim.addEventListener('click', startSimulation);
+            }
+            const btnReiniciarSim = document.getElementById('btn-reiniciar-sim');
+            if (btnReiniciarSim) {
+                btnReiniciarSim.addEventListener('click', resetSimulation);
+            }
 
             // Trigger initial repaint on load for the active panel
             const initialPanel = document.querySelector('.dashboard-panel.active');
