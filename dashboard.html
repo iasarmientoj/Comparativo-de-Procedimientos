@@ -257,10 +257,109 @@
 
                 <!-- PANEL: SISTEMA DE AUTOGESTIÓN -->
                 <div class="dashboard-panel" id="panel-sis-autogestion">
-                    <div class="structure-placeholder">
-                        <i class="fa-solid fa-laptop-code placeholder-icon"></i>
-                        <h3>Sistema de Autogestión</h3>
-                        <p>Estructura lista para la gestión de documentos, estudios previos automatizados y plantillas.</p>
+                    <!-- Pantalla 1: Selección de Rol -->
+                    <div class="auto-role-select-view" id="auto-role-select-view">
+                        <div class="auto-select-header">
+                            <h2>¿Con qué rol deseas ingresar al Sistema de Autogestión?</h2>
+                            <p>Tus datos son 100% locales, privados y se guardan únicamente en este dispositivo.</p>
+                        </div>
+                        <div class="auto-roles-grid">
+                            <div class="auto-role-card card-glass" onclick="enterAutogestion('dt')">
+                                <div class="role-icon-wrapper dt-color">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <h4>Dependencia Técnica</h4>
+                                <p>Define las necesidades, cotiza en el catálogo y realiza la evaluación técnica de ofertas.</p>
+                                <span class="enter-badge dt-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                            <div class="auto-role-card card-glass" onclick="enterAutogestion('ac')">
+                                <div class="role-icon-wrapper ac-color">
+                                    <i class="fa-solid fa-scale-balanced"></i>
+                                </div>
+                                <h4>Abogado de Contratos</h4>
+                                <p>Acompaña la estructuración, publica las RFQ, evalúa antecedentes y aprueba garantías.</p>
+                                <span class="enter-badge ac-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                            <div class="auto-role-card card-glass" onclick="enterAutogestion('pr')">
+                                <div class="role-icon-wrapper pr-color">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                </div>
+                                <h4>Presupuesto</h4>
+                                <p>Valida los recursos asignados al plan anual y expide los certificados CDP y registros RP.</p>
+                                <span class="enter-badge pr-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                            <div class="auto-role-card card-glass" onclick="enterAutogestion('og')">
+                                <div class="role-icon-wrapper og-color">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <h4>Ordenador del Gasto</h4>
+                                <p>Firma digitalmente la Orden de Compra y autoriza el inicio y la designación de supervisores.</p>
+                                <span class="enter-badge og-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                        <div class="auto-persistence-header" style="margin-top: 30px; text-align: center;">
+                            <button class="footer-btn" onclick="triggerImportState()" style="display: inline-flex; margin: 0 auto;"><i class="fa-solid fa-file-import"></i> Cargar Estado Anterior</button>
+                        </div>
+                    </div>
+
+                    <!-- Pantalla 2: Workspace de Trabajo -->
+                    <div class="auto-workspace-view" id="auto-workspace-view" style="display: none;">
+                        <div class="auto-workspace-header card-glass">
+                            <div class="role-badge-title">
+                                <div class="role-icon-mini" id="active-role-icon"></div>
+                                <div>
+                                    <span class="role-subtitle-label">Perfil de Autogestión</span>
+                                    <h3 id="active-role-name">Nombre del Rol</h3>
+                                </div>
+                            </div>
+                            
+                            <div class="auto-header-buttons">
+                                <button class="action-btn-secondary btn-small" onclick="backToRoleSelect()"><i class="fa-solid fa-chevron-left"></i> Cambiar Rol</button>
+                                <button class="action-btn btn-small" onclick="saveAutogestionState()"><i class="fa-solid fa-floppy-disk"></i> Guardar Estado</button>
+                                <button class="action-btn-secondary btn-small" onclick="triggerImportState()"><i class="fa-solid fa-file-import"></i> Cargar Estado</button>
+                                <button class="action-btn-secondary btn-small btn-danger" onclick="resetAutogestionState()"><i class="fa-solid fa-trash-can"></i> Reiniciar</button>
+                            </div>
+                        </div>
+
+                        <div class="privacy-banner">
+                            <i class="fa-solid fa-shield-halved"></i> <span><strong>Privacidad garantizada:</strong> Todos los datos se procesan localmente en tu navegador. Ninguna información es transmitida.</span>
+                        </div>
+
+                        <div class="auto-workspace-grid">
+                            <!-- Columna Izquierda: Checklist de Tareas del Rol -->
+                            <div class="auto-checklist-column">
+                                <div class="panel-section-header">
+                                    <h3><i class="fa-solid fa-list-check"></i> Tus Tareas en el Flujo</h3>
+                                    <span class="hint-text">Marca las tareas a medida que las completes</span>
+                                </div>
+                                <div class="auto-tasks-list" id="auto-tasks-list">
+                                    <!-- Inyectado por JS -->
+                                </div>
+                            </div>
+
+                            <!-- Columna Derecha: Estado Global e Interconexiones -->
+                            <div class="auto-sidebar-column">
+                                <!-- Progreso General -->
+                                <div class="auto-progress-panel card-glass">
+                                    <div class="panel-section-header">
+                                        <h4><i class="fa-solid fa-chart-line"></i> Progreso del Contrato</h4>
+                                    </div>
+                                    <div class="progress-bars-container" id="auto-progress-bars">
+                                        <!-- Inyectado por JS -->
+                                    </div>
+                                </div>
+
+                                <!-- Alertas y Bloqueos de Coordinación -->
+                                <div class="auto-alerts-panel card-glass">
+                                    <div class="panel-section-header">
+                                        <h4><i class="fa-solid fa-route"></i> Coordinación entre Roles</h4>
+                                    </div>
+                                    <div class="alerts-container" id="auto-coordination-alerts">
+                                        <!-- Inyectado por JS -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1464,6 +1563,886 @@
             }
         }
 
+        /* ==========================================================================
+           SISTEMA DE AUTOGESTIÓN JAVASCRIPT (MODULAR Y ASISTIDO)
+           ========================================================================== */
+
+        // Task definitions for each role
+        const autogestionTasks = [
+            {
+                id: "dt_fase1_simulador",
+                role: "dt",
+                fase: "Fase 1",
+                title: "Estructuración de Necesidad y Simulador",
+                desc: "Definir ítems y cantidades en el catálogo vigente. Simular precios y estructurar el requerimiento.",
+                subtasks: [
+                    "Simular precios en el catálogo oficial de la TVEC.",
+                    "Descargar PDF de cotización de la TVEC.",
+                    "Solicitar expedición de CDP al área de Presupuesto."
+                ],
+                notePlaceholder: "Añadir notas del catálogo...",
+                blockedBy: [],
+                coordination: {
+                    type: "request",
+                    target: "Presupuesto",
+                    actionLabel: "Solicitar CDP",
+                    emailSubject: "Solicitud de CDP - Estructuración de Necesidad",
+                    emailBody: "Hola Presupuesto,\n\nHe terminado la simulación y estructuración de la necesidad para el contrato. Solicito amablemente la expedición del CDP correspondiente para continuar con el trámite de Estudios Previos.\n\nAtentamente,\nÁrea Técnica"
+                }
+            },
+            {
+                id: "dt_fase2_codiseno",
+                role: "dt",
+                fase: "Fase 2",
+                title: "Co-diseño de Estudios Previos",
+                desc: "Redactar y co-diseñar requerimientos técnicos y de negocio. Estructurar la matriz de riesgos técnicos.",
+                subtasks: [
+                    "Confirmar recibo de CDP por parte de Presupuesto.",
+                    "Programar sesión de co-diseño con Abogado asignado.",
+                    "Estructurar la matriz preliminar de riesgos técnicos.",
+                    "Notificar al Abogado para consolidar Estudios Previos."
+                ],
+                notePlaceholder: "Añadir enlace a borrador de estudios previos...",
+                blockedBy: ["pr_fase1_cdp"],
+                blockMessage: "Se sugiere confirmar la expedición del CDP por parte de Presupuesto.",
+                coordination: {
+                    type: "notify",
+                    target: "Abogado",
+                    actionLabel: "Notificar Estudios Listos",
+                    emailSubject: "Co-diseño Estudios Previos - Requerimientos Técnicos Listos",
+                    emailBody: "Hola,\n\nHe estructurado los requerimientos técnicos y la matriz preliminar de riesgos. Quedo atento para coordinar la sesión de co-diseño y consolidar los Estudios Previos.\n\nAtentamente,\nÁrea Técnica"
+                }
+            },
+            {
+                id: "dt_fase3_rfi",
+                role: "dt",
+                fase: "Fase 3",
+                title: "Evaluación de RFI (Indagación)",
+                desc: "Revisar propuestas del mercado y analizar si aplica la limitación MIPYME.",
+                subtasks: [
+                    "Verificar RUES de proponentes para validez nacional MIPYME."
+                ],
+                notePlaceholder: "Añadir observaciones de las MIPYME...",
+                blockedBy: []
+            },
+            {
+                id: "dt_fase5_observaciones",
+                role: "dt",
+                fase: "Fase 5",
+                title: "Resolución de Observaciones Técnicas",
+                desc: "Responder dudas y aclaraciones técnicas de los proponentes en el foro de la RFQ.",
+                subtasks: [
+                    "Cargar respuestas técnicas unificadas en cuadernillo de la RFQ."
+                ],
+                notePlaceholder: "Añadir número de radicado o notas...",
+                blockedBy: []
+            },
+            {
+                id: "dt_fase8_precios",
+                role: "dt",
+                fase: "Fase 8",
+                title: "Control de Precios Bajos y Exenciones",
+                desc: "Validar costos frente a la cotización de menor valor y emitir concepto técnico de viabilidad.",
+                subtasks: [
+                    "Verificar publicación del evento RFQ por parte del Abogado.",
+                    "Solicitar aclaración al oferente si cotiza con 0% de IVA (Control IVA).",
+                    "Emitir concepto técnico de viabilidad económica.",
+                    "Notificar concepto técnico al Abogado de Contratos."
+                ],
+                notePlaceholder: "Escribir resultado de la validación del IVA...",
+                blockedBy: ["ac_fase4_rfq"],
+                blockMessage: "Se sugiere esperar a que el Abogado publique y parametrice el RFQ oficial.",
+                coordination: {
+                    type: "notify",
+                    target: "Abogado",
+                    actionLabel: "Enviar Concepto Técnico",
+                    emailSubject: "Concepto Técnico de Viabilidad - Contrato",
+                    emailBody: "Hola,\n\nHe emitido el concepto técnico de viabilidad económica y control de precios bajos/IVA para la oferta de menor valor. Adjunto el documento/concepto para su consolidación en el informe de evaluación.\n\nAtentamente,\nÁrea Técnica"
+                }
+            },
+            {
+                id: "dt_fase12_inicio",
+                role: "dt",
+                fase: "Fase 12",
+                title: "Acta de Inicio y Supervisión",
+                desc: "Iniciar ejecución formal y técnica del contrato.",
+                subtasks: [
+                    "Verificar aprobación de pólizas (Abogado) y expedición de RP (Presupuesto).",
+                    "Firmar Acta de Inicio junto al contratista.",
+                    "Agendar primer comité de seguimiento.",
+                    "Notificar inicio de ejecución a Contratos."
+                ],
+                notePlaceholder: "Añadir fecha de firma del acta de inicio...",
+                hasCalendar: true,
+                calendarTitle: "Primer Comité de Seguimiento - Contrato MIN-AM",
+                calendarDesc: "Revisión técnica de inicio y plan de trabajo del supervisor. Recordatorio automático local.",
+                blockedBy: ["ac_fase11_garantias", "pr_fase11_rp"],
+                blockMessage: "Se aconseja que las garantías estén aprobadas y el RP esté expedido antes del inicio.",
+                coordination: {
+                    type: "notify",
+                    target: "Contratos",
+                    actionLabel: "Notificar Inicio Ejecución",
+                    emailSubject: "Acta de Inicio Suscrita - Inicio Ejecución",
+                    emailBody: "Hola,\n\nInformo que el Acta de Inicio correspondiente al contrato ha sido firmada por el supervisor y el contratista con fecha de hoy. Se da inicio formal a la ejecución.\n\nAtentamente,\nSupervisor"
+                }
+            },
+            
+            // AC
+            {
+                id: "ac_fase2_codiseno",
+                role: "ac",
+                fase: "Fase 2",
+                title: "Co-diseño y Control Jurídico",
+                desc: "Revisar conveniencia legal y matriz de riesgos jurídicos. Diseñar pólizas.",
+                subtasks: [
+                    "Confirmar que Presupuesto expidió el CDP.",
+                    "Revisar borrador técnico enviado por el área solicitante.",
+                    "Diseñar el esquema de amparos y coberturas de pólizas."
+                ],
+                notePlaceholder: "Añadir notas sobre amparos requeridos...",
+                blockedBy: ["pr_fase1_cdp"],
+                blockMessage: "Se sugiere que Presupuesto expida el CDP antes de iniciar."
+            },
+            {
+                id: "ac_fase4_rfq",
+                role: "ac",
+                fase: "Fase 4",
+                title: "Configuración del RFQ Oficial",
+                desc: "Parametrizar y publicar el evento RFQ en la Tienda Virtual (TVEC).",
+                subtasks: [
+                    "Validar firmas en Estudios Previos (DT y Contratos).",
+                    "Parametrizar la RFQ en la TVEC usando la cuenta institucional.",
+                    "Validar que el cronograma incluya los traslados mínimos de ley.",
+                    "Notificar a la DT la publicación del evento."
+                ],
+                notePlaceholder: "Añadir número de RFQ generado...",
+                blockedBy: ["dt_fase2_codiseno", "ac_fase2_codiseno"],
+                blockMessage: "Se recomienda que se complete primero el co-diseño de Estudios Previos.",
+                coordination: {
+                    type: "notify",
+                    target: "DT",
+                    actionLabel: "Notificar Publicación RFQ",
+                    emailSubject: "RFQ Publicada en TVEC - Evento Abierto",
+                    emailBody: "Hola Dependencia Técnica,\n\nLes informo que la RFQ ha sido publicada exitosamente en la Tienda Virtual (TVEC). Agradezco estar atentos para la resolución de observaciones y evaluación de ofertas.\n\nAtentamente,\nAbogado de Contratos"
+                }
+            },
+            {
+                id: "ac_fase7_antecedentes",
+                role: "ac",
+                fase: "Fase 7",
+                title: "Evaluación de Inhabilidades y REDAM",
+                desc: "Validar antecedentes del oferente de menor precio en las plataformas de ley.",
+                subtasks: [
+                    "Descargar certificado REDAM en vivo (Fecha de hoy).",
+                    "Descargar antecedentes fiscales (Contraloría) y penales (Policía).",
+                    "Validar representación legal en RUES frente a inhabilidades del Art. 44 Ley 80."
+                ],
+                notePlaceholder: "Añadir notas del RUES o REDAM...",
+                blockedBy: ["ac_fase4_rfq"],
+                blockMessage: "Se sugiere que la RFQ esté publicada antes de evaluar antecedentes."
+            },
+            {
+                id: "ac_fase9_consolidacion",
+                role: "ac",
+                fase: "Fase 9",
+                title: "Consolidación de Evaluaciones",
+                desc: "Consolidar informes técnicos y jurídicos. Publicar y habilitar observaciones.",
+                subtasks: [
+                    "Recibir concepto de precios/IVA del área técnica (DT).",
+                    "Firmar y publicar acta de evaluación jurídica.",
+                    "Habilitar traslado de 1 día para observaciones de oferentes.",
+                    "Notificar al Ordenador del Gasto para firma de Orden de Compra."
+                ],
+                notePlaceholder: "Añadir notas de observaciones recibidas...",
+                blockedBy: ["dt_fase8_precios", "ac_fase7_antecedentes"],
+                blockMessage: "Se sugiere contar con el control de precios de DT y la evaluación REDAM.",
+                coordination: {
+                    type: "request",
+                    target: "Ordenador",
+                    actionLabel: "Solicitar Firma de OC",
+                    emailSubject: "Visto Bueno Adjudicación y Firma de OC",
+                    emailBody: "Estimado(a) Ordenador(a),\n\nHe consolidado las evaluaciones técnica y jurídica de la RFQ con resultado habilitante para el oferente de menor precio. Remito visto bueno para proceder con la firma de la Orden de Compra (OC) en la Tienda Virtual.\n\nAtentamente,\nAbogado de Contratos"
+                }
+            },
+            {
+                id: "ac_fase11_garantias",
+                role: "ac",
+                fase: "Fase 11",
+                title: "Aprobación de Garantías",
+                desc: "Verificar suficiencia de pólizas cargadas por el contratista.",
+                subtasks: [
+                    "Confirmar que el Ordenador firmó la Orden de Compra.",
+                    "Validar vigencias de pólizas cargadas por el contratista.",
+                    "Emitir Aprobación Formal de Garantía.",
+                    "Notificar aprobación a la DT y al Contratista."
+                ],
+                notePlaceholder: "Añadir número de póliza y aseguradora...",
+                hasCalendar: true,
+                calendarTitle: "Vencimiento para entrega de Garantías - Contrato MIN-AM",
+                calendarDesc: "Recordatorio límite de 3 días para que el contratista suba garantías.",
+                blockedBy: ["og_fase10_firma"],
+                blockMessage: "Se sugiere que la Orden de Compra esté firmada antes de aprobar pólizas.",
+                coordination: {
+                    type: "notify",
+                    target: "DT",
+                    actionLabel: "Notificar Garantías Aprobadas",
+                    emailSubject: "Garantías Aprobadas - Listo para Acta de Inicio",
+                    emailBody: "Hola,\n\nLes informo que las pólizas de garantía cargadas por el contratista han sido aprobadas jurídicamente. Una vez Presupuesto emita el Registro Presupuestal (RP), se puede proceder con la firma del Acta de Inicio.\n\nAtentamente,\nAbogado de Contratos"
+                }
+            },
+            {
+                id: "ac_fase12_notificacion",
+                role: "ac",
+                fase: "Fase 12",
+                title: "Notificación formal de supervisión",
+                desc: "Remitir el oficio de designación del supervisor y datos de contacto.",
+                subtasks: [
+                    "Confirmar que el Ordenador firmó la designación del supervisor.",
+                    "Remitir oficio formal de supervisión con datos de contacto."
+                ],
+                notePlaceholder: "Añadir número de radicado del oficio...",
+                blockedBy: ["og_fase12_designacion"],
+                blockMessage: "Se aconseja que el Oficio de Designación esté firmado por el Ordenador."
+            },
+            
+            // PR
+            {
+                id: "pr_fase1_cdp",
+                role: "pr",
+                fase: "Fase 1",
+                title: "Expedición de CDP",
+                desc: "Reservar recursos en el SIIF Nación de acuerdo al Plan Anual de Adquisiciones.",
+                subtasks: [
+                    "Verificar rubro presupuestal y Plan de Adquisiciones.",
+                    "Generar CDP oficial en sistema SIIF Nación.",
+                    "Cargar PDF de CDP firmado.",
+                    "Notificar expedición de CDP a la DT solicitante."
+                ],
+                notePlaceholder: "Añadir número de CDP y valor reservado...",
+                coordination: {
+                    type: "notify",
+                    target: "DT",
+                    actionLabel: "Notificar CDP Expedido",
+                    emailSubject: "CDP Expedido - Trámite Contratación",
+                    emailBody: "Hola Dependencia Técnica,\n\nLes informo que el Certificado de Disponibilidad Presupuestal (CDP) ha sido expedido satisfactoriamente. Pueden continuar con el trámite de Estudios Previos.\n\nAtentamente,\nPresupuesto"
+                }
+            },
+            {
+                id: "pr_fase11_rp",
+                role: "pr",
+                fase: "Fase 11",
+                title: "Expedición de RP",
+                desc: "Afectación presupuestal definitiva. Registrar la Orden de Compra en el SIIF.",
+                subtasks: [
+                    "Recibir notificación de Orden de Compra firmada.",
+                    "Verificar que el Registro Presupuestal corresponda al valor de adjudicación.",
+                    "Expedir RP oficial en SIIF.",
+                    "Notificar RP al supervisor (DT) y Abogado."
+                ],
+                notePlaceholder: "Añadir número de RP generado...",
+                blockedBy: ["og_fase10_firma"],
+                blockMessage: "Se sugiere que la Orden de Compra esté firmada antes de registrar el RP.",
+                coordination: {
+                    type: "notify",
+                    target: "Supervisor",
+                    actionLabel: "Notificar RP Expedido",
+                    emailSubject: "Registro Presupuestal (RP) Expedido",
+                    emailBody: "Hola,\n\nLes informo que el Registro Presupuestal (RP) para el contrato ha sido expedido en el SIIF, quedando perfeccionada la afectación presupuestal.\n\nAtentamente,\nPresupuesto"
+                }
+            },
+            
+            // OG
+            {
+                id: "og_fase5_cancelacion",
+                role: "og",
+                fase: "Fase 5",
+                title: "Firma de Cancelación Formal",
+                desc: "Expedir y firmar acto administrativo motivado de cancelación (solo si aplica por errores técnicos en RFQ).",
+                subtasks: [
+                    "Revisar justificación legal y técnica de error en RFQ.",
+                    "Firmar Acto Administrativo motivado de cancelación (Prohibida la cancelación directa por botón)."
+                ],
+                notePlaceholder: "Añadir justificación de cancelación o número de resolución..."
+            },
+            {
+                id: "og_fase10_firma",
+                role: "og",
+                fase: "Fase 10",
+                title: "Adjudicación y Firma de OC",
+                desc: "Suscripción formal de la Orden de Compra (OC) en la Tienda Virtual (TVEC).",
+                subtasks: [
+                    "Confirmar que el Abogado emitió visto bueno de adjudicación.",
+                    "Firmar digitalmente la Orden de Compra (OC) en la Tienda Virtual (TVEC).",
+                    "Notificar firma a Presupuesto y Abogado."
+                ],
+                notePlaceholder: "Añadir número de Orden de Compra firmada...",
+                blockedBy: ["ac_fase9_consolidacion"],
+                blockMessage: "Se recomienda que el Abogado emita el visto bueno de adjudicación primero.",
+                coordination: {
+                    type: "notify",
+                    target: "Presupuesto/Abogado",
+                    actionLabel: "Notificar OC Firmada",
+                    emailSubject: "Orden de Compra Firmada - Trámite de Registro y Garantías",
+                    emailBody: "Hola,\n\nInformo que la Orden de Compra ha sido firmada digitalmente en la Tienda Virtual (TVEC). Agradezco proceder con la expedición del Registro Presupuestal (RP) y la revisión de pólizas de garantía.\n\nAtentamente,\nOrdenador del Gasto"
+                }
+            },
+            {
+                id: "og_fase12_designacion",
+                role: "og",
+                fase: "Fase 12",
+                title: "Firma de Designación",
+                desc: "Autorizar formalmente el inicio del contrato mediante firma del oficio de designación de supervisión.",
+                subtasks: [
+                    "Confirmar firma del Acta de Inicio por el Supervisor.",
+                    "Firmar oficio de designación del supervisor técnico.",
+                    "Notificar designación al Abogado."
+                ],
+                notePlaceholder: "Añadir datos del supervisor designado...",
+                blockedBy: ["dt_fase12_inicio"],
+                blockMessage: "Se sugiere que el Supervisor haya firmado el Acta de Inicio.",
+                coordination: {
+                    type: "notify",
+                    target: "Abogado",
+                    actionLabel: "Notificar Designación Firmada",
+                    emailSubject: "Oficio de Designación de Supervisión Firmado",
+                    emailBody: "Hola,\n\nInformo que he firmado el Oficio de Designación de Supervisión para el contrato. Agradezco proceder con la notificación formal.\n\nAtentamente,\nOrdenador del Gasto"
+                }
+            }
+        ];
+
+        // State structure for local-only storage
+        let autogestionState = {
+            contractId: "MIN-AM-2026-001",
+            lastUpdated: new Date().toISOString(),
+            currentRole: null,
+            completedTasks: {},
+            subtasks: {},
+            notes: {}
+        };
+
+        // LocalStorage Helpers
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('contrato_autogestion_state');
+            if (saved) {
+                try {
+                    autogestionState = JSON.parse(saved);
+                } catch(e) {
+                    console.error("Error al cargar estado de autogestión:", e);
+                }
+            }
+        }
+
+        function saveToLocalStorage() {
+            autogestionState.lastUpdated = new Date().toISOString();
+            localStorage.setItem('contrato_autogestion_state', JSON.stringify(autogestionState));
+        }
+
+        // Enter view
+        function enterAutogestion(role) {
+            autogestionState.currentRole = role;
+            saveToLocalStorage();
+            
+            document.getElementById('auto-role-select-view').style.display = 'none';
+            document.getElementById('auto-workspace-view').style.display = 'block';
+            
+            const header = document.querySelector('.auto-workspace-header');
+            if (header) {
+                header.className = `auto-workspace-header card-glass ${role}-color`;
+            }
+            
+            renderAutogestion();
+        }
+
+        // Exit view
+        function backToRoleSelect() {
+            autogestionState.currentRole = null;
+            saveToLocalStorage();
+            
+            document.getElementById('auto-workspace-view').style.display = 'none';
+            document.getElementById('auto-role-select-view').style.display = 'flex';
+        }
+
+        // Block logic helper (Tasks are never disabled now)
+        function isTaskBlocked(task) {
+            return false;
+        }
+
+        // Advisory check for prerequisites
+        function hasPendingPrerequisites(task) {
+            if (!task.blockedBy || task.blockedBy.length === 0) return false;
+            return task.blockedBy.some(depId => !autogestionState.completedTasks[depId]);
+        }
+
+        // Toggle task
+        function toggleTask(taskId, isChecked) {
+            autogestionState.completedTasks[taskId] = isChecked;
+            
+            const task = autogestionTasks.find(t => t.id === taskId);
+            if (task && task.subtasks) {
+                task.subtasks.forEach((_, index) => {
+                    const subId = `${taskId}_sub${index}`;
+                    autogestionState.subtasks[subId] = isChecked;
+                });
+            }
+            
+            saveToLocalStorage();
+            renderAutogestion();
+        }
+
+        // Toggle subtask
+        function toggleSubtask(taskId, subIndex, isChecked) {
+            const subId = `${taskId}_sub${subIndex}`;
+            autogestionState.subtasks[subId] = isChecked;
+            
+            const task = autogestionTasks.find(t => t.id === taskId);
+            if (task && task.subtasks) {
+                const allCompleted = task.subtasks.every((_, index) => {
+                    return !!autogestionState.subtasks[`${taskId}_sub${index}`];
+                });
+                autogestionState.completedTasks[taskId] = allCompleted;
+            }
+            
+            saveToLocalStorage();
+            renderAutogestion();
+        }
+
+        // Update task note
+        function updateTaskNote(taskId, noteText) {
+            autogestionState.notes[taskId] = noteText;
+            saveToLocalStorage();
+        }
+
+        // Role progress computation
+        function getRoleProgress(role) {
+            const roleTasks = autogestionTasks.filter(t => t.role === role);
+            const completed = roleTasks.filter(t => !!autogestionState.completedTasks[t.id]).length;
+            return {
+                completed: completed,
+                total: roleTasks.length,
+                percentage: roleTasks.length > 0 ? Math.round((completed / roleTasks.length) * 100) : 0
+            };
+        }
+
+        // Render progress panel
+        function renderProgressPanel() {
+            const progressContainer = document.getElementById('auto-progress-bars');
+            if (!progressContainer) return;
+            progressContainer.innerHTML = '';
+            
+            const roles = [
+                { id: 'dt', name: 'Dependencia Técnica', icon: 'fa-laptop-code', colorHex: '#0f52ba' },
+                { id: 'ac', name: 'Abogado de Contratos', icon: 'fa-scale-balanced', colorHex: '#8b5cf6' },
+                { id: 'pr', name: 'Presupuesto', icon: 'fa-file-invoice-dollar', colorHex: '#f59e0b' },
+                { id: 'og', name: 'Ordenador del Gasto', icon: 'fa-user-tie', colorHex: '#ec4899' }
+            ];
+            
+            roles.forEach(r => {
+                const prog = getRoleProgress(r.id);
+                progressContainer.innerHTML += `
+                    <div class="role-progress-bar">
+                        <div class="role-progress-info">
+                            <span class="role-progress-label" style="color: ${r.colorHex}; font-weight: 700;">
+                                <i class="fa-solid ${r.icon}"></i> ${r.name}
+                            </span>
+                            <span class="role-progress-percentage" style="color: ${r.colorHex};">${prog.percentage}% (${prog.completed}/${prog.total})</span>
+                        </div>
+                        <div class="role-progress-bg">
+                            <div class="role-progress-fill" style="width: ${prog.percentage}%; background-color: ${r.colorHex};"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Render coordination alerts
+        function renderCoordinationAlerts() {
+            const alertsContainer = document.getElementById('auto-coordination-alerts');
+            if (!alertsContainer) return;
+            alertsContainer.innerHTML = '';
+            
+            const cState = autogestionState.completedTasks;
+            
+            const milestones = [
+                {
+                    name: "Fase 1: Asignación de Presupuesto (CDP)",
+                    desc: "Presupuesto expide CDP oficial en el SIIF.",
+                    icon: "fa-file-invoice-dollar",
+                    isCompleted: !!cState["pr_fase1_cdp"],
+                    isBlocked: false,
+                    get status() {
+                        return this.isCompleted ? "completed" : "pending";
+                    }
+                },
+                {
+                    name: "Fase 2: Co-diseño de Estudios Previos",
+                    desc: "DT y Abogado redactan pliegos y matriz de riesgos conjunta.",
+                    icon: "fa-scale-balanced",
+                    isCompleted: !!cState["dt_fase2_codiseno"] && !!cState["ac_fase2_codiseno"],
+                    get isBlocked() {
+                        return !cState["pr_fase1_cdp"];
+                    },
+                    get status() {
+                        if (this.isCompleted) return "completed";
+                        return this.isBlocked ? "blocked" : "pending";
+                    }
+                },
+                {
+                    name: "Fase 4: Publicación en TVEC",
+                    desc: "Abogado publica evento RFQ oficial en la Tienda Virtual.",
+                    icon: "fa-paper-plane",
+                    isCompleted: !!cState["ac_fase4_rfq"],
+                    get isBlocked() {
+                        return !cState["dt_fase2_codiseno"] || !cState["ac_fase2_codiseno"];
+                    },
+                    get status() {
+                        if (this.isCompleted) return "completed";
+                        return this.isBlocked ? "blocked" : "pending";
+                    }
+                },
+                {
+                    name: "Fase 7-8: Mitigación de Riesgos",
+                    desc: "DT valida exenciones e IVA; Abogado evalúa REDAM y antecedentes.",
+                    icon: "fa-shield-halved",
+                    isCompleted: !!cState["dt_fase8_precios"] && !!cState["ac_fase7_antecedentes"],
+                    get isBlocked() {
+                        return !cState["ac_fase4_rfq"];
+                    },
+                    get status() {
+                        if (this.isCompleted) return "completed";
+                        return this.isBlocked ? "blocked" : "pending";
+                    }
+                },
+                {
+                    name: "Fase 10: Firma de Orden de Compra",
+                    desc: "El Ordenador del Gasto suscribe la OC con visto bueno técnico-legal.",
+                    icon: "fa-signature",
+                    isCompleted: !!cState["og_fase10_firma"],
+                    get isBlocked() {
+                        return !cState["ac_fase9_consolidacion"];
+                    },
+                    get status() {
+                        if (this.isCompleted) return "completed";
+                        return this.isBlocked ? "blocked" : "pending";
+                    }
+                },
+                {
+                    name: "Fase 11: Garantías y Afectación Presupuestal",
+                    desc: "Abogado aprueba pólizas; Presupuesto expide Registro Presupuestal RP.",
+                    icon: "fa-lock",
+                    isCompleted: !!cState["ac_fase11_garantias"] && !!cState["pr_fase11_rp"],
+                    get isBlocked() {
+                        return !cState["og_fase10_firma"];
+                    },
+                    get status() {
+                        if (this.isCompleted) return "completed";
+                        return this.isBlocked ? "blocked" : "pending";
+                    }
+                },
+                {
+                    name: "Fase 12: Inicio de Contrato",
+                    desc: "Supervisor firma acta de inicio, se designa y notifica formalmente.",
+                    icon: "fa-play",
+                    isCompleted: !!cState["dt_fase12_inicio"] && !!cState["og_fase12_designacion"] && !!cState["ac_fase12_notificacion"],
+                    get isBlocked() {
+                        return !cState["ac_fase11_garantias"] || !cState["pr_fase11_rp"];
+                    },
+                    get status() {
+                        if (this.isCompleted) return "completed";
+                        return this.isBlocked ? "blocked" : "pending";
+                    }
+                }
+            ];
+            
+            milestones.forEach(m => {
+                let stateClass = "";
+                let stateIcon = "";
+                let stateText = "";
+                
+                if (m.status === "completed") {
+                    stateClass = "active";
+                    stateIcon = '<i class="fa-solid fa-circle-check"></i>';
+                    stateText = "Met";
+                } else if (m.status === "blocked") {
+                    stateClass = "blocked";
+                    stateIcon = '<i class="fa-solid fa-circle-minus"></i>';
+                    stateText = "Prerrequisito";
+                } else {
+                    stateClass = "pending";
+                    stateIcon = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
+                    stateText = "Pendiente";
+                }
+                
+                alertsContainer.innerHTML += `
+                    <div class="coor-alert-item ${stateClass}">
+                        <div style="font-size: 1.1rem; margin-top: 2px;">
+                            ${stateIcon}
+                        </div>
+                        <div>
+                            <strong style="display: block; font-size: 0.82rem; margin-bottom: 2px;">${m.name}</strong>
+                            <span style="display: block; font-size: 0.72rem; opacity: 0.85; margin-bottom: 4px;">${m.desc}</span>
+                            <span class="locked-badge" style="background: rgba(255,255,255,0.4); border: 1px solid rgba(0,0,0,0.05);">${stateText}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Copy coordination text to clipboard helper with tactile feedback
+        function copyCoordinationMessage(taskId, buttonEl) {
+            const task = autogestionTasks.find(t => t.id === taskId);
+            if (task && task.coordination) {
+                const message = task.coordination.emailBody;
+                navigator.clipboard.writeText(message).then(() => {
+                    const originalText = buttonEl.innerHTML;
+                    buttonEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> ¡Copiado!';
+                    buttonEl.style.borderColor = '#10b981';
+                    buttonEl.style.color = '#10b981';
+                    setTimeout(() => {
+                        buttonEl.innerHTML = originalText;
+                        buttonEl.style.borderColor = '';
+                        buttonEl.style.color = '';
+                    }, 1800);
+                }).catch(err => {
+                    console.error("Error al copiar texto: ", err);
+                    alert("No se pudo copiar automáticamente. Copia el texto manualmente.");
+                });
+            }
+        }
+
+        // Calendar links
+        function getGoogleCalendarUrl(task) {
+            const title = encodeURIComponent(task.calendarTitle || task.title);
+            const desc = encodeURIComponent(task.calendarDesc || task.desc);
+            const today = new Date();
+            const threeDaysLater = new Date(today);
+            threeDaysLater.setDate(today.getDate() + 3);
+            const formatDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, "");
+            const dates = formatDate(today) + "/" + formatDate(threeDaysLater);
+            return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${desc}`;
+        }
+
+        // Outlook links
+        function getOutlookCalendarUrl(task) {
+            const title = encodeURIComponent(task.calendarTitle || task.title);
+            const desc = encodeURIComponent(task.calendarDesc || task.desc);
+            const today = new Date();
+            const threeDaysLater = new Date(today);
+            threeDaysLater.setDate(today.getDate() + 3);
+            const start = today.toISOString().split('.')[0] + 'Z';
+            const end = threeDaysLater.toISOString().split('.')[0] + 'Z';
+            return `https://outlook.office.com/calendar/0/deeplink/compose?subject=${title}&startdt=${start}&enddt=${end}&body=${desc}`;
+        }
+
+        // Save State JSON download
+        function saveAutogestionState() {
+            saveToLocalStorage();
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(autogestionState, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `contrato-autogestion-${autogestionState.contractId}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Reset State confirmation
+        function resetAutogestionState() {
+            if (confirm("¿Estás seguro de que deseas reiniciar todo el progreso de autogestión? Esta acción borrará todas tus tareas y notas locales.")) {
+                autogestionState = {
+                    contractId: "MIN-AM-2026-001",
+                    lastUpdated: new Date().toISOString(),
+                    currentRole: null,
+                    completedTasks: {},
+                    subtasks: {},
+                    notes: {}
+                };
+                saveToLocalStorage();
+                backToRoleSelect();
+            }
+        }
+
+        // Import handlers
+        function triggerImportState() {
+            let fileInput = document.getElementById('auto-import-file');
+            if (!fileInput) {
+                fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.id = 'auto-import-file';
+                fileInput.accept = '.json';
+                fileInput.style.display = 'none';
+                fileInput.addEventListener('change', handleImportFile);
+                document.body.appendChild(fileInput);
+            }
+            fileInput.click();
+        }
+
+        function handleImportFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (!imported.completedTasks || !imported.subtasks) {
+                        alert("El archivo no tiene el formato válido de Autogestión.");
+                        return;
+                    }
+                    autogestionState = {
+                        contractId: imported.contractId || "MIN-AM-2026-001",
+                        lastUpdated: imported.lastUpdated || new Date().toISOString(),
+                        currentRole: imported.currentRole || null,
+                        completedTasks: imported.completedTasks || {},
+                        subtasks: imported.subtasks || {},
+                        notes: imported.notes || {}
+                    };
+                    saveToLocalStorage();
+                    if (autogestionState.currentRole) {
+                        enterAutogestion(autogestionState.currentRole);
+                    } else {
+                        backToRoleSelect();
+                    }
+                    alert("¡Estado cargado con éxito!");
+                } catch (err) {
+                    alert("Error al leer el archivo JSON: " + err.message);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        // Render main workspace
+        function renderAutogestion() {
+            const role = autogestionState.currentRole;
+            if (!role) return;
+            
+            let roleName = "";
+            let roleIcon = "";
+            if (role === 'dt') {
+                roleName = "Dependencia Técnica";
+                roleIcon = '<i class="fa-solid fa-laptop-code"></i>';
+            } else if (role === 'ac') {
+                roleName = "Abogado de Contratos";
+                roleIcon = '<i class="fa-solid fa-scale-balanced"></i>';
+            } else if (role === 'pr') {
+                roleName = "Presupuesto";
+                roleIcon = '<i class="fa-solid fa-file-invoice-dollar"></i>';
+            } else if (role === 'og') {
+                roleName = "Ordenador del Gasto";
+                roleIcon = '<i class="fa-solid fa-user-tie"></i>';
+            }
+            
+            const miniIconEl = document.getElementById('active-role-icon');
+            if (miniIconEl) {
+                miniIconEl.innerHTML = roleIcon;
+                miniIconEl.className = `role-icon-mini ${role}-color`;
+            }
+            const activeRoleNameEl = document.getElementById('active-role-name');
+            if (activeRoleNameEl) {
+                activeRoleNameEl.textContent = roleName;
+            }
+            
+            const tasksListEl = document.getElementById('auto-tasks-list');
+            if (!tasksListEl) return;
+            tasksListEl.innerHTML = '';
+            
+            const roleTasks = autogestionTasks.filter(t => t.role === role);
+            
+            roleTasks.forEach(task => {
+                const hasPending = hasPendingPrerequisites(task);
+                const isCompleted = !!autogestionState.completedTasks[task.id];
+                
+                const taskCard = document.createElement('div');
+                taskCard.className = `auto-task-item ${isCompleted ? 'completed' : ''}`;
+                
+                let hexColor = role === 'dt' ? '#0f52ba' : role === 'ac' ? '#8b5cf6' : role === 'pr' ? '#f59e0b' : '#ec4899';
+                taskCard.style.setProperty('--role-color', hexColor);
+                
+                let subtasksHtml = '';
+                if (task.subtasks && task.subtasks.length > 0) {
+                    subtasksHtml = `<div class="auto-subtasks-wrapper">`;
+                    task.subtasks.forEach((sub, index) => {
+                        const subId = `${task.id}_sub${index}`;
+                        const subChecked = !!autogestionState.subtasks[subId];
+                        subtasksHtml += `
+                            <label class="auto-subtask-item">
+                                <input type="checkbox" ${subChecked ? 'checked' : ''} onchange="toggleSubtask('${task.id}', ${index}, this.checked)">
+                                <span>${sub}</span>
+                            </label>
+                        `;
+                    });
+                    subtasksHtml += `</div>`;
+                }
+                
+                const noteVal = autogestionState.notes[task.id] || '';
+                const noteHtml = `
+                    <div style="padding-left: 32px; margin-top: 6px;">
+                        <textarea style="width:100%; min-height:48px; font-size:0.75rem; padding:6px; border:1px solid rgba(0,0,0,0.1); border-radius:4px; font-family:var(--font-sans); background: rgba(255,255,255,0.8); resize:vertical;" placeholder="${task.notePlaceholder || 'Añadir notas locales o número de documento...'}" onblur="updateTaskNote('${task.id}', this.value)">${noteVal}</textarea>
+                    </div>
+                `;
+                
+                let coordinationHtml = '';
+                if (task.coordination) {
+                    const mailtoUrl = `mailto:?subject=${encodeURIComponent(task.coordination.emailSubject)}&body=${encodeURIComponent(task.coordination.emailBody)}`;
+                    coordinationHtml = `
+                        <div class="auto-task-actions" style="margin-top: 10px; display: flex; gap: 8px;">
+                            <button class="prod-btn" onclick="copyCoordinationMessage('${task.id}', this)">
+                                <i class="fa-solid fa-copy"></i> Copiar Mensaje (Teams/WA)
+                            </button>
+                            <a href="${mailtoUrl}" class="prod-btn prod-btn-outlook">
+                                <i class="fa-solid fa-envelope"></i> Enviar Correo
+                            </a>
+                        </div>
+                    `;
+                }
+                
+                let calendarHtml = '';
+                if (task.hasCalendar) {
+                    const googleUrl = getGoogleCalendarUrl(task);
+                    const outlookUrl = getOutlookCalendarUrl(task);
+                    calendarHtml = `
+                        <div class="auto-task-actions" style="margin-top: 8px;">
+                            <a href="${googleUrl}" target="_blank" class="prod-btn"><i class="fa-brands fa-google"></i> Agendar en Google</a>
+                            <a href="${outlookUrl}" target="_blank" class="prod-btn prod-btn-outlook"><i class="fa-solid fa-envelope"></i> Agendar en Outlook</a>
+                        </div>
+                    `;
+                }
+                
+                let blockWarningHtml = '';
+                if (hasPending) {
+                    blockWarningHtml = `
+                        <div style="margin-top: 6px; padding-left: 32px;">
+                            <span class="locked-badge" style="background: rgba(245, 158, 11, 0.08); color: #b45309; border: 1.5px solid rgba(245, 158, 11, 0.15);"><i class="fa-solid fa-circle-exclamation"></i> <strong>Sugerencia:</strong> ${task.blockMessage}</span>
+                        </div>
+                    `;
+                }
+                
+                taskCard.innerHTML = `
+                    <div class="auto-task-header">
+                        <div class="auto-task-checkbox ${isCompleted ? 'checked' : ''}" onclick="toggleTask('${task.id}', ${!isCompleted})">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="auto-task-content">
+                            <div class="auto-task-fase">${task.fase}</div>
+                            <div class="auto-task-title">${task.title}</div>
+                            <div class="auto-task-desc">${task.desc}</div>
+                        </div>
+                    </div>
+                    ${blockWarningHtml}
+                    ${subtasksHtml}
+                    ${noteHtml}
+                    ${coordinationHtml}
+                    ${calendarHtml}
+                `;
+                
+                tasksListEl.appendChild(taskCard);
+            });
+            
+            renderProgressPanel();
+            renderCoordinationAlerts();
+        }
+
+
         // Initialize background circle repulsion and force initial repaint on load
         document.addEventListener('DOMContentLoaded', () => {
             const inners = document.querySelectorAll('.blur-circle-inner');
@@ -1528,6 +2507,12 @@
             // Render simulation cases and steps
             renderSimCases();
             renderSimSteps();
+
+            // Initialize autogestion system
+            loadFromLocalStorage();
+            if (autogestionState && autogestionState.currentRole) {
+                enterAutogestion(autogestionState.currentRole);
+            }
 
             // Bind simulation control buttons
             const btnIniciarSim = document.getElementById('btn-iniciar-sim');
