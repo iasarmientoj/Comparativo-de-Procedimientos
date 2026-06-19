@@ -1374,29 +1374,7 @@
     }
 }
 
-/* Responsive simulation */
-@media (max-width: 1024px) {
-    .sim-cases-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .sim-columns-grid {
-        grid-template-columns: 1fr;
-    }
-    .sim-column-panel {
-        height: 450px !important;
-    }
-    .sim-steps-wrapper {
-        height: auto !important;
-        flex-grow: 1 !important;
-        min-height: 0 !important;
-        flex-shrink: 1 !important;
-    }
-}
-@media (max-width: 600px) {
-    .sim-cases-grid {
-        grid-template-columns: 1fr;
-    }
-}
+
 
 /* Simulation Results Styles */
 .sim-result-container {
@@ -1563,4 +1541,56 @@
     display: none;
     align-items: center;
     gap: 6px;
+}
+
+/* ============================================================
+   RESPONSIVE SIMULATION OVERRIDES
+   ============================================================ */
+@media (max-width: 1024px) {
+    .sim-cases-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sim-columns-grid {
+        grid-template-columns: 1fr;
+        height: auto !important;
+    }
+    .sim-column-panel {
+        height: auto !important;
+        min-height: 450px;
+    }
+    .sim-steps-wrapper {
+        height: 350px !important;
+        overflow-y: auto !important;
+        flex-shrink: 0 !important;
+    }
+    .sim-collapsible-header {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 16px !important;
+    }
+    .sim-buttons-group {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        gap: 8px !important;
+    }
+    .sim-buttons-group button,
+    .sim-buttons-group .action-btn,
+    .sim-buttons-group .action-btn-secondary {
+        width: 100% !important;
+        justify-content: center !important;
+        display: inline-flex !important;
+    }
+    .viewport-content {
+        height: auto !important;
+    }
+    .dashboard-panel {
+        height: auto !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .sim-cases-grid {
+        grid-template-columns: 1fr;
+    }
 }
