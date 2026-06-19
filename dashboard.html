@@ -217,8 +217,8 @@
                                     <div class="warning-glow-circle"></div>
                                     <div class="warning-ripple"></div>
                                     <i class="fa-solid fa-triangle-exclamation animated-warning"></i>
-                                    <h3 class="warning-text">Riesgos Detectados</h3>
-                                    <p class="warning-subtext">Vulnerabilidades críticas materializadas</p>
+                                    <h3 class="warning-text" id="warning-overlay-title">Riesgos Detectados</h3>
+                                    <p class="warning-subtext" id="warning-overlay-subtext">Vulnerabilidades críticas materializadas</p>
                                 </div>
                             </div>
                             <div class="panel-section-header" style="margin-bottom: 16px;">
@@ -239,8 +239,8 @@
                                     <div class="shield-glow-circle"></div>
                                     <div class="shield-ripple"></div>
                                     <i class="fa-solid fa-shield-halved animated-shield"></i>
-                                    <h3 class="shield-text">Control Activado</h3>
-                                    <p class="shield-subtext">Riesgo contractual mitigado con éxito</p>
+                                    <h3 class="shield-text" id="shield-overlay-title">Control Activado</h3>
+                                    <p class="shield-subtext" id="shield-overlay-subtext">Riesgo contractual mitigado con éxito</p>
                                 </div>
                             </div>
                             <div class="panel-section-header" style="margin-bottom: 16px;">
@@ -1151,6 +1151,15 @@
             // Activar la animación de riesgo al terminar el flujo vigente
             const warningOverlay = document.getElementById('sim-warning-overlay');
             if (warningOverlay) {
+                const warningCount = selectedSimCase.oldWarnings.length;
+                const warningTitle = document.getElementById('warning-overlay-title');
+                const warningSub = document.getElementById('warning-overlay-subtext');
+                if (warningTitle) {
+                    warningTitle.textContent = `${warningCount} ${warningCount > 1 ? 'Riesgos Detectados' : 'Riesgo Detectado'}`;
+                }
+                if (warningSub) {
+                    warningSub.textContent = `${warningCount > 1 ? 'Vulnerabilidades críticas materializadas' : 'Vulnerabilidad crítica materializada'}`;
+                }
                 warningOverlay.classList.add('active');
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 warningOverlay.classList.remove('active');
@@ -1177,6 +1186,15 @@
                     // Activar el escudo animado overlay
                     const shieldOverlay = document.getElementById('sim-shield-overlay');
                     if (shieldOverlay) {
+                        const blockStep = SIM_NEW_STEPS[blockIndex];
+                        const shieldTitle = document.getElementById('shield-overlay-title');
+                        const shieldSub = document.getElementById('shield-overlay-subtext');
+                        if (shieldTitle) {
+                            shieldTitle.textContent = `Control Activado — Fase ${blockStep.number}`;
+                        }
+                        if (shieldSub) {
+                            shieldSub.textContent = `Riesgo contractual mitigado con éxito`;
+                        }
                         shieldOverlay.classList.add('active');
                         await new Promise(resolve => setTimeout(resolve, 2000));
                         shieldOverlay.classList.remove('active');
