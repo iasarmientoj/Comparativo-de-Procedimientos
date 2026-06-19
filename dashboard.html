@@ -976,13 +976,25 @@
             if (isPanelCollapsed) {
                 body.style.maxHeight = '0px';
                 body.style.opacity = '0';
+                body.style.marginTop = '0px';
+                body.style.paddingTop = '0px';
+                body.style.borderTopWidth = '0px';
                 chevron.style.transform = 'rotate(-90deg)';
-                if (panel) panel.style.paddingBottom = '12px';
+                if (panel) {
+                    panel.style.paddingBottom = '20px'; // Equal to top padding (20px)
+                    panel.style.marginBottom = '20px';  // Reduced margin to align with top space
+                }
             } else {
                 body.style.maxHeight = '500px';
                 body.style.opacity = '1';
+                body.style.marginTop = '16px';
+                body.style.paddingTop = '16px';
+                body.style.borderTopWidth = '1.5px';
                 chevron.style.transform = 'rotate(0deg)';
-                if (panel) panel.style.paddingBottom = '24px';
+                if (panel) {
+                    panel.style.paddingBottom = '20px';
+                    panel.style.marginBottom = '24px';
+                }
             }
         }
 
