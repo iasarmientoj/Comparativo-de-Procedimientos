@@ -1308,19 +1308,19 @@
 }
 
 .sim-step-node.blocked {
-    background: rgba(245, 158, 11, 0.04);
-    border-color: rgba(245, 158, 11, 0.22);
-    border-left-color: #f59e0b;
+    background: rgba(15, 82, 186, 0.04);
+    border-color: rgba(15, 82, 186, 0.18);
+    border-left-color: #0f52ba;
 }
 
 .sim-step-node.blocked .sim-step-dot {
-    border-color: #f59e0b;
-    background-color: #f59e0b;
+    border-color: #0f52ba;
+    background-color: #0f52ba;
     color: #ffffff;
 }
 
 .sim-step-node.blocked .sim-step-title {
-    color: #b45309;
+    color: #0f52ba;
     font-weight: 700;
 }
 
