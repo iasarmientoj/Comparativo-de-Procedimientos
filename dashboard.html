@@ -178,10 +178,80 @@
 
                 <!-- PANEL: SIMULACIÓN COMPARATIVA -->
                 <div class="dashboard-panel" id="panel-sim-comparativa">
-                    <div class="structure-placeholder">
-                        <i class="fa-solid fa-code-compare placeholder-icon"></i>
-                        <h3>Simulación Comparativa</h3>
-                        <p>Estructura lista para evaluar contingencias, comparar flujos antiguos contra nuevos y auditorías.</p>
+                    <!-- Cabecera de la sección -->
+                    <div class="sim-header-section">
+                        <div class="panel-section-header" style="margin-bottom: 12px; border-bottom: none; padding-bottom: 0;">
+                            <h3><i class="fa-solid fa-code-compare"></i> Simulador de Estrés Contractual y Contingencias</h3>
+                            <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un caso de estudio</span>
+                        </div>
+                    </div>
+
+                    <!-- Casos de Simulación (Ancho completo) -->
+                    <div class="sim-cases-grid" id="sim-cases-grid">
+                        <!-- Inyectado por JS -->
+                    </div>
+
+                    <!-- Botón de Acción y Controles -->
+                    <div class="sim-controls-panel card-glass" style="margin: 20px 0; padding: 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                        <div class="sim-info-block" style="flex: 1; min-width: 250px;">
+                            <h4 id="sim-selected-title" style="margin: 0 0 4px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-color-main);">Ningún caso seleccionado</h4>
+                            <p id="sim-selected-desc" style="margin: 0; font-size: 0.8rem; color: var(--text-color-muted);">Selecciona uno de los 5 casos de estudio superiores para iniciar la simulación comparativa de flujos.</p>
+                        </div>
+                        <div class="sim-buttons-group" style="display: flex; align-items: center; gap: 12px;">
+                            <button class="action-btn" id="btn-iniciar-sim" disabled style="background: var(--primary-blue); color: white; padding: 10px 24px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; opacity: 0.5; display: inline-flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-play"></i> Iniciar Simulación
+                            </button>
+                            <button class="action-btn-secondary" id="btn-reiniciar-sim" style="background: transparent; color: var(--text-color-main); border: 1.5px solid rgba(15, 82, 186, 0.25); padding: 10px 20px; border-radius: 4px; font-weight: 600; cursor: pointer; display: none; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-rotate-left"></i> Reiniciar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Resultados Estadísticos (Solo visibles post-simulación) -->
+                    <div class="sim-stats-bar" id="sim-stats-bar" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; width: 100%;">
+                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
+                            <div class="stat-value" id="stat-val-old" style="font-size: 1.5rem; font-weight: 800; color: #ef4444;">—</div>
+                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Pasos Vigentes</div>
+                        </div>
+                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
+                            <div class="stat-value" id="stat-val-new" style="font-size: 1.5rem; font-weight: 800; color: #10b981;">—</div>
+                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Pasos Mejorados</div>
+                        </div>
+                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
+                            <div class="stat-value" id="stat-val-risks" style="font-size: 1.5rem; font-weight: 800; color: #ef4444;">—</div>
+                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Riesgos No Detectados</div>
+                        </div>
+                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
+                            <div class="stat-value" id="stat-val-saved" style="font-size: 1.15rem; font-weight: 800; color: #10b981; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 4px 0;">—</div>
+                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Contención Preventiva</div>
+                        </div>
+                    </div>
+
+                    <!-- Columnas de Flujo en Paralelo -->
+                    <div class="sim-columns-grid">
+                        <!-- Columna Izquierda: Flujo Vigente -->
+                        <div class="sim-column-panel card-glass" id="sim-panel-vigente" style="padding: 20px;">
+                            <div class="panel-section-header" style="margin-bottom: 16px;">
+                                <h3><i class="fa-solid fa-clock"></i> Procedimiento Actual</h3>
+                                <span class="badge-status" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">MHCP Vigente</span>
+                            </div>
+                            <div class="sim-steps-wrapper" id="sim-list-vigente">
+                                <!-- Inyectado por JS -->
+                            </div>
+                            <div class="sim-result-container" id="sim-result-vigente" style="margin-top: 15px;"></div>
+                        </div>
+
+                        <!-- Columna Derecha: Flujo Mejorado -->
+                        <div class="sim-column-panel card-glass" id="sim-panel-mejorado" style="padding: 20px;">
+                            <div class="panel-section-header" style="margin-bottom: 16px;">
+                                <h3><i class="fa-solid fa-shield-halved"></i> Procedimiento Mejorado</h3>
+                                <span class="badge-status" style="background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">Propuesta</span>
+                            </div>
+                            <div class="sim-steps-wrapper" id="sim-list-mejorado">
+                                <!-- Inyectado por JS -->
+                            </div>
+                            <div class="sim-result-container" id="sim-result-mejorado" style="margin-top: 15px;"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -711,6 +781,358 @@
                 ]
             }
         ];
+
+        /* ==========================================================================
+           SIMULATION DATA & LOGIC (VIGENTE VS MEJORADO)
+           ========================================================================== */
+        const SIM_OLD_STEPS = [
+            { id: 'sim-old-0', code: 'A', title: 'Identificación de Necesidad y AMP' },
+            { id: 'sim-old-1', code: 'B', title: 'Verificación de Existencia en SECOP' },
+            { id: 'sim-old-2', code: 'C', title: 'Adelantar Tareas de Adquisición en AMP' },
+            { id: 'sim-old-3', code: 'D', title: 'Solicitud de Expedición de CDP' },
+            { id: 'sim-old-4', code: 'E', title: 'Autorización de Creación de Roles' },
+            { id: 'sim-old-5', code: 'F', title: 'Registro en la Tienda Virtual (TVEC)' },
+            { id: 'sim-old-6', code: 'G', title: 'Búsqueda de Catálogo y Selección' },
+            { id: 'sim-old-7', code: 'H', title: 'Elaboración de Estudios Previos (Posteriores)' },
+            { id: 'sim-old-8', code: 'I', title: 'Radicación en Licitaciones' },
+            { id: 'sim-old-9', code: 'J', title: 'Informe de Viabilidad Jurídica' },
+            { id: 'sim-old-10', code: 'K', title: 'Aprobación/Rechazo de la Orden de Compra' },
+            { id: 'sim-old-11', code: 'L', title: 'Registro Presupuestal (RP)' },
+            { id: 'sim-old-12', code: 'M', title: 'Designación de Supervisión' },
+            { id: 'sim-old-13', code: 'N', title: 'Remisión de Soportes al Supervisor' }
+        ];
+
+        const SIM_NEW_STEPS = [
+            { id: 'sim-new-0', number: 1, phva: 'P', phvaLabel: 'Planear', title: 'Definición de Necesidad, Catálogo y Simulación' },
+            { id: 'sim-new-1', number: 2, phva: 'P', phvaLabel: 'Planear', title: 'Co-diseño de Estudios Previos y Matriz de Riesgos' },
+            { id: 'sim-new-2', number: 3, phva: 'H', phvaLabel: 'Hacer', title: 'Indagación de Mercado (RFI) y Filtro MIPYMES' },
+            { id: 'sim-new-3', number: 4, phva: 'H', phvaLabel: 'Hacer', title: 'Configuración y Publicación del Evento (RFQ)' },
+            { id: 'sim-new-4', number: 5, phva: 'V', phvaLabel: 'Verificar', title: 'Aclaraciones, Observaciones y Cancelaciones' },
+            { id: 'sim-new-5', number: 6, phva: 'V', phvaLabel: 'Verificar', title: 'Cierre de Cotizaciones y Apertura de Plataforma' },
+            { id: 'sim-new-6', number: 7, phva: 'V', phvaLabel: 'Verificar', title: 'Evaluación Jurídica y Filtro de Inhabilidades' },
+            { id: 'sim-new-7', number: 8, phva: 'V', phvaLabel: 'Verificar', title: 'Evaluación Técnica y Control de Precios Bajos' },
+            { id: 'sim-new-8', number: 9, phva: 'H', phvaLabel: 'Hacer', title: 'Publicación de Evaluaciones y Término de Traslado' },
+            { id: 'sim-new-9', number: 10, phva: 'H', phvaLabel: 'Hacer', title: 'Adjudicación y Firma Digital de Orden de Compra' },
+            { id: 'sim-new-10', number: 11, phva: 'H', phvaLabel: 'Hacer', title: 'Legalización: Pólizas y Registro Presupuestal' },
+            { id: 'sim-new-11', number: 12, phva: 'A', phvaLabel: 'Actuar', title: 'Notificación de Supervisión y Acta de Inicio' }
+        ];
+
+        const SIM_CASES = [
+            {
+                id: 1,
+                icon: '💻',
+                title: 'Licenciamiento de Software e Infraestructura',
+                subtitle: 'Soporte de hiperconvergencia',
+                value: '$2.170.000.000',
+                riskType: 'IVA 0% / Precio Artificial',
+                desc: 'Adquisición de soporte de hiperconvergencia. Un oferente cotiza con 0% de IVA simulando una exención que no aplica para software local.',
+                oldWarnings: [
+                    { stepIndex: 6, msg: 'El funcionario técnico evalúa y chatea de forma informal con el proveedor para aclarar el IVA de 0% sin control legal.' },
+                    { stepIndex: 7, msg: 'Estudios previos elaborados de forma posterior, validando la cotización con 0% de IVA de manera retroactiva y sin control legal.' },
+                    { stepIndex: 10, msg: 'Firma y aprobación de la Orden de Compra sin verificar que la exención de IVA sea legalmente aplicable.' }
+                ],
+                newBlockIndex: 7, // Fase 8: Evaluación Técnica y Control de Precios Bajos
+                newBlockMsg: 'El Comité Evaluador detectó que la propuesta de menor precio excluyó el IVA del 19% simulando una exención de servicios en la nube que no aplica para soporte local de software.',
+                newBlockNorm: 'Cláusula 6.14 de la Minuta CCE-SNG-IAD-002-2024'
+            },
+            {
+                id: 2,
+                icon: '⛽',
+                title: 'Suministro de Combustible Nacional',
+                subtitle: 'Logística de flota regional',
+                value: '$1.200.000.000',
+                riskType: 'Salto de Planeación Obligatoria',
+                desc: 'Adquisición de combustible. El área técnica omite verificar la cobertura del Acuerdo Marco y procede a estructurar contratación directa por fuera.',
+                oldWarnings: [
+                    { stepIndex: 0, msg: 'La dependencia realiza búsqueda empírica en la web y asume que el Acuerdo Marco no sirve por cobertura regional.' },
+                    { stepIndex: 2, msg: 'Preparación aislada del requerimiento técnico evadiendo el Acuerdo Marco obligatorio.' },
+                    { stepIndex: 8, msg: 'Radicación tardía en Licitaciones. El proceso se cae tras meses de planeación al detectarse la obligatoriedad del Acuerdo.' }
+                ],
+                newBlockIndex: 1, // Fase 2: Co-diseño de Estudios Previos y Matriz de Riesgos
+                newBlockMsg: 'El Abogado del Grupo de Contratos asignado detectó que el área técnica omitió realizar el estudio formal de cobertura geográfica obligatorio.',
+                newBlockNorm: 'Decreto 1082 de 2015 - Principio de Selección Objetiva'
+            },
+            {
+                id: 3,
+                icon: '🖥️',
+                title: 'Equipos de Computación y Redes',
+                subtitle: 'Renovación de estaciones de trabajo',
+                value: '$3.800.000.000',
+                riskType: 'Inhabilidad REDAM de Última Hora',
+                desc: 'Compra masiva de computadores. El representante legal del adjudicatario es inhabilitado por deudas de alimentos (REDAM) el día anterior a la firma.',
+                oldWarnings: [
+                    { stepIndex: 6, msg: 'El técnico selecciona al proveedor en plataforma sin chequear antecedentes de inhabilidades.' },
+                    { stepIndex: 9, msg: 'La revisión jurídica formal del Grupo de Licitaciones es estática, basada en documentos físicos presentados días antes.' },
+                    { stepIndex: 10, msg: 'La Directora aprueba y firma la Orden de Compra a ciegas con el proponente inhabilitado, configurando Nulidad Absoluta.' }
+                ],
+                newBlockIndex: 6, // Fase 7: Evaluación Jurídica y Filtro de Inhabilidades
+                newBlockMsg: 'El Abogado de Contratos detectó en vivo en las bases de datos del Estado que el representante legal del oferente cuenta con una inhabilidad activa en el registro REDAM.',
+                newBlockNorm: 'Artículo 44 de la Ley 80 de 1993 y Ley 2097 de 2021'
+            },
+            {
+                id: 4,
+                icon: '💾',
+                title: 'Infraestructura de Almacenamiento y Datos',
+                subtitle: 'Ampliación de centro de datos',
+                value: '$4.500.000.000',
+                riskType: 'Cancelación Ilegal de Evento',
+                desc: 'Adquisición de almacenamiento. El técnico cancela directamente el evento en la plataforma ante un error propio en el simulador de cantidades.',
+                oldWarnings: [
+                    { stepIndex: 4, msg: 'Se autorizan roles de comprador en la TVEC sin filtro de idoneidad o control jurídico.' },
+                    { stepIndex: 6, msg: 'El ingeniero técnico presiona de forma autónoma el botón Cancelar Evento de la Tienda Virtual.' },
+                    { stepIndex: 10, msg: 'Se reinicia el trámite sin acto administrativo motivado, exponiendo al Ministerio a demandas de oferentes.' }
+                ],
+                newBlockIndex: 4, // Fase 5: Aclaraciones, Observaciones y Cancelaciones
+                newBlockMsg: 'Se detecta error en cantidades. El Comité frena la cancelación por botón en plataforma y exige la expedición obligatoria de un Acto Administrativo motivado firmado por el ordenador.',
+                newBlockNorm: 'Cláusula 6.13 de la Minuta CCE-SNG-IAD-002-2024'
+            },
+            {
+                id: 5,
+                icon: '🧹',
+                title: 'Servicios Generales de Aseo y Cafetería',
+                subtitle: 'Mantenimiento e higiene de sedes',
+                value: '$1.800.000.000',
+                riskType: 'Ejecución sin Garantías Aprobadas',
+                desc: 'Contratación del servicio de aseo. El supervisor autoriza el inicio físico de actividades sin que Licitaciones haya aprobado las pólizas de garantía.',
+                oldWarnings: [
+                    { stepIndex: 7, msg: 'Estudios previos sin estructuración rigurosa de amparos ni vigencias de pólizas requeridas por el AMP.' },
+                    { stepIndex: 12, msg: 'Designación de supervisor y entrega formal de la carpeta autorizando iniciar labores.' },
+                    { stepIndex: 13, msg: 'El supervisor permite el inicio de labores físicas sin contar con la aprobación y vigencia formal de las pólizas de cumplimiento.' }
+                ],
+                newBlockIndex: 10, // Fase 11: Legalización: Garantías y Registro Presupuestal
+                newBlockMsg: 'El contratista cargó pólizas con amparos insuficientes. El Abogado de Contratos frena el avance del proceso, prohibiendo el Acta de Inicio física hasta la aprobación formal de la Garantía.',
+                newBlockNorm: 'Artículo 41 de la Ley 80 de 1993 y Cláusula 6.29 de la Minuta CCE'
+            }
+        ];
+
+        let selectedSimCase = null;
+        let isSimRunning = false;
+
+        // Render Cases in Grid
+        function renderSimCases() {
+            const grid = document.getElementById('sim-cases-grid');
+            if (!grid) return;
+            grid.innerHTML = SIM_CASES.map(c => `
+                <div class="sim-case-card card-glass" id="sim-case-${c.id}" onclick="selectSimCase(${c.id})">
+                    <span class="sim-case-icon">${c.icon}</span>
+                    <div class="sim-case-title">${c.title}</div>
+                    <div class="sim-case-subtitle">${c.subtitle}</div>
+                    <div class="sim-case-value">${c.value}</div>
+                    <span class="sim-case-risk-tag">${c.riskType}</span>
+                </div>
+            `).join('');
+        }
+
+        // Render Steps Lists (Initial state: titles only)
+        function renderSimSteps() {
+            const listVigente = document.getElementById('sim-list-vigente');
+            const listMejorado = document.getElementById('sim-list-mejorado');
+            if (!listVigente || !listMejorado) return;
+
+            // Vigente
+            listVigente.innerHTML = SIM_OLD_STEPS.map(step => `
+                <div class="sim-step-node" id="${step.id}">
+                    <div class="sim-step-dot">${step.code}</div>
+                    <div class="sim-step-info">
+                        <div class="sim-step-title">${step.title}</div>
+                        <div class="sim-warning-container" id="warn-box-${step.id}"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Mejorado
+            listMejorado.innerHTML = SIM_NEW_STEPS.map(step => `
+                <div class="sim-step-node" id="${step.id}">
+                    <div class="sim-step-dot">${step.number}</div>
+                    <div class="sim-step-info">
+                        <div class="sim-step-title">${step.title}</div>
+                        <div class="sim-block-container" id="block-box-${step.id}"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Select Case
+        function selectSimCase(caseId) {
+            if (isSimRunning) return;
+            selectedSimCase = SIM_CASES.find(c => c.id === caseId);
+            if (!selectedSimCase) return;
+
+            // Highlight card
+            document.querySelectorAll('.sim-case-card').forEach(card => card.classList.remove('selected'));
+            const cardEl = document.getElementById(`sim-case-${caseId}`);
+            if (cardEl) cardEl.classList.add('selected');
+
+            // Update info
+            document.getElementById('sim-selected-title').textContent = selectedSimCase.title;
+            document.getElementById('sim-selected-desc').textContent = selectedSimCase.desc;
+
+            // Reset simulation panel and steps
+            resetSimulation();
+
+            // Enable simulate button
+            const btnIniciar = document.getElementById('btn-iniciar-sim');
+            if (btnIniciar) {
+                btnIniciar.disabled = false;
+                btnIniciar.style.opacity = '1';
+                btnIniciar.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar Simulación';
+            }
+        }
+
+        // Reset Simulation
+        function resetSimulation() {
+            renderSimSteps();
+            document.getElementById('sim-stats-bar').style.display = 'none';
+            document.getElementById('btn-reiniciar-sim').style.display = 'none';
+            
+            const btnIniciar = document.getElementById('btn-iniciar-sim');
+            if (btnIniciar) {
+                if (selectedSimCase) {
+                    btnIniciar.disabled = false;
+                    btnIniciar.style.opacity = '1';
+                    btnIniciar.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar Simulación';
+                } else {
+                    btnIniciar.disabled = true;
+                    btnIniciar.style.opacity = '0.5';
+                }
+            }
+        }
+
+        // Start Simulation
+        async function startSimulation() {
+            if (!selectedSimCase || isSimRunning) return;
+            isSimRunning = true;
+
+            const btnIniciar = document.getElementById('btn-iniciar-sim');
+            if (btnIniciar) {
+                btnIniciar.disabled = true;
+                btnIniciar.style.opacity = '0.7';
+                btnIniciar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Simulando...';
+            }
+
+            // Run both procedures simultaneously
+            const oldPromise = runSimOldProcedure();
+            const newPromise = runSimNewProcedure();
+
+            await Promise.all([oldPromise, newPromise]);
+
+            isSimRunning = false;
+            if (btnIniciar) {
+                btnIniciar.innerHTML = '<i class="fa-solid fa-check-double"></i> Simulación Completada';
+            }
+            document.getElementById('btn-reiniciar-sim').style.display = 'inline-flex';
+
+            // Show results stats
+            showSimResults();
+        }
+
+        // Run Old Procedure
+        async function runSimOldProcedure() {
+            // Phase 1: All steps process and approve
+            for (let i = 0; i < SIM_OLD_STEPS.length; i++) {
+                const step = SIM_OLD_STEPS[i];
+                const node = document.getElementById(step.id);
+                if (node) {
+                    node.classList.add('processing');
+                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    await new Promise(resolve => setTimeout(resolve, 180));
+                    node.classList.remove('processing');
+                    node.classList.add('approved');
+                }
+            }
+
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Phase 2: Risks appear on vulnerable steps
+            for (const warning of selectedSimCase.oldWarnings) {
+                const step = SIM_OLD_STEPS[warning.stepIndex];
+                const node = document.getElementById(step.id);
+                if (node) {
+                    node.classList.remove('approved');
+                    node.classList.add('warning');
+                    
+                    const warnContainer = document.getElementById(`warn-box-${step.id}`);
+                    if (warnContainer) {
+                        warnContainer.innerHTML = `
+                            <div class="sim-warning-box">
+                                <strong>⚠️ Riesgo no detectado:</strong>
+                                ${warning.msg}
+                            </div>
+                        `;
+                    }
+                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                }
+            }
+        }
+
+        // Run New Procedure
+        async function runSimNewProcedure() {
+            const blockIndex = selectedSimCase.newBlockIndex;
+
+            for (let i = 0; i < SIM_NEW_STEPS.length; i++) {
+                const step = SIM_NEW_STEPS[i];
+                const node = document.getElementById(step.id);
+                if (!node) continue;
+
+                if (i === blockIndex) {
+                    // Processing block index
+                    node.classList.add('processing');
+                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    await new Promise(resolve => setTimeout(resolve, 600));
+
+                    // Block it
+                    node.classList.remove('processing');
+                    node.classList.add('blocked');
+
+                    const blockContainer = document.getElementById(`block-box-${step.id}`);
+                    if (blockContainer) {
+                        blockContainer.innerHTML = `
+                            <div class="sim-block-box">
+                                <strong>🛑 Control activado — Proceso detenido</strong>
+                                <span>${selectedSimCase.newBlockMsg}</span>
+                                <span class="norm">📌 Normativa: ${selectedSimCase.newBlockNorm}</span>
+                            </div>
+                        `;
+                    }
+                    node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    await new Promise(resolve => setTimeout(resolve, 300));
+
+                    // Skip the remaining steps
+                    for (let j = i + 1; j < SIM_NEW_STEPS.length; j++) {
+                        const skipStep = SIM_NEW_STEPS[j];
+                        const skipNode = document.getElementById(skipStep.id);
+                        if (skipNode) {
+                            skipNode.classList.add('skipped');
+                        }
+                    }
+                    break;
+                }
+
+                // Normal process and approve
+                node.classList.add('processing');
+                node.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                await new Promise(resolve => setTimeout(resolve, 250));
+                node.classList.remove('processing');
+                node.classList.add('approved');
+            }
+        }
+
+        // Show Sim Results Bar
+        function showSimResults() {
+            const statsBar = document.getElementById('sim-stats-bar');
+            if (!statsBar) return;
+
+            document.getElementById('stat-val-old').textContent = SIM_OLD_STEPS.length;
+            document.getElementById('stat-val-new').textContent = selectedSimCase.newBlockIndex + 1;
+            document.getElementById('stat-val-risks').textContent = selectedSimCase.oldWarnings.length;
+            
+            const savedLabel = document.getElementById('stat-val-saved');
+            savedLabel.textContent = `Fase ${selectedSimCase.newBlockIndex + 1}`;
+            savedLabel.title = SIM_NEW_STEPS[selectedSimCase.newBlockIndex].title;
+
+            statsBar.style.display = 'grid';
+        }
 
         let currentOldStepIndex = 0;
         let currentNewStepIndex = 0;
