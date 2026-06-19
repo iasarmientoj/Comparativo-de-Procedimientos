@@ -1625,24 +1625,25 @@
 }
 
 /* ============================================================
-   SHIELD PROTECTION OVERLAY ANIMATION
+   SHIELD PROTECTION OVERLAY ANIMATION (IMPROVED FLOW)
    ============================================================ */
 .sim-shield-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: rgba(10, 25, 47, 0.55);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 100;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
+    border-radius: 4px;
 }
 
 .sim-shield-overlay.active {
@@ -1657,7 +1658,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 30px;
+    padding: 20px;
 }
 
 .shield-glow-circle {
@@ -1681,7 +1682,7 @@
 }
 
 .animated-shield {
-    font-size: 7.5rem;
+    font-size: 6.5rem;
     color: #10b981;
     z-index: 3;
     position: relative;
@@ -1691,10 +1692,10 @@
 
 .shield-text {
     font-family: var(--font-sans);
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: #ffffff;
-    margin: 24px 0 8px 0;
+    margin: 20px 0 8px 0;
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     z-index: 3;
     opacity: 0;
@@ -1702,7 +1703,7 @@
 
 .shield-subtext {
     font-family: var(--font-sans);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.85);
     margin: 0;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -1727,6 +1728,113 @@
     animation: textEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
 }
 
+/* ============================================================
+   WARNING RISK OVERLAY ANIMATION (VIGENTE FLOW)
+   ============================================================ */
+.sim-warning-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45, 10, 10, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    border-radius: 4px;
+}
+
+.sim-warning-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.warning-animation-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.warning-glow-circle {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.4) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.warning-ripple {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 3px solid rgba(239, 68, 68, 0.6);
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.animated-warning {
+    font-size: 6.5rem;
+    color: #ef4444;
+    z-index: 3;
+    position: relative;
+    filter: drop-shadow(0 0 35px rgba(239, 68, 68, 0.75));
+    transform: scale(0);
+}
+
+.warning-text {
+    font-family: var(--font-sans);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 20px 0 8px 0;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    opacity: 0;
+}
+
+.warning-subtext {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    opacity: 0;
+}
+
+/* Warning Overlay Animations */
+.sim-warning-overlay.active .animated-warning {
+    animation: warningEntrance 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.sim-warning-overlay.active .warning-ripple {
+    animation: warningRipple 1.6s ease-out infinite;
+}
+
+.sim-warning-overlay.active .warning-text {
+    animation: textEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.sim-warning-overlay.active .warning-subtext {
+    animation: textEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+
+/* ============================================================
+   SHARED KEYFRAMES FOR SIMULATION ANIMATIONS
+   ============================================================ */
 @keyframes shieldEntrance {
     0% {
         transform: scale(3) rotate(-20deg);
@@ -1751,7 +1859,55 @@
     }
 }
 
+@keyframes warningEntrance {
+    0% {
+        transform: scale(3) rotate(-15deg);
+        opacity: 0;
+        filter: drop-shadow(0 0 0 rgba(239, 68, 68, 0));
+    }
+    35% {
+        transform: scale(0.9) rotate(5deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 40px rgba(239, 68, 68, 0.8));
+    }
+    45% {
+        transform: scale(1.05) rotate(-3deg);
+    }
+    55% {
+        transform: scale(1) rotate(2deg);
+    }
+    65% {
+        transform: scale(1) rotate(-2deg);
+    }
+    75% {
+        transform: scale(1) rotate(1deg);
+    }
+    85% {
+        transform: scale(1) rotate(-1deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        filter: drop-shadow(0 0 25px rgba(239, 68, 68, 0.45));
+    }
+}
+
 @keyframes shieldRipple {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.8;
+    }
+    75% {
+        transform: scale(2.3);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(2.3);
+        opacity: 0;
+    }
+}
+
+@keyframes warningRipple {
     0% {
         transform: scale(0.85);
         opacity: 0.8;

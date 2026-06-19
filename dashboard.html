@@ -178,16 +178,6 @@
 
                 <!-- PANEL: SIMULACIÓN COMPARATIVA -->
                 <div class="dashboard-panel" id="panel-sim-comparativa" style="position: relative;">
-                    <!-- Escudo de protección animado overlay -->
-                    <div class="sim-shield-overlay" id="sim-shield-overlay">
-                        <div class="shield-animation-wrapper">
-                            <div class="shield-glow-circle"></div>
-                            <div class="shield-ripple"></div>
-                            <i class="fa-solid fa-shield-halved animated-shield"></i>
-                            <h3 class="shield-text">Control Activado</h3>
-                            <p class="shield-subtext">Riesgo contractual mitigado con éxito</p>
-                        </div>
-                    </div>
                     <!-- Panel Colapsable de Casos (Ancho completo) -->
                     <div class="sim-collapsible-panel card-glass" id="sim-collapsible-panel">
                         <!-- Cabecera del colapsable -->
@@ -220,7 +210,17 @@
                     <!-- Columnas de Flujo en Paralelo -->
                     <div class="sim-columns-grid">
                         <!-- Columna Izquierda: Flujo Vigente -->
-                        <div class="sim-column-panel card-glass" id="sim-panel-vigente" style="padding: 20px;">
+                        <div class="sim-column-panel card-glass" id="sim-panel-vigente" style="padding: 20px; position: relative;">
+                            <!-- Alerta de riesgo animada overlay -->
+                            <div class="sim-warning-overlay" id="sim-warning-overlay">
+                                <div class="warning-animation-wrapper">
+                                    <div class="warning-glow-circle"></div>
+                                    <div class="warning-ripple"></div>
+                                    <i class="fa-solid fa-triangle-exclamation animated-warning"></i>
+                                    <h3 class="warning-text">Riesgos Detectados</h3>
+                                    <p class="warning-subtext">Vulnerabilidades críticas materializadas</p>
+                                </div>
+                            </div>
                             <div class="panel-section-header" style="margin-bottom: 16px;">
                                 <h3><i class="fa-solid fa-clock"></i> Procedimiento Actual</h3>
                                 <span class="badge-status" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">MHCP Vigente</span>
@@ -232,7 +232,17 @@
                         </div>
 
                         <!-- Columna Derecha: Flujo Mejorado -->
-                        <div class="sim-column-panel card-glass" id="sim-panel-mejorado" style="padding: 20px;">
+                        <div class="sim-column-panel card-glass" id="sim-panel-mejorado" style="padding: 20px; position: relative;">
+                            <!-- Escudo de protección animado overlay -->
+                            <div class="sim-shield-overlay" id="sim-shield-overlay">
+                                <div class="shield-animation-wrapper">
+                                    <div class="shield-glow-circle"></div>
+                                    <div class="shield-ripple"></div>
+                                    <i class="fa-solid fa-shield-halved animated-shield"></i>
+                                    <h3 class="shield-text">Control Activado</h3>
+                                    <p class="shield-subtext">Riesgo contractual mitigado con éxito</p>
+                                </div>
+                            </div>
                             <div class="panel-section-header" style="margin-bottom: 16px;">
                                 <h3><i class="fa-solid fa-shield-halved"></i> Procedimiento Mejorado</h3>
                                 <span class="badge-status" style="background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">Propuesta</span>
@@ -1020,6 +1030,10 @@
             if (shieldOverlay) {
                 shieldOverlay.classList.remove('active');
             }
+            const warningOverlay = document.getElementById('sim-warning-overlay');
+            if (warningOverlay) {
+                warningOverlay.classList.remove('active');
+            }
             
             const oldResultEl = document.getElementById('sim-result-vigente');
             if (oldResultEl) {
@@ -1132,6 +1146,15 @@
                     scrollToElement(node, container);
                     await new Promise(resolve => setTimeout(resolve, 500));
                 }
+            }
+
+            // Activar la animación de riesgo al terminar el flujo vigente
+            const warningOverlay = document.getElementById('sim-warning-overlay');
+            if (warningOverlay) {
+                warningOverlay.classList.add('active');
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                warningOverlay.classList.remove('active');
+                await new Promise(resolve => setTimeout(resolve, 300));
             }
         }
 
