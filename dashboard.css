@@ -1550,6 +1550,23 @@
     .sim-cases-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .sim-case-card {
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+        padding: 12px 16px !important;
+    }
+    .sim-case-icon {
+        margin-bottom: 0 !important;
+        font-size: 2.2rem !important;
+        flex-shrink: 0 !important;
+    }
+    .sim-case-content {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex-grow: 1;
+    }
     .sim-columns-grid {
         grid-template-columns: 1fr;
         height: auto !important;
@@ -1579,7 +1596,6 @@
     .sim-buttons-group .action-btn-secondary {
         width: 100% !important;
         justify-content: center !important;
-        display: inline-flex !important;
     }
     .viewport-content {
         height: auto !important;

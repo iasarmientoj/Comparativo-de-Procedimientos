@@ -895,10 +895,12 @@
             grid.innerHTML = SIM_CASES.map(c => `
                 <div class="sim-case-card card-glass" id="sim-case-${c.id}" onclick="selectSimCase(${c.id})">
                     <span class="sim-case-icon">${c.icon}</span>
-                    <div class="sim-case-title">${c.title}</div>
-                    <div class="sim-case-subtitle">${c.subtitle}</div>
-                    <div class="sim-case-value">${c.value}</div>
-                    <span class="sim-case-risk-tag">${c.riskType}</span>
+                    <div class="sim-case-content">
+                        <div class="sim-case-title">${c.title}</div>
+                        <div class="sim-case-subtitle">${c.subtitle}</div>
+                        <div class="sim-case-value">${c.value}</div>
+                        <span class="sim-case-risk-tag">${c.riskType}</span>
+                    </div>
                 </div>
             `).join('');
         }
@@ -985,7 +987,8 @@
                     panel.style.marginBottom = '20px';  // Reduced margin to align with top space
                 }
             } else {
-                body.style.maxHeight = '500px';
+                const isMobile = window.innerWidth <= 1024;
+                body.style.maxHeight = isMobile ? '2000px' : '500px';
                 body.style.opacity = '1';
                 body.style.marginTop = '16px';
                 body.style.paddingTop = '16px';
