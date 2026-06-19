@@ -1178,17 +1178,19 @@
 .sim-column-panel {
     display: flex;
     flex-direction: column;
-    height: 580px;
+    min-height: 580px;
+    height: auto;
     overflow: hidden;
 }
 
 .sim-steps-wrapper {
-    flex-grow: 1;
+    height: 480px;
     overflow-y: auto;
     padding-right: 8px;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    flex-shrink: 0;
 }
 
 .sim-step-node {
@@ -1382,6 +1384,12 @@
     }
     .sim-column-panel {
         height: 450px !important;
+    }
+    .sim-steps-wrapper {
+        height: auto !important;
+        flex-grow: 1 !important;
+        min-height: 0 !important;
+        flex-shrink: 1 !important;
     }
 }
 @media (max-width: 600px) {
