@@ -178,52 +178,32 @@
 
                 <!-- PANEL: SIMULACIÓN COMPARATIVA -->
                 <div class="dashboard-panel" id="panel-sim-comparativa">
-                    <!-- Cabecera de la sección -->
-                    <div class="sim-header-section">
-                        <div class="panel-section-header" style="margin-bottom: 12px; border-bottom: none; padding-bottom: 0;">
-                            <h3><i class="fa-solid fa-code-compare"></i> Simulador de Estrés Contractual y Contingencias</h3>
-                            <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un caso de estudio</span>
+                    <!-- Panel Colapsable de Casos (Ancho completo) -->
+                    <div class="sim-collapsible-panel card-glass" id="sim-collapsible-panel">
+                        <!-- Cabecera del colapsable -->
+                        <div class="sim-collapsible-header" id="sim-collapsible-header">
+                            <div class="sim-collapsible-title-area">
+                                <i class="fa-solid fa-chevron-down" id="sim-chevron"></i>
+                                <div class="sim-info-block">
+                                    <h4 id="sim-selected-title">Ningún caso seleccionado</h4>
+                                    <p id="sim-selected-desc">Selecciona uno de los 5 casos de estudio para iniciar la simulación comparativa de flujos.</p>
+                                </div>
+                            </div>
+                            <div class="sim-buttons-group" onclick="event.stopPropagation();">
+                                <button class="action-btn" id="btn-iniciar-sim" disabled>
+                                    <i class="fa-solid fa-play"></i> Iniciar Simulación
+                                </button>
+                                <button class="action-btn-secondary" id="btn-reiniciar-sim">
+                                    <i class="fa-solid fa-rotate-left"></i> Reiniciar
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Casos de Simulación (Ancho completo) -->
-                    <div class="sim-cases-grid" id="sim-cases-grid">
-                        <!-- Inyectado por JS -->
-                    </div>
-
-                    <!-- Botón de Acción y Controles -->
-                    <div class="sim-controls-panel card-glass" style="margin: 20px 0; padding: 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
-                        <div class="sim-info-block" style="flex: 1; min-width: 250px;">
-                            <h4 id="sim-selected-title" style="margin: 0 0 4px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-color-main);">Ningún caso seleccionado</h4>
-                            <p id="sim-selected-desc" style="margin: 0; font-size: 0.8rem; color: var(--text-color-muted);">Selecciona uno de los 5 casos de estudio superiores para iniciar la simulación comparativa de flujos.</p>
-                        </div>
-                        <div class="sim-buttons-group" style="display: flex; align-items: center; gap: 12px;">
-                            <button class="action-btn" id="btn-iniciar-sim" disabled style="background: var(--primary-blue); color: white; padding: 10px 24px; border: none; border-radius: 4px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; opacity: 0.5; display: inline-flex; align-items: center; gap: 8px;">
-                                <i class="fa-solid fa-play"></i> Iniciar Simulación
-                            </button>
-                            <button class="action-btn-secondary" id="btn-reiniciar-sim" style="background: transparent; color: var(--text-color-main); border: 1.5px solid rgba(15, 82, 186, 0.25); padding: 10px 20px; border-radius: 4px; font-weight: 600; cursor: pointer; display: none; align-items: center; gap: 6px;">
-                                <i class="fa-solid fa-rotate-left"></i> Reiniciar
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Resultados Estadísticos (Solo visibles post-simulación) -->
-                    <div class="sim-stats-bar" id="sim-stats-bar" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; width: 100%;">
-                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
-                            <div class="stat-value" id="stat-val-old" style="font-size: 1.5rem; font-weight: 800; color: #ef4444;">—</div>
-                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Pasos Vigentes</div>
-                        </div>
-                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
-                            <div class="stat-value" id="stat-val-new" style="font-size: 1.5rem; font-weight: 800; color: #10b981;">—</div>
-                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Pasos Mejorados</div>
-                        </div>
-                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
-                            <div class="stat-value" id="stat-val-risks" style="font-size: 1.5rem; font-weight: 800; color: #ef4444;">—</div>
-                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Riesgos No Detectados</div>
-                        </div>
-                        <div class="sim-stat-card card-glass" style="text-align: center; padding: 12px;">
-                            <div class="stat-value" id="stat-val-saved" style="font-size: 1.15rem; font-weight: 800; color: #10b981; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 4px 0;">—</div>
-                            <div class="stat-label" style="font-size: 0.68rem; color: var(--text-color-muted); text-transform: uppercase; font-weight: 700;">Contención Preventiva</div>
+                        <!-- Cuerpo del colapsable -->
+                        <div class="sim-collapsible-body" id="sim-collapsible-body">
+                            <div class="sim-cases-grid" id="sim-cases-grid">
+                                <!-- Inyectado por JS -->
+                            </div>
                         </div>
                     </div>
 
@@ -979,10 +959,36 @@
             }
         }
 
+        // Toggle collapsible panel state (true = open, false = collapse)
+        let isPanelCollapsed = false;
+        function toggleCollapsiblePanel(forceState) {
+            const body = document.getElementById('sim-collapsible-body');
+            const chevron = document.getElementById('sim-chevron');
+            const panel = document.getElementById('sim-collapsible-panel');
+            if (!body || !chevron) return;
+
+            if (forceState !== undefined) {
+                isPanelCollapsed = !forceState;
+            } else {
+                isPanelCollapsed = !isPanelCollapsed;
+            }
+
+            if (isPanelCollapsed) {
+                body.style.maxHeight = '0px';
+                body.style.opacity = '0';
+                chevron.style.transform = 'rotate(-90deg)';
+                if (panel) panel.style.paddingBottom = '12px';
+            } else {
+                body.style.maxHeight = '500px';
+                body.style.opacity = '1';
+                chevron.style.transform = 'rotate(0deg)';
+                if (panel) panel.style.paddingBottom = '24px';
+            }
+        }
+
         // Reset Simulation
         function resetSimulation() {
             renderSimSteps();
-            document.getElementById('sim-stats-bar').style.display = 'none';
             document.getElementById('btn-reiniciar-sim').style.display = 'none';
             
             const oldResultEl = document.getElementById('sim-result-vigente');
@@ -1007,6 +1013,9 @@
                     btnIniciar.style.opacity = '0.5';
                 }
             }
+
+            // Expand the cases panel on reset so the user can choose another one
+            toggleCollapsiblePanel(true);
         }
 
         // Helper function to scroll element smoothly inside container
@@ -1036,6 +1045,9 @@
                 btnIniciar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Simulando...';
             }
 
+            // Collapse the panel automatically to give full focus to workflows comparison
+            toggleCollapsiblePanel(false);
+
             // Run both procedures simultaneously
             const oldPromise = runSimOldProcedure();
             const newPromise = runSimNewProcedure();
@@ -1048,7 +1060,7 @@
             }
             document.getElementById('btn-reiniciar-sim').style.display = 'inline-flex';
 
-            // Show results stats
+            // Show results
             showSimResults();
         }
 
@@ -1146,21 +1158,8 @@
             }
         }
 
-        // Show Sim Results Bar and Box Containers
+        // Show Sim Results Box Containers
         function showSimResults() {
-            const statsBar = document.getElementById('sim-stats-bar');
-            if (!statsBar) return;
-
-            document.getElementById('stat-val-old').textContent = SIM_OLD_STEPS.length;
-            document.getElementById('stat-val-new').textContent = selectedSimCase.newBlockIndex + 1;
-            document.getElementById('stat-val-risks').textContent = selectedSimCase.oldWarnings.length;
-            
-            const savedLabel = document.getElementById('stat-val-saved');
-            savedLabel.textContent = `Fase ${selectedSimCase.newBlockIndex + 1}`;
-            savedLabel.title = SIM_NEW_STEPS[selectedSimCase.newBlockIndex].title;
-
-            statsBar.style.display = 'grid';
-
             // Update old procedure result box
             const oldResultEl = document.getElementById('sim-result-vigente');
             if (oldResultEl) {
@@ -1458,6 +1457,14 @@
             const btnReiniciarSim = document.getElementById('btn-reiniciar-sim');
             if (btnReiniciarSim) {
                 btnReiniciarSim.addEventListener('click', resetSimulation);
+            }
+
+            // Bind collapsible panel header toggle
+            const collapsibleHeader = document.getElementById('sim-collapsible-header');
+            if (collapsibleHeader) {
+                collapsibleHeader.addEventListener('click', () => {
+                    toggleCollapsiblePanel();
+                });
             }
 
             // Trigger initial repaint on load for the active panel
