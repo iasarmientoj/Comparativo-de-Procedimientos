@@ -435,7 +435,7 @@
 }
 
 /* Old Procedure Grid and Panels */
-.old-proc-grid {
+.old-proc-grid, .new-proc-grid {
     display: grid;
     grid-template-columns: 1.2fr 1.1fr;
     gap: 24px;
@@ -443,7 +443,7 @@
     min-height: 520px;
 }
 
-.old-steps-panel {
+.old-steps-panel, .new-steps-panel {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -453,7 +453,7 @@
     box-shadow: 0 12px 36px rgba(15, 82, 186, 0.12) !important;
 }
 
-.old-steps-list {
+.old-steps-list, .new-steps-list {
     flex-grow: 1;
     overflow-y: auto;
     padding-right: 8px;
@@ -462,7 +462,7 @@
     gap: 12px;
 }
 
-.old-details-column {
+.old-details-column, .new-details-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -470,11 +470,11 @@
     overflow: visible;
 }
 
-.old-roles-panel {
+.old-roles-panel, .new-roles-panel {
     flex: 0 0 auto;
 }
 
-.old-diagnosis-panel {
+.old-diagnosis-panel, .new-diagnosis-panel {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
@@ -504,8 +504,7 @@
     color: var(--text-color-muted);
 }
 
-/* Old Step Item */
-.old-step-item {
+.old-step-item, .new-step-item {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -518,7 +517,7 @@
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.old-step-item:hover {
+.old-step-item:hover, .new-step-item:hover {
     background: rgba(255, 255, 255, 0.65);
     border-color: rgba(15, 82, 186, 0.25);
     border-left-color: var(--primary-blue);
@@ -526,7 +525,7 @@
     box-shadow: 0 6px 16px rgba(15, 82, 186, 0.08);
 }
 
-.old-step-item.selected {
+.old-step-item.selected, .new-step-item.selected {
     background: linear-gradient(90deg, #ffffff 0%, rgba(203, 220, 255, 0.85) 100%);
     border-color: rgba(15, 82, 186, 0.35);
     border-left-color: var(--primary-blue);
@@ -534,13 +533,13 @@
     box-shadow: 0 10px 25px rgba(15, 82, 186, 0.15);
 }
 
-.old-step-item.selected:hover {
+.old-step-item.selected:hover, .new-step-item.selected:hover {
     transform: translateX(6px) translateY(-2px);
     background: linear-gradient(90deg, #ffffff 0%, rgba(235, 242, 255, 0.98) 100%);
     box-shadow: 0 12px 28px rgba(15, 82, 186, 0.18);
 }
 
-.old-step-letter {
+.old-step-letter, .new-step-letter {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -553,7 +552,7 @@
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
 
-.old-step-item.selected .old-step-letter {
+.old-step-item.selected .old-step-letter, .new-step-item.selected .new-step-letter {
     transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
@@ -570,11 +569,25 @@
     background-color: #3b82f6;
 }
 
-.old-step-info {
+/* PHVA colors for new-step-letter */
+.new-step-letter.phva-p {
+    background-color: #3b82f6; /* Planear - Azul */
+}
+.new-step-letter.phva-h {
+    background-color: #10b981; /* Hacer - Verde */
+}
+.new-step-letter.phva-v {
+    background-color: #f59e0b; /* Verificar - Naranja */
+}
+.new-step-letter.phva-a {
+    background-color: #8b5cf6; /* Actuar - Púrpura */
+}
+
+.old-step-info, .new-step-info {
     flex-grow: 1;
 }
 
-.old-step-title {
+.old-step-title, .new-step-title {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--text-color-main);
@@ -582,25 +595,26 @@
     transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
-.old-step-item.selected .old-step-title {
+.old-step-item.selected .old-step-title, .new-step-item.selected .new-step-title {
     color: var(--primary-blue);
     font-weight: 700;
 }
 
-.old-step-resp {
+.old-step-resp, .new-step-resp {
     font-size: 0.78rem;
     color: var(--text-color-muted);
 }
 
-.old-step-risk-badge {
+.old-step-risk-badge, .new-step-phva-badge {
     padding: 4px 8px;
     font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    border-radius: 2px;
 }
 
-.old-step-item.selected .old-step-risk-badge {
+.old-step-item.selected .old-step-risk-badge, .new-step-item.selected .new-step-phva-badge {
     background-color: #fdfdfd;
 }
 
@@ -617,6 +631,24 @@
 .old-step-risk-badge.low {
     background-color: rgba(59, 130, 246, 0.1);
     color: #3b82f6;
+}
+
+/* PHVA badge colors */
+.new-step-phva-badge.p {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+.new-step-phva-badge.h {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+.new-step-phva-badge.v {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+.new-step-phva-badge.a {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
 }
 
 /* Roles Workload Styles */
@@ -975,26 +1007,26 @@
     }
 
     /* 3 panels (Steps, Roles, Diagnosis) layout */
-    .old-proc-grid {
+    .old-proc-grid, .new-proc-grid {
         grid-template-columns: 1fr;
         height: auto !important;
         gap: 24px;
     }
 
-    .old-details-column {
+    .old-details-column, .new-details-column {
         height: auto !important;
         gap: 24px;
     }
 
     /* Steps list: 400px height with scroll */
-    .old-steps-panel {
+    .old-steps-panel, .new-steps-panel {
         height: 400px !important;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
     }
 
-    .old-steps-list {
+    .old-steps-list, .new-steps-list {
         flex-grow: 1;
         overflow-y: auto !important;
         padding-right: 8px;
@@ -1002,7 +1034,7 @@
     }
 
     /* Roles: auto-height to fit items, no scroll needed */
-    .old-roles-panel {
+    .old-roles-panel, .new-roles-panel {
         height: auto !important;
         box-sizing: border-box;
     }
@@ -1013,7 +1045,7 @@
     }
 
     /* Diagnosis: adaptive height matching content, no scroll needed */
-    .old-diagnosis-panel {
+    .old-diagnosis-panel, .new-diagnosis-panel {
         height: auto !important;
         box-sizing: border-box;
     }

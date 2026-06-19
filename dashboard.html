@@ -139,10 +139,40 @@
 
                 <!-- PANEL: PROCEDIMIENTO MEJORADO -->
                 <div class="dashboard-panel" id="panel-proc-mejorado">
-                    <div class="structure-placeholder">
-                        <i class="fa-solid fa-shield-halved placeholder-icon"></i>
-                        <h3>Procedimiento Mejorado</h3>
-                        <p>Estructura lista para visualizar la nueva matriz de roles, control PHVA e hitos contractuales.</p>
+                    <div class="new-proc-grid">
+                        <!-- Left Panel: Steps Flow (Scrollable) -->
+                        <div class="new-steps-panel card-glass">
+                            <div class="panel-section-header">
+                                <h3><i class="fa-solid fa-shield-halved"></i> Pasos del Flujo Mejorado</h3>
+                                <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un paso</span>
+                            </div>
+                            <div class="new-steps-list" id="new-steps-list">
+                                <!-- Inyectado por JS -->
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Roles and Details -->
+                        <div class="new-details-column">
+                            <!-- Roles Panel -->
+                            <div class="new-roles-panel card-glass">
+                                <div class="panel-section-header">
+                                    <h3><i class="fa-solid fa-users-viewfinder"></i> Matriz de Co-responsabilidad y Roles</h3>
+                                </div>
+                                <div class="roles-container" id="new-roles-container">
+                                    <!-- Inyectado por JS -->
+                                </div>
+                            </div>
+
+                            <!-- Detail & Diagnosis Panel -->
+                            <div class="new-diagnosis-panel card-glass">
+                                <div class="panel-section-header">
+                                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Gestión PHVA y Controles</h3>
+                                </div>
+                                <div class="diagnosis-container" id="new-diagnosis-container">
+                                    <!-- Inyectado por JS -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -484,9 +514,208 @@
             }
         ];
 
-        let currentOldStepIndex = 0;
+        /* ==========================================================================
+           PROCEDURE DATA STRUCTURES (NEW IMPROVED FLOW)
+           ========================================================================== */
+        const newProcedureSteps = [
+            {
+                letter: "1",
+                title: "Definición de Necesidad, Catálogo y Simulación",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Definición técnica del requerimiento y simulación oficial de costos en el catálogo.",
+                description: "La dependencia que origina la necesidad define el requerimiento técnico y los bienes o servicios a contratar. Verifica la vigencia del Acuerdo Marco de Precios aplicable y ejecuta el simulador oficial de costos para estructurar las cantidades e ítems, estimando el presupuesto máximo del proceso.",
+                control: "Verificación de correspondencia de ítems frente a las categorías autorizadas en la Minuta y el catálogo vigente del AMP para evitar adquisiciones por fuera de su alcance.",
+                records: "Ficha interna de necesidad, simulador preliminar de precios del catálogo.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Líder Técnico 🔧", score: 90, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesoría Inicial ⚖️", score: 10, class: "warning" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "2",
+                title: "Co-diseño de Estudios Previos y Matriz de Riesgos",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Elaboración conjunta de estudios previos, matriz de riesgos y garantías aplicables.",
+                description: "El Coordinador del Grupo de Contratos asigna un abogado responsable al trámite. El abogado asesora y co-redacta junto con el área técnica los Estudios Previos definitivos, estructurando la justificación del proceso, la matriz de riesgos y el análisis de garantías exigibles antes de ingresar a la plataforma TVEC.",
+                control: "Control de oportunidad jurídica. Se garantiza que los estudios y análisis de conveniencia precedan formalmente al inicio de cualquier etapa de selección en plataforma.",
+                records: "Estudios previos definitivos firmados, matriz de riesgos del proceso.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Co-Diseño 📝", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Co-Diseño ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "3",
+                title: "Indagación de Mercado (RFI) y Filtro MIPYMES",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Publicación de RFI en la TVEC y análisis legal de limitación a MIPYMES nacionales.",
+                description: "En caso de que la Guía del AMP lo exija o sea necesario precisar aspectos de la solución, se publica el RFI en la TVEC. El abogado analiza el RUP, RUES y las solicitudes recibidas para decidir si el proceso debe limitarse obligatoriamente a MIPYMES nacionales de conformidad con el Decreto 1860 de 2021.",
+                control: "Verificación jurídica del cumplimiento de condiciones del RUES para habilitar la limitación legal y blindar la convocatoria de impugnaciones.",
+                records: "Solicitud de Información (RFI) en TVEC, informe de análisis de limitación de MIPYMES.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Apoyo Técnico 🔧", score: 20, class: "success" },
+                    { name: "Abogado de Contratos", status: "Evaluador Legal ⚖️", score: 80, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "4",
+                title: "Configuración y Publicación del Evento (RFQ)",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Parametrización de la RFQ en la TVEC a través de la cuenta oficial institucional.",
+                description: "Configuración y parametrización de la solicitud de cotización (RFQ) en la plataforma TVEC utilizando una cuenta institucional de la entidad. Se cargan los estudios previos como equivalentes a los pliegos de condiciones y se publican las reglas de evaluación.",
+                control: "Uso de canales oficiales y centralizados de la TVEC. Queda estrictamente prohibida toda comunicación directa o negociación externa con proveedores (Minuta CCE).",
+                records: "Solicitud de cotización publicada en TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Cargue Técnico 📝", score: 40, class: "success" },
+                    { name: "Abogado de Contratos", status: "Cargador Principal ⚙️", score: 60, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "5",
+                title: "Aclaraciones, Observaciones y Cancelaciones",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Resolución de observaciones del foro y control estricto de cancelaciones por acto administrativo.",
+                description: "Se recopilan las observaciones enviadas por los proveedores and el Comité Evaluador emite un Cuadernillo de Respuestas consolidado. En caso de detectarse errores insubsanables en la RFQ que impidan continuar, se tramita su revocación formal.",
+                control: "Si se requiere cancelar el evento en plataforma, se prohíbe el uso del botón directo de cancelación. Exige la expedición obligatoria de un Acto Administrativo motivado del Ordenador del Gasto para prevenir reclamaciones indemnizatorias.",
+                records: "Respuestas cargadas en el foro de la TVEC, Acto Administrativo de cancelación (si aplica).",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Respuestas Técnicas 📝", score: 45, class: "success" },
+                    { name: "Abogado de Contratos", status: "Respuestas Jurídicas ⚖️", score: 45, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firma Cancelación ✍️", score: 10, class: "warning" }
+                ]
+            },
+            {
+                letter: "6",
+                title: "Cierre de Cotizaciones y Apertura de Plataforma",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Cierre automático de la TVEC y generación oficial del listado de ofertas.",
+                description: "Cumplido el plazo del evento (mínimo 5 días hábiles), la plataforma TVEC realiza de forma automática el cierre y apertura de cotizaciones a las 17:00 horas, generando el listado de ofertas ordenadas de menor a mayor precio.",
+                control: "Garantía tecnológica de transparencia. Imposibilidad de manipulación humana o visualización anticipada de las propuestas económicas.",
+                records: "Listado oficial de cotizaciones emitido por la plataforma TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Automático 🤖", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Automático 🤖", score: 0, class: "muted" },
+                    { name: "Presupuesto", status: "Automático 🤖", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Automático 🤖", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "7",
+                title: "Evaluación Jurídica y Filtro de Inhabilidades",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Validación legal de la propuesta de menor precio y chequeo de antecedentes (REDAM/RUES).",
+                description: "El abogado realiza la evaluación jurídica de la propuesta de menor precio. Verifica personería, RUES y realiza búsquedas de antecedentes fiscales (Contraloría), penales (Policía), disciplinarios (Procuraduría) e inhabilidades por deudas de alimentos (REDAM) del representante legal y la empresa.",
+                control: "Prevención de nulidad absoluta del contrato (Art. 44 Ley 80) e inhabilitación por mora alimentaria (Cláusulas 6.11 y 6.17 de la Minuta).",
+                records: "Certificados oficiales de antecedentes y RUES descargados con fecha y hora del día de la evaluación.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Evaluador Único ⚖️", score: 100, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "8",
+                title: "Evaluación Técnica y Control de Precios Bajos",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Verificación de cumplimiento de catálogo y requerimiento de aclaración por precios artificiales.",
+                description: "El evaluador técnico verifica que la propuesta de menor valor cumpla con las fichas técnicas del catálogo. Si la oferta presenta un precio sospechosamente bajo o excluye cargas tributarias (como el IVA en bienes/servicios gravados), el comité solicita aclaración al proveedor siguiendo la Guía de Colombia Compra Eficiente.",
+                control: "Descarte motivado de ofertas técnicamente inviables o con precios artificialmente bajos que comprometan el suministro del bien o servicio (Cláusula 6.14 de la Minuta).",
+                records: "Informe de cumplimiento técnico y análisis económico de costos.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Evaluador Técnico 🔧", score: 80, class: "success" },
+                    { name: "Abogado de Contratos", status: "Apoyo Legal ⚖️", score: 20, class: "warning" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "9",
+                title: "Publicación de Evaluaciones y Término de Traslado",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Publicación de informes de evaluación para observaciones de los oferentes.",
+                description: "Consolidación y publicación del informe de evaluación técnica y jurídica en la plataforma TVEC. Se otorga un término de traslado mínimo de 1 día hábil para que los demás proponentes presenten sus observaciones.",
+                control: "Respeto al derecho de defensa, debido proceso y principio de publicidad de las actuaciones administrativas.",
+                records: "Informe de evaluación publicado en la TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Firma Evaluación 📝", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Firma Evaluación ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "10",
+                title: "Adjudicación y Firma Digital de Orden de Compra",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Visto bueno del Coordinador jurídico y suscripción digital de la OC por la Directora.",
+                description: "Cierre de la etapa de traslado y resolución de observaciones. Previa aprobación y visto bueno del Coordinador de Contratos, el Ordenador del Gasto firma digitalmente la Orden de Compra (OC) en la TVEC a favor del proveedor seleccionado.",
+                control: "Co-responsabilidad institucional y control concurrente de firmas en plataforma, eliminando el riesgo de firmas 'a ciegas' por fe técnica.",
+                records: "Orden de Compra perfeccionada y firmada digitalmente en TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Visto Bueno 🔧", score: 10, class: "success" },
+                    { name: "Abogado de Contratos", status: "Visto Bueno ⚖️", score: 40, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firma Digital ✍️", score: 50, class: "success" }
+                ]
+            },
+            {
+                letter: "11",
+                title: "Legalización: Pólizas y Registro Presupuestal",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Revisión/aprobación de garantías por el abogado y expedición del RP por Presupuesto.",
+                description: "El contratista constituye y envía las garantías (póliza de seguros) dentro del plazo estipulado (máximo 3 días). El abogado revisa la suficiencia y vigencia de las pólizas y expide la aprobación. Simultáneamente, el Grupo de Presupuesto genera el Registro Presupuestal (RP) en el sistema SIIF Nación.",
+                control: "Verificación de suficiencia de pólizas según los amparos del AMP (Cláusula 6.29) y cálculo de retenciones territoriales aplicables al valor (Cláusula 6.9).",
+                records: "Certificado de aprobación de garantías en la TVEC, Registro Presupuestal expedido.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Aprobación Pólizas ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Expedición RP 📄", score: 50, class: "success" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "12",
+                title: "Notificación de Supervisión y Acta de Inicio",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Designación del supervisor, notificación al proveedor y firma del acta de inicio.",
+                description: "El Coordinador de Contratos notifica la designación de supervisión al funcionario técnico y remite los datos de contacto y enlace al proveedor seleccionado (Cláusula 6.23). El supervisor y el proveedor firman formalmente el Acta de Inicio dentro de los 5 días hábiles siguientes (Cláusula 6.26).",
+                control: "Garantizar que la prestación del servicio o entrega de los bienes no comience sin las garantías aprobadas ni el acta de inicio debidamente perfeccionada (prevención de hechos cumplidos).",
+                records: "Oficio de designación de supervisor notificado, Acta de Inicio suscrita.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Supervisión Activa 🔍", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Notificación Formal ⚖️", score: 30, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firma Designación ✍️", score: 20, class: "success" }
+                ]
+            }
+        ];
 
-        // Render steps list
+        let currentOldStepIndex = 0;
+        let currentNewStepIndex = 0;
+
+        // Render steps list for old procedure
         function renderOldProcedure() {
             const stepsList = document.getElementById('old-steps-list');
             if (!stepsList) return;
@@ -576,6 +805,101 @@
             }
         }
 
+        // Render new procedure steps
+        function renderNewProcedure() {
+            const stepsList = document.getElementById('new-steps-list');
+            if (!stepsList) return;
+            stepsList.innerHTML = '';
+            
+            newProcedureSteps.forEach((step, index) => {
+                const item = document.createElement('div');
+                item.className = 'new-step-item';
+                item.id = `new-step-item-${index}`;
+                item.setAttribute('onclick', `selectNewStep(${index})`);
+                
+                item.innerHTML = `
+                    <div class="new-step-letter phva-${step.phva}">${step.letter}</div>
+                    <div class="new-step-info">
+                        <div class="new-step-title">${step.title}</div>
+                        <div class="new-step-resp">${step.summary}</div>
+                    </div>
+                    <span class="new-step-phva-badge ${step.phva}">${step.phvaLabel}</span>
+                `;
+                stepsList.appendChild(item);
+            });
+        }
+
+        // Select specific step and update roles and details for improved procedure
+        function selectNewStep(index) {
+            currentNewStepIndex = index;
+            document.querySelectorAll('.new-step-item').forEach((item, i) => {
+                if (i === index) item.classList.add('selected');
+                else item.classList.remove('selected');
+            });
+
+            const step = newProcedureSteps[index];
+
+            // Update Roles Panel
+            const rolesContainer = document.getElementById('new-roles-container');
+            if (rolesContainer) {
+                rolesContainer.innerHTML = '';
+                step.roles.forEach(role => {
+                    let icon = "fa-user-tie";
+                    if (role.name.includes("Técnica")) icon = "fa-laptop-code";
+                    else if (role.name.includes("Contratos")) icon = "fa-user-shield";
+                    else if (role.name.includes("Presupuesto")) icon = "fa-file-invoice-dollar";
+                    
+                    rolesContainer.innerHTML += `
+                        <div class="role-workload-item">
+                            <div class="role-name-row">
+                                <span class="role-name"><i class="fa-solid ${icon}"></i> ${role.name}</span>
+                                <span class="role-status status-${role.class}">${role.status}</span>
+                            </div>
+                            <div class="workload-bar-bg">
+                                <div class="workload-bar-fill ${role.class}" style="width: ${role.score}%;"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Update Diagnosis/Control Panel
+            const diagnosisContainer = document.getElementById('new-diagnosis-container');
+            if (diagnosisContainer) {
+                diagnosisContainer.innerHTML = `
+                    <div class="diagnosis-header">
+                        <div class="diagnosis-title-wrap">
+                            <div class="diagnosis-step-badge new-step-letter phva-${step.phva}">${step.letter}</div>
+                            <div class="diagnosis-step-title">${step.title}</div>
+                        </div>
+                        <div class="diagnosis-risk-meter" style="width: 140px;">
+                            <div class="diagnosis-risk-label" style="color: ${step.phva === 'p' ? '#3b82f6' : step.phva === 'h' ? '#10b981' : step.phva === 'v' ? '#f59e0b' : '#8b5cf6'};">
+                                Ciclo PHVA: ${step.phvaLabel}
+                            </div>
+                            <div class="diagnosis-risk-bar-bg">
+                                <div class="diagnosis-risk-bar-fill ${step.phva === 'p' ? 'low' : step.phva === 'h' ? 'success' : step.phva === 'v' ? 'medium' : 'high'}" style="width: 100%; height: 100%; background-color: ${step.phva === 'p' ? '#3b82f6' : step.phva === 'h' ? '#10b981' : step.phva === 'v' ? '#f59e0b' : '#8b5cf6'};"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="diagnosis-section" style="margin-top: 4px;">
+                        <h5><i class="fa-solid fa-align-left"></i> Descripción de la Fase:</h5>
+                        <p>${step.description}</p>
+                    </div>
+
+                    <div class="diagnosis-section alert-box" style="background-color: rgba(16, 185, 129, 0.03); border-color: rgba(16, 185, 129, 0.15);">
+                        <h5 style="color: #10b981;"><i class="fa-solid fa-shield-halved"></i> Mecanismo de Control Preventivo:</h5>
+                        <p style="color: #065f46; font-weight: 500;">${step.control}</p>
+                    </div>
+
+                    <div class="diagnosis-section">
+                        <h5><i class="fa-solid fa-folder-open"></i> Registros y Entregables Habilitantes:</h5>
+                        <p>${step.records}</p>
+                    </div>
+                `;
+            }
+        }
+
         // Initialize background circle repulsion and force initial repaint on load
         document.addEventListener('DOMContentLoaded', () => {
             const inners = document.querySelectorAll('.blur-circle-inner');
@@ -633,23 +957,29 @@
             renderOldProcedure();
             selectOldStep(0);
 
+            // Render new procedure steps and select the first step initially
+            renderNewProcedure();
+            selectNewStep(0);
+
             // Trigger initial repaint on load for the active panel
             const initialPanel = document.querySelector('.dashboard-panel.active');
             triggerRepaint(initialPanel);
 
             // Keyboard navigation for steps
             window.addEventListener('keydown', (e) => {
-                const panel = document.getElementById('panel-proc-anterior');
-                if (panel && panel.classList.contains('active')) {
-                    // Ignore keydown if focused on an input/textarea/editable
-                    if (document.activeElement && (
-                        document.activeElement.tagName === 'INPUT' || 
-                        document.activeElement.tagName === 'TEXTAREA' || 
-                        document.activeElement.isContentEditable
-                    )) {
-                        return;
-                    }
+                const panelAnterior = document.getElementById('panel-proc-anterior');
+                const panelMejorado = document.getElementById('panel-proc-mejorado');
+                
+                // Ignore keydown if focused on an input/textarea/editable
+                if (document.activeElement && (
+                    document.activeElement.tagName === 'INPUT' || 
+                    document.activeElement.tagName === 'TEXTAREA' || 
+                    document.activeElement.isContentEditable
+                )) {
+                    return;
+                }
 
+                if (panelAnterior && panelAnterior.classList.contains('active')) {
                     if (e.key === 'ArrowDown') {
                         e.preventDefault();
                         if (currentOldStepIndex < oldProcedureSteps.length - 1) {
@@ -664,6 +994,26 @@
                         if (currentOldStepIndex > 0) {
                             selectOldStep(currentOldStepIndex - 1);
                             const activeItem = document.getElementById(`old-step-item-${currentOldStepIndex}`);
+                            if (activeItem) {
+                                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                        }
+                    }
+                } else if (panelMejorado && panelMejorado.classList.contains('active')) {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (currentNewStepIndex < newProcedureSteps.length - 1) {
+                            selectNewStep(currentNewStepIndex + 1);
+                            const activeItem = document.getElementById(`new-step-item-${currentNewStepIndex}`);
+                            if (activeItem) {
+                                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                        }
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (currentNewStepIndex > 0) {
+                            selectNewStep(currentNewStepIndex - 1);
+                            const activeItem = document.getElementById(`new-step-item-${currentNewStepIndex}`);
                             if (activeItem) {
                                 activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                             }
