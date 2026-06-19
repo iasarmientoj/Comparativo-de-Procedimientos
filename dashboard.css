@@ -1623,3 +1623,156 @@
         gap: 8px !important;
     }
 }
+
+/* ============================================================
+   SHIELD PROTECTION OVERLAY ANIMATION
+   ============================================================ */
+.sim-shield-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 25, 47, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.sim-shield-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.shield-animation-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.shield-glow-circle {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, transparent 70%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.shield-ripple {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border: 3px solid rgba(16, 185, 129, 0.6);
+    border-radius: 50%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.animated-shield {
+    font-size: 7.5rem;
+    color: #10b981;
+    z-index: 3;
+    position: relative;
+    filter: drop-shadow(0 0 35px rgba(16, 185, 129, 0.75));
+    transform: scale(0);
+}
+
+.shield-text {
+    font-family: var(--font-sans);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 24px 0 8px 0;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    opacity: 0;
+}
+
+.shield-subtext {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+    opacity: 0;
+}
+
+/* Overlay Animations */
+.sim-shield-overlay.active .animated-shield {
+    animation: shieldEntrance 1.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.sim-shield-overlay.active .shield-ripple {
+    animation: shieldRipple 1.6s ease-out infinite;
+}
+
+.sim-shield-overlay.active .shield-text {
+    animation: textEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+
+.sim-shield-overlay.active .shield-subtext {
+    animation: textEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+
+@keyframes shieldEntrance {
+    0% {
+        transform: scale(3) rotate(-20deg);
+        opacity: 0;
+        filter: drop-shadow(0 0 0 rgba(16, 185, 129, 0));
+    }
+    35% {
+        transform: scale(0.9) rotate(5deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 40px rgba(16, 185, 129, 0.8));
+    }
+    55% {
+        transform: scale(1.12) rotate(-3deg);
+    }
+    75% {
+        transform: scale(0.97) rotate(1deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+        filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.45));
+    }
+}
+
+@keyframes shieldRipple {
+    0% {
+        transform: scale(0.85);
+        opacity: 0.8;
+    }
+    75% {
+        transform: scale(2.3);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(2.3);
+        opacity: 0;
+    }
+}
+
+@keyframes textEntrance {
+    0% {
+        transform: translateY(18px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

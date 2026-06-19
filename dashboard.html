@@ -177,7 +177,17 @@
                 </div>
 
                 <!-- PANEL: SIMULACIÓN COMPARATIVA -->
-                <div class="dashboard-panel" id="panel-sim-comparativa">
+                <div class="dashboard-panel" id="panel-sim-comparativa" style="position: relative;">
+                    <!-- Escudo de protección animado overlay -->
+                    <div class="sim-shield-overlay" id="sim-shield-overlay">
+                        <div class="shield-animation-wrapper">
+                            <div class="shield-glow-circle"></div>
+                            <div class="shield-ripple"></div>
+                            <i class="fa-solid fa-shield-halved animated-shield"></i>
+                            <h3 class="shield-text">Control Activado</h3>
+                            <p class="shield-subtext">Riesgo contractual mitigado con éxito</p>
+                        </div>
+                    </div>
                     <!-- Panel Colapsable de Casos (Ancho completo) -->
                     <div class="sim-collapsible-panel card-glass" id="sim-collapsible-panel">
                         <!-- Cabecera del colapsable -->
@@ -1006,6 +1016,11 @@
             renderSimSteps();
             document.getElementById('btn-reiniciar-sim').style.display = 'none';
             
+            const shieldOverlay = document.getElementById('sim-shield-overlay');
+            if (shieldOverlay) {
+                shieldOverlay.classList.remove('active');
+            }
+            
             const oldResultEl = document.getElementById('sim-result-vigente');
             if (oldResultEl) {
                 oldResultEl.classList.remove('visible');
@@ -1135,6 +1150,15 @@
                     node.classList.add('processing');
                     scrollToElement(node, container);
                     await new Promise(resolve => setTimeout(resolve, 600));
+
+                    // Activar el escudo animado overlay
+                    const shieldOverlay = document.getElementById('sim-shield-overlay');
+                    if (shieldOverlay) {
+                        shieldOverlay.classList.add('active');
+                        await new Promise(resolve => setTimeout(resolve, 2000));
+                        shieldOverlay.classList.remove('active');
+                        await new Promise(resolve => setTimeout(resolve, 300));
+                    }
 
                     // Block it
                     node.classList.remove('processing');
