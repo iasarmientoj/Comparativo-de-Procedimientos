@@ -368,6 +368,11 @@
 
                     <!-- 3. Dashboard de Proceso Activo (oculto por defecto) -->
                     <div class="autogestion-dashboard-container" id="autogestion-dashboard" style="display: none;">
+                        <!-- Aviso de Autoguardado (fuera y arriba del panel) -->
+                        <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px; justify-content: flex-end; width: 100%; margin-bottom: 8px; padding-right: 4px;">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+                            <span>Los cambios se guardan automáticamente en tu navegador</span>
+                        </div>
                         <!-- Cabecera del Proceso -->
                         <div class="autogestion-dashboard-header card-glass" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 24px; gap: 20px;">
                             <!-- Izquierda: Rol y botón de cambio -->
@@ -379,30 +384,24 @@
                             </div>
                             
                             <!-- Centro: Progreso del Rol -->
-                            <div class="autogestion-progress-wrapper" style="width: 280px; margin: 0;">
-                                <div class="autogestion-progress-label" style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
-                                    <span id="autogestion-progress-text" style="color: var(--primary-blue);">0% Completado</span>
-                                    <span id="autogestion-progress-count" style="color: var(--text-color-muted); font-weight: 500;">(0 de 17 tareas de este rol)</span>
+                            <div class="autogestion-progress-wrapper" style="width: 350px; flex-shrink: 0; margin: 0 20px;">
+                                <div class="autogestion-progress-label" style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; gap: 12px;">
+                                    <span id="autogestion-progress-text" style="color: var(--primary-blue); white-space: nowrap;">0% Completado</span>
+                                    <span id="autogestion-progress-count" style="color: var(--text-color-muted); font-weight: 500; white-space: nowrap;">(0 de 17 tareas de este rol)</span>
                                 </div>
                                 <div class="autogestion-progress-bar-bg" style="width: 100%; height: 6px; background-color: rgba(15, 82, 186, 0.08); border-radius: 0px; overflow: hidden;">
                                     <div class="autogestion-progress-bar-fill" id="autogestion-progress-fill" style="width: 0%; height: 100%; background-color: var(--primary-blue); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);"></div>
                                 </div>
                             </div>
                             
-                            <!-- Derecha: Acciones y aviso de autoguardado -->
-                            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
-                                <div style="font-size: 0.68rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 4px; margin-bottom: 2px; white-space: nowrap;">
-                                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
-                                    <span>Los cambios se guardan automáticamente en tu navegador</span>
-                                </div>
-                                <div class="autogestion-header-actions" style="display: flex; gap: 10px;">
-                                    <button class="footer-btn" onclick="saveProcessState()" style="padding: 6px 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.75rem;">
-                                        <i class="fa-solid fa-download"></i> Exportar
-                                    </button>
-                                    <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 6px 12px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; font-size: 0.75rem;">
-                                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir de este proceso
-                                    </button>
-                                </div>
+                            <!-- Derecha: Acciones -->
+                            <div class="autogestion-header-actions" style="display: flex; gap: 10px;">
+                                <button class="footer-btn" onclick="saveProcessState()" style="padding: 6px 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.75rem;">
+                                    <i class="fa-solid fa-download"></i> Exportar
+                                </button>
+                                <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 6px 12px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; font-size: 0.75rem;">
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir de este proceso
+                                </button>
                             </div>
                         </div>
 
