@@ -267,36 +267,38 @@
                 <!-- PANEL: SISTEMA DE AUTOGESTIÓN -->
                 <div class="dashboard-panel" id="panel-sis-autogestion">
                     <!-- 1. Pantalla de Bienvenida (Nuevo o Cargar) -->
-                    <div class="autogestion-welcome-container card-glass" id="autogestion-welcome">
-                        <div class="autogestion-welcome-header">
-                            <i class="fa-solid fa-laptop-code autogestion-welcome-icon"></i>
-                            <h3>Sistema de Autogestión</h3>
-                            <p>Asistente interactivo estructurado por roles para el seguimiento de actividades, control de hitos clave y mitigación de riesgos durante el proceso de contratación.</p>
-                        </div>
-                        
-                        <div class="autogestion-options">
-                            <button class="autogestion-opt-btn" id="btn-nuevo-proceso" onclick="showNewProcessInput()">
-                                <i class="fa-solid fa-file-circle-plus"></i>
-                                <span>Nuevo Proceso</span>
-                            </button>
-                            <button class="autogestion-opt-btn" id="btn-cargar-proceso" onclick="triggerLoadProcess()">
-                                <i class="fa-solid fa-file-arrow-up"></i>
-                                <span>Cargar Proceso</span>
-                            </button>
-                        </div>
-
-                        <!-- Buscador de archivos oculto -->
-                        <input type="file" id="autogestion-file-input" accept=".json" style="display: none;" onchange="handleLoadProcessFile(event)">
-
-                        <!-- Formulario para Nuevo Proceso (oculto por defecto) -->
-                        <div class="autogestion-new-form" id="autogestion-new-form" style="display: none;">
-                            <div class="form-group">
-                                <label for="new-process-name">Nombre del Proceso Contractual:</label>
-                                <input type="text" id="new-process-name" placeholder="Ej. Adquisición Licenciamiento Software CCE-2026" class="autogestion-input" onkeyup="checkNewProcessName(event)">
+                    <div class="autogestion-welcome-container" id="autogestion-welcome" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                        <div class="card-glass" style="width: 100%; max-width: 700px; display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 40px; text-align: center;">
+                            <div class="autogestion-welcome-header">
+                                <i class="fa-solid fa-laptop-code autogestion-welcome-icon"></i>
+                                <h3>Sistema de Autogestión</h3>
+                                <p>Asistente interactivo estructurado por roles para el seguimiento de actividades, control de hitos clave y mitigación de riesgos durante el proceso de contratación.</p>
                             </div>
-                            <button class="autogestion-submit-btn" id="btn-submit-nuevo" onclick="createNewProcess()" disabled>
-                                <span>Crear Proceso</span> <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                            
+                            <div class="autogestion-options">
+                                <button class="autogestion-opt-btn" id="btn-nuevo-proceso" onclick="showNewProcessInput()">
+                                    <i class="fa-solid fa-file-circle-plus"></i>
+                                    <span>Nuevo Proceso</span>
+                                </button>
+                                <button class="autogestion-opt-btn" id="btn-cargar-proceso" onclick="triggerLoadProcess()">
+                                    <i class="fa-solid fa-file-arrow-up"></i>
+                                    <span>Cargar Proceso</span>
+                                </button>
+                            </div>
+
+                            <!-- Buscador de archivos oculto -->
+                            <input type="file" id="autogestion-file-input" accept=".json" style="display: none;" onchange="handleLoadProcessFile(event)">
+
+                            <!-- Formulario para Nuevo Proceso (oculto por defecto) -->
+                            <div class="autogestion-new-form" id="autogestion-new-form" style="display: none;">
+                                <div class="form-group">
+                                    <label for="new-process-name">Nombre del Proceso Contractual:</label>
+                                    <input type="text" id="new-process-name" placeholder="Ej. Adquisición Licenciamiento Software CCE-2026" class="autogestion-input" onkeyup="checkNewProcessName(event)">
+                                </div>
+                                <button class="autogestion-submit-btn" id="btn-submit-nuevo" onclick="createNewProcess()" disabled>
+                                    <span>Crear Proceso</span> <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Aviso de datos locales y privacidad -->
@@ -307,95 +309,108 @@
                     </div>
 
                     <!-- 2. Pantalla de Selección de Rol (exclusiva) -->
-                    <div class="autogestion-role-selection-container card-glass" id="autogestion-role-selection" style="display: none;">
-                        <div class="autogestion-welcome-header">
-                            <i class="fa-solid fa-users-gear autogestion-welcome-icon"></i>
-                            <h3>Selecciona tu Rol</h3>
-                            <p>Cada rol interviene en diferentes etapas del proceso de contratación con actividades y controles específicos.</p>
-                        </div>
-                        
-                        <div class="autogestion-roles-grid">
-                            <div class="autogestion-role-card card-glass" onclick="selectRole('tecnico')">
-                                <div class="role-card-icon-wrap">
-                                    <i class="fa-solid fa-laptop-code"></i>
-                                </div>
-                                <h4>Área Técnica</h4>
-                                <p>Ingeniero solicitante: Estructura requerimiento técnico, simula costos y realiza el control de ejecución.</p>
-                                <span class="role-card-progress" id="card-progress-tecnico">0 / 17 tareas</span>
+                    <div class="autogestion-role-selection-container" id="autogestion-role-selection" style="display: none; flex-direction: column; align-items: center; gap: 20px;">
+                        <div class="card-glass" style="width: 100%; max-width: 950px; display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 30px 40px; text-align: center;">
+                            <div class="autogestion-welcome-header">
+                                <i class="fa-solid fa-users-gear autogestion-welcome-icon"></i>
+                                <h3>Selecciona tu Rol</h3>
+                                <p>Cada rol interviene en diferentes etapas del proceso de contratación con actividades y controles específicos.</p>
                             </div>
-                            <div class="autogestion-role-card card-glass" onclick="selectRole('abogado')">
-                                <div class="role-card-icon-wrap">
-                                    <i class="fa-solid fa-user-shield"></i>
+                            
+                            <div class="autogestion-roles-grid">
+                                <div class="autogestion-role-card card-glass" onclick="selectRole('tecnico')">
+                                    <div class="role-card-icon-wrap">
+                                        <i class="fa-solid fa-laptop-code"></i>
+                                    </div>
+                                    <h4>Área Técnica</h4>
+                                    <p>Ingeniero solicitante: Estructura requerimiento técnico, simula costos y realiza el control de ejecución.</p>
+                                    <span class="role-card-progress" id="card-progress-tecnico">0 / 17 tareas</span>
                                 </div>
-                                <h4>Abogado de Contratos</h4>
-                                <p>Grupo de contratos: Vela por la legalidad, estructura la RFQ y gestiona la legalización.</p>
-                                <span class="role-card-progress" id="card-progress-abogado">0 / 14 tareas</span>
+                                <div class="autogestion-role-card card-glass" onclick="selectRole('abogado')">
+                                    <div class="role-card-icon-wrap">
+                                        <i class="fa-solid fa-user-shield"></i>
+                                    </div>
+                                    <h4>Abogado de Contratos</h4>
+                                    <p>Grupo de contratos: Vela por la legalidad, estructura la RFQ y gestiona la legalización.</p>
+                                    <span class="role-card-progress" id="card-progress-abogado">0 / 14 tareas</span>
+                                </div>
+                                <div class="autogestion-role-card card-glass" onclick="selectRole('presupuesto')">
+                                    <div class="role-card-icon-wrap">
+                                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                                    </div>
+                                    <h4>Presupuesto</h4>
+                                    <p>Financiera: Responsable de verificar acopio de recursos y registrar CDP/RP en SIIF Nación.</p>
+                                    <span class="role-card-progress" id="card-progress-presupuesto">0 / 4 tareas</span>
+                                </div>
+                                <div class="autogestion-role-card card-glass" onclick="selectRole('ordenador')">
+                                    <div class="role-card-icon-wrap">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                    </div>
+                                    <h4>Ordenador del Gasto</h4>
+                                    <p>Directora / Subdirectora: Firma la adjudicación, pólizas y la delegación de supervisión.</p>
+                                    <span class="role-card-progress" id="card-progress-ordenador">0 / 4 tareas</span>
+                                </div>
                             </div>
-                            <div class="autogestion-role-card card-glass" onclick="selectRole('presupuesto')">
-                                <div class="role-card-icon-wrap">
-                                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                                </div>
-                                <h4>Presupuesto</h4>
-                                <p>Financiera: Responsable de verificar acopio de recursos y registrar CDP/RP en SIIF Nación.</p>
-                                <span class="role-card-progress" id="card-progress-presupuesto">0 / 4 tareas</span>
-                            </div>
-                            <div class="autogestion-role-card card-glass" onclick="selectRole('ordenador')">
-                                <div class="role-card-icon-wrap">
-                                    <i class="fa-solid fa-user-tie"></i>
-                                </div>
-                                <h4>Ordenador del Gasto</h4>
-                                <p>Directora / Subdirectora: Firma la adjudicación, pólizas y la delegación de supervisión.</p>
-                                <span class="role-card-progress" id="card-progress-ordenador">0 / 4 tareas</span>
+
+                            <div class="role-selection-footer" style="border-top: 1.5px solid rgba(15, 82, 186, 0.1); padding-top: 20px; width: 100%; display: flex; justify-content: center;">
+                                <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
+                                    <i class="fa-solid fa-arrow-left" style="color: inherit;"></i> Regresar
+                                </button>
                             </div>
                         </div>
 
-                        <div class="role-selection-footer" style="flex-direction: column; gap: 12px; align-items: center;">
-                            <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
-                                <i class="fa-solid fa-arrow-left" style="color: inherit;"></i> Regresar
-                            </button>
-                            <div class="autogestion-privacy-notice" style="margin-top: 8px;">
-                                <i class="fa-solid fa-shield-halved"></i>
-                                <span>Los datos se guardan exclusivamente en tu navegador. Ninguna información es transmitida a servidores externos.</span>
-                            </div>
+                        <!-- Aviso de datos locales y privacidad -->
+                        <div class="autogestion-privacy-notice">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Los datos se guardan exclusivamente en tu navegador. Ninguna información es transmitida a servidores externos.</span>
                         </div>
                     </div>
 
                     <!-- 3. Dashboard de Proceso Activo (oculto por defecto) -->
                     <div class="autogestion-dashboard-container" id="autogestion-dashboard" style="display: none;">
                         <!-- Cabecera del Proceso -->
-                        <div class="autogestion-dashboard-header card-glass">
-                            <div class="autogestion-header-left">
-                                <h3 id="active-process-title">Nombre del Proceso</h3>
-                                <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
-                                    <span class="details-role-badge" id="header-role-badge" style="margin-top: 0; font-size: 0.72rem; padding: 4px 10px; background: rgba(15, 82, 186, 0.08); color: var(--primary-blue); border-radius: 2px;">Rol: Área Técnica</span>
-                                    <button class="calendar-action-btn" onclick="openRoleSelection()" style="padding: 3px 8px; font-size: 0.7rem; border-color: rgba(15, 82, 186, 0.35); border-radius: 0px;">
-                                        <i class="fa-solid fa-user-gear"></i> Cambiar Rol
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="autogestion-header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-                                <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px; justify-content: flex-end; margin-bottom: 2px;">
+                        <div class="autogestion-dashboard-header card-glass" style="display: flex; flex-direction: column; gap: 16px; padding: 20px 28px;">
+                            <!-- Fila Superior -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <h3 id="active-process-title" style="font-size: 1.6rem; font-weight: 700; color: var(--text-color-main); margin: 0;">Nombre del Proceso</h3>
+                                <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
                                     <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
                                     <span>Los cambios se guardan automáticamente en tu navegador</span>
                                 </div>
-                                <div style="display: flex; align-items: center; gap: 32px;">
-                                    <div class="autogestion-progress-wrapper">
-                                        <div class="autogestion-progress-label">
-                                            <span id="autogestion-progress-text">0% Completado</span>
-                                            <span id="autogestion-progress-count">(0 de 17 tareas de este rol)</span>
-                                        </div>
-                                        <div class="autogestion-progress-bar-bg">
-                                            <div class="autogestion-progress-bar-fill" id="autogestion-progress-fill" style="width: 0%;"></div>
-                                        </div>
+                            </div>
+                            
+                            <!-- Línea Divisoria Sutil -->
+                            <div style="height: 1px; background: rgba(15, 82, 186, 0.08); width: 100%;"></div>
+                            
+                            <!-- Fila Inferior -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; gap: 16px;">
+                                <!-- Izquierda: Rol y botón de cambio -->
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <span class="details-role-badge" id="header-role-badge" style="margin-top: 0; font-size: 0.72rem; padding: 6px 12px; background: rgba(15, 82, 186, 0.08); color: var(--primary-blue); border-radius: 2px;">Rol: Área Técnica</span>
+                                    <button class="calendar-action-btn" onclick="openRoleSelection()" style="padding: 5px 10px; font-size: 0.72rem; border-color: rgba(15, 82, 186, 0.35); border-radius: 0px;">
+                                        <i class="fa-solid fa-user-gear"></i> Cambiar Rol
+                                    </button>
+                                </div>
+                                
+                                <!-- Centro: Progreso del Rol -->
+                                <div class="autogestion-progress-wrapper" style="width: 280px; margin: 0 16px;">
+                                    <div class="autogestion-progress-label" style="display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">
+                                        <span id="autogestion-progress-text" style="color: var(--primary-blue);">0% Completado</span>
+                                        <span id="autogestion-progress-count" style="color: var(--text-color-muted); font-weight: 500;">(0 de 17 tareas de este rol)</span>
                                     </div>
-                                    <div class="autogestion-header-actions">
-                                        <button class="footer-btn" onclick="saveProcessState()" style="padding: 10px 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent;">
-                                            <i class="fa-solid fa-download"></i> Exportar
-                                        </button>
-                                        <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent;">
-                                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir de este proceso
-                                        </button>
+                                    <div class="autogestion-progress-bar-bg" style="width: 100%; height: 6px; background-color: rgba(15, 82, 186, 0.08); border-radius: 0px; overflow: hidden;">
+                                        <div class="autogestion-progress-bar-fill" id="autogestion-progress-fill" style="width: 0%; height: 100%; background-color: var(--primary-blue); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);"></div>
                                     </div>
+                                </div>
+                                
+                                <!-- Derecha: Acciones -->
+                                <div class="autogestion-header-actions" style="display: flex; gap: 12px;">
+                                    <button class="footer-btn" onclick="saveProcessState()" style="padding: 8px 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-download"></i> Exportar
+                                    </button>
+                                    <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 8px 16px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir de este proceso
+                                    </button>
                                 </div>
                             </div>
                         </div>
