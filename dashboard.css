@@ -1992,8 +1992,721 @@
         opacity: 0;
     }
 
-    100% {
+    to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+/* ============================================================
+   AUTOGESTION START PANEL STYLES
+   ============================================================ */
+.autogestion-welcome-container {
+    max-width: 700px;
+    margin: 60px auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    padding: 40px;
+}
+
+.autogestion-welcome-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.autogestion-welcome-icon {
+    font-size: 4rem;
+    color: var(--primary-blue);
+    margin-bottom: 8px;
+    filter: drop-shadow(0 6px 16px rgba(15, 82, 186, 0.18));
+}
+
+.autogestion-welcome-header h3 {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--text-color-main);
+    margin: 0;
+}
+
+.autogestion-welcome-header p {
+    font-size: 1.05rem;
+    color: var(--text-color-muted);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0;
+}
+
+.autogestion-options {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    justify-content: center;
+}
+
+.autogestion-opt-btn {
+    flex: 1;
+    max-width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px 20px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1.5px solid rgba(15, 82, 186, 0.15);
+    border-radius: 0px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(15, 82, 186, 0.03);
+}
+
+.autogestion-opt-btn i {
+    font-size: 2.2rem;
+    color: var(--primary-blue);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autogestion-opt-btn span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color-main);
+    letter-spacing: -0.01em;
+}
+
+.autogestion-opt-btn:hover {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: var(--primary-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 82, 186, 0.12);
+}
+
+.autogestion-opt-btn:hover i {
+    transform: scale(1.15);
+}
+
+.autogestion-opt-btn.active {
+    background: #ffffff;
+    border-color: var(--primary-blue);
+    box-shadow: 0 10px 25px rgba(15, 82, 186, 0.15);
+    transform: translateY(-2px);
+}
+
+.autogestion-new-form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: simFadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.autogestion-new-form .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.autogestion-new-form label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-color-muted);
+}
+
+.autogestion-input {
+    width: 100%;
+    padding: 14px 18px;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1.5px solid rgba(15, 82, 186, 0.15);
+    color: var(--text-color-main);
+    transition: all 0.3s ease;
+    border-radius: 0px;
+}
+
+.autogestion-input:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 12px rgba(15, 82, 186, 0.08);
+}
+
+.autogestion-submit-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 0px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(15, 82, 186, 0.15);
+}
+
+.autogestion-submit-btn:hover:not(:disabled) {
+    background-color: var(--primary-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 82, 186, 0.22);
+}
+
+.autogestion-submit-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* ============================================================
+   AUTOGESTION DASHBOARD PANEL STYLES
+   ============================================================ */
+.autogestion-dashboard-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    animation: fadeInContent 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.autogestion-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-radius: 0px;
+}
+
+.autogestion-header-left h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color-main);
+    margin: 0 0 4px 0;
+}
+
+.autogestion-header-left p {
+    font-size: 0.88rem;
+    color: var(--text-color-muted);
+    margin: 0;
+}
+
+.autogestion-header-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.autogestion-progress-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 250px;
+}
+
+.autogestion-progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+#autogestion-progress-text {
+    color: var(--primary-blue);
+}
+
+#autogestion-progress-count {
+    color: var(--text-color-muted);
+}
+
+.autogestion-progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(15, 82, 186, 0.08);
+    border-radius: 0px;
+    overflow: hidden;
+}
+
+.autogestion-progress-bar-fill {
+    height: 100%;
+    background-color: var(--primary-blue);
+    width: 0%;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autogestion-header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.autogestion-workspace {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr 1.3fr;
+    gap: 24px;
+    margin-top: 24px;
+    height: calc(100vh - 250px);
+    min-height: 520px;
+}
+
+.autogestion-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%;
+    overflow: hidden;
+}
+
+.sidebar-sec-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-color-muted);
+    margin: 0 0 4px 0;
+    border-bottom: 1.5px solid rgba(15, 82, 186, 0.1);
+    padding-bottom: 10px;
+}
+
+.autogestion-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.autogestion-tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(15, 82, 186, 0.12);
+    border-left: 4px solid transparent;
+    border-radius: 0px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autogestion-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(15, 82, 186, 0.25);
+    transform: translateY(-1px);
+}
+
+.autogestion-tab-btn.active {
+    background: #ffffff;
+    border-color: rgba(15, 82, 186, 0.25);
+    border-left-color: var(--primary-blue);
+    box-shadow: 0 4px 15px rgba(15, 82, 186, 0.08);
+}
+
+.autogestion-tab-btn i {
+    font-size: 1.25rem;
+    color: var(--primary-blue);
+    width: 24px;
+    text-align: center;
+}
+
+.tab-btn-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-role-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color-main);
+}
+
+.tab-role-progress {
+    font-size: 0.7rem;
+    color: var(--text-color-muted);
+}
+
+/* Tasks Checklist Panel */
+.autogestion-tasks-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.autogestion-tasks-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.autogestion-task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(15, 82, 186, 0.10);
+    border-left: 4px solid transparent;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autogestion-task-item:hover {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(15, 82, 186, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 82, 186, 0.06);
+}
+
+.autogestion-task-item.selected {
+    background: #ffffff;
+    border-color: rgba(15, 82, 186, 0.25);
+    border-left-color: var(--primary-blue);
+    box-shadow: 0 6px 16px rgba(15, 82, 186, 0.1);
+    transform: translateX(4px);
+}
+
+/* Checkbox Style */
+.task-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+}
+
+.task-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(15, 82, 186, 0.4);
+    border-radius: 0px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.task-checkbox i {
+    font-size: 0.65rem;
+    color: #ffffff;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.autogestion-task-item.completed .task-checkbox {
+    border-color: #10b981;
+    background-color: #10b981;
+}
+
+.autogestion-task-item.completed .task-checkbox i {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.autogestion-task-item.completed .task-item-title {
+    text-decoration: line-through;
+    color: var(--text-color-muted);
+}
+
+.task-item-content {
+    flex-grow: 1;
+}
+
+.task-item-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-color-main);
+    line-height: 1.35;
+    margin-bottom: 2px;
+}
+
+.task-item-phase {
+    font-size: 0.72rem;
+    color: var(--text-color-muted);
+}
+
+/* Task Details Panel */
+.autogestion-details-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+    gap: 20px;
+}
+
+.autogestion-details-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    color: var(--text-color-muted);
+    gap: 16px;
+    padding: 24px;
+}
+
+.autogestion-details-placeholder i {
+    font-size: 3rem;
+    color: rgba(15, 82, 186, 0.15);
+}
+
+.autogestion-details-placeholder p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+.details-sec-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1.5px solid rgba(15, 82, 186, 0.1);
+    padding-bottom: 12px;
+}
+
+.details-role-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-blue);
+    background: rgba(15, 82, 186, 0.08);
+    padding: 3px 8px;
+    border-radius: 2px;
+    align-self: flex-start;
+}
+
+.details-task-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-color-main);
+    line-height: 1.35;
+}
+
+.details-task-phase {
+    font-size: 0.78rem;
+    color: var(--text-color-muted);
+    font-weight: 500;
+}
+
+.details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.details-section h5 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.details-section p {
+    font-size: 0.88rem;
+    color: var(--text-color-main);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.details-instructions-list {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.details-instructions-list li {
+    font-size: 0.88rem;
+    color: var(--text-color-main);
+    line-height: 1.5;
+}
+
+.details-action-box {
+    background: rgba(15, 82, 186, 0.03);
+    border: 1px solid rgba(15, 82, 186, 0.12);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 0px;
+}
+
+.details-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.details-action-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.details-action-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.details-action-label.deliverable {
+    color: #ef4444;
+}
+
+.details-action-label.receive {
+    color: #10b981;
+}
+
+.details-action-value {
+    font-size: 0.82rem;
+    color: var(--text-color-main);
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.details-note-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.details-note-textarea {
+    width: 100%;
+    height: 90px;
+    padding: 10px 12px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(15, 82, 186, 0.15);
+    color: var(--text-color-main);
+    resize: none;
+    transition: all 0.3s ease;
+    border-radius: 0px;
+}
+
+.details-note-textarea:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 10px rgba(15, 82, 186, 0.06);
+}
+
+.calendar-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(15, 82, 186, 0.25);
+    color: var(--primary-blue);
+    padding: 8px 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+    border-radius: 0px;
+}
+
+.calendar-action-btn:hover {
+    background: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+/* Responsiveness for Autogestion Dashboard */
+@media (max-width: 1200px) {
+    .autogestion-workspace {
+        grid-template-columns: 1fr 1.2fr 1.2fr;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .autogestion-dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    .autogestion-header-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .autogestion-progress-wrapper {
+        width: 100%;
+        max-width: 320px;
+    }
+    
+    .autogestion-workspace {
+        grid-template-columns: 1fr;
+        height: auto !important;
+        gap: 24px;
+    }
+    
+    .autogestion-sidebar,
+    .autogestion-tasks-panel,
+    .autogestion-details-panel {
+        height: auto !important;
+    }
+    
+    .autogestion-tabs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .autogestion-tab-btn {
+        flex: 1 1 200px;
+    }
+    
+    .autogestion-tasks-list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .autogestion-options {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+    
+    .autogestion-opt-btn {
+        width: 100%;
+        max-width: 100%;
     }
 }

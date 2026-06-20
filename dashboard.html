@@ -274,11 +274,126 @@
 
                 <!-- PANEL: SISTEMA DE AUTOGESTIÓN -->
                 <div class="dashboard-panel" id="panel-sis-autogestion">
-                    <div class="structure-placeholder">
-                        <i class="fa-solid fa-laptop-code placeholder-icon"></i>
-                        <h3>Sistema de Autogestión</h3>
-                        <p>Estructura lista para la gestión de documentos, estudios previos automatizados y plantillas.
-                        </p>
+                    <!-- 1. Pantalla de Bienvenida (Nuevo o Cargar) -->
+                    <div class="autogestion-welcome-container card-glass" id="autogestion-welcome">
+                        <div class="autogestion-welcome-header">
+                            <i class="fa-solid fa-laptop-code autogestion-welcome-icon"></i>
+                            <h3>Sistema de Autogestión</h3>
+                            <p>Estructura asistida para la gestión de documentos, estudios previos automatizados, plantillas y mitigación activa de riesgos por roles.</p>
+                        </div>
+                        
+                        <div class="autogestion-options">
+                            <button class="autogestion-opt-btn" id="btn-nuevo-proceso" onclick="showNewProcessInput()">
+                                <i class="fa-solid fa-file-circle-plus"></i>
+                                <span>Nuevo Proceso</span>
+                            </button>
+                            <button class="autogestion-opt-btn" id="btn-cargar-proceso" onclick="triggerLoadProcess()">
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                                <span>Cargar Proceso</span>
+                            </button>
+                        </div>
+
+                        <!-- Buscador de archivos oculto -->
+                        <input type="file" id="autogestion-file-input" accept=".json" style="display: none;" onchange="handleLoadProcessFile(event)">
+
+                        <!-- Formulario para Nuevo Proceso (oculto por defecto) -->
+                        <div class="autogestion-new-form" id="autogestion-new-form" style="display: none;">
+                            <div class="form-group">
+                                <label for="new-process-name">Nombre del Proceso Contractual:</label>
+                                <input type="text" id="new-process-name" placeholder="Ej. Adquisición Licenciamiento Software CCE-2026" class="autogestion-input" onkeyup="checkNewProcessName(event)">
+                            </div>
+                            <button class="autogestion-submit-btn" id="btn-submit-nuevo" onclick="createNewProcess()" disabled>
+                                <span>Crear Proceso</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Dashboard de Proceso Activo (oculto por defecto) -->
+                    <div class="autogestion-dashboard-container" id="autogestion-dashboard" style="display: none;">
+                        <!-- Cabecera del Proceso -->
+                        <div class="autogestion-dashboard-header card-glass">
+                            <div class="autogestion-header-left">
+                                <h3 id="active-process-title">Nombre del Proceso</h3>
+                                <p><i class="fa-solid fa-lock"></i> Gestión local segura — Ningún dato se envía a servidores externos</p>
+                            </div>
+                            <div class="autogestion-header-right">
+                                <div class="autogestion-progress-wrapper">
+                                    <div class="autogestion-progress-label">
+                                        <span id="autogestion-progress-text">0% Completado</span>
+                                        <span id="autogestion-progress-count">(0 de 39 tareas)</span>
+                                    </div>
+                                    <div class="autogestion-progress-bar-bg">
+                                        <div class="autogestion-progress-bar-fill" id="autogestion-progress-fill" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                                <div class="autogestion-header-actions">
+                                    <button class="footer-btn" onclick="saveProcessState()" style="padding: 10px 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent;">
+                                        <i class="fa-regular fa-floppy-disk"></i> Guardar
+                                    </button>
+                                    <button class="footer-btn" onclick="exitActiveProcess()" style="padding: 10px 16px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent;">
+                                        <i class="fa-solid fa-rotate-left"></i> Cambiar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Área de Trabajo -->
+                        <div class="autogestion-workspace">
+                            <!-- Columna 1: Selección de Roles (Tabs) -->
+                            <div class="autogestion-sidebar card-glass">
+                                <h4 class="sidebar-sec-title">Flujo por Rol</h4>
+                                <div class="autogestion-tabs">
+                                    <button class="autogestion-tab-btn active" id="tab-role-tecnico" onclick="switchAutogestionRole('tecnico')">
+                                        <i class="fa-solid fa-laptop-code"></i>
+                                        <div class="tab-btn-text">
+                                            <span class="tab-role-name">Área Técnica</span>
+                                            <span class="tab-role-progress" id="progress-role-tecnico">0 / 17 tareas</span>
+                                        </div>
+                                    </button>
+                                    <button class="autogestion-tab-btn" id="tab-role-abogado" onclick="switchAutogestionRole('abogado')">
+                                        <i class="fa-solid fa-user-shield"></i>
+                                        <div class="tab-btn-text">
+                                            <span class="tab-role-name">Abogado Contratos</span>
+                                            <span class="tab-role-progress" id="progress-role-abogado">0 / 14 tareas</span>
+                                        </div>
+                                    </button>
+                                    <button class="autogestion-tab-btn" id="tab-role-presupuesto" onclick="switchAutogestionRole('presupuesto')">
+                                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                                        <div class="tab-btn-text">
+                                            <span class="tab-role-name">Presupuesto</span>
+                                            <span class="tab-role-progress" id="progress-role-presupuesto">0 / 4 tareas</span>
+                                        </div>
+                                    </button>
+                                    <button class="autogestion-tab-btn" id="tab-role-ordenador" onclick="switchAutogestionRole('ordenador')">
+                                        <i class="fa-solid fa-user-tie"></i>
+                                        <div class="tab-btn-text">
+                                            <span class="tab-role-name">Ordenador Gasto</span>
+                                            <span class="tab-role-progress" id="progress-role-ordenador">0 / 4 tareas</span>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Columna 2: Lista de Actividades -->
+                            <div class="autogestion-tasks-panel card-glass">
+                                <div class="panel-section-header">
+                                    <h3><i class="fa-solid fa-list-check"></i> Checklist del Rol</h3>
+                                    <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona una tarea</span>
+                                </div>
+                                <div class="autogestion-tasks-list" id="autogestion-tasks-list">
+                                    <!-- Inyectado por JS -->
+                                </div>
+                            </div>
+
+                            <!-- Columna 3: Detalles e Instrucciones -->
+                            <div class="autogestion-details-panel card-glass" id="autogestion-details-panel">
+                                <!-- Inyectado por JS -->
+                                <div class="autogestion-details-placeholder">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    <p>Selecciona una tarea de la lista para ver sus instrucciones operativas, entregables exigidos, y registrar notas de seguimiento.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1294,6 +1409,872 @@
             }
         }
 
+        /* ==========================================================================
+           AUTOGESTION DATA STRUCTURES (39 TASKS)
+           ========================================================================== */
+        const autogestionRolesData = {
+            "tecnico": {
+                roleName: "Dependencia Técnica",
+                roleIcon: "fa-laptop-code",
+                tasks: [
+                    {
+                        id: "tec_1",
+                        num: 1,
+                        title: "Definir el requerimiento técnico",
+                        phase: "Fase 1: Planificación e Indagación Inicial",
+                        desc: "Escriba detalladamente las especificaciones del bien o servicio y seleccione los catálogos correspondientes que se encuentren vigentes en la Tienda Virtual.",
+                        instructions: [
+                            "Consulta el listado de marcas y catálogos vigentes del Acuerdo en el portal de CCE.",
+                            "Redacta el Anexo Técnico de especificaciones utilizando como plantilla el archivo '03. Anexo Técnico 02 - Especificaciones técnicas transversales'.",
+                            "Si estás adquiriendo suites de oficina o colaboración corporativa, incorpora las exigencias del documento '04. Anexo Técnico 03 - Suplementos Suite Corporativa'."
+                        ]
+                    },
+                    {
+                        id: "tec_2",
+                        num: 2,
+                        title: "Verificar vigencia del AMP",
+                        phase: "Fase 1: Planificación e Indagación Inicial",
+                        desc: "Consulte el catálogo oficial en SECOP/Colombia Compra Eficiente para validar que el Acuerdo Marco sigue activo.",
+                        instructions: [
+                            "Ingresa a Colombia Compra Eficiente y constata que la fecha de terminación del Acuerdo Marco de Software II no haya expirado y que esté habilitada la colocación de Órdenes de Compra."
+                        ]
+                    },
+                    {
+                        id: "tec_3",
+                        num: 3,
+                        title: "Ejecutar el simulador oficial de costos",
+                        phase: "Fase 1: Planificación e Indagación Inicial",
+                        desc: "Utilice el simulador oficial de costos para calcular el valor estimado de la contratación, asegurando incluir retenciones y estampillas territoriales.",
+                        deliverable: "Solicitud de CDP (memorando con ficha y simulador preliminar) a Presupuesto.",
+                        instructions: [
+                            "Descarga el archivo Excel '08. Simulador' oficial de la Tienda Virtual (recuerda hacer clic en 'Habilitar Edición' y 'Desbloquear contenido' en Excel).",
+                            "Digita las cantidades y perfiles requeridos para obtener el costo base oficial del catálogo.",
+                            "Realiza el cálculo manual de la contribución MHCP (Estampillas y Timbre) guiándote con el '10. Comunicado Impuesto de timbre' y súmalo al presupuesto estimado final (esta adición es obligatoria para el MHCP y no la realiza el simulador de CCE automáticamente)."
+                        ]
+                    },
+                    {
+                        id: "tec_4",
+                        num: 4,
+                        title: "Enviar insumos a Contratos",
+                        phase: "Fase 2: Co-diseño de Estudios y Control",
+                        desc: "Remita la ficha técnica con las especificaciones y la cotización preliminar al Abogado de Contratos asignado para iniciar el proceso.",
+                        deliverable: "Ficha técnica y simulador definitivo firmado digitalmente a Abogado de Contratos.",
+                        instructions: [
+                            "Valida que el Anexo Técnico y el cuadro de cotización preliminar definitivo se encuentren firmados digitalmente por ti.",
+                            "Remite la documentación al Abogado de Contratos asignado mediante memorando oficial interno adjuntando el simulador en Excel y el soporte PDF."
+                        ]
+                    },
+                    {
+                        id: "tec_5",
+                        num: 5,
+                        title: "Co-redactar Estudios Previos",
+                        phase: "Fase 2: Co-diseño de Estudios y Control",
+                        desc: "Redacte activamente junto con el abogado el documento de Estudios Previos y la Matriz de Riesgos que justificarán la contratación.",
+                        deliverable: "Borrador de Estudios Previos y Matriz de Riesgos co-redactados a Abogado de Contratos.",
+                        instructions: [
+                            "Redacta el documento definitivo de Estudios Previos de la entidad, estructurando la justificación e idoneidad basándote en el contenido exigido en el '07. Formato RFQ - Justificación de Compra' de CCE.",
+                            "Co-diseña con el abogado la Matriz de Riesgos de ejecución, estableciendo los riesgos técnicos de soporte y actualización tecnológica."
+                        ]
+                    },
+                    {
+                        id: "tec_6",
+                        num: 6,
+                        title: "Recibir CDP (Certificado de Disponibilidad)",
+                        phase: "Fase 2: Co-diseño de Estudios y Control",
+                        desc: "Verifique que el área de presupuesto haya expedido y cargado el CDP antes de que el proceso inicie en la TVEC.",
+                        receiveFrom: "CDP (Certificado de Disponibilidad Presupuestal) firmado de Presupuesto.",
+                        instructions: [
+                            "Confirma que el área de presupuesto haya expedido el Certificado de Disponibilidad Presupuestal (CDP) en SIIF Nación y lo haya cargado al expediente.",
+                            "Comprueba que el valor del CDP cubra la totalidad de la cotización final simulada."
+                        ]
+                    },
+                    {
+                        id: "tec_7",
+                        num: 7,
+                        title: "Apoyo técnico en RFI / Indagación de Mercado",
+                        phase: "Fase 3: Análisis de Mercado y Filtro MIPYMES",
+                        desc: "Participe en la resolución de dudas técnicas planteadas por los proveedores durante la fase de RFI y aporte insumos para definir la conveniencia de la limitación MIPYME.",
+                        deliverable: "Concepto de aclaraciones técnicas de RFI a Abogado de Contratos.",
+                        receiveFrom: "Formato RFI con observaciones de los proponentes de Abogado de Contratos.",
+                        instructions: [
+                            "Acompañe al abogado en la revisión técnica de las consultas del RFI cargadas por los interesados en el portafolio de CCE utilizando el '06. Formato RFI - Solicitud de información'.",
+                            "Valide que los requerimientos técnicos analizados en esta fase pre-contractual se mantengan estables y no generen direccionamientos de mercado."
+                        ]
+                    },
+                    {
+                        id: "tec_8",
+                        num: 8,
+                        title: "Acompañamiento técnico en la publicación de la RFQ",
+                        phase: "Fase 4: Configuración y Publicación del Evento (RFQ)",
+                        desc: "Revise la parametrización definitiva del evento en la Tienda Virtual (TVEC) antes de su publicación para asegurar que coincida con las especificaciones técnicas autorizadas.",
+                        receiveFrom: "Notificación de publicación de la RFQ de Abogado de Contratos.",
+                        instructions: [
+                            "Verifique que los anexos técnicos, el simulador de costos y las especificaciones finales cargadas por el abogado en la plataforma coincidan exactamente con la ficha técnica co-diseñada.",
+                            "Confirme que los plazos de entrega y las condiciones técnicas del servicio no hayan sufrido modificaciones en la configuración del evento."
+                        ]
+                    },
+                    {
+                        id: "tec_9",
+                        num: 9,
+                        title: "Responder observaciones técnicas",
+                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
+                        desc: "Resuelva de manera objetiva las dudas técnicas que los oferentes publiquen en el foro oficial de la plataforma, evitando todo chat informal directo.",
+                        deliverable: "Respuestas técnicas unificadas a Abogado de Contratos para publicación del cuadernillo.",
+                        receiveFrom: "Observaciones técnicas cargadas por oferentes de Abogado de Contratos.",
+                        instructions: [
+                            "Descarga del foro oficial de la RFQ de la Tienda Virtual (TVEC) las dudas remitidas por los proponentes.",
+                            "Redacta las respuestas técnicas ciñéndose estrictamente a lo establecido en los Anexos Técnicos de CCE, evitando acuerdos informales con proveedores por chat."
+                        ]
+                    },
+                    {
+                        id: "tec_10",
+                        num: 10,
+                        title: "Gestión de Cancelación (Si aplica)",
+                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
+                        desc: "Absténgase de usar el botón de cancelación de la plataforma hasta no contar con el Acto Administrativo de cancelación firmado por el Ordenador.",
+                        deliverable: "Justificación técnica de cancelación a Abogado de Contratos.",
+                        receiveFrom: "Acto Administrativo de cancelación firmado de Ordenador del Gasto.",
+                        instructions: [
+                            "En caso de error en cantidades o especificaciones en la RFQ, remite de inmediato la justificación técnica al abogado para que se proceda a formular la resolución de cancelación.",
+                            "No presiones el botón de cancelación de la plataforma TVEC si la resolución firmada por la Directora no ha sido expedida y cargada."
+                        ]
+                    },
+                    {
+                        id: "tec_11",
+                        num: 11,
+                        title: "Evaluar propuesta de menor precio",
+                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
+                        desc: "Compruebe que la oferta de menor costo cumpla al 100% con los requerimientos y la ficha técnica.",
+                        receiveFrom: "Propuesta técnica del oferente de menor precio de Abogado de Contratos.",
+                        instructions: [
+                            "Descarga el sobre técnico del proveedor con la oferta de menor costo al cierre del evento.",
+                            "Compara ítem por ítem el cumplimiento de los requerimientos técnicos y las certificaciones del fabricante exigidas en el anexo técnico del proceso."
+                        ]
+                    },
+                    {
+                        id: "tec_12",
+                        num: 12,
+                        title: "Verificación de precios artificiales / IVA",
+                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
+                        desc: "Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención.",
+                        deliverable: "Solicitud de aclaración por precios bajos o exención de IVA a Abogado de Contratos.",
+                        instructions: [
+                            "Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención bajo las directrices de la Minuta."
+                        ]
+                    },
+                    {
+                        id: "tec_13",
+                        num: 13,
+                        title: "Firmar informe técnico",
+                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
+                        desc: "Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación.",
+                        deliverable: "Acta de Evaluación Técnica firmada digitalmente a Abogado de Contratos.",
+                        instructions: [
+                            "Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación en la TVEC."
+                        ]
+                    },
+                    {
+                        id: "tec_14",
+                        num: 14,
+                        title: "Acompañamiento en traslado de evaluaciones",
+                        phase: "Fase 9: Consolidación y Publicación de Evaluaciones",
+                        desc: "Acompañe al abogado de contratos en la respuesta y justificación de las observaciones técnicas realizadas por los oferentes.",
+                        deliverable: "Respuestas a observaciones de traslado a Abogado de Contratos.",
+                        receiveFrom: "Observaciones de oferentes a la evaluación técnica de Abogado de Contratos.",
+                        instructions: [
+                            "Revise las observaciones técnicas cargadas en la TVEC por los oferentes y proyecte la justificación técnica de aceptación o rechazo."
+                        ]
+                    },
+                    {
+                        id: "tec_15",
+                        num: 15,
+                        title: "Verificación técnica de la Orden de Compra",
+                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
+                        desc: "Valide que el borrador de la Orden de Compra contenga los ítems, marcas y licenciamientos acordes a la evaluación final.",
+                        deliverable: "Visto bueno técnico de la Orden de Compra a Abogado de Contratos.",
+                        receiveFrom: "Borrador de la Orden de Compra de Abogado de Contratos.",
+                        instructions: [
+                            "Revise que el borrador de la Orden de Compra en la TVEC concuerde técnicamente con lo cotizado por el proveedor seleccionado."
+                        ]
+                    },
+                    {
+                        id: "tec_16",
+                        num: 16,
+                        title: "Recibir designación de supervisión",
+                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
+                        desc: "Reciba el memorando de designación de supervisión contractual emitido por Contratos y asuma formalmente el rol y las responsabilidades del control contractual.",
+                        receiveFrom: "Memorando de designación de supervisión firmado de Ordenador del Gasto (remitido por Abogado de Contratos).",
+                        instructions: [
+                            "Recibe el memorando de designación de supervisión contractual emitido por Contratos y asume formalmente el rol y las responsabilidades del control contractual."
+                        ]
+                    },
+                    {
+                        id: "tec_17",
+                        num: 17,
+                        title: "Coordinar firma de Acta de Inicio",
+                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
+                        desc: "Firme digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido.",
+                        deliverable: "Acta de Inicio firmada digitalmente (junto con el contratista) a Abogado de Contratos.",
+                        receiveFrom: "Garantías (póliza) aprobadas de Abogado de Contratos y Registro Presupuestal (RP) firmado de Presupuesto.",
+                        instructions: [
+                            "Firma digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido."
+                        ]
+                    }
+                ]
+            },
+            "abogado": {
+                roleName: "Abogado de Contratos",
+                roleIcon: "fa-user-shield",
+                tasks: [
+                    {
+                        id: "abo_1",
+                        num: 1,
+                        title: "Asesoría jurídica preliminar sobre el AMP",
+                        phase: "Fase 1: Planificación e Indagación Inicial",
+                        desc: "Brinde acompañamiento jurídica inicial a la Dependencia Técnica para validar que el objeto a contratar se enmarque en el alcance y vigencia del Acuerdo Marco de Software II.",
+                        receiveFrom: "Requerimiento de contratación y consulta de viabilidad de Dependencia Técnica.",
+                        instructions: [
+                            "Revise el alcance de las marcas y categorías autorizadas en la '01. Minuta del Acuerdo' para confirmar que la necesidad de la DT puede contratarse por esta vía."
+                        ]
+                    },
+                    {
+                        id: "abo_2",
+                        num: 2,
+                        title: "Revisión jurídica de insumos",
+                        phase: "Fase 2: Co-diseño de Estudios y Control",
+                        desc: "Verifique que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados.",
+                        receiveFrom: "Ficha técnica y simulador de costos definitivo de Dependencia Técnica.",
+                        instructions: [
+                            "Verifica que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados en la '01. Minuta del Acuerdo' (evitando compras por fuera del alcance del AMP)."
+                        ]
+                    },
+                    {
+                        id: "abo_3",
+                        num: 3,
+                        title: "Asegurar orden legal de estudios",
+                        phase: "Fase 2: Co-diseño de Estudios y Control",
+                        desc: "Confirme que los Estudios Previos estén firmados digitalmente por el líder técnico y por usted antes de cualquier configuración o cargue en la plataforma de compras.",
+                        receiveFrom: "Estudios Previos firmados por el líder de Dependencia Técnica y CDP firmado de Presupuesto.",
+                        instructions: [
+                            "Confirma que los Estudios Previos estén firmados digitalmente por el líder técnico y por ti antes de realizar cualquier configuración o cargue en la plataforma de compras."
+                        ]
+                    },
+                    {
+                        id: "abo_4",
+                        num: 4,
+                        title: "Verificación jurídica de limitación a MIPYMES",
+                        phase: "Fase 3: Análisis de Mercado y Filtro MIPYMES",
+                        desc: "Estructure las preguntas del RFI y analice las manifestaciones de interés recibidas para decidir si el proceso debe limitarse obligatoriamente a MIPYMES nacionales.",
+                        deliverable: "Concepto de limitación a MIPYMES a Dependencia Técnica.",
+                        receiveFrom: "Manifestaciones de interés y RUES de proponentes (vía RFI).",
+                        instructions: [
+                            "Si haces indagación de mercado previa, estructura las preguntas del RFI utilizando el '06. Formato RFI - Solicitud de información' del portafolio del Acuerdo.",
+                            "Analiza las manifestaciones de interés recibidas y elabora el concepto de limitación MIPYMES aplicando el Decreto 1860 de 2021."
+                        ]
+                    },
+                    {
+                        id: "abo_5",
+                        num: 5,
+                        title: "Publicar la Solicitud de Cotización (RFQ)",
+                        phase: "Fase 4: Configuración y Publicación del Evento (RFQ)",
+                        desc: "Configure el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico.",
+                        deliverable: "Notificación de publicación de la RFQ a Dependencia Técnica.",
+                        instructions: [
+                            "Configura el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico."
+                        ]
+                    },
+                    {
+                        id: "abo_6",
+                        num: 6,
+                        title: "Revisar observaciones jurídicas",
+                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
+                        desc: "Consolide las respuestas técnicas y proyecte las respuestas legales en el foro oficial de la RFQ, publicando el cuadernillo definitivo a tiempo.",
+                        receiveFrom: "Respuestas a observaciones técnicas de Dependencia Técnica.",
+                        instructions: [
+                            "Consolida las respuestas técnicas y proyecte las respuestas legales en el foro oficial de la RFQ. Publica el cuadernillo consolidado antes de que venza el plazo del foro."
+                        ]
+                    },
+                    {
+                        id: "abo_7",
+                        num: 7,
+                        title: "Proyectar Acto Administrativo de cancelación (Si aplica)",
+                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
+                        desc: "Elabore el texto de la resolución motivada de cancelación del evento, explaining detalladamente la falla de planeación técnica.",
+                        deliverable: "Proyecto de Acto Administrativo de cancelación a Ordenador del Gasto.",
+                        receiveFrom: "Justificación técnica de cancelación de Dependencia Técnica.",
+                        instructions: [
+                            "Elabora el texto de la resolución motivada de cancelación del evento, explicando detalladamente la falla de planeación técnica fundamentado en la '01. Minuta del Acuerdo' de CCE."
+                        ]
+                    },
+                    {
+                        id: "abo_8",
+                        num: 8,
+                        title: "Filtro de Inhabilidades en tiempo real",
+                        phase: "Fase 7: Evaluación Jurídica y Filtro de Inhabilidades",
+                        desc: "Descargue el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa de menor precio en el día de la evaluación.",
+                        instructions: [
+                            "Descarga el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa.",
+                            "Guarda los certificados PDF con la fecha y hora exacta del día de la evaluación para blindar el proceso.",
+                            "Revisa la '11. Circular 001 2026 Ley de Garantías Electorales' para asegurar que el proceso no contravenga restricciones de contratación pública electoral vigentes."
+                        ]
+                    },
+                    {
+                        id: "abo_9",
+                        num: 9,
+                        title: "Emitir informe jurídico",
+                        phase: "Fase 7: Evaluación Jurídica y Filtro de Inhabilidades",
+                        desc: "Elabore la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firme la habilitación jurídica.",
+                        deliverable: "Planilla de cumplimiento legal y habilitación jurídica a Dependencia Técnica.",
+                        instructions: [
+                            "Elabora la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firma la habilitación jurídica."
+                        ]
+                    },
+                    {
+                        id: "abo_10",
+                        num: 10,
+                        title: "Acompañamiento en el control de precios bajos e IVA",
+                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
+                        desc: "Apoye a la DT en la estructuración de solicitudes de aclaración legal ante exenciones del IVA no claras o indicios de precios artificiales.",
+                        deliverable: "Requerimiento legal de aclaración económica enviado al oferente de menor precio (con copia a Dependencia Técnica).",
+                        receiveFrom: "Alerta técnica de precio bajo o IVA 0% de Dependencia Técnica.",
+                        instructions: [
+                            "Elabore el requerimiento legal para solicitar al proponente de menor costo la justificación del valor de sus ítems si se detecta un posible precio artificial."
+                        ]
+                    },
+                    {
+                        id: "abo_11",
+                        num: 11,
+                        title: "Consolidación y traslado de evaluaciones",
+                        phase: "Fase 9: Consolidación y Publicación de Evaluaciones",
+                        desc: "Publique los informes de evaluación en la TVEC y habilite el plazo oficial de traslado para que los proponentes presenten sus observaciones.",
+                        receiveFrom: "Informe técnico de evaluación firmado de Dependencia Técnica.",
+                        instructions: [
+                            "Cargue en la plataforma de compras la evaluación jurídica y técnica y notifique formalmente a los proponentes el inicio del término de traslado."
+                        ]
+                    },
+                    {
+                        id: "abo_12",
+                        num: 12,
+                        title: "Visto bueno de la Orden de Compra (OC)",
+                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
+                        desc: "Envíe el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar.",
+                        deliverable: "Memorando de visto bueno de adjudicación a Ordenador del Gasto.",
+                        receiveFrom: "Visto bueno técnico de la Orden de Compra de Dependencia Técnica.",
+                        instructions: [
+                            "Envía el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar."
+                        ]
+                    },
+                    {
+                        id: "abo_13",
+                        num: 13,
+                        title: "Control de Pólizas",
+                        phase: "Fase 11: Legalización: Pólizas y Registro Presupuestal",
+                        desc: "Revise en la Minuta las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo, y apruebe las garantías en plataforma.",
+                        deliverable: "Certificado de aprobación de garantías en plataforma a Dependencia Técnica.",
+                        receiveFrom: "Póliza de seguros constituida por el contratista.",
+                        instructions: [
+                            "Revisa en la '01. Minuta del Acuerdo Marco' las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo.",
+                            "Aprueba las garantías en plataforma una vez validadas."
+                        ]
+                    },
+                    {
+                        id: "abo_14",
+                        num: 14,
+                        title: "Proyectar designación de supervisor",
+                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
+                        desc: "Envíe la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software.",
+                        deliverable: "Proyecto de memorando de designación de supervisor a Ordenador del Gasto.",
+                        instructions: [
+                            "Envía la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software."
+                        ]
+                    }
+                ]
+            },
+            "presupuesto": {
+                roleName: "Presupuesto",
+                roleIcon: "fa-file-invoice-dollar",
+                tasks: [
+                    {
+                        id: "pre_1",
+                        num: 1,
+                        title: "Verificar acopio de recursos",
+                        phase: "Fase 1: Planificación e Indagación Inicial",
+                        desc: "Verifique que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad.",
+                        receiveFrom: "Ficha de necesidad y solicitud de CDP de Dependencia Técnica.",
+                        instructions: [
+                            "Verifica que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad."
+                        ]
+                    },
+                    {
+                        id: "pre_2",
+                        num: 2,
+                        title: "Expedir CDP (SIIF Nación)",
+                        phase: "Fase 1: Planificación e Indagación Inicial",
+                        desc: "Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica.",
+                        deliverable: "CDP (Certificado de Disponibilidad Presupuestal) firmado digitalmente a Dependencia Técnica y Abogado de Contratos.",
+                        instructions: [
+                            "Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica."
+                        ]
+                    },
+                    {
+                        id: "pre_3",
+                        num: 3,
+                        title: "Validar Orden de Compra firmada",
+                        phase: "Fase 11: Legalización: Pólizas y Registro Presupuestal",
+                        desc: "Reciba la notificación de la Orden de Compra firmada en la plataforma transaccional de compras.",
+                        receiveFrom: "Notificación de la Orden de Compra firmada de Ordenador del Gasto.",
+                        instructions: [
+                            "Recibe la notificación de la Orden de Compra firmada en la plataforma transaccional de compras."
+                        ]
+                    },
+                    {
+                        id: "pre_4",
+                        num: 4,
+                        title: "Expedir RP (SIIF Nación)",
+                        phase: "Fase 11: Legalización: Pólizas y Registro Presupuestal",
+                        desc: "Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos.",
+                        deliverable: "Registro Presupuestal (RP) firmado digitalmente a Dependencia Técnica y Abogado de Contratos.",
+                        instructions: [
+                            "Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos."
+                        ]
+                    }
+                ]
+            },
+            "ordenador": {
+                roleName: "Ordenador del Gasto",
+                roleIcon: "fa-user-tie",
+                tasks: [
+                    {
+                        id: "ord_1",
+                        num: 1,
+                        title: "Firmar Acto Administrativo de cancelación",
+                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
+                        desc: "Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma.",
+                        deliverable: "Acto Administrativo de cancelación firmado a Abogado de Contratos y Dependencia Técnica.",
+                        receiveFrom: "Proyecto de resolución motivada de cancelación de Abogado de Contratos.",
+                        instructions: [
+                            "Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma."
+                        ]
+                    },
+                    {
+                        id: "ord_2",
+                        num: 2,
+                        title: "Validación concurrente",
+                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
+                        desc: "Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades.",
+                        receiveFrom: "Memorando de visto bueno de Abogado de Contratos e Informe Técnico de Dependencia Técnica.",
+                        instructions: [
+                            "Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades."
+                        ]
+                    },
+                    {
+                        id: "ord_3",
+                        num: 3,
+                        title: "Firma digital de la OC",
+                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
+                        desc: "Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra.",
+                        deliverable: "Orden de Compra firmada digitalmente en la Tienda Virtual a Presupuesto y Abogado de Contratos.",
+                        receiveFrom: "Visto bueno jurídico de Contratos y planilla de antecedentes libres de inhabilidades.",
+                        instructions: [
+                            "Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra."
+                        ]
+                    },
+                    {
+                        id: "ord_4",
+                        num: 4,
+                        title: "Firmar designación de supervisión",
+                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
+                        desc: "Firma el memorando de designación técnica proyectado por Contratos.",
+                        deliverable: "Memorando de designación firmado a Abogado de Contratos.",
+                        receiveFrom: "Borrador de memorando de designación de Abogado de Contratos.",
+                        instructions: [
+                            "Firma el memorando de designación técnica proyectado por Contratos."
+                        ]
+                    }
+                ]
+            }
+        };
+
+        /* ==========================================================================
+           AUTOGESTION STATE & LOGIC
+           ========================================================================== */
+        let activeProcess = null;
+        let currentAutogestionRole = 'tecnico';
+        let currentSelectedTaskId = null;
+
+        // Toggle New Process Form
+        function showNewProcessInput() {
+            document.getElementById('btn-nuevo-proceso').classList.add('active');
+            document.getElementById('btn-cargar-proceso').classList.remove('active');
+            document.getElementById('autogestion-new-form').style.display = 'block';
+            document.getElementById('new-process-name').focus();
+        }
+
+        // Enable button if name is not empty
+        function checkNewProcessName(event) {
+            const nameInput = document.getElementById('new-process-name');
+            const submitBtn = document.getElementById('btn-submit-nuevo');
+            const name = nameInput.value.trim();
+            submitBtn.disabled = (name === '');
+
+            // Create on enter
+            if (event && event.key === 'Enter' && name !== '') {
+                createNewProcess();
+            }
+        }
+
+        // Create new process object
+        function createNewProcess() {
+            const nameInput = document.getElementById('new-process-name');
+            const name = nameInput.value.trim();
+            if (!name) return;
+
+            activeProcess = {
+                name: name,
+                createdAt: new Date().toISOString(),
+                completedTasks: {},
+                notes: {}
+            };
+
+            // Save state in localStorage
+            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+
+            // Reset inputs
+            nameInput.value = '';
+            document.getElementById('btn-submit-nuevo').disabled = true;
+
+            // Load view
+            initActiveProcess();
+        }
+
+        // Trigger file select dialog
+        function triggerLoadProcess() {
+            document.getElementById('btn-cargar-proceso').classList.add('active');
+            document.getElementById('btn-nuevo-proceso').classList.remove('active');
+            document.getElementById('autogestion-new-form').style.display = 'none';
+            document.getElementById('autogestion-file-input').click();
+        }
+
+        // Handle JSON loading
+        function handleLoadProcessFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (parsed && parsed.name) {
+                        activeProcess = {
+                            name: parsed.name,
+                            createdAt: parsed.createdAt || new Date().toISOString(),
+                            completedTasks: parsed.completedTasks || {},
+                            notes: parsed.notes || {}
+                        };
+                        localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+                        initActiveProcess();
+                    } else {
+                        alert('El archivo cargado no contiene un formato de proceso válido.');
+                    }
+                } catch (err) {
+                    alert('Error al leer el archivo JSON: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; // clear input
+        }
+
+        // Setup process view
+        function initActiveProcess() {
+            if (!activeProcess) return;
+
+            document.getElementById('active-process-title').textContent = activeProcess.name;
+            document.getElementById('autogestion-welcome').style.display = 'none';
+            document.getElementById('autogestion-dashboard').style.display = 'flex';
+
+            switchAutogestionRole('tecnico');
+            updateAutogestionProgress();
+            
+            // Re-trigger repaint for the dashboard layout elements inside autogestion panel
+            const panel = document.getElementById('panel-sis-autogestion');
+            if (panel) {
+                panel.querySelectorAll('.card-glass').forEach(card => {
+                    const originalFilter = card.style.backdropFilter || '';
+                    card.style.backdropFilter = 'none';
+                    card.offsetHeight;
+                    card.style.backdropFilter = originalFilter;
+                });
+            }
+        }
+
+        // Tab selection for roles
+        function switchAutogestionRole(roleKey) {
+            currentAutogestionRole = roleKey;
+            
+            document.querySelectorAll('.autogestion-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const activeBtn = document.getElementById(`tab-role-${roleKey}`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            renderAutogestionTasks(roleKey);
+
+            // Select first task of the new tab
+            const roleTasks = autogestionRolesData[roleKey].tasks;
+            if (roleTasks.length > 0) {
+                selectAutogestionTask(roleTasks[0].id);
+            } else {
+                clearAutogestionDetails();
+            }
+        }
+
+        // Render checklist items
+        function renderAutogestionTasks(roleKey) {
+            const listContainer = document.getElementById('autogestion-tasks-list');
+            if (!listContainer) return;
+            listContainer.innerHTML = '';
+
+            const roleTasks = autogestionRolesData[roleKey].tasks;
+            roleTasks.forEach(task => {
+                const isCompleted = activeProcess.completedTasks[task.id] === true;
+                const isSelected = currentSelectedTaskId === task.id;
+
+                const item = document.createElement('div');
+                item.className = `autogestion-task-item ${isCompleted ? 'completed' : ''} ${isSelected ? 'selected' : ''}`;
+                item.setAttribute('onclick', `selectAutogestionTask('${task.id}')`);
+
+                item.innerHTML = `
+                    <div class="task-checkbox-wrapper" onclick="toggleAutogestionTask('${task.id}', event)">
+                        <div class="task-checkbox">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="task-item-content">
+                        <div class="task-item-title">${task.title}</div>
+                        <div class="task-item-phase">${task.phase}</div>
+                    </div>
+                `;
+                listContainer.appendChild(item);
+            });
+        }
+
+        // Select task
+        function selectAutogestionTask(taskId) {
+            currentSelectedTaskId = taskId;
+
+            // Highlight in list
+            document.querySelectorAll('.autogestion-task-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            // Highlight current in view
+            renderAutogestionTasks(currentAutogestionRole);
+
+            // Find task info
+            let task = null;
+            let roleKey = '';
+            for (const rKey in autogestionRolesData) {
+                const found = autogestionRolesData[rKey].tasks.find(t => t.id === taskId);
+                if (found) {
+                    task = found;
+                    roleKey = rKey;
+                    break;
+                }
+            }
+
+            if (!task) return;
+
+            const detailsPanel = document.getElementById('autogestion-details-panel');
+            if (!detailsPanel) return;
+
+            const roleName = autogestionRolesData[roleKey].roleName;
+            
+            // Build instructions HTML
+            let instructionsHtml = '';
+            if (task.instructions && task.instructions.length > 0) {
+                instructionsHtml = `
+                    <div class="details-section">
+                        <h5><i class="fa-solid fa-list-check"></i> Instrucciones de Procedimiento:</h5>
+                        <ul class="details-instructions-list">
+                            ${task.instructions.map(inst => `<li>${inst}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Build action box for deliverable / receive
+            let actionBoxHtml = '';
+            if (task.deliverable || task.receiveFrom) {
+                actionBoxHtml = `
+                    <div class="details-action-box">
+                        ${task.deliverable ? `
+                            <div class="details-action-row">
+                                <div class="details-action-info">
+                                    <span class="details-action-label deliverable"><i class="fa-solid fa-file-export"></i> Debo Entregar:</span>
+                                    <span class="details-action-value">${task.deliverable}</span>
+                                </div>
+                            </div>
+                        ` : ''}
+                        ${task.receiveFrom ? `
+                            <div class="details-action-row">
+                                <div class="details-action-info">
+                                    <span class="details-action-label receive"><i class="fa-solid fa-file-import"></i> Debo Recibir:</span>
+                                    <span class="details-action-value">${task.receiveFrom}</span>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            // Build calendar template URL
+            const calendarTitle = encodeURIComponent(`Hito Contratación: ${task.title}`);
+            const calendarDesc = encodeURIComponent(`Fase: ${task.phase}\nRol: ${roleName}\n\nInstrucciones:\n${task.instructions.map(i => '- ' + i).join('\n')}`);
+            const calendarDates = '20260630T090000/20260630T100000';
+            const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&details=${calendarDesc}&dates=${calendarDates}`;
+
+            const noteText = activeProcess.notes[taskId] || '';
+
+            detailsPanel.innerHTML = `
+                <div class="details-sec-header">
+                    <span class="details-role-badge">${roleName}</span>
+                    <h4 class="details-task-title">${task.num}. ${task.title}</h4>
+                    <span class="details-task-phase">${task.phase}</span>
+                </div>
+
+                <div class="details-section">
+                    <h5><i class="fa-solid fa-align-left"></i> Descripción de la Tarea:</h5>
+                    <p>${task.desc}</p>
+                </div>
+
+                ${instructionsHtml}
+                ${actionBoxHtml}
+
+                <div class="details-section" style="margin-top: 4px;">
+                    <h5><i class="fa-regular fa-calendar-plus"></i> Integración y Productividad:</h5>
+                    <a href="${googleCalUrl}" target="_blank" class="calendar-action-btn">
+                        <i class="fa-brands fa-google"></i> Recordatorio en Google Calendar
+                    </a>
+                </div>
+
+                <div class="details-note-section">
+                    <h5><i class="fa-regular fa-comment-dots"></i> Notas, Trazabilidad y Soportes (Autoguardado):</h5>
+                    <textarea class="details-note-textarea" placeholder="Escribe aquí observaciones, enlaces a soportes o notas de esta tarea..." oninput="saveNoteForTask('${task.id}', this.value)">${noteText}</textarea>
+                </div>
+            `;
+        }
+
+        // Clear details
+        function clearAutogestionDetails() {
+            const detailsPanel = document.getElementById('autogestion-details-panel');
+            if (detailsPanel) {
+                detailsPanel.innerHTML = `
+                    <div class="autogestion-details-placeholder">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p>Selecciona una tarea de la lista para ver sus instrucciones operativas, entregables exigidos, y registrar notas de seguimiento.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Mark task complete / incomplete
+        function toggleAutogestionTask(taskId, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            const isCompleted = activeProcess.completedTasks[taskId] === true;
+            activeProcess.completedTasks[taskId] = !isCompleted;
+
+            // Save state
+            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+
+            // Refresh UI
+            renderAutogestionTasks(currentAutogestionRole);
+            updateAutogestionProgress();
+
+            // Refresh details panel check if it's currently showing this task
+            if (currentSelectedTaskId === taskId) {
+                selectAutogestionTask(taskId);
+            }
+        }
+
+        // Update progress indicators
+        function updateAutogestionProgress() {
+            if (!activeProcess) return;
+
+            let totalTasksCount = 0;
+            let totalCompletedCount = 0;
+
+            // Group calculations
+            for (const roleKey in autogestionRolesData) {
+                const roleTasks = autogestionRolesData[roleKey].tasks;
+                const roleTotal = roleTasks.length;
+                let roleCompleted = 0;
+
+                roleTasks.forEach(task => {
+                    totalTasksCount++;
+                    if (activeProcess.completedTasks[task.id] === true) {
+                        totalCompletedCount++;
+                        roleCompleted++;
+                    }
+                });
+
+                // Update tab progress label
+                const tabLabel = document.getElementById(`progress-role-${roleKey}`);
+                if (tabLabel) {
+                    tabLabel.textContent = `${roleCompleted} / ${roleTotal} tareas`;
+                }
+            }
+
+            // Overall calculations
+            const percentage = totalTasksCount > 0 ? Math.round((totalCompletedCount / totalTasksCount) * 100) : 0;
+
+            document.getElementById('autogestion-progress-text').textContent = `${percentage}% Completado`;
+            document.getElementById('autogestion-progress-count').textContent = `(${totalCompletedCount} de ${totalTasksCount} tareas)`;
+            document.getElementById('autogestion-progress-fill').style.width = `${percentage}%`;
+        }
+
+        // Save process as JSON file
+        function saveProcessState() {
+            if (!activeProcess) return;
+
+            const filename = `proceso-${activeProcess.name.toLowerCase().replace(/[^a-z0-9]/g, '_')}-${new Date().toISOString().slice(0,10)}.json`;
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(activeProcess, null, 2));
+            
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", filename);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        // Save note
+        function saveNoteForTask(taskId, value) {
+            if (!activeProcess) return;
+            activeProcess.notes[taskId] = value;
+            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+        }
+
+        // Exit active process and reset to welcome
+        function exitActiveProcess() {
+            if (confirm('¿Deseas cerrar el proceso actual? Los cambios guardados se mantendrán en este navegador.')) {
+                activeProcess = null;
+                localStorage.removeItem('autogestion_active_process');
+
+                // Clean welcome forms
+                document.getElementById('new-process-name').value = '';
+                document.getElementById('btn-submit-nuevo').disabled = true;
+                document.getElementById('autogestion-new-form').style.display = 'none';
+                document.getElementById('btn-nuevo-proceso').classList.remove('active');
+                document.getElementById('btn-cargar-proceso').classList.remove('active');
+
+                // Switch UI
+                document.getElementById('autogestion-dashboard').style.display = 'none';
+                document.getElementById('autogestion-welcome').style.display = 'block';
+            }
+        }
+
         let currentOldStepIndex = 0;
         let currentNewStepIndex = 0;
 
@@ -1484,6 +2465,17 @@
 
         // Initialize background circle repulsion and force initial repaint on load
         document.addEventListener('DOMContentLoaded', () => {
+            // Restore active autogestion process from localStorage if present
+            const saved = localStorage.getItem('autogestion_active_process');
+            if (saved) {
+                try {
+                    activeProcess = JSON.parse(saved);
+                    initActiveProcess();
+                } catch (err) {
+                    console.error("Error loading saved process:", err);
+                }
+            }
+
             const inners = document.querySelectorAll('.blur-circle-inner');
             let mouseX = 0;
             let mouseY = 0;
