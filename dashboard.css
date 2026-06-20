@@ -2719,7 +2719,8 @@
 
     .autogestion-sidebar,
     .autogestion-tasks-panel,
-    .autogestion-details-panel {
+    .autogestion-details-panel,
+    .autogestion-details-column {
         height: auto !important;
     }
 
@@ -2882,4 +2883,46 @@
 .autogestion-privacy-notice i {
     color: var(--primary-blue);
     font-size: 0.9rem;
+}
+
+/* Custom Styles for Autogestion Checklist, Numbers and Fases */
+.task-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: rgba(15, 82, 186, 0.08);
+    color: var(--primary-blue);
+    font-weight: 700;
+    font-size: 0.82rem;
+    flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.task-number.completed {
+    background-color: #10b981;
+    color: #ffffff;
+}
+
+.autogestion-task-item.completed {
+    border-color: rgba(16, 185, 129, 0.3);
+    border-left-color: #10b981;
+    background: rgba(16, 185, 129, 0.04);
+}
+
+.autogestion-task-item.completed:hover {
+    border-color: rgba(16, 185, 129, 0.5);
+    background: rgba(16, 185, 129, 0.07);
+}
+
+.autogestion-task-item.completed.selected {
+    background: linear-gradient(90deg, #ffffff 0%, rgba(209, 250, 229, 0.6) 100%);
+    border-color: rgba(16, 185, 129, 0.45);
+    border-left-color: #10b981;
+}
+
+.autogestion-task-item.completed.selected:hover {
+    background: linear-gradient(90deg, #ffffff 0%, rgba(209, 250, 229, 0.8) 100%);
 }

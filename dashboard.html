@@ -417,11 +417,21 @@
                             </div>
 
                             <!-- Columna 2: Detalles e Instrucciones -->
-                            <div class="autogestion-details-panel card-glass" id="autogestion-details-panel">
-                                <!-- Inyectado por JS -->
-                                <div class="autogestion-details-placeholder">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                    <p>Selecciona una tarea de la lista para ver sus instrucciones operativas, entregables exigidos, y registrar notas de seguimiento.</p>
+                            <div class="autogestion-details-column" style="display: flex; flex-direction: column; gap: 20px; height: 100%; overflow: hidden;">
+                                <!-- Panel 1: Tareas pendientes -->
+                                <div class="card-glass" id="autogestion-details-panel" style="display: flex; flex-direction: column; gap: 16px; overflow-y: auto; min-height: 220px; max-height: 380px;">
+                                    <!-- Inyectado por JS -->
+                                    <div class="panel-section-header" style="margin-bottom: 12px; padding-bottom: 8px;">
+                                        <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
+                                    </div>
+                                    <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center;">
+                                        <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 12px; display: block;"></i>
+                                        <p style="font-size: 0.82rem; color: var(--text-color-muted); max-width: 250px; margin: 0 auto; line-height: 1.5;">Selecciona una tarea de la lista para ver y completar sus tareas pendientes.</p>
+                                    </div>
+                                </div>
+                                <!-- Panel 2: Resumen de Procedimiento -->
+                                <div class="card-glass" id="autogestion-summary-panel" style="display: flex; flex-direction: column; gap: 16px; overflow-y: auto; flex-grow: 1;">
+                                    <!-- Inyectado por JS -->
                                 </div>
                             </div>
                         </div>
@@ -1983,6 +1993,7 @@
                 name: name,
                 createdAt: new Date().toISOString(),
                 completedTasks: {},
+                completedInstructions: {},
                 notes: {}
             };
 
@@ -2019,6 +2030,7 @@
                             name: parsed.name,
                             createdAt: parsed.createdAt || new Date().toISOString(),
                             completedTasks: parsed.completedTasks || {},
+                            completedInstructions: parsed.completedInstructions || {},
                             notes: parsed.notes || {}
                         };
                         localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
@@ -2037,6 +2049,10 @@
         // Setup process view
         function initActiveProcess() {
             if (!activeProcess) return;
+
+            if (!activeProcess.completedInstructions) {
+                activeProcess.completedInstructions = {};
+            }
 
             // Only update the viewport header if the autogestion panel is currently active
             const activePanel = document.querySelector('.dashboard-panel.active');
@@ -2088,6 +2104,7 @@
             // Render checklist for this role
             renderAutogestionTasks(roleKey);
             updateAutogestionProgress();
+            renderProcedureSummary();
 
             // Select first task of the selected role
             const roleTasks = autogestionRolesData[roleKey].tasks;
@@ -2157,8 +2174,8 @@
             listContainer.innerHTML = '';
 
             const roleTasks = autogestionRolesData[roleKey].tasks;
-            roleTasks.forEach(task => {
-                const isCompleted = activeProcess.completedTasks[task.id] === true;
+            roleTasks.forEach((task, index) => {
+                const isCompleted = task.instructions.every((_, idx) => activeProcess.completedInstructions[`${task.id}_${idx}`] === true);
                 const isSelected = currentSelectedTaskId === task.id;
 
                 const item = document.createElement('div');
@@ -2166,14 +2183,14 @@
                 item.setAttribute('onclick', `selectAutogestionTask('${task.id}')`);
 
                 item.innerHTML = `
-                    <div class="task-checkbox-wrapper" onclick="toggleAutogestionTask('${task.id}', event)">
-                        <div class="task-checkbox">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                    </div>
-                    <div class="task-item-content">
-                        <div class="task-item-title">${task.title}</div>
-                        <div class="task-item-phase">${task.phase}</div>
+                    <div class="task-number ${isCompleted ? 'completed' : ''}">${index + 1}</div>
+                    <div class="task-item-content" style="display: flex; flex-direction: column; gap: 4px; flex-grow: 1;">
+                        <div class="task-item-title" style="font-size: 0.88rem; font-weight: 600; color: var(--text-color-main); text-align: left;">${task.title}</div>
+                        ${isSelected ? `
+                            <div class="task-item-desc" style="font-size: 0.78rem; color: var(--text-color-muted); line-height: 1.45; text-align: left; animation: fadeInContent 0.3s ease;">
+                                ${task.desc}
+                            </div>
+                        ` : ''}
                     </div>
                 `;
                 listContainer.appendChild(item);
@@ -2185,10 +2202,6 @@
             currentSelectedTaskId = taskId;
 
             // Highlight in list
-            document.querySelectorAll('.autogestion-task-item').forEach(item => {
-                item.classList.remove('selected');
-            });
-            // Highlight current in view
             renderAutogestionTasks(currentAutogestionRole);
 
             // Find task info
@@ -2208,79 +2221,24 @@
             const detailsPanel = document.getElementById('autogestion-details-panel');
             if (!detailsPanel) return;
 
-            const roleName = autogestionRolesData[roleKey].roleName;
-            
-            // Build instructions HTML
-            let instructionsHtml = '';
-            if (task.instructions && task.instructions.length > 0) {
-                instructionsHtml = `
-                    <div class="details-section">
-                        <h5><i class="fa-solid fa-list-check"></i> Instrucciones de Procedimiento:</h5>
-                        <ul class="details-instructions-list">
-                            ${task.instructions.map(inst => `<li>${inst}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
-
-            // Build action box for deliverable / receive
-            let actionBoxHtml = '';
-            if (task.deliverable || task.receiveFrom) {
-                actionBoxHtml = `
-                    <div class="details-action-box">
-                        ${task.deliverable ? `
-                            <div class="details-action-row">
-                                <div class="details-action-info">
-                                    <span class="details-action-label deliverable"><i class="fa-solid fa-file-export"></i> Debo Entregar:</span>
-                                    <span class="details-action-value">${task.deliverable}</span>
-                                </div>
-                            </div>
-                        ` : ''}
-                        ${task.receiveFrom ? `
-                            <div class="details-action-row">
-                                <div class="details-action-info">
-                                    <span class="details-action-label receive"><i class="fa-solid fa-file-import"></i> Debo Recibir:</span>
-                                    <span class="details-action-value">${task.receiveFrom}</span>
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }
-
-            // Build calendar template URL
-            const calendarTitle = encodeURIComponent(`Hito Contratación: ${task.title}`);
-            const calendarDesc = encodeURIComponent(`Fase: ${task.phase}\nRol: ${roleName}\n\nInstrucciones:\n${task.instructions.map(i => '- ' + i).join('\n')}`);
-            const calendarDates = '20260630T090000/20260630T100000';
-            const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${calendarTitle}&details=${calendarDesc}&dates=${calendarDates}`;
-
-            const noteText = activeProcess.notes[taskId] || '';
-
+            // Build the checklist of instructions as checkable items
             detailsPanel.innerHTML = `
-                <div class="details-sec-header">
-                    <span class="details-role-badge">${roleName}</span>
-                    <h4 class="details-task-title">${task.num}. ${task.title}</h4>
-                    <span class="details-task-phase">${task.phase}</span>
+                <div class="panel-section-header" style="margin-bottom: 16px; padding-bottom: 8px;">
+                    <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
+                    <span class="hint-text">Paso ${task.num}</span>
                 </div>
-
-                <div class="details-section">
-                    <h5><i class="fa-solid fa-align-left"></i> Descripción de la Tarea:</h5>
-                    <p>${task.desc}</p>
-                </div>
-
-                ${instructionsHtml}
-                ${actionBoxHtml}
-
-                <div class="details-section" style="margin-top: 4px;">
-                    <h5><i class="fa-regular fa-calendar-plus"></i> Integración y Productividad:</h5>
-                    <a href="${googleCalUrl}" target="_blank" class="calendar-action-btn">
-                        <i class="fa-brands fa-google"></i> Recordatorio en Google Calendar
-                    </a>
-                </div>
-
-                <div class="details-note-section">
-                    <h5><i class="fa-regular fa-comment-dots"></i> Notas, Trazabilidad y Soportes (Autoguardado):</h5>
-                    <textarea class="details-note-textarea" placeholder="Escribe aquí observaciones, enlaces a soportes o notas de esta tarea..." oninput="saveNoteForTask('${task.id}', this.value)">${noteText}</textarea>
+                <div class="autogestion-instructions-list" style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto;">
+                    ${task.instructions.map((inst, index) => {
+                        const isInstCompleted = activeProcess.completedInstructions[`${task.id}_${index}`] === true;
+                        return `
+                            <div class="instruction-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 4px 0;" onclick="toggleInstruction('${task.id}', ${index})">
+                                <div class="task-checkbox" style="margin-top: 2px; border-color: ${isInstCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isInstCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                                    <i class="fa-solid fa-check" style="opacity: ${isInstCompleted ? '1' : '0'}; transform: scale(${isInstCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                                </div>
+                                <span style="font-size: 0.85rem; color: var(--text-color-main); line-height: 1.45; text-decoration: ${isInstCompleted ? 'line-through' : 'none'}; opacity: ${isInstCompleted ? 0.7 : 1}; transition: all 0.2s ease; text-align: left;">${inst}</span>
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
             `;
         }
@@ -2290,22 +2248,33 @@
             const detailsPanel = document.getElementById('autogestion-details-panel');
             if (detailsPanel) {
                 detailsPanel.innerHTML = `
-                    <div class="autogestion-details-placeholder">
-                        <i class="fa-solid fa-circle-info"></i>
-                        <p>Selecciona una tarea de la lista para ver sus instrucciones operativas, entregables exigidos, y registrar notas de seguimiento.</p>
+                    <div class="panel-section-header" style="margin-bottom: 12px; padding-bottom: 8px;">
+                        <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
+                    </div>
+                    <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center;">
+                        <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 12px; display: block;"></i>
+                        <p style="font-size: 0.82rem; color: var(--text-color-muted); max-width: 250px; margin: 0 auto; line-height: 1.5;">Selecciona una tarea de la lista para ver y completar sus tareas pendientes.</p>
                     </div>
                 `;
             }
         }
 
-        // Mark task complete / incomplete
-        function toggleAutogestionTask(taskId, event) {
-            if (event) {
-                event.stopPropagation();
-            }
+        // Toggle sub-task (instruction) complete
+        function toggleInstruction(taskId, instIndex) {
+            if (!activeProcess) return;
+            const key = `${taskId}_${instIndex}`;
+            const current = activeProcess.completedInstructions[key] === true;
+            activeProcess.completedInstructions[key] = !current;
 
-            const isCompleted = activeProcess.completedTasks[taskId] === true;
-            activeProcess.completedTasks[taskId] = !isCompleted;
+            // Recalculate if the main task is completed
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (currentRoleData) {
+                const task = currentRoleData.tasks.find(t => t.id === taskId);
+                if (task) {
+                    const allDone = task.instructions.every((_, idx) => activeProcess.completedInstructions[`${taskId}_${idx}`] === true);
+                    activeProcess.completedTasks[taskId] = allDone;
+                }
+            }
 
             // Save state
             localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
@@ -2313,11 +2282,70 @@
             // Refresh UI
             renderAutogestionTasks(currentAutogestionRole);
             updateAutogestionProgress();
+            selectAutogestionTask(taskId); // refresh right panel
+            renderProcedureSummary(); // refresh summary panel
+        }
 
-            // Refresh details panel check if it's currently showing this task
-            if (currentSelectedTaskId === taskId) {
-                selectAutogestionTask(taskId);
+        // Check if all tasks in a phase are completed
+        function checkPhaseCompleted(phaseName) {
+            if (!activeProcess) return false;
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (!currentRoleData) return false;
+
+            const phaseTasks = currentRoleData.tasks.filter(t => t.phase === phaseName);
+            if (phaseTasks.length === 0) return false;
+
+            return phaseTasks.every(task => {
+                return task.instructions.every((_, idx) => activeProcess.completedInstructions[`${task.id}_${idx}`] === true);
+            });
+        }
+
+        // Render the read-only procedure summary
+        function renderProcedureSummary() {
+            const summaryPanel = document.getElementById('autogestion-summary-panel');
+            if (!summaryPanel) return;
+
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (!currentRoleData) {
+                summaryPanel.innerHTML = `
+                    <div class="panel-section-header" style="margin-bottom: 12px; padding-bottom: 8px;">
+                        <h3><i class="fa-solid fa-chart-line"></i> Resumen de Procedimiento</h3>
+                    </div>
+                    <div style="font-size: 0.82rem; color: var(--text-color-muted); text-align: center; padding: 12px 0;">
+                        Selecciona un rol para ver las fases.
+                    </div>
+                `;
+                return;
             }
+
+            const phases = [];
+            currentRoleData.tasks.forEach(task => {
+                if (!phases.includes(task.phase)) {
+                    phases.push(task.phase);
+                }
+            });
+
+            summaryPanel.innerHTML = `
+                <div class="panel-section-header" style="margin-bottom: 16px; padding-bottom: 8px;">
+                    <h3><i class="fa-solid fa-chart-line"></i> Resumen de Procedimiento</h3>
+                </div>
+                <div class="autogestion-phases-list" style="display: flex; flex-direction: column; gap: 10px;">
+                    ${phases.map(phase => {
+                        const isPhaseCompleted = checkPhaseCompleted(phase);
+                        return `
+                            <div class="phase-summary-item ${isPhaseCompleted ? 'completed' : ''}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 4px; border: 1.5px solid ${isPhaseCompleted ? 'rgba(16, 185, 129, 0.25)' : 'rgba(15, 82, 186, 0.1)'}; background: ${isPhaseCompleted ? 'rgba(16, 185, 129, 0.05)' : 'rgba(255, 255, 255, 0.3)'}; transition: all 0.3s ease;">
+                                <div style="display: flex; align-items: center; gap: 10px; text-align: left;">
+                                    <i class="${isPhaseCompleted ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'}" style="color: ${isPhaseCompleted ? '#10b981' : 'var(--text-color-light)'}; font-size: 0.95rem; flex-shrink: 0;"></i>
+                                    <span style="font-size: 0.82rem; font-weight: 600; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-main)'}; line-height: 1.3;">${phase}</span>
+                                </div>
+                                <span style="font-size: 0.68rem; font-weight: 700; color: ${isPhaseCompleted ? '#10b981' : 'var(--text-color-muted)'}; text-transform: uppercase; flex-shrink: 0; margin-left: 8px;">
+                                    ${isPhaseCompleted ? 'Completado' : 'Pendiente'}
+                                </span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
         }
 
         // Update progress indicators
@@ -2390,6 +2418,10 @@
 
                 const headerRight = document.getElementById('viewport-header-right');
                 if (headerRight) headerRight.innerHTML = '';
+
+                // Clean summary panel
+                const summaryPanel = document.getElementById('autogestion-summary-panel');
+                if (summaryPanel) summaryPanel.innerHTML = '';
 
                 // Switch UI
                 document.getElementById('autogestion-dashboard').style.display = 'none';
@@ -2593,6 +2625,9 @@
             if (saved) {
                 try {
                     activeProcess = JSON.parse(saved);
+                    if (activeProcess && !activeProcess.completedInstructions) {
+                        activeProcess.completedInstructions = {};
+                    }
                     initActiveProcess();
                 } catch (err) {
                     console.error("Error loading saved process:", err);
