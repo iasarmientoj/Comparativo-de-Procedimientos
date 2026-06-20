@@ -300,13 +300,68 @@
                         </div>
                     </div>
 
-                    <!-- 2. Dashboard de Proceso Activo (oculto por defecto) -->
+                    <!-- 2. Pantalla de Selección de Rol (exclusiva) -->
+                    <div class="autogestion-role-selection-container card-glass" id="autogestion-role-selection" style="display: none;">
+                        <div class="autogestion-welcome-header">
+                            <i class="fa-solid fa-users-gear autogestion-welcome-icon"></i>
+                            <h3>Selecciona tu Rol</h3>
+                            <p>Cada rol interviene en diferentes etapas del proceso de contratación con actividades y controles específicos.</p>
+                        </div>
+                        
+                        <div class="autogestion-roles-grid">
+                            <div class="autogestion-role-card card-glass" onclick="selectRole('tecnico')">
+                                <div class="role-card-icon-wrap">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <h4>Área Técnica</h4>
+                                <p>Ingeniero solicitante: Estructura requerimiento técnico, simula costos y realiza el control de ejecución.</p>
+                                <span class="role-card-progress" id="card-progress-tecnico">0 / 17 tareas</span>
+                            </div>
+                            <div class="autogestion-role-card card-glass" onclick="selectRole('abogado')">
+                                <div class="role-card-icon-wrap">
+                                    <i class="fa-solid fa-user-shield"></i>
+                                </div>
+                                <h4>Abogado de Contratos</h4>
+                                <p>Grupo de contratos: Vela por la legalidad, estructura la RFQ y gestiona la legalización.</p>
+                                <span class="role-card-progress" id="card-progress-abogado">0 / 14 tareas</span>
+                            </div>
+                            <div class="autogestion-role-card card-glass" onclick="selectRole('presupuesto')">
+                                <div class="role-card-icon-wrap">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                </div>
+                                <h4>Presupuesto</h4>
+                                <p>Financiera: Responsable de verificar acopio de recursos y registrar CDP/RP en SIIF Nación.</p>
+                                <span class="role-card-progress" id="card-progress-presupuesto">0 / 4 tareas</span>
+                            </div>
+                            <div class="autogestion-role-card card-glass" onclick="selectRole('ordenador')">
+                                <div class="role-card-icon-wrap">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <h4>Ordenador del Gasto</h4>
+                                <p>Directora / Subdirectora: Firma la adjudicación, pólizas y la delegación de supervisión.</p>
+                                <span class="role-card-progress" id="card-progress-ordenador">0 / 4 tareas</span>
+                            </div>
+                        </div>
+
+                        <div class="role-selection-footer">
+                            <button class="footer-btn" onclick="exitActiveProcess()" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
+                                <i class="fa-solid fa-arrow-left"></i> Cambiar Proceso
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3. Dashboard de Proceso Activo (oculto por defecto) -->
                     <div class="autogestion-dashboard-container" id="autogestion-dashboard" style="display: none;">
                         <!-- Cabecera del Proceso -->
                         <div class="autogestion-dashboard-header card-glass">
                             <div class="autogestion-header-left">
                                 <h3 id="active-process-title">Nombre del Proceso</h3>
-                                <p><i class="fa-solid fa-lock"></i> Gestión local segura — Ningún dato se envía a servidores externos</p>
+                                <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+                                    <span class="details-role-badge" id="header-role-badge" style="margin-top: 0; font-size: 0.72rem; padding: 4px 10px; background: rgba(15, 82, 186, 0.08); color: var(--primary-blue); border-radius: 2px;">Rol: Área Técnica</span>
+                                    <button class="calendar-action-btn" onclick="openRoleSelection()" style="padding: 3px 8px; font-size: 0.7rem; border-color: rgba(15, 82, 186, 0.35); border-radius: 0px;">
+                                        <i class="fa-solid fa-user-gear"></i> Cambiar Rol
+                                    </button>
+                                </div>
                             </div>
                             <div class="autogestion-header-right">
                                 <div class="autogestion-progress-wrapper">
@@ -331,42 +386,7 @@
 
                         <!-- Área de Trabajo -->
                         <div class="autogestion-workspace">
-                            <!-- Columna 1: Selección de Roles (Tabs) -->
-                            <div class="autogestion-sidebar card-glass">
-                                <h4 class="sidebar-sec-title">Flujo por Rol</h4>
-                                <div class="autogestion-tabs">
-                                    <button class="autogestion-tab-btn active" id="tab-role-tecnico" onclick="switchAutogestionRole('tecnico')">
-                                        <i class="fa-solid fa-laptop-code"></i>
-                                        <div class="tab-btn-text">
-                                            <span class="tab-role-name">Área Técnica</span>
-                                            <span class="tab-role-progress" id="progress-role-tecnico">0 / 17 tareas</span>
-                                        </div>
-                                    </button>
-                                    <button class="autogestion-tab-btn" id="tab-role-abogado" onclick="switchAutogestionRole('abogado')">
-                                        <i class="fa-solid fa-user-shield"></i>
-                                        <div class="tab-btn-text">
-                                            <span class="tab-role-name">Abogado Contratos</span>
-                                            <span class="tab-role-progress" id="progress-role-abogado">0 / 14 tareas</span>
-                                        </div>
-                                    </button>
-                                    <button class="autogestion-tab-btn" id="tab-role-presupuesto" onclick="switchAutogestionRole('presupuesto')">
-                                        <i class="fa-solid fa-file-invoice-dollar"></i>
-                                        <div class="tab-btn-text">
-                                            <span class="tab-role-name">Presupuesto</span>
-                                            <span class="tab-role-progress" id="progress-role-presupuesto">0 / 4 tareas</span>
-                                        </div>
-                                    </button>
-                                    <button class="autogestion-tab-btn" id="tab-role-ordenador" onclick="switchAutogestionRole('ordenador')">
-                                        <i class="fa-solid fa-user-tie"></i>
-                                        <div class="tab-btn-text">
-                                            <span class="tab-role-name">Ordenador Gasto</span>
-                                            <span class="tab-role-progress" id="progress-role-ordenador">0 / 4 tareas</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Columna 2: Lista de Actividades -->
+                            <!-- Columna 1: Lista de Actividades -->
                             <div class="autogestion-tasks-panel card-glass">
                                 <div class="panel-section-header">
                                     <h3><i class="fa-solid fa-list-check"></i> Checklist del Rol</h3>
@@ -377,7 +397,7 @@
                                 </div>
                             </div>
 
-                            <!-- Columna 3: Detalles e Instrucciones -->
+                            <!-- Columna 2: Detalles e Instrucciones -->
                             <div class="autogestion-details-panel card-glass" id="autogestion-details-panel">
                                 <!-- Inyectado por JS -->
                                 <div class="autogestion-details-placeholder">
@@ -1982,10 +2002,10 @@
 
             document.getElementById('active-process-title').textContent = activeProcess.name;
             document.getElementById('autogestion-welcome').style.display = 'none';
-            document.getElementById('autogestion-dashboard').style.display = 'flex';
+            document.getElementById('autogestion-dashboard').style.display = 'none';
+            document.getElementById('autogestion-role-selection').style.display = 'flex';
 
-            switchAutogestionRole('tecnico');
-            updateAutogestionProgress();
+            updateRoleCardProgress();
             
             // Re-trigger repaint for the dashboard layout elements inside autogestion panel
             const panel = document.getElementById('panel-sis-autogestion');
@@ -1999,24 +2019,80 @@
             }
         }
 
-        // Tab selection for roles
-        function switchAutogestionRole(roleKey) {
+        // Select a role from the Role Selection screen
+        function selectRole(roleKey) {
             currentAutogestionRole = roleKey;
             
-            document.querySelectorAll('.autogestion-tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            const activeBtn = document.getElementById(`tab-role-${roleKey}`);
-            if (activeBtn) activeBtn.classList.add('active');
-
+            // Map keys to Spanish friendly role names
+            const roleName = autogestionRolesData[roleKey].roleName;
+            document.getElementById('header-role-badge').innerHTML = `<i class="fa-solid ${autogestionRolesData[roleKey].roleIcon}"></i> Rol: ${roleName}`;
+            
+            // Switch screen
+            document.getElementById('autogestion-role-selection').style.display = 'none';
+            document.getElementById('autogestion-dashboard').style.display = 'flex';
+            
+            // Render checklist for this role
             renderAutogestionTasks(roleKey);
+            updateAutogestionProgress();
 
-            // Select first task of the new tab
+            // Select first task of the selected role
             const roleTasks = autogestionRolesData[roleKey].tasks;
             if (roleTasks.length > 0) {
                 selectAutogestionTask(roleTasks[0].id);
             } else {
                 clearAutogestionDetails();
+            }
+
+            // Force repaint
+            const panel = document.getElementById('panel-sis-autogestion');
+            if (panel) {
+                panel.querySelectorAll('.card-glass').forEach(card => {
+                    const originalFilter = card.style.backdropFilter || '';
+                    card.style.backdropFilter = 'none';
+                    card.offsetHeight;
+                    card.style.backdropFilter = originalFilter;
+                });
+            }
+        }
+
+        // Show role selection screen while in active process
+        function openRoleSelection() {
+            document.getElementById('autogestion-dashboard').style.display = 'none';
+            document.getElementById('autogestion-role-selection').style.display = 'flex';
+            updateRoleCardProgress();
+
+            // Force repaint
+            const panel = document.getElementById('panel-sis-autogestion');
+            if (panel) {
+                panel.querySelectorAll('.card-glass').forEach(card => {
+                    const originalFilter = card.style.backdropFilter || '';
+                    card.style.backdropFilter = 'none';
+                    card.offsetHeight;
+                    card.style.backdropFilter = originalFilter;
+                });
+            }
+        }
+
+        // Calculate and update the progress tags on the role selection cards
+        function updateRoleCardProgress() {
+            if (!activeProcess) return;
+
+            for (const roleKey in autogestionRolesData) {
+                const roleTasks = autogestionRolesData[roleKey].tasks;
+                const roleTotal = roleTasks.length;
+                let roleCompleted = 0;
+
+                roleTasks.forEach(task => {
+                    if (activeProcess.completedTasks[task.id] === true) {
+                        roleCompleted++;
+                    }
+                });
+
+                // Update role card progress text
+                const cardProgressEl = document.getElementById(`card-progress-${roleKey}`);
+                if (cardProgressEl) {
+                    cardProgressEl.textContent = `${roleCompleted} / ${roleTotal} tareas`;
+                }
             }
         }
 
@@ -2218,6 +2294,9 @@
                 }
             }
 
+            // Also update the role selection cards progress
+            updateRoleCardProgress();
+
             // Overall calculations
             const percentage = totalTasksCount > 0 ? Math.round((totalCompletedCount / totalTasksCount) * 100) : 0;
 
@@ -2263,6 +2342,7 @@
 
                 // Switch UI
                 document.getElementById('autogestion-dashboard').style.display = 'none';
+                document.getElementById('autogestion-role-selection').style.display = 'none';
                 document.getElementById('autogestion-welcome').style.display = 'flex';
             }
         }
