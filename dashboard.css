@@ -2871,3 +2871,19 @@
         grid-template-columns: 1fr;
     }
 }
+
+.autogestion-privacy-notice {
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: var(--text-color-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    opacity: 0.85;
+}
+
+.autogestion-privacy-notice i {
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+}

@@ -271,7 +271,7 @@
                         <div class="autogestion-welcome-header">
                             <i class="fa-solid fa-laptop-code autogestion-welcome-icon"></i>
                             <h3>Sistema de Autogestión</h3>
-                            <p>Estructura asistida para la gestión de documentos, estudios previos automatizados, plantillas y mitigación activa de riesgos por roles.</p>
+                            <p>Asistente interactivo estructurado por roles para el seguimiento de actividades, control de hitos clave y mitigación de riesgos durante el proceso de contratación.</p>
                         </div>
                         
                         <div class="autogestion-options">
@@ -297,6 +297,12 @@
                             <button class="autogestion-submit-btn" id="btn-submit-nuevo" onclick="createNewProcess()" disabled>
                                 <span>Crear Proceso</span> <i class="fa-solid fa-arrow-right"></i>
                             </button>
+                        </div>
+
+                        <!-- Aviso de datos locales y privacidad -->
+                        <div class="autogestion-privacy-notice">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Los datos se guardan exclusivamente en tu navegador. Ninguna información es transmitida a servidores externos.</span>
                         </div>
                     </div>
 
@@ -343,10 +349,14 @@
                             </div>
                         </div>
 
-                        <div class="role-selection-footer">
+                        <div class="role-selection-footer" style="flex-direction: column; gap: 12px; align-items: center;">
                             <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
                                 <i class="fa-solid fa-arrow-left" style="color: inherit;"></i> Regresar
                             </button>
+                            <div class="autogestion-privacy-notice" style="margin-top: 8px;">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <span>Los datos se guardan exclusivamente en tu navegador. Ninguna información es transmitida a servidores externos.</span>
+                            </div>
                         </div>
                     </div>
 
@@ -363,23 +373,29 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="autogestion-header-right">
-                                <div class="autogestion-progress-wrapper">
-                                    <div class="autogestion-progress-label">
-                                        <span id="autogestion-progress-text">0% Completado</span>
-                                        <span id="autogestion-progress-count">(0 de 39 tareas)</span>
-                                    </div>
-                                    <div class="autogestion-progress-bar-bg">
-                                        <div class="autogestion-progress-bar-fill" id="autogestion-progress-fill" style="width: 0%;"></div>
-                                    </div>
+                            <div class="autogestion-header-right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                                <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px; justify-content: flex-end; margin-bottom: 2px;">
+                                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+                                    <span>Los cambios se guardan automáticamente en tu navegador</span>
                                 </div>
-                                <div class="autogestion-header-actions">
-                                    <button class="footer-btn" onclick="saveProcessState()" style="padding: 10px 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent;">
-                                        <i class="fa-regular fa-floppy-disk"></i> Guardar
-                                    </button>
-                                    <button class="footer-btn" onclick="exitActiveProcess()" style="padding: 10px 16px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent;">
-                                        <i class="fa-solid fa-rotate-left"></i> Cambiar
-                                    </button>
+                                <div style="display: flex; align-items: center; gap: 32px;">
+                                    <div class="autogestion-progress-wrapper">
+                                        <div class="autogestion-progress-label">
+                                            <span id="autogestion-progress-text">0% Completado</span>
+                                            <span id="autogestion-progress-count">(0 de 17 tareas de este rol)</span>
+                                        </div>
+                                        <div class="autogestion-progress-bar-bg">
+                                            <div class="autogestion-progress-bar-fill" id="autogestion-progress-fill" style="width: 0%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="autogestion-header-actions">
+                                        <button class="footer-btn" onclick="saveProcessState()" style="padding: 10px 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent;">
+                                            <i class="fa-solid fa-download"></i> Exportar
+                                        </button>
+                                        <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent;">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir de este proceso
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -486,7 +502,7 @@
                     break;
                 case 'sis-autogestion':
                     titleEl.textContent = 'Sistema de Autogestión';
-                    subtitleEl.textContent = 'Generación asistida de estudios previos y mitigación activa';
+                    subtitleEl.textContent = 'Guía interactiva de actividades, hitos y mitigación de riesgos por roles';
                     break;
             }
 
@@ -2270,38 +2286,27 @@
         function updateAutogestionProgress() {
             if (!activeProcess) return;
 
-            let totalTasksCount = 0;
-            let totalCompletedCount = 0;
-
-            // Group calculations
-            for (const roleKey in autogestionRolesData) {
-                const roleTasks = autogestionRolesData[roleKey].tasks;
-                const roleTotal = roleTasks.length;
-                let roleCompleted = 0;
-
-                roleTasks.forEach(task => {
-                    totalTasksCount++;
-                    if (activeProcess.completedTasks[task.id] === true) {
-                        totalCompletedCount++;
-                        roleCompleted++;
-                    }
-                });
-
-                // Update tab progress label
-                const tabLabel = document.getElementById(`progress-role-${roleKey}`);
-                if (tabLabel) {
-                    tabLabel.textContent = `${roleCompleted} / ${roleTotal} tareas`;
-                }
-            }
-
             // Also update the role selection cards progress
             updateRoleCardProgress();
 
-            // Overall calculations
-            const percentage = totalTasksCount > 0 ? Math.round((totalCompletedCount / totalTasksCount) * 100) : 0;
+            // Calculate progress for CURRENT role
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (!currentRoleData) return;
+
+            const roleTasks = currentRoleData.tasks;
+            const roleTotalCount = roleTasks.length;
+            let roleCompletedCount = 0;
+
+            roleTasks.forEach(task => {
+                if (activeProcess.completedTasks[task.id] === true) {
+                    roleCompletedCount++;
+                }
+            });
+
+            const percentage = roleTotalCount > 0 ? Math.round((roleCompletedCount / roleTotalCount) * 100) : 0;
 
             document.getElementById('autogestion-progress-text').textContent = `${percentage}% Completado`;
-            document.getElementById('autogestion-progress-count').textContent = `(${totalCompletedCount} de ${totalTasksCount} tareas)`;
+            document.getElementById('autogestion-progress-count').textContent = `(${roleCompletedCount} de ${roleTotalCount} tareas de este rol)`;
             document.getElementById('autogestion-progress-fill').style.width = `${percentage}%`;
         }
 
