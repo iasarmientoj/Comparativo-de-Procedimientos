@@ -88,10 +88,13 @@
 
         <!-- Main Content Viewport -->
         <main class="dashboard-viewport">
-            <header class="viewport-header">
-                <h1 id="viewport-title" class="viewport-title">Procedimiento Vigente</h1>
-                <p id="viewport-subtitle" class="viewport-subtitle">Análisis estructurado y diagnóstico de
-                    vulnerabilidades</p>
+            <header class="viewport-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1 id="viewport-title" class="viewport-title">Procedimiento Vigente</h1>
+                    <p id="viewport-subtitle" class="viewport-subtitle">Análisis estructurado y diagnóstico de
+                        vulnerabilidades</p>
+                </div>
+                <div id="viewport-header-right"></div>
             </header>
 
             <div class="viewport-content">
@@ -368,11 +371,6 @@
 
                     <!-- 3. Dashboard de Proceso Activo (oculto por defecto) -->
                     <div class="autogestion-dashboard-container" id="autogestion-dashboard" style="display: none;">
-                        <!-- Aviso de Autoguardado (fuera y arriba del panel) -->
-                        <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px; justify-content: flex-end; width: 100%; margin-bottom: 8px; padding-right: 4px;">
-                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
-                            <span>Los cambios se guardan automáticamente en tu navegador</span>
-                        </div>
                         <!-- Cabecera del Proceso -->
                         <div class="autogestion-dashboard-header card-glass" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 24px; gap: 20px;">
                             <!-- Izquierda: Rol y botón de cambio -->
@@ -491,24 +489,37 @@
             // Update titles
             const titleEl = document.getElementById('viewport-title');
             const subtitleEl = document.getElementById('viewport-subtitle');
-
+            const headerRight = document.getElementById('viewport-header-right');
+            if (headerRight) headerRight.innerHTML = '';
+ 
             switch (panelId) {
                 case 'proc-anterior':
                     titleEl.textContent = 'Procedimiento Vigente';
                     subtitleEl.textContent = 'Análisis estructurado y diagnóstico de vulnerabilidades';
+                    subtitleEl.style.display = 'block';
                     break;
                 case 'proc-mejorado':
                     titleEl.textContent = 'Procedimiento Mejorado';
                     subtitleEl.textContent = 'Control de riesgos PHVA y nueva matriz de responsabilidades';
+                    subtitleEl.style.display = 'block';
                     break;
                 case 'sim-comparativa':
                     titleEl.textContent = 'Simulación Comparativa';
                     subtitleEl.textContent = 'Estrés contractual y auditoría de pliegos frente a normativas';
+                    subtitleEl.style.display = 'block';
                     break;
                 case 'sis-autogestion':
                     if (activeProcess) {
                         titleEl.textContent = `Proceso: ${activeProcess.name}`;
                         subtitleEl.style.display = 'none';
+                        if (headerRight) {
+                            headerRight.innerHTML = `
+                                <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+                                    <span>Los cambios se guardan automáticamente en tu navegador</span>
+                                </div>
+                            `;
+                        }
                     } else {
                         titleEl.textContent = 'Sistema de Autogestión';
                         subtitleEl.textContent = 'Guía interactiva de actividades, hitos y mitigación de riesgos por roles';
@@ -2030,6 +2041,16 @@
             // Set main page title to process name and hide subtitle to save space
             document.getElementById('viewport-title').textContent = `Proceso: ${activeProcess.name}`;
             document.getElementById('viewport-subtitle').style.display = 'none';
+            
+            const headerRight = document.getElementById('viewport-header-right');
+            if (headerRight) {
+                headerRight.innerHTML = `
+                    <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+                        <span>Los cambios se guardan automáticamente en tu navegador</span>
+                    </div>
+                `;
+            }
 
             document.getElementById('autogestion-welcome').style.display = 'none';
             document.getElementById('autogestion-dashboard').style.display = 'none';
@@ -2363,6 +2384,9 @@
                 document.getElementById('viewport-title').textContent = 'Sistema de Autogestión';
                 document.getElementById('viewport-subtitle').textContent = 'Guía interactiva de actividades, hitos y mitigación de riesgos por roles';
                 document.getElementById('viewport-subtitle').style.display = 'block';
+
+                const headerRight = document.getElementById('viewport-header-right');
+                if (headerRight) headerRight.innerHTML = '';
 
                 // Switch UI
                 document.getElementById('autogestion-dashboard').style.display = 'none';
