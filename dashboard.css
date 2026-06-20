@@ -2163,7 +2163,8 @@
     z-index: 1;
     box-shadow: 0 4px 15px rgba(15, 82, 186, 0.05);
     transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
-    margin-top: 24px; /* Separar del campo de texto */
+    margin-top: 1px;
+    /* Separar del campo de texto */
 }
 
 .autogestion-submit-btn::before {
@@ -2699,41 +2700,41 @@
         gap: 20px;
         padding: 20px;
     }
-    
+
     .autogestion-header-right {
         width: 100%;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 20px;
     }
-    
+
     .autogestion-progress-wrapper {
         width: 100%;
         max-width: 320px;
     }
-    
+
     .autogestion-workspace {
         grid-template-columns: 1fr;
         height: auto !important;
         gap: 24px;
     }
-    
+
     .autogestion-sidebar,
     .autogestion-tasks-panel,
     .autogestion-details-panel {
         height: auto !important;
     }
-    
+
     .autogestion-tabs {
         flex-direction: row;
         flex-wrap: wrap;
         gap: 8px;
     }
-    
+
     .autogestion-tab-btn {
         flex: 1 1 200px;
     }
-    
+
     .autogestion-tasks-list {
         max-height: 400px;
         overflow-y: auto;
@@ -2746,7 +2747,7 @@
         align-items: center;
         gap: 16px;
     }
-    
+
     .autogestion-opt-btn {
         width: 100%;
         max-width: 100%;
