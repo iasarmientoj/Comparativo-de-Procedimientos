@@ -697,9 +697,9 @@
                 control: "Verificación de correspondencia de ítems frente a las categorías autorizadas en la Minuta y el catálogo vigente del AMP para evitar adquisiciones por fuera de su alcance.",
                 records: "Ficha interna de necesidad, simulador preliminar de precios del catálogo.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Líder Técnico 🔧", score: 90, class: "success" },
+                    { name: "Dependencia Técnica", status: "Líder Técnico 🔧", score: 70, class: "success" },
                     { name: "Abogado de Contratos", status: "Asesoría Inicial ⚖️", score: 10, class: "warning" },
-                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Presupuesto", status: "Verificar PAA y CDP 🪙", score: 20, class: "success" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
@@ -1569,345 +1569,725 @@
 
         // Task definitions for each role
         const autogestionTasks = [
+[
             {
-                id: "dt_fase1_simulador",
+                id: "dt_fase1_definir_el",
                 role: "dt",
                 fase: "Fase 1",
-                title: "Estructuración de Necesidad y Simulador",
-                desc: "Definir ítems y cantidades en el catálogo vigente. Simular precios y estructurar el requerimiento.",
-                subtasks: [
-                    "Simular precios en el catálogo oficial de la TVEC.",
-                    "Descargar PDF de cotización de la TVEC.",
-                    "Solicitar expedición de CDP al área de Presupuesto."
-                ],
-                notePlaceholder: "Añadir notas del catálogo...",
+                title: "Definir el requerimiento técnico",
+                desc: "Escriba detalladamente las especificaciones del bien o servicio y seleccione los catálogos correspondientes que se encuentren vigentes en la Tienda Virtual.",
+                subtasks: ["Consulta el listado de marcas y catálogos vigentes del Acuerdo en el portal de CCE.", "Redacta el Anexo Técnico de especificaciones utilizando como plantilla el archivo **'03. Anexo Técnico 02 - Especificaciones técnicas transversales'**.", "Si estás adquiriendo suites de oficina o colaboración corporativa, incorpora las exigencias del documento **'04. Anexo Técnico 03 - Suplementos Suite Corporativa'**."],
+                notePlaceholder: "Añadir notas sobre definir el requerimiento técnico...",
                 blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase1_verificar_vigencia",
+                role: "dt",
+                fase: "Fase 1",
+                title: "Verificar vigencia del AMP",
+                desc: "Consulte el catálogo oficial en SECOP/Colombia Compra Eficiente para validar que el Acuerdo Marco sigue activo.",
+                subtasks: ["Ingresa a Colombia Compra Eficiente y constata que la fecha de terminación del Acuerdo Marco de Software II no haya expirado y que esté habilitada la colocación de Órdenes de Compra."],
+                notePlaceholder: "Añadir notas sobre verificar vigencia del amp...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase1_ejecutar_el",
+                role: "dt",
+                fase: "Fase 1",
+                title: "Ejecutar el simulador oficial de costos",
+                desc: "Utilice el simulador oficial de costos para calcular el valor estimado de la contratación, asegurando incluir retenciones y estampillas territoriales.",
+                subtasks: ["Descarga el archivo Excel **'08. Simulador'** oficial de la Tienda Virtual (recuerda hacer clic en \"Habilitar Edición\" y \"Desbloquear contenido\" en Excel).", "Digita las cantidades y perfiles requeridos para obtener el costo base oficial del catálogo.", "Realiza el cálculo manual de la contribución MHCP (Estampillas y Timbre) guiándote con el **'10. Comunicado Impuesto de timbre'** y súmalo al presupuesto estimado final (esta adición es obligatoria para el MHCP y no la realiza el simulador de CCE automáticamente)."],
+                notePlaceholder: "Añadir notas sobre ejecutar el simulador oficial de costos...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "request",
                     target: "Presupuesto",
                     actionLabel: "Solicitar CDP",
-                    emailSubject: "Solicitud de CDP - Estructuración de Necesidad",
-                    emailBody: "Hola Presupuesto,\n\nHe terminado la simulación y estructuración de la necesidad para el contrato. Solicito amablemente la expedición del CDP correspondiente para continuar con el trámite de Estudios Previos.\n\nAtentamente,\nÁrea Técnica"
+                    emailSubject: "Solicitud de CDP - Simulador y Ficha Técnica Listos",
+                    emailBody: `Hola Presupuesto,
+
+He completado la simulación oficial de costos para la adquisición de software por catálogo. Solicito amablemente la expedición del CDP correspondiente para continuar con la contratación.
+
+Atentamente,
+Dependencia Técnica`
                 }
             },
             {
-                id: "dt_fase2_codiseno",
+                id: "dt_fase2_enviar_insumos",
                 role: "dt",
                 fase: "Fase 2",
-                title: "Co-diseño de Estudios Previos",
-                desc: "Redactar y co-diseñar requerimientos técnicos y de negocio. Estructurar la matriz de riesgos técnicos.",
-                subtasks: [
-                    "Confirmar recibo de CDP por parte de Presupuesto.",
-                    "Programar sesión de co-diseño con Abogado asignado.",
-                    "Estructurar la matriz preliminar de riesgos técnicos.",
-                    "Notificar al Abogado para consolidar Estudios Previos."
-                ],
-                notePlaceholder: "Añadir enlace a borrador de estudios previos...",
-                blockedBy: ["pr_fase1_cdp"],
-                blockMessage: "Se sugiere confirmar la expedición del CDP por parte de Presupuesto.",
+                title: "Enviar insumos a Contratos",
+                desc: "Remita la ficha técnica con las especificaciones y la cotización preliminar al Abogado de Contratos asignado para iniciar el proceso.",
+                subtasks: ["Valida que el Anexo Técnico y el cuadro de cotización preliminar definitivo se encuentren firmados digitalmente por ti.", "Remite la documentación al Abogado de Contratos asignado mediante memorando oficial interno adjuntando el simulador en Excel y el soporte PDF."],
+                notePlaceholder: "Añadir notas sobre enviar insumos a contratos...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: {
+                    type: "notify",
+                    target: "Abogado",
+                    actionLabel: "Notificar Envío de Insumos",
+                    emailSubject: "Envío de Ficha Técnica e Insumos de Simulación",
+                    emailBody: `Estimado Abogado de Contratos,
+
+Le informo que he completado la simulación preliminar de costos en el catálogo oficial para la adquisición y he remitido los insumos técnicos firmados digitalmente. Quedo atento a su asesoría para co-diseñar los Estudios Previos.
+
+Atentamente,
+Dependencia Técnica`
+                }
+            },
+            {
+                id: "dt_fase2_coredactar_estudios",
+                role: "dt",
+                fase: "Fase 2",
+                title: "Co-redactar Estudios Previos",
+                desc: "Redacte activamente junto con el abogado el documento de Estudios Previos y la Matriz de Riesgos que justificarán la contratación.",
+                subtasks: ["Redacta el documento definitivo de Estudios Previos de la entidad, estructurando la justificación e idoneidad basándote en el contenido exigido en el **'07. Formato RFQ - Justificación de Compra'** de CCE.", "Co-diseña con el abogado la Matriz de Riesgos de ejecución, estableciendo los riesgos técnicos de soporte y actualización tecnológica."],
+                notePlaceholder: "Añadir notas sobre co-redactar estudios previos...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
                     target: "Abogado",
                     actionLabel: "Notificar Estudios Listos",
-                    emailSubject: "Co-diseño Estudios Previos - Requerimientos Técnicos Listos",
-                    emailBody: "Hola,\n\nHe estructurado los requerimientos técnicos y la matriz preliminar de riesgos. Quedo atento para coordinar la sesión de co-diseño y consolidar los Estudios Previos.\n\nAtentamente,\nÁrea Técnica"
+                    emailSubject: "Borrador de Estudios Previos Co-redactado",
+                    emailBody: `Hola,
+
+He redactado la justificación técnica de compra y co-diseñado la matriz de riesgos técnicos. Quedo a su disposición para consolidar el documento final de Estudios Previos.
+
+Atentamente,
+Dependencia Técnica`
                 }
             },
             {
-                id: "dt_fase3_rfi",
+                id: "dt_fase2_recibir_cdp",
+                role: "dt",
+                fase: "Fase 2",
+                title: "Recibir CDP (Certificado de Disponibilidad)",
+                desc: "Verifique que el área de presupuesto haya expedido y cargado el CDP antes de que el proceso inicie en la TVEC.",
+                subtasks: ["Confirma que el área de presupuesto haya expedido el Certificado de Disponibilidad Presupuestal (CDP) en SIIF Nación y lo haya cargado al expediente.", "Comprueba que el valor del CDP cubra la totalidad de la cotización final simulada."],
+                notePlaceholder: "Añadir notas sobre recibir cdp (certificado de disponibilidad)...",
+                blockedBy: ["pr_fase1_expedir_cdp"],
+                blockMessage: "Se sugiere confirmar la expedición del CDP por parte de Presupuesto.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase3_apoyo_técnico",
                 role: "dt",
                 fase: "Fase 3",
-                title: "Evaluación de RFI (Indagación)",
-                desc: "Revisar propuestas del mercado y analizar si aplica la limitación MIPYME.",
-                subtasks: [
-                    "Verificar RUES de proponentes para validez nacional MIPYME."
-                ],
-                notePlaceholder: "Añadir observaciones de las MIPYME...",
-                blockedBy: []
+                title: "Apoyo técnico en RFI / Indagación de Mercado",
+                desc: "Participe en la resolución de dudas técnicas planteadas por los proveedores durante la fase de RFI y aporte insumos para definir la conveniencia de la limitación MIPYME.",
+                subtasks: ["Acompañe al abogado en la revisión técnica de las consultas del RFI cargadas por los interesados en el portafolio de CCE utilizando el **'06. Formato RFI - Solicitud de información'**.", "Valide que los requerimientos técnicos analizados en esta fase pre-contractual se mantengan estables y no generen direccionamientos de mercado."],
+                notePlaceholder: "Añadir notas sobre apoyo técnico en rfi / indagación de mercado...",
+                blockedBy: ["ac_fase3_verificación_jurídica"],
+                blockMessage: "Se sugiere esperar a que el Abogado inicie la revisión del RFI.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
             },
             {
-                id: "dt_fase5_observaciones",
+                id: "dt_fase4_acompañamiento_técnico",
+                role: "dt",
+                fase: "Fase 4",
+                title: "Acompañamiento técnico en la publicación de la RFQ",
+                desc: "Revise la parametrización definitiva del evento en la Tienda Virtual (TVEC) antes de su publicación para asegurar que coincida con las especificaciones técnicas autorizadas.",
+                subtasks: ["Verifique que los anexos técnicos, el simulador de costos y las especificaciones finales cargadas por el abogado en la plataforma coincidan exactamente con la ficha técnica co-diseñada.", "Confirme que los plazos de entrega and las condiciones técnicas del servicio no hayan sufrido modificaciones en la configuración del evento."],
+                notePlaceholder: "Añadir notas sobre acompañamiento técnico en la publicación de la rfq...",
+                blockedBy: ["ac_fase4_publicar_la"],
+                blockMessage: "Se sugiere esperar a que el Abogado inicie la publicación de la RFQ.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase5_responder_observaciones",
                 role: "dt",
                 fase: "Fase 5",
-                title: "Resolución de Observaciones Técnicas",
-                desc: "Responder dudas y aclaraciones técnicas de los proponentes en el foro de la RFQ.",
-                subtasks: [
-                    "Cargar respuestas técnicas unificadas en cuadernillo de la RFQ."
-                ],
-                notePlaceholder: "Añadir número de radicado o notas...",
-                blockedBy: []
+                title: "Responder observaciones técnicas",
+                desc: "Resuelva de manera objetiva las dudas técnicas que los oferentes publiquen en el foro oficial de la plataforma, evitando todo chat informal directo.",
+                subtasks: ["Descarga del foro oficial de la RFQ de la Tienda Virtual (TVEC) las dudas remitidas por los proponentes.", "Redacta las respuestas técnicas ciñéndose estrictamente a lo establecido en los Anexos Técnicos de CCE, evitando acuerdos informales con proveedores por chat."],
+                notePlaceholder: "Añadir notas sobre responder observaciones técnicas...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
             },
             {
-                id: "dt_fase8_precios",
+                id: "dt_fase5_gestión_de",
+                role: "dt",
+                fase: "Fase 5",
+                title: "Gestión de Cancelación (Si aplica)",
+                desc: "Absténgase de usar el botón de cancelación de la plataforma hasta no contar con el Acto Administrativo de cancelación firmado por el Ordenador.",
+                subtasks: ["En caso de error en cantidades o especificaciones en la RFQ, remite de inmediato la justificación técnica al abogado para que se proceda a formular la resolución de cancelación.", "No presiones el botón de cancelación de la plataforma TVEC si la resolución firmada por la Directora no ha sido expedida y cargada."],
+                notePlaceholder: "Añadir notas sobre gestión de cancelación (si aplica)...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase8_evaluar_propuesta",
                 role: "dt",
                 fase: "Fase 8",
-                title: "Control de Precios Bajos y Exenciones",
-                desc: "Validar costos frente a la cotización de menor valor y emitir concepto técnico de viabilidad.",
-                subtasks: [
-                    "Verificar publicación del evento RFQ por parte del Abogado.",
-                    "Solicitar aclaración al oferente si cotiza con 0% de IVA (Control IVA).",
-                    "Emitir concepto técnico de viabilidad económica.",
-                    "Notificar concepto técnico al Abogado de Contratos."
-                ],
-                notePlaceholder: "Escribir resultado de la validación del IVA...",
-                blockedBy: ["ac_fase4_rfq"],
+                title: "Evaluar propuesta de menor precio",
+                desc: "Compruebe que la oferta de menor costo cumpla al 100% con los requerimientos y la ficha técnica.",
+                subtasks: ["Descarga el sobre técnico del proveedor con la oferta de menor costo al cierre del evento.", "Compara ítem por ítem el cumplimiento de los requerimientos técnicos y las certificaciones del fabricante exigidas en el anexo técnico del proceso."],
+                notePlaceholder: "Añadir notas sobre evaluar propuesta de menor precio...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase8_verificación_de",
+                role: "dt",
+                fase: "Fase 8",
+                title: "Verificación de precios artificiales / IVA",
+                desc: "Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención.",
+                subtasks: ["Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención bajo las directrices de la Minuta."],
+                notePlaceholder: "Añadir notas sobre verificación de precios artificiales / iva...",
+                blockedBy: ["ac_fase4_publicar_la"],
                 blockMessage: "Se sugiere esperar a que el Abogado publique y parametrice el RFQ oficial.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
                     target: "Abogado",
                     actionLabel: "Enviar Concepto Técnico",
-                    emailSubject: "Concepto Técnico de Viabilidad - Contrato",
-                    emailBody: "Hola,\n\nHe emitido el concepto técnico de viabilidad económica y control de precios bajos/IVA para la oferta de menor valor. Adjunto el documento/concepto para su consolidación en el informe de evaluación.\n\nAtentamente,\nÁrea Técnica"
+                    emailSubject: "Concepto Técnico de Viabilidad y Precios/IVA",
+                    emailBody: `Hola,
+
+He realizado la evaluación técnica y validado la exención del IVA de la oferta de menor costo. Adjunto el concepto de viabilidad para su cargue y consolidación.
+
+Atentamente,
+Dependencia Técnica`
                 }
             },
             {
-                id: "dt_fase12_inicio",
+                id: "dt_fase8_firmar_informe",
+                role: "dt",
+                fase: "Fase 8",
+                title: "Firmar informe técnico",
+                desc: "Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación.",
+                subtasks: ["Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación en la TVEC."],
+                notePlaceholder: "Añadir notas sobre firmar informe técnico...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase9_acompañamiento_en",
+                role: "dt",
+                fase: "Fase 9",
+                title: "Acompañamiento en traslado de evaluaciones",
+                desc: "Acompañe al abogado de contratos en la respuesta y justificación de las observaciones técnicas realizadas por los oferentes.",
+                subtasks: ["Revise las observaciones técnicas cargadas en la TVEC por los oferentes y proyecte la justificación técnica de aceptación o rechazo."],
+                notePlaceholder: "Añadir notas sobre acompañamiento en traslado de evaluaciones...",
+                blockedBy: ["ac_fase9_consolidación_y"],
+                blockMessage: "Se sugiere que el Abogado publique las evaluaciones antes del traslado.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase10_verificación_técnica",
+                role: "dt",
+                fase: "Fase 10",
+                title: "Verificación técnica de la Orden de Compra",
+                desc: "Valide que el borrador de la Orden de Compra contenga los ítems, marcas y licenciamientos acordes a la evaluación final.",
+                subtasks: ["Revise que el borrador de la Orden de Compra en la TVEC concuerde técnicamente con lo cotizado por el proveedor seleccionado."],
+                notePlaceholder: "Añadir notas sobre verificación técnica de la orden de compra...",
+                blockedBy: ["ac_fase10_visto_bueno"],
+                blockMessage: "Se aconseja que el Abogado emita el visto bueno de la Orden de Compra primero.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase12_recibir_designación",
                 role: "dt",
                 fase: "Fase 12",
-                title: "Acta de Inicio y Supervisión",
-                desc: "Iniciar ejecución formal y técnica del contrato.",
-                subtasks: [
-                    "Verificar aprobación de pólizas (Abogado) y expedición de RP (Presupuesto).",
-                    "Firmar Acta de Inicio junto al contratista.",
-                    "Agendar primer comité de seguimiento.",
-                    "Notificar inicio de ejecución a Contratos."
-                ],
-                notePlaceholder: "Añadir fecha de firma del acta de inicio...",
+                title: "Recibir designación de supervisión",
+                desc: "Reciba el memorando de designación de supervisión contractual emitido por Contratos y asuma formalmente el rol y las responsabilidades del control contractual.",
+                subtasks: ["Recibe el memorando de designación de supervisión contractual emitido por Contratos y asume formalmente el rol y las responsabilidades del control contractual."],
+                notePlaceholder: "Añadir notas sobre recibir designación de supervisión...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "dt_fase12_coordinar_firma",
+                role: "dt",
+                fase: "Fase 12",
+                title: "Coordinar firma de Acta de Inicio",
+                desc: "Firme digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido.",
+                subtasks: ["Firma digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido."],
+                notePlaceholder: "Añadir notas sobre coordinar firma de acta de inicio...",
+                blockedBy: ["ac_fase11_control_de", "pr_fase11_expedir_rp"],
+                blockMessage: "Se aconseja que las garantías estén aprobadas y el RP esté expedido antes del inicio.",
                 hasCalendar: true,
                 calendarTitle: "Primer Comité de Seguimiento - Contrato MIN-AM",
                 calendarDesc: "Revisión técnica de inicio y plan de trabajo del supervisor. Recordatorio automático local.",
-                blockedBy: ["ac_fase11_garantias", "pr_fase11_rp"],
-                blockMessage: "Se aconseja que las garantías estén aprobadas y el RP esté expedido antes del inicio.",
                 coordination: {
                     type: "notify",
                     target: "Contratos",
-                    actionLabel: "Notificar Inicio Ejecución",
+                    actionLabel: "Notificar Acta Firmada",
                     emailSubject: "Acta de Inicio Suscrita - Inicio Ejecución",
-                    emailBody: "Hola,\n\nInformo que el Acta de Inicio correspondiente al contrato ha sido firmada por el supervisor y el contratista con fecha de hoy. Se da inicio formal a la ejecución.\n\nAtentamente,\nSupervisor"
+                    emailBody: `Hola,
+
+Informo que el Acta de Inicio correspondiente al contrato ha sido firmada por el supervisor y el contratista con fecha de hoy. Se da inicio formal a la ejecución.
+
+Atentamente,
+Supervisor`
                 }
             },
-            
-            // AC
             {
-                id: "ac_fase2_codiseno",
+                id: "ac_fase1_asesoría_jurídica",
                 role: "ac",
-                fase: "Fase 2",
-                title: "Co-diseño y Control Jurídico",
-                desc: "Revisar conveniencia legal y matriz de riesgos jurídicos. Diseñar pólizas.",
-                subtasks: [
-                    "Confirmar que Presupuesto expidió el CDP.",
-                    "Revisar borrador técnico enviado por el área solicitante.",
-                    "Diseñar el esquema de amparos y coberturas de pólizas."
-                ],
-                notePlaceholder: "Añadir notas sobre amparos requeridos...",
-                blockedBy: ["pr_fase1_cdp"],
-                blockMessage: "Se sugiere que Presupuesto expida el CDP antes de iniciar."
+                fase: "Fase 1",
+                title: "Asesoría jurídica preliminar sobre el AMP",
+                desc: "Brinde acompañamiento jurídico inicial a la Dependencia Técnica para validar que el objeto a contratar se enmarque en el alcance y vigencia del Acuerdo Marco de Software II.",
+                subtasks: ["Revise el alcance de las marcas y categorías autorizadas en la **'01. Minuta del Acuerdo'** para confirmar que la necesidad de la DT puede contratarse por esta vía."],
+                notePlaceholder: "Añadir notas sobre asesoría jurídica preliminar sobre el amp...",
+                blockedBy: ["dt_fase1_definir_el"],
+                blockMessage: "Se sugiere esperar a que la DT defina el requerimiento técnico.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
             },
             {
-                id: "ac_fase4_rfq",
+                id: "ac_fase2_revisión_jurídica",
+                role: "ac",
+                fase: "Fase 2",
+                title: "Revisión jurídica de insumos",
+                desc: "Verifique que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados.",
+                subtasks: ["Verifica que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados en la **'01. Minuta del Acuerdo'** (evitando compras por fuera del alcance del AMP)."],
+                notePlaceholder: "Añadir notas sobre revisión jurídica de insumos...",
+                blockedBy: ["dt_fase2_enviar_insumos"],
+                blockMessage: "Se sugiere que la Dependencia Técnica envíe primero los insumos firmados.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase2_asegurar_orden",
+                role: "ac",
+                fase: "Fase 2",
+                title: "Asegurar orden legal de estudios",
+                desc: "Confirme que los Estudios Previos estén firmados digitalmente por el líder técnico y por usted antes de cualquier configuración o cargue en la plataforma de compras.",
+                subtasks: ["Confirma que los Estudios Previos estén firmados digitalmente por el líder técnico y por ti antes de realizar cualquier configuración o cargue en la plataforma de compras."],
+                notePlaceholder: "Añadir notas sobre asegurar orden legal de estudios...",
+                blockedBy: ["dt_fase2_coredactar_estudios"],
+                blockMessage: "Se aconseja esperar al co-diseño técnico de los Estudios Previos.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase3_verificación_jurídica",
+                role: "ac",
+                fase: "Fase 3",
+                title: "Verificación jurídica de limitación a MIPYMES",
+                desc: "Estructure las preguntas del RFI y analice las manifestaciones de interés recibidas para decidir si el proceso debe limitarse obligatoriamente a MIPYMES nacionales.",
+                subtasks: ["Si haces indagación de mercado previa, estructura las preguntas del RFI utilizando el **'06. Formato RFI - Solicitud de información'** del portafolio del Acuerdo.", "Analiza las manifestaciones de interés recibidas y elabora el concepto de limitación MIPYMES aplicando el Decreto 1860 de 2021."],
+                notePlaceholder: "Añadir notas sobre verificación jurídica de limitación a mipymes...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase4_publicar_la",
                 role: "ac",
                 fase: "Fase 4",
-                title: "Configuración del RFQ Oficial",
-                desc: "Parametrizar y publicar el evento RFQ en la Tienda Virtual (TVEC).",
-                subtasks: [
-                    "Validar firmas en Estudios Previos (DT y Contratos).",
-                    "Parametrizar la RFQ en la TVEC usando la cuenta institucional.",
-                    "Validar que el cronograma incluya los traslados mínimos de ley.",
-                    "Notificar a la DT la publicación del evento."
-                ],
-                notePlaceholder: "Añadir número de RFQ generado...",
-                blockedBy: ["dt_fase2_codiseno", "ac_fase2_codiseno"],
-                blockMessage: "Se recomienda que se complete primero el co-diseño de Estudios Previos.",
+                title: "Publicar la Solicitud de Cotización (RFQ)",
+                desc: "Configure el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico.",
+                subtasks: ["Configura el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico."],
+                notePlaceholder: "Añadir notas sobre publicar la solicitud de cotización (rfq)...",
+                blockedBy: ["ac_fase2_asegurar_orden"],
+                blockMessage: "Se sugiere firmar los Estudios Previos antes de publicar la RFQ.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
                     target: "DT",
                     actionLabel: "Notificar Publicación RFQ",
-                    emailSubject: "RFQ Publicada en TVEC - Evento Abierto",
-                    emailBody: "Hola Dependencia Técnica,\n\nLes informo que la RFQ ha sido publicada exitosamente en la Tienda Virtual (TVEC). Agradezco estar atentos para la resolución de observaciones y evaluación de ofertas.\n\nAtentamente,\nAbogado de Contratos"
+                    emailSubject: "Solicitud de Cotización (RFQ) Publicada",
+                    emailBody: `Hola Dependencia Técnica,
+
+Les informo que la RFQ ha sido configurada y publicada exitosamente en la Tienda Virtual (TVEC) con los soportes de Estudios Previos y Anexo Técnico. Agradecemos estar atentos para la resolución de observaciones.
+
+Atentamente,
+Abogado de Contratos`
                 }
             },
             {
-                id: "ac_fase7_antecedentes",
+                id: "ac_fase5_revisar_observaciones",
                 role: "ac",
-                fase: "Fase 7",
-                title: "Evaluación de Inhabilidades y REDAM",
-                desc: "Validar antecedentes del oferente de menor precio en las plataformas de ley.",
-                subtasks: [
-                    "Descargar certificado REDAM en vivo (Fecha de hoy).",
-                    "Descargar antecedentes fiscales (Contraloría) y penales (Policía).",
-                    "Validar representación legal en RUES frente a inhabilidades del Art. 44 Ley 80."
-                ],
-                notePlaceholder: "Añadir notas del RUES o REDAM...",
-                blockedBy: ["ac_fase4_rfq"],
-                blockMessage: "Se sugiere que la RFQ esté publicada antes de evaluar antecedentes."
+                fase: "Fase 5",
+                title: "Revisar observaciones jurídicas",
+                desc: "Consolide las respuestas técnicas y proyecte las respuestas legales en el foro oficial de la RFQ, publicando el cuadernillo definitivo a tiempo.",
+                subtasks: ["Consolida las respuestas técnicas y proyecta las respuestas legales en el foro oficial de la RFQ. Publica el cuadernillo consolidado antes de que venza el plazo del foro."],
+                notePlaceholder: "Añadir notas sobre revisar observaciones jurídicas...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
             },
             {
-                id: "ac_fase9_consolidacion",
+                id: "ac_fase5_proyectar_acto",
+                role: "ac",
+                fase: "Fase 5",
+                title: "Proyectar Acto Administrativo de cancelación (Si aplica)",
+                desc: "Elabore el texto de la resolución motivada de cancelación del evento, explicando detalladamente la falla de planeación técnica.",
+                subtasks: ["Elabora el texto de la resolución motivada de cancelación del evento, explicando detalladamente la falla de planeación técnica fundamentado en la **'01. Minuta del Acuerdo'** de CCE."],
+                notePlaceholder: "Añadir notas sobre proyectar acto administrativo de cancelación (si aplica)...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase7_filtro_de",
+                role: "ac",
+                fase: "Fase 7",
+                title: "Filtro de Inhabilidades en tiempo real",
+                desc: "Descargue el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa de menor precio en el día de la evaluación.",
+                subtasks: ["Descarga el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa.", "Guarda los certificados PDF con la fecha y hora exacta del día de la evaluación para blindar el proceso.", "Revisa la **'11. Circular 001 2026 Ley de Garantías Electorales'** para asegurar que el proceso no contravenga restricciones de contratación pública electoral vigentes."],
+                notePlaceholder: "Añadir notas sobre filtro de inhabilidades en tiempo real...",
+                blockedBy: ["ac_fase4_publicar_la"],
+                blockMessage: "Se sugiere que el evento RFQ esté publicado antes de realizar el filtro.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase7_emitir_informe",
+                role: "ac",
+                fase: "Fase 7",
+                title: "Emitir informe jurídico",
+                desc: "Elabore la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firme la habilitación jurídica.",
+                subtasks: ["Elabora la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firma la habilitación jurídica."],
+                notePlaceholder: "Añadir notas sobre emitir informe jurídico...",
+                blockedBy: ["dt_fase8_evaluar_propuesta", "dt_fase8_verificación_de"],
+                blockMessage: "Se sugiere esperar la evaluación técnica y control de precios/IVA de la DT.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase8_acompañamiento_en",
+                role: "ac",
+                fase: "Fase 8",
+                title: "Acompañamiento en el control de precios bajos e IVA",
+                desc: "Apoye a la DT en la estructuración de solicitudes de aclaración legal ante exenciones del IVA no claras o indicios de precios artificiales.",
+                subtasks: ["Elabore el requerimiento legal para solicitar al proponente de menor costo la justificación del valor de sus ítems si se detecta un posible precio artificial."],
+                notePlaceholder: "Añadir notas sobre acompañamiento en el control de precios bajos e iva...",
+                blockedBy: ["dt_fase8_verificación_de"],
+                blockMessage: "Se sugiere esperar a que la DT realice la verificación de precios/IVA.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "ac_fase9_consolidación_y",
                 role: "ac",
                 fase: "Fase 9",
-                title: "Consolidación de Evaluaciones",
-                desc: "Consolidar informes técnicos y jurídicos. Publicar y habilitar observaciones.",
-                subtasks: [
-                    "Recibir concepto de precios/IVA del área técnica (DT).",
-                    "Firmar y publicar acta de evaluación jurídica.",
-                    "Habilitar traslado de 1 día para observaciones de oferentes.",
-                    "Notificar al Ordenador del Gasto para firma de Orden de Compra."
-                ],
-                notePlaceholder: "Añadir notas de observaciones recibidas...",
-                blockedBy: ["dt_fase8_precios", "ac_fase7_antecedentes"],
-                blockMessage: "Se sugiere contar con el control de precios de DT y la evaluación REDAM.",
+                title: "Consolidación y traslado de evaluaciones",
+                desc: "Publique los informes de evaluación en la TVEC y habilite el plazo oficial de traslado para que los proponentes presenten sus observaciones.",
+                subtasks: ["Cargue en la plataforma de compras la evaluación jurídica y técnica y notifique formalmente a los proponentes el inicio del término de traslado."],
+                notePlaceholder: "Añadir notas sobre consolidación y traslado de evaluaciones...",
+                blockedBy: ["dt_fase8_firmar_informe"],
+                blockMessage: "Se sugiere que la DT firme el informe de evaluación técnica primero.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: {
+                    type: "notify",
+                    target: "DT",
+                    actionLabel: "Notificar Traslado",
+                    emailSubject: "Evaluaciones Publicadas - Inicio de Traslado",
+                    emailBody: `Hola Dependencia Técnica,
+
+Les informo que las evaluaciones jurídica y técnica han sido consolidadas y publicadas en la TVEC. Se da inicio al término de traslado para observaciones.
+
+Atentamente,
+Abogado de Contratos`
+                }
+            },
+            {
+                id: "ac_fase10_visto_bueno",
+                role: "ac",
+                fase: "Fase 10",
+                title: "Visto bueno de la Orden de Compra (OC)",
+                desc: "Envíe el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar.",
+                subtasks: ["Envía el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar."],
+                notePlaceholder: "Añadir notas sobre visto bueno de la orden de compra (oc)...",
+                blockedBy: ["ac_fase9_consolidación_y", "dt_fase8_firmar_informe"],
+                blockMessage: "Se recomienda consolidar las evaluaciones técnica y jurídica antes del visto bueno.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "request",
                     target: "Ordenador",
                     actionLabel: "Solicitar Firma de OC",
-                    emailSubject: "Visto Bueno Adjudicación y Firma de OC",
-                    emailBody: "Estimado(a) Ordenador(a),\n\nHe consolidado las evaluaciones técnica y jurídica de la RFQ con resultado habilitante para el oferente de menor precio. Remito visto bueno para proceder con la firma de la Orden de Compra (OC) en la Tienda Virtual.\n\nAtentamente,\nAbogado de Contratos"
+                    emailSubject: "Visto Bueno de Orden de Compra Listo",
+                    emailBody: `Estimado Ordenador del Gasto,
+
+He proyectado y firmado el visto bueno de la Orden de Compra tras constatar la habilitación total del proponente de menor precio. Solicito amablemente la firma de la OC en la Tienda Virtual.
+
+Atentamente,
+Abogado de Contratos`
                 }
             },
             {
-                id: "ac_fase11_garantias",
+                id: "ac_fase11_control_de",
                 role: "ac",
                 fase: "Fase 11",
-                title: "Aprobación de Garantías",
-                desc: "Verificar suficiencia de pólizas cargadas por el contratista.",
-                subtasks: [
-                    "Confirmar que el Ordenador firmó la Orden de Compra.",
-                    "Validar vigencias de pólizas cargadas por el contratista.",
-                    "Emitir Aprobación Formal de Garantía.",
-                    "Notificar aprobación a la DT y al Contratista."
-                ],
-                notePlaceholder: "Añadir número de póliza y aseguradora...",
+                title: "Control de Pólizas",
+                desc: "Revise en la Minuta las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo, y apruebe las garantías en plataforma.",
+                subtasks: ["Revisa en la **'01. Minuta del Acuerdo Marco'** las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo.", "Aprueba las garantías en plataforma una vez validadas."],
+                notePlaceholder: "Añadir notas sobre control de pólizas...",
+                blockedBy: ["og_fase10_firma_digital"],
+                blockMessage: "Se sugiere que la Orden de Compra esté firmada por el Ordenador para validar garantías.",
                 hasCalendar: true,
-                calendarTitle: "Vencimiento para entrega de Garantías - Contrato MIN-AM",
+                calendarTitle: "Vencimiento para entrega de Garantías - Contrato MHCP",
                 calendarDesc: "Recordatorio límite de 3 días para que el contratista suba garantías.",
-                blockedBy: ["og_fase10_firma"],
-                blockMessage: "Se sugiere que la Orden de Compra esté firmada antes de aprobar pólizas.",
-                coordination: {
-                    type: "notify",
-                    target: "DT",
-                    actionLabel: "Notificar Garantías Aprobadas",
-                    emailSubject: "Garantías Aprobadas - Listo para Acta de Inicio",
-                    emailBody: "Hola,\n\nLes informo que las pólizas de garantía cargadas por el contratista han sido aprobadas jurídicamente. Una vez Presupuesto emita el Registro Presupuestal (RP), se puede proceder con la firma del Acta de Inicio.\n\nAtentamente,\nAbogado de Contratos"
-                }
+                coordination: null
             },
             {
-                id: "ac_fase12_notificacion",
+                id: "ac_fase12_proyectar_designación",
                 role: "ac",
                 fase: "Fase 12",
-                title: "Notificación formal de supervisión",
-                desc: "Remitir el oficio de designación del supervisor y datos de contacto.",
-                subtasks: [
-                    "Confirmar que el Ordenador firmó la designación del supervisor.",
-                    "Remitir oficio formal de supervisión con datos de contacto."
-                ],
-                notePlaceholder: "Añadir número de radicado del oficio...",
-                blockedBy: ["og_fase12_designacion"],
-                blockMessage: "Se aconseja que el Oficio de Designación esté firmado por el Ordenador."
+                title: "Proyectar designación de supervisor",
+                desc: "Envíe la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software.",
+                subtasks: ["Envía la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software."],
+                notePlaceholder: "Añadir notas sobre proyectar designación de supervisor...",
+                blockedBy: ["og_fase12_firmar_designación"],
+                blockMessage: "Se aconseja contar con la firma de designación del Ordenador del Gasto.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
             },
-            
-            // PR
             {
-                id: "pr_fase1_cdp",
+                id: "pr_fase1_verificar_acopio",
                 role: "pr",
                 fase: "Fase 1",
-                title: "Expedición de CDP",
-                desc: "Reservar recursos en el SIIF Nación de acuerdo al Plan Anual de Adquisiciones.",
-                subtasks: [
-                    "Verificar rubro presupuestal y Plan de Adquisiciones.",
-                    "Generar CDP oficial en sistema SIIF Nación.",
-                    "Cargar PDF de CDP firmado.",
-                    "Notificar expedición de CDP a la DT solicitante."
-                ],
-                notePlaceholder: "Añadir número de CDP y valor reservado...",
+                title: "Verificar acopio de recursos",
+                desc: "Verifique que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad.",
+                subtasks: ["Verifica que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad."],
+                notePlaceholder: "Añadir notas sobre verificar acopio de recursos...",
+                blockedBy: [],
+                blockMessage: "",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "pr_fase1_expedir_cdp",
+                role: "pr",
+                fase: "Fase 1",
+                title: "Expedir CDP (SIIF Nación)",
+                desc: "Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica.",
+                subtasks: ["Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica."],
+                notePlaceholder: "Añadir notas sobre expedir cdp (siif nación)...",
+                blockedBy: ["pr_fase1_verificar_acopio"],
+                blockMessage: "Se sugiere verificar el acopio de recursos en el Plan Anual antes de expedir el CDP.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
                     target: "DT",
                     actionLabel: "Notificar CDP Expedido",
-                    emailSubject: "CDP Expedido - Trámite Contratación",
-                    emailBody: "Hola Dependencia Técnica,\n\nLes informo que el Certificado de Disponibilidad Presupuestal (CDP) ha sido expedido satisfactoriamente. Pueden continuar con el trámite de Estudios Previos.\n\nAtentamente,\nPresupuesto"
+                    emailSubject: "Certificado de Disponibilidad Presupuestal (CDP) Expedido",
+                    emailBody: `Hola Dependencia Técnica,
+
+Les informo que el CDP correspondiente para el trámite de contratación ha sido expedido en el SIIF Nación y se encuentra en el expediente.
+
+Atentamente,
+Presupuesto`
                 }
             },
             {
-                id: "pr_fase11_rp",
+                id: "pr_fase11_validar_orden",
                 role: "pr",
                 fase: "Fase 11",
-                title: "Expedición de RP",
-                desc: "Afectación presupuestal definitiva. Registrar la Orden de Compra en el SIIF.",
-                subtasks: [
-                    "Recibir notificación de Orden de Compra firmada.",
-                    "Verificar que el Registro Presupuestal corresponda al valor de adjudicación.",
-                    "Expedir RP oficial en SIIF.",
-                    "Notificar RP al supervisor (DT) y Abogado."
-                ],
-                notePlaceholder: "Añadir número de RP generado...",
-                blockedBy: ["og_fase10_firma"],
-                blockMessage: "Se sugiere que la Orden de Compra esté firmada antes de registrar el RP.",
+                title: "Validar Orden de Compra firmada",
+                desc: "Reciba la notificación de la Orden de Compra firmada en la plataforma transaccional de compras.",
+                subtasks: ["Recibe la notificación de la Orden de Compra firmada en la plataforma transaccional de compras."],
+                notePlaceholder: "Añadir notas sobre validar orden de compra firmada...",
+                blockedBy: ["og_fase10_firma_digital"],
+                blockMessage: "Se requiere que la Orden de Compra esté firmada por el Ordenador y el contratista.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "pr_fase11_expedir_rp",
+                role: "pr",
+                fase: "Fase 11",
+                title: "Expedir RP (SIIF Nación)",
+                desc: "Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos.",
+                subtasks: ["Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos."],
+                notePlaceholder: "Añadir notas sobre expedir rp (siif nación)...",
+                blockedBy: ["pr_fase11_validar_orden"],
+                blockMessage: "Se sugiere validar la Orden de Compra antes de expedir el Registro Presupuestal (RP).",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
-                    target: "Supervisor",
+                    target: "DT/Abogado",
                     actionLabel: "Notificar RP Expedido",
-                    emailSubject: "Registro Presupuestal (RP) Expedido",
-                    emailBody: "Hola,\n\nLes informo que el Registro Presupuestal (RP) para el contrato ha sido expedido en el SIIF, quedando perfeccionada la afectación presupuestal.\n\nAtentamente,\nPresupuesto"
+                    emailSubject: "Registro Presupuestal (RP) Expedido - Perfeccionamiento",
+                    emailBody: `Hola,
+
+Informo que he expedido el Registro Presupuestal (RP) definitivo en el SIIF Nación con cargo a la Orden de Compra formalizada. Quedan reservados en firme los fondos.
+
+Atentamente,
+Presupuesto`
                 }
             },
-            
-            // OG
             {
-                id: "og_fase5_cancelacion",
+                id: "og_fase5_firmar_acto",
                 role: "og",
                 fase: "Fase 5",
-                title: "Firma de Cancelación Formal",
-                desc: "Expedir y firmar acto administrativo motivado de cancelación (solo si aplica por errores técnicos en RFQ).",
-                subtasks: [
-                    "Revisar justificación legal y técnica de error en RFQ.",
-                    "Firmar Acto Administrativo motivado de cancelación (Prohibida la cancelación directa por botón)."
-                ],
-                notePlaceholder: "Añadir justificación de cancelación o número de resolución..."
+                title: "Firmar Acto Administrativo de cancelación",
+                desc: "Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma.",
+                subtasks: ["Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma."],
+                notePlaceholder: "Añadir notas sobre firmar acto administrativo de cancelación...",
+                blockedBy: ["ac_fase5_proyectar_acto"],
+                blockMessage: "Se sugiere que el Abogado proyecte la resolución motivada de cancelación.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
             },
             {
-                id: "og_fase10_firma",
+                id: "og_fase10_validación_concurrente",
                 role: "og",
                 fase: "Fase 10",
-                title: "Adjudicación y Firma de OC",
-                desc: "Suscripción formal de la Orden de Compra (OC) en la Tienda Virtual (TVEC).",
-                subtasks: [
-                    "Confirmar que el Abogado emitió visto bueno de adjudicación.",
-                    "Firmar digitalmente la Orden de Compra (OC) en la Tienda Virtual (TVEC).",
-                    "Notificar firma a Presupuesto y Abogado."
-                ],
-                notePlaceholder: "Añadir número de Orden de Compra firmada...",
-                blockedBy: ["ac_fase9_consolidacion"],
-                blockMessage: "Se recomienda que el Abogado emita el visto bueno de adjudicación primero.",
+                title: "Validación concurrente",
+                desc: "Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades.",
+                subtasks: ["Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades."],
+                notePlaceholder: "Añadir notas sobre validación concurrente...",
+                blockedBy: ["ac_fase10_visto_bueno"],
+                blockMessage: "Se sugiere esperar el visto bueno formal de Contratos.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
+                coordination: null
+            },
+            {
+                id: "og_fase10_firma_digital",
+                role: "og",
+                fase: "Fase 10",
+                title: "Firma digital de la OC",
+                desc: "Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra.",
+                subtasks: ["Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra."],
+                notePlaceholder: "Añadir notas sobre firma digital de la oc...",
+                blockedBy: ["og_fase10_validación_concurrente"],
+                blockMessage: "Se aconseja completar la validación de antecedentes antes de firmar.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
                     target: "Presupuesto/Abogado",
                     actionLabel: "Notificar OC Firmada",
-                    emailSubject: "Orden de Compra Firmada - Trámite de Registro y Garantías",
-                    emailBody: "Hola,\n\nInformo que la Orden de Compra ha sido firmada digitalmente en la Tienda Virtual (TVEC). Agradezco proceder con la expedición del Registro Presupuestal (RP) y la revisión de pólizas de garantía.\n\nAtentamente,\nOrdenador del Gasto"
+                    emailSubject: "Orden de Compra Firmada - MHCP",
+                    emailBody: `Hola,
+
+Les informo que he firmado digitalmente la Orden de Compra (OC) en la Tienda Virtual. Agradezco proceder con la expedición del RP y la legalización de pólizas.
+
+Atentamente,
+Ordenador del Gasto`
                 }
             },
             {
-                id: "og_fase12_designacion",
+                id: "og_fase12_firmar_designación",
                 role: "og",
                 fase: "Fase 12",
-                title: "Firma de Designación",
-                desc: "Autorizar formalmente el inicio del contrato mediante firma del oficio de designación de supervisión.",
-                subtasks: [
-                    "Confirmar firma del Acta de Inicio por el Supervisor.",
-                    "Firmar oficio de designación del supervisor técnico.",
-                    "Notificar designación al Abogado."
-                ],
-                notePlaceholder: "Añadir datos del supervisor designado...",
-                blockedBy: ["dt_fase12_inicio"],
-                blockMessage: "Se sugiere que el Supervisor haya firmado el Acta de Inicio.",
+                title: "Firmar designación de supervisión",
+                desc: "Firma el memorando de designación técnica proyectado por Contratos.",
+                subtasks: ["Firma el memorando de designación técnica proyectado por Contratos."],
+                notePlaceholder: "Añadir notas sobre firmar designación de supervisión...",
+                blockedBy: ["ac_fase12_proyectar_designación"],
+                blockMessage: "Se sugiere que el Abogado proyecte el memorando de designación.",
+                hasCalendar: false,
+                calendarTitle: "",
+                calendarDesc: "",
                 coordination: {
                     type: "notify",
-                    target: "Abogado",
+                    target: "Abogado/DT",
                     actionLabel: "Notificar Designación Firmada",
-                    emailSubject: "Oficio de Designación de Supervisión Firmado",
-                    emailBody: "Hola,\n\nInformo que he firmado el Oficio de Designación de Supervisión para el contrato. Agradezco proceder con la notificación formal.\n\nAtentamente,\nOrdenador del Gasto"
+                    emailSubject: "Designación de Supervisión Contractual Firmada",
+                    emailBody: `Hola,
+
+Informo que he firmado el memorando de designación de supervisión técnica. Se puede proceder con la firma del Acta de Inicio.
+
+Atentamente,
+Ordenador del Gasto`
                 }
             }
+        ]
         ];
 
         // State structure for local-only storage
@@ -2067,7 +2447,7 @@
                     name: "Fase 1: Asignación de Presupuesto (CDP)",
                     desc: "Presupuesto expide CDP oficial en el SIIF.",
                     icon: "fa-file-invoice-dollar",
-                    isCompleted: !!cState["pr_fase1_cdp"],
+                    isCompleted: !!cState["pr_fase1_expedir_cdp"],
                     isBlocked: false,
                     get status() {
                         return this.isCompleted ? "completed" : "pending";
@@ -2077,9 +2457,9 @@
                     name: "Fase 2: Co-diseño de Estudios Previos",
                     desc: "DT y Abogado redactan pliegos y matriz de riesgos conjunta.",
                     icon: "fa-scale-balanced",
-                    isCompleted: !!cState["dt_fase2_codiseno"] && !!cState["ac_fase2_codiseno"],
+                    isCompleted: !!cState["dt_fase2_coredactar_estudios"] && !!cState["ac_fase2_asegurar_orden"],
                     get isBlocked() {
-                        return !cState["pr_fase1_cdp"];
+                        return !cState["pr_fase1_expedir_cdp"];
                     },
                     get status() {
                         if (this.isCompleted) return "completed";
@@ -2090,9 +2470,9 @@
                     name: "Fase 4: Publicación en TVEC",
                     desc: "Abogado publica evento RFQ oficial en la Tienda Virtual.",
                     icon: "fa-paper-plane",
-                    isCompleted: !!cState["ac_fase4_rfq"],
+                    isCompleted: !!cState["ac_fase4_publicar_la"],
                     get isBlocked() {
-                        return !cState["dt_fase2_codiseno"] || !cState["ac_fase2_codiseno"];
+                        return !cState["dt_fase2_coredactar_estudios"] || !cState["ac_fase2_asegurar_orden"];
                     },
                     get status() {
                         if (this.isCompleted) return "completed";
@@ -2103,9 +2483,9 @@
                     name: "Fase 7-8: Mitigación de Riesgos",
                     desc: "DT valida exenciones e IVA; Abogado evalúa REDAM y antecedentes.",
                     icon: "fa-shield-halved",
-                    isCompleted: !!cState["dt_fase8_precios"] && !!cState["ac_fase7_antecedentes"],
+                    isCompleted: !!cState["dt_fase8_verificación_de"] && !!cState["ac_fase7_filtro_de"],
                     get isBlocked() {
-                        return !cState["ac_fase4_rfq"];
+                        return !cState["ac_fase4_publicar_la"];
                     },
                     get status() {
                         if (this.isCompleted) return "completed";
@@ -2116,9 +2496,9 @@
                     name: "Fase 10: Firma de Orden de Compra",
                     desc: "El Ordenador del Gasto suscribe la OC con visto bueno técnico-legal.",
                     icon: "fa-signature",
-                    isCompleted: !!cState["og_fase10_firma"],
+                    isCompleted: !!cState["og_fase10_firma_digital"],
                     get isBlocked() {
-                        return !cState["ac_fase9_consolidacion"];
+                        return !cState["ac_fase9_consolidación_y"];
                     },
                     get status() {
                         if (this.isCompleted) return "completed";
@@ -2129,9 +2509,9 @@
                     name: "Fase 11: Garantías y Afectación Presupuestal",
                     desc: "Abogado aprueba pólizas; Presupuesto expide Registro Presupuestal RP.",
                     icon: "fa-lock",
-                    isCompleted: !!cState["ac_fase11_garantias"] && !!cState["pr_fase11_rp"],
+                    isCompleted: !!cState["ac_fase11_control_de"] && !!cState["pr_fase11_expedir_rp"],
                     get isBlocked() {
-                        return !cState["og_fase10_firma"];
+                        return !cState["og_fase10_firma_digital"];
                     },
                     get status() {
                         if (this.isCompleted) return "completed";
@@ -2142,9 +2522,9 @@
                     name: "Fase 12: Inicio de Contrato",
                     desc: "Supervisor firma acta de inicio, se designa y notifica formalmente.",
                     icon: "fa-play",
-                    isCompleted: !!cState["dt_fase12_inicio"] && !!cState["og_fase12_designacion"] && !!cState["ac_fase12_notificacion"],
+                    isCompleted: !!cState["dt_fase12_coordinar_firma"] && !!cState["og_fase12_firmar_designación"] && !!cState["ac_fase12_proyectar_designación"],
                     get isBlocked() {
-                        return !cState["ac_fase11_garantias"] || !cState["pr_fase11_rp"];
+                        return !cState["ac_fase11_control_de"] || !cState["pr_fase11_expedir_rp"];
                     },
                     get status() {
                         if (this.isCompleted) return "completed";
