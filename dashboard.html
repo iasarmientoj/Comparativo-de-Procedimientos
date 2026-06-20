@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,15 @@
     <!-- Google Fonts: Cormorant Garamond, Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <!-- FontAwesome Icons for sidebar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="welcome.css">
     <link rel="stylesheet" href="dashboard.css">
 </head>
+
 <body class="welcome-body dashboard-body">
     <!-- Moving background blur circles -->
     <div class="bg-blur-container">
@@ -53,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <button class="nav-btn active" id="btn-proc-anterior" onclick="switchPanel('proc-anterior')">
                     <i class="fa-solid fa-clock-rotate-left"></i>
@@ -94,7 +98,8 @@
         <main class="dashboard-viewport">
             <header class="viewport-header">
                 <h1 id="viewport-title" class="viewport-title">Procedimiento Vigente</h1>
-                <p id="viewport-subtitle" class="viewport-subtitle">Análisis estructurado y diagnóstico de vulnerabilidades</p>
+                <p id="viewport-subtitle" class="viewport-subtitle">Análisis estructurado y diagnóstico de
+                    vulnerabilidades</p>
             </header>
 
             <div class="viewport-content">
@@ -105,7 +110,8 @@
                         <div class="old-steps-panel card-glass">
                             <div class="panel-section-header">
                                 <h3><i class="fa-solid fa-list-ol"></i> Pasos del Flujo Vigente</h3>
-                                <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un paso</span>
+                                <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un
+                                    paso</span>
                             </div>
                             <div class="old-steps-list" id="old-steps-list">
                                 <!-- Injectado por JS -->
@@ -127,7 +133,8 @@
                             <!-- Detail & Diagnosis Panel -->
                             <div class="old-diagnosis-panel card-glass">
                                 <div class="panel-section-header">
-                                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Diagnóstico Jurídico y Riesgos</h3>
+                                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Diagnóstico Jurídico y Riesgos
+                                    </h3>
                                 </div>
                                 <div class="diagnosis-container" id="old-diagnosis-container">
                                     <!-- Injectado por JS -->
@@ -144,7 +151,8 @@
                         <div class="new-steps-panel card-glass">
                             <div class="panel-section-header">
                                 <h3><i class="fa-solid fa-shield-halved"></i> Pasos del Flujo Mejorado</h3>
-                                <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un paso</span>
+                                <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona un
+                                    paso</span>
                             </div>
                             <div class="new-steps-list" id="new-steps-list">
                                 <!-- Inyectado por JS -->
@@ -156,7 +164,8 @@
                             <!-- Roles Panel -->
                             <div class="new-roles-panel card-glass">
                                 <div class="panel-section-header">
-                                    <h3><i class="fa-solid fa-users-viewfinder"></i> Matriz de Co-responsabilidad y Roles</h3>
+                                    <h3><i class="fa-solid fa-users-viewfinder"></i> Matriz de Co-responsabilidad y
+                                        Roles</h3>
                                 </div>
                                 <div class="roles-container" id="new-roles-container">
                                     <!-- Inyectado por JS -->
@@ -186,7 +195,8 @@
                                 <i class="fa-solid fa-chevron-down" id="sim-chevron"></i>
                                 <div class="sim-info-block">
                                     <h4 id="sim-selected-title">Ningún caso seleccionado</h4>
-                                    <p id="sim-selected-desc">Selecciona uno de los 5 casos de estudio para iniciar la simulación comparativa de flujos.</p>
+                                    <p id="sim-selected-desc">Selecciona uno de los 5 casos de estudio para iniciar la
+                                        simulación comparativa de flujos.</p>
                                 </div>
                             </div>
                             <div class="sim-buttons-group" onclick="event.stopPropagation();">
@@ -210,7 +220,8 @@
                     <!-- Columnas de Flujo en Paralelo -->
                     <div class="sim-columns-grid">
                         <!-- Columna Izquierda: Flujo Vigente -->
-                        <div class="sim-column-panel card-glass" id="sim-panel-vigente" style="padding: 20px; position: relative;">
+                        <div class="sim-column-panel card-glass" id="sim-panel-vigente"
+                            style="padding: 20px; position: relative;">
                             <!-- Alerta de riesgo animada overlay -->
                             <div class="sim-warning-overlay" id="sim-warning-overlay">
                                 <div class="warning-animation-wrapper">
@@ -218,12 +229,15 @@
                                     <div class="warning-ripple"></div>
                                     <i class="fa-solid fa-triangle-exclamation animated-warning"></i>
                                     <h3 class="warning-text" id="warning-overlay-title">Riesgos Detectados</h3>
-                                    <p class="warning-subtext" id="warning-overlay-subtext">Vulnerabilidades críticas materializadas</p>
+                                    <p class="warning-subtext" id="warning-overlay-subtext">Vulnerabilidades críticas
+                                        materializadas</p>
                                 </div>
                             </div>
                             <div class="panel-section-header" style="margin-bottom: 16px;">
                                 <h3><i class="fa-solid fa-clock"></i> Procedimiento Actual</h3>
-                                <span class="badge-status" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">MHCP Vigente</span>
+                                <span class="badge-status"
+                                    style="background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">MHCP
+                                    Vigente</span>
                             </div>
                             <div class="sim-steps-wrapper" id="sim-list-vigente">
                                 <!-- Inyectado por JS -->
@@ -232,7 +246,8 @@
                         </div>
 
                         <!-- Columna Derecha: Flujo Mejorado -->
-                        <div class="sim-column-panel card-glass" id="sim-panel-mejorado" style="padding: 20px; position: relative;">
+                        <div class="sim-column-panel card-glass" id="sim-panel-mejorado"
+                            style="padding: 20px; position: relative;">
                             <!-- Escudo de protección animado overlay -->
                             <div class="sim-shield-overlay" id="sim-shield-overlay">
                                 <div class="shield-animation-wrapper">
@@ -240,12 +255,14 @@
                                     <div class="shield-ripple"></div>
                                     <i class="fa-solid fa-shield-halved animated-shield"></i>
                                     <h3 class="shield-text" id="shield-overlay-title">Control Activado</h3>
-                                    <p class="shield-subtext" id="shield-overlay-subtext">Riesgo contractual mitigado con éxito</p>
+                                    <p class="shield-subtext" id="shield-overlay-subtext">Riesgo contractual mitigado
+                                        con éxito</p>
                                 </div>
                             </div>
                             <div class="panel-section-header" style="margin-bottom: 16px;">
                                 <h3><i class="fa-solid fa-shield-halved"></i> Procedimiento Mejorado</h3>
-                                <span class="badge-status" style="background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">Propuesta</span>
+                                <span class="badge-status"
+                                    style="background: rgba(16, 185, 129, 0.1); color: #10b981; font-size: 0.68rem; padding: 2px 8px; font-weight: 700; text-transform: uppercase; border-radius: 2px;">Propuesta</span>
                             </div>
                             <div class="sim-steps-wrapper" id="sim-list-mejorado">
                                 <!-- Inyectado por JS -->
@@ -257,109 +274,11 @@
 
                 <!-- PANEL: SISTEMA DE AUTOGESTIÓN -->
                 <div class="dashboard-panel" id="panel-sis-autogestion">
-                    <!-- Pantalla 1: Selección de Rol -->
-                    <div class="auto-role-select-view" id="auto-role-select-view">
-                        <div class="auto-select-header">
-                            <h2>¿Con qué rol deseas ingresar al Sistema de Autogestión?</h2>
-                            <p>Tus datos son 100% locales, privados y se guardan únicamente en este dispositivo.</p>
-                        </div>
-                        <div class="auto-roles-grid">
-                            <div class="auto-role-card card-glass" onclick="enterAutogestion('dt')">
-                                <div class="role-icon-wrapper dt-color">
-                                    <i class="fa-solid fa-laptop-code"></i>
-                                </div>
-                                <h4>Dependencia Técnica</h4>
-                                <p>Define las necesidades, cotiza en el catálogo y realiza la evaluación técnica de ofertas.</p>
-                                <span class="enter-badge dt-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
-                            </div>
-                            <div class="auto-role-card card-glass" onclick="enterAutogestion('ac')">
-                                <div class="role-icon-wrapper ac-color">
-                                    <i class="fa-solid fa-scale-balanced"></i>
-                                </div>
-                                <h4>Abogado de Contratos</h4>
-                                <p>Acompaña la estructuración, publica las RFQ, evalúa antecedentes y aprueba garantías.</p>
-                                <span class="enter-badge ac-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
-                            </div>
-                            <div class="auto-role-card card-glass" onclick="enterAutogestion('pr')">
-                                <div class="role-icon-wrapper pr-color">
-                                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                                </div>
-                                <h4>Presupuesto</h4>
-                                <p>Valida los recursos asignados al plan anual y expide los certificados CDP y registros RP.</p>
-                                <span class="enter-badge pr-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
-                            </div>
-                            <div class="auto-role-card card-glass" onclick="enterAutogestion('og')">
-                                <div class="role-icon-wrapper og-color">
-                                    <i class="fa-solid fa-user-tie"></i>
-                                </div>
-                                <h4>Ordenador del Gasto</h4>
-                                <p>Firma digitalmente la Orden de Compra y autoriza el inicio y la designación de supervisores.</p>
-                                <span class="enter-badge og-color">Ingresar <i class="fa-solid fa-arrow-right"></i></span>
-                            </div>
-                        </div>
-                        <div class="auto-persistence-header" style="margin-top: 30px; text-align: center;">
-                            <button class="footer-btn" onclick="triggerImportState()" style="display: inline-flex; margin: 0 auto;"><i class="fa-solid fa-file-import"></i> Cargar Estado Anterior</button>
-                        </div>
-                    </div>
-
-                    <!-- Pantalla 2: Workspace de Trabajo -->
-                    <div class="auto-workspace-view" id="auto-workspace-view" style="display: none;">
-                        <div class="auto-workspace-header card-glass">
-                            <div class="role-badge-title">
-                                <div class="role-icon-mini" id="active-role-icon"></div>
-                                <div>
-                                    <span class="role-subtitle-label">Perfil de Autogestión</span>
-                                    <h3 id="active-role-name">Nombre del Rol</h3>
-                                </div>
-                            </div>
-                            
-                            <div class="auto-header-buttons">
-                                <button class="action-btn-secondary btn-small" onclick="backToRoleSelect()"><i class="fa-solid fa-chevron-left"></i> Cambiar Rol</button>
-                                <button class="action-btn btn-small" onclick="saveAutogestionState()"><i class="fa-solid fa-floppy-disk"></i> Guardar Estado</button>
-                                <button class="action-btn-secondary btn-small" onclick="triggerImportState()"><i class="fa-solid fa-file-import"></i> Cargar Estado</button>
-                                <button class="action-btn-secondary btn-small btn-danger" onclick="resetAutogestionState()"><i class="fa-solid fa-trash-can"></i> Reiniciar</button>
-                            </div>
-                        </div>
-
-                        <div class="privacy-banner">
-                            <i class="fa-solid fa-shield-halved"></i> <span><strong>Privacidad garantizada:</strong> Todos los datos se procesan localmente en tu navegador. Ninguna información es transmitida.</span>
-                        </div>
-
-                        <div class="auto-workspace-grid">
-                            <!-- Columna Izquierda: Checklist de Tareas del Rol -->
-                            <div class="auto-checklist-column">
-                                <div class="panel-section-header">
-                                    <h3><i class="fa-solid fa-list-check"></i> Tus Tareas en el Flujo</h3>
-                                    <span class="hint-text">Marca las tareas a medida que las completes</span>
-                                </div>
-                                <div class="auto-tasks-list" id="auto-tasks-list">
-                                    <!-- Inyectado por JS -->
-                                </div>
-                            </div>
-
-                            <!-- Columna Derecha: Estado Global e Interconexiones -->
-                            <div class="auto-sidebar-column">
-                                <!-- Progreso General -->
-                                <div class="auto-progress-panel card-glass">
-                                    <div class="panel-section-header">
-                                        <h4><i class="fa-solid fa-chart-line"></i> Progreso del Contrato</h4>
-                                    </div>
-                                    <div class="progress-bars-container" id="auto-progress-bars">
-                                        <!-- Inyectado por JS -->
-                                    </div>
-                                </div>
-
-                                <!-- Alertas y Bloqueos de Coordinación -->
-                                <div class="auto-alerts-panel card-glass">
-                                    <div class="panel-section-header">
-                                        <h4><i class="fa-solid fa-route"></i> Coordinación entre Roles</h4>
-                                    </div>
-                                    <div class="alerts-container" id="auto-coordination-alerts">
-                                        <!-- Inyectado por JS -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="structure-placeholder">
+                        <i class="fa-solid fa-laptop-code placeholder-icon"></i>
+                        <h3>Sistema de Autogestión</h3>
+                        <p>Estructura lista para la gestión de documentos, estudios previos automatizados y plantillas.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -424,7 +343,7 @@
             // Update titles
             const titleEl = document.getElementById('viewport-title');
             const subtitleEl = document.getElementById('viewport-subtitle');
-            
+
             switch (panelId) {
                 case 'proc-anterior':
                     titleEl.textContent = 'Procedimiento Vigente';
@@ -1124,7 +1043,7 @@
         function resetSimulation() {
             renderSimSteps();
             document.getElementById('btn-reiniciar-sim').style.display = 'none';
-            
+
             const shieldOverlay = document.getElementById('sim-shield-overlay');
             if (shieldOverlay) {
                 shieldOverlay.classList.remove('active');
@@ -1133,7 +1052,7 @@
             if (warningOverlay) {
                 warningOverlay.classList.remove('active');
             }
-            
+
             const oldResultEl = document.getElementById('sim-result-vigente');
             if (oldResultEl) {
                 oldResultEl.classList.remove('visible');
@@ -1166,7 +1085,7 @@
             if (!el || !container) return;
             const containerRect = container.getBoundingClientRect();
             const elRect = el.getBoundingClientRect();
-            
+
             if (elRect.top < containerRect.top || elRect.bottom > containerRect.bottom) {
                 const scrollTopDiff = elRect.top - containerRect.top;
                 container.scrollTo({
@@ -1232,7 +1151,7 @@
                 if (node) {
                     node.classList.remove('approved');
                     node.classList.add('warning');
-                    
+
                     const warnContainer = document.getElementById(`warn-box-${step.id}`);
                     if (warnContainer) {
                         warnContainer.innerHTML = `
@@ -1383,13 +1302,13 @@
             const stepsList = document.getElementById('old-steps-list');
             if (!stepsList) return;
             stepsList.innerHTML = '';
-            
+
             oldProcedureSteps.forEach((step, index) => {
                 const item = document.createElement('div');
                 item.className = 'old-step-item';
                 item.id = `old-step-item-${index}`;
                 item.setAttribute('onclick', `selectOldStep(${index})`);
-                
+
                 item.innerHTML = `
                     <div class="old-step-letter risk-${step.risk}">${step.letter}</div>
                     <div class="old-step-info">
@@ -1418,9 +1337,9 @@
                 rolesContainer.innerHTML = '';
                 step.roles.forEach(role => {
                     const icon = role.name.includes("Ingeniero") ? "fa-laptop-code" :
-                                 role.name.includes("Contratos") ? "fa-user-shield" :
-                                 role.name.includes("Financiera") ? "fa-file-invoice-dollar" : "fa-user-tie";
-                    
+                        role.name.includes("Contratos") ? "fa-user-shield" :
+                            role.name.includes("Financiera") ? "fa-file-invoice-dollar" : "fa-user-tie";
+
                     rolesContainer.innerHTML += `
                         <div class="role-workload-item">
                             <div class="role-name-row">
@@ -1473,13 +1392,13 @@
             const stepsList = document.getElementById('new-steps-list');
             if (!stepsList) return;
             stepsList.innerHTML = '';
-            
+
             newProcedureSteps.forEach((step, index) => {
                 const item = document.createElement('div');
                 item.className = 'new-step-item';
                 item.id = `new-step-item-${index}`;
                 item.setAttribute('onclick', `selectNewStep(${index})`);
-                
+
                 item.innerHTML = `
                     <div class="new-step-letter phva-${step.phva}">${step.letter}</div>
                     <div class="new-step-info">
@@ -1511,7 +1430,7 @@
                     if (role.name.includes("Técnica")) icon = "fa-laptop-code";
                     else if (role.name.includes("Contratos")) icon = "fa-user-shield";
                     else if (role.name.includes("Presupuesto")) icon = "fa-file-invoice-dollar";
-                    
+
                     rolesContainer.innerHTML += `
                         <div class="role-workload-item">
                             <div class="role-name-row">
@@ -1563,1272 +1482,12 @@
             }
         }
 
-        /* ==========================================================================
-           SISTEMA DE AUTOGESTIÓN JAVASCRIPT (MODULAR Y ASISTIDO)
-           ========================================================================== */
-
-        // Task definitions for each role
-        const autogestionTasks = [
-[
-            {
-                id: "dt_fase1_definir_el",
-                role: "dt",
-                fase: "Fase 1",
-                title: "Definir el requerimiento técnico",
-                desc: "Escriba detalladamente las especificaciones del bien o servicio y seleccione los catálogos correspondientes que se encuentren vigentes en la Tienda Virtual.",
-                subtasks: ["Consulta el listado de marcas y catálogos vigentes del Acuerdo en el portal de CCE.", "Redacta el Anexo Técnico de especificaciones utilizando como plantilla el archivo **'03. Anexo Técnico 02 - Especificaciones técnicas transversales'**.", "Si estás adquiriendo suites de oficina o colaboración corporativa, incorpora las exigencias del documento **'04. Anexo Técnico 03 - Suplementos Suite Corporativa'**."],
-                notePlaceholder: "Añadir notas sobre definir el requerimiento técnico...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase1_verificar_vigencia",
-                role: "dt",
-                fase: "Fase 1",
-                title: "Verificar vigencia del AMP",
-                desc: "Consulte el catálogo oficial en SECOP/Colombia Compra Eficiente para validar que el Acuerdo Marco sigue activo.",
-                subtasks: ["Ingresa a Colombia Compra Eficiente y constata que la fecha de terminación del Acuerdo Marco de Software II no haya expirado y que esté habilitada la colocación de Órdenes de Compra."],
-                notePlaceholder: "Añadir notas sobre verificar vigencia del amp...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase1_ejecutar_el",
-                role: "dt",
-                fase: "Fase 1",
-                title: "Ejecutar el simulador oficial de costos",
-                desc: "Utilice el simulador oficial de costos para calcular el valor estimado de la contratación, asegurando incluir retenciones y estampillas territoriales.",
-                subtasks: ["Descarga el archivo Excel **'08. Simulador'** oficial de la Tienda Virtual (recuerda hacer clic en \"Habilitar Edición\" y \"Desbloquear contenido\" en Excel).", "Digita las cantidades y perfiles requeridos para obtener el costo base oficial del catálogo.", "Realiza el cálculo manual de la contribución MHCP (Estampillas y Timbre) guiándote con el **'10. Comunicado Impuesto de timbre'** y súmalo al presupuesto estimado final (esta adición es obligatoria para el MHCP y no la realiza el simulador de CCE automáticamente)."],
-                notePlaceholder: "Añadir notas sobre ejecutar el simulador oficial de costos...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "request",
-                    target: "Presupuesto",
-                    actionLabel: "Solicitar CDP",
-                    emailSubject: "Solicitud de CDP - Simulador y Ficha Técnica Listos",
-                    emailBody: `Hola Presupuesto,
-
-He completado la simulación oficial de costos para la adquisición de software por catálogo. Solicito amablemente la expedición del CDP correspondiente para continuar con la contratación.
-
-Atentamente,
-Dependencia Técnica`
-                }
-            },
-            {
-                id: "dt_fase2_enviar_insumos",
-                role: "dt",
-                fase: "Fase 2",
-                title: "Enviar insumos a Contratos",
-                desc: "Remita la ficha técnica con las especificaciones y la cotización preliminar al Abogado de Contratos asignado para iniciar el proceso.",
-                subtasks: ["Valida que el Anexo Técnico y el cuadro de cotización preliminar definitivo se encuentren firmados digitalmente por ti.", "Remite la documentación al Abogado de Contratos asignado mediante memorando oficial interno adjuntando el simulador en Excel y el soporte PDF."],
-                notePlaceholder: "Añadir notas sobre enviar insumos a contratos...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "Abogado",
-                    actionLabel: "Notificar Envío de Insumos",
-                    emailSubject: "Envío de Ficha Técnica e Insumos de Simulación",
-                    emailBody: `Estimado Abogado de Contratos,
-
-Le informo que he completado la simulación preliminar de costos en el catálogo oficial para la adquisición y he remitido los insumos técnicos firmados digitalmente. Quedo atento a su asesoría para co-diseñar los Estudios Previos.
-
-Atentamente,
-Dependencia Técnica`
-                }
-            },
-            {
-                id: "dt_fase2_coredactar_estudios",
-                role: "dt",
-                fase: "Fase 2",
-                title: "Co-redactar Estudios Previos",
-                desc: "Redacte activamente junto con el abogado el documento de Estudios Previos y la Matriz de Riesgos que justificarán la contratación.",
-                subtasks: ["Redacta el documento definitivo de Estudios Previos de la entidad, estructurando la justificación e idoneidad basándote en el contenido exigido en el **'07. Formato RFQ - Justificación de Compra'** de CCE.", "Co-diseña con el abogado la Matriz de Riesgos de ejecución, estableciendo los riesgos técnicos de soporte y actualización tecnológica."],
-                notePlaceholder: "Añadir notas sobre co-redactar estudios previos...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "Abogado",
-                    actionLabel: "Notificar Estudios Listos",
-                    emailSubject: "Borrador de Estudios Previos Co-redactado",
-                    emailBody: `Hola,
-
-He redactado la justificación técnica de compra y co-diseñado la matriz de riesgos técnicos. Quedo a su disposición para consolidar el documento final de Estudios Previos.
-
-Atentamente,
-Dependencia Técnica`
-                }
-            },
-            {
-                id: "dt_fase2_recibir_cdp",
-                role: "dt",
-                fase: "Fase 2",
-                title: "Recibir CDP (Certificado de Disponibilidad)",
-                desc: "Verifique que el área de presupuesto haya expedido y cargado el CDP antes de que el proceso inicie en la TVEC.",
-                subtasks: ["Confirma que el área de presupuesto haya expedido el Certificado de Disponibilidad Presupuestal (CDP) en SIIF Nación y lo haya cargado al expediente.", "Comprueba que el valor del CDP cubra la totalidad de la cotización final simulada."],
-                notePlaceholder: "Añadir notas sobre recibir cdp (certificado de disponibilidad)...",
-                blockedBy: ["pr_fase1_expedir_cdp"],
-                blockMessage: "Se sugiere confirmar la expedición del CDP por parte de Presupuesto.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase3_apoyo_técnico",
-                role: "dt",
-                fase: "Fase 3",
-                title: "Apoyo técnico en RFI / Indagación de Mercado",
-                desc: "Participe en la resolución de dudas técnicas planteadas por los proveedores durante la fase de RFI y aporte insumos para definir la conveniencia de la limitación MIPYME.",
-                subtasks: ["Acompañe al abogado en la revisión técnica de las consultas del RFI cargadas por los interesados en el portafolio de CCE utilizando el **'06. Formato RFI - Solicitud de información'**.", "Valide que los requerimientos técnicos analizados en esta fase pre-contractual se mantengan estables y no generen direccionamientos de mercado."],
-                notePlaceholder: "Añadir notas sobre apoyo técnico en rfi / indagación de mercado...",
-                blockedBy: ["ac_fase3_verificación_jurídica"],
-                blockMessage: "Se sugiere esperar a que el Abogado inicie la revisión del RFI.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase4_acompañamiento_técnico",
-                role: "dt",
-                fase: "Fase 4",
-                title: "Acompañamiento técnico en la publicación de la RFQ",
-                desc: "Revise la parametrización definitiva del evento en la Tienda Virtual (TVEC) antes de su publicación para asegurar que coincida con las especificaciones técnicas autorizadas.",
-                subtasks: ["Verifique que los anexos técnicos, el simulador de costos y las especificaciones finales cargadas por el abogado en la plataforma coincidan exactamente con la ficha técnica co-diseñada.", "Confirme que los plazos de entrega and las condiciones técnicas del servicio no hayan sufrido modificaciones en la configuración del evento."],
-                notePlaceholder: "Añadir notas sobre acompañamiento técnico en la publicación de la rfq...",
-                blockedBy: ["ac_fase4_publicar_la"],
-                blockMessage: "Se sugiere esperar a que el Abogado inicie la publicación de la RFQ.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase5_responder_observaciones",
-                role: "dt",
-                fase: "Fase 5",
-                title: "Responder observaciones técnicas",
-                desc: "Resuelva de manera objetiva las dudas técnicas que los oferentes publiquen en el foro oficial de la plataforma, evitando todo chat informal directo.",
-                subtasks: ["Descarga del foro oficial de la RFQ de la Tienda Virtual (TVEC) las dudas remitidas por los proponentes.", "Redacta las respuestas técnicas ciñéndose estrictamente a lo establecido en los Anexos Técnicos de CCE, evitando acuerdos informales con proveedores por chat."],
-                notePlaceholder: "Añadir notas sobre responder observaciones técnicas...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase5_gestión_de",
-                role: "dt",
-                fase: "Fase 5",
-                title: "Gestión de Cancelación (Si aplica)",
-                desc: "Absténgase de usar el botón de cancelación de la plataforma hasta no contar con el Acto Administrativo de cancelación firmado por el Ordenador.",
-                subtasks: ["En caso de error en cantidades o especificaciones en la RFQ, remite de inmediato la justificación técnica al abogado para que se proceda a formular la resolución de cancelación.", "No presiones el botón de cancelación de la plataforma TVEC si la resolución firmada por la Directora no ha sido expedida y cargada."],
-                notePlaceholder: "Añadir notas sobre gestión de cancelación (si aplica)...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase8_evaluar_propuesta",
-                role: "dt",
-                fase: "Fase 8",
-                title: "Evaluar propuesta de menor precio",
-                desc: "Compruebe que la oferta de menor costo cumpla al 100% con los requerimientos y la ficha técnica.",
-                subtasks: ["Descarga el sobre técnico del proveedor con la oferta de menor costo al cierre del evento.", "Compara ítem por ítem el cumplimiento de los requerimientos técnicos y las certificaciones del fabricante exigidas en el anexo técnico del proceso."],
-                notePlaceholder: "Añadir notas sobre evaluar propuesta de menor precio...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase8_verificación_de",
-                role: "dt",
-                fase: "Fase 8",
-                title: "Verificación de precios artificiales / IVA",
-                desc: "Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención.",
-                subtasks: ["Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención bajo las directrices de la Minuta."],
-                notePlaceholder: "Añadir notas sobre verificación de precios artificiales / iva...",
-                blockedBy: ["ac_fase4_publicar_la"],
-                blockMessage: "Se sugiere esperar a que el Abogado publique y parametrice el RFQ oficial.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "Abogado",
-                    actionLabel: "Enviar Concepto Técnico",
-                    emailSubject: "Concepto Técnico de Viabilidad y Precios/IVA",
-                    emailBody: `Hola,
-
-He realizado la evaluación técnica y validado la exención del IVA de la oferta de menor costo. Adjunto el concepto de viabilidad para su cargue y consolidación.
-
-Atentamente,
-Dependencia Técnica`
-                }
-            },
-            {
-                id: "dt_fase8_firmar_informe",
-                role: "dt",
-                fase: "Fase 8",
-                title: "Firmar informe técnico",
-                desc: "Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación.",
-                subtasks: ["Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación en la TVEC."],
-                notePlaceholder: "Añadir notas sobre firmar informe técnico...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase9_acompañamiento_en",
-                role: "dt",
-                fase: "Fase 9",
-                title: "Acompañamiento en traslado de evaluaciones",
-                desc: "Acompañe al abogado de contratos en la respuesta y justificación de las observaciones técnicas realizadas por los oferentes.",
-                subtasks: ["Revise las observaciones técnicas cargadas en la TVEC por los oferentes y proyecte la justificación técnica de aceptación o rechazo."],
-                notePlaceholder: "Añadir notas sobre acompañamiento en traslado de evaluaciones...",
-                blockedBy: ["ac_fase9_consolidación_y"],
-                blockMessage: "Se sugiere que el Abogado publique las evaluaciones antes del traslado.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase10_verificación_técnica",
-                role: "dt",
-                fase: "Fase 10",
-                title: "Verificación técnica de la Orden de Compra",
-                desc: "Valide que el borrador de la Orden de Compra contenga los ítems, marcas y licenciamientos acordes a la evaluación final.",
-                subtasks: ["Revise que el borrador de la Orden de Compra en la TVEC concuerde técnicamente con lo cotizado por el proveedor seleccionado."],
-                notePlaceholder: "Añadir notas sobre verificación técnica de la orden de compra...",
-                blockedBy: ["ac_fase10_visto_bueno"],
-                blockMessage: "Se aconseja que el Abogado emita el visto bueno de la Orden de Compra primero.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase12_recibir_designación",
-                role: "dt",
-                fase: "Fase 12",
-                title: "Recibir designación de supervisión",
-                desc: "Reciba el memorando de designación de supervisión contractual emitido por Contratos y asuma formalmente el rol y las responsabilidades del control contractual.",
-                subtasks: ["Recibe el memorando de designación de supervisión contractual emitido por Contratos y asume formalmente el rol y las responsabilidades del control contractual."],
-                notePlaceholder: "Añadir notas sobre recibir designación de supervisión...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "dt_fase12_coordinar_firma",
-                role: "dt",
-                fase: "Fase 12",
-                title: "Coordinar firma de Acta de Inicio",
-                desc: "Firme digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido.",
-                subtasks: ["Firma digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido."],
-                notePlaceholder: "Añadir notas sobre coordinar firma de acta de inicio...",
-                blockedBy: ["ac_fase11_control_de", "pr_fase11_expedir_rp"],
-                blockMessage: "Se aconseja que las garantías estén aprobadas y el RP esté expedido antes del inicio.",
-                hasCalendar: true,
-                calendarTitle: "Primer Comité de Seguimiento - Contrato MIN-AM",
-                calendarDesc: "Revisión técnica de inicio y plan de trabajo del supervisor. Recordatorio automático local.",
-                coordination: {
-                    type: "notify",
-                    target: "Contratos",
-                    actionLabel: "Notificar Acta Firmada",
-                    emailSubject: "Acta de Inicio Suscrita - Inicio Ejecución",
-                    emailBody: `Hola,
-
-Informo que el Acta de Inicio correspondiente al contrato ha sido firmada por el supervisor y el contratista con fecha de hoy. Se da inicio formal a la ejecución.
-
-Atentamente,
-Supervisor`
-                }
-            },
-            {
-                id: "ac_fase1_asesoría_jurídica",
-                role: "ac",
-                fase: "Fase 1",
-                title: "Asesoría jurídica preliminar sobre el AMP",
-                desc: "Brinde acompañamiento jurídico inicial a la Dependencia Técnica para validar que el objeto a contratar se enmarque en el alcance y vigencia del Acuerdo Marco de Software II.",
-                subtasks: ["Revise el alcance de las marcas y categorías autorizadas en la **'01. Minuta del Acuerdo'** para confirmar que la necesidad de la DT puede contratarse por esta vía."],
-                notePlaceholder: "Añadir notas sobre asesoría jurídica preliminar sobre el amp...",
-                blockedBy: ["dt_fase1_definir_el"],
-                blockMessage: "Se sugiere esperar a que la DT defina el requerimiento técnico.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase2_revisión_jurídica",
-                role: "ac",
-                fase: "Fase 2",
-                title: "Revisión jurídica de insumos",
-                desc: "Verifique que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados.",
-                subtasks: ["Verifica que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados en la **'01. Minuta del Acuerdo'** (evitando compras por fuera del alcance del AMP)."],
-                notePlaceholder: "Añadir notas sobre revisión jurídica de insumos...",
-                blockedBy: ["dt_fase2_enviar_insumos"],
-                blockMessage: "Se sugiere que la Dependencia Técnica envíe primero los insumos firmados.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase2_asegurar_orden",
-                role: "ac",
-                fase: "Fase 2",
-                title: "Asegurar orden legal de estudios",
-                desc: "Confirme que los Estudios Previos estén firmados digitalmente por el líder técnico y por usted antes de cualquier configuración o cargue en la plataforma de compras.",
-                subtasks: ["Confirma que los Estudios Previos estén firmados digitalmente por el líder técnico y por ti antes de realizar cualquier configuración o cargue en la plataforma de compras."],
-                notePlaceholder: "Añadir notas sobre asegurar orden legal de estudios...",
-                blockedBy: ["dt_fase2_coredactar_estudios"],
-                blockMessage: "Se aconseja esperar al co-diseño técnico de los Estudios Previos.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase3_verificación_jurídica",
-                role: "ac",
-                fase: "Fase 3",
-                title: "Verificación jurídica de limitación a MIPYMES",
-                desc: "Estructure las preguntas del RFI y analice las manifestaciones de interés recibidas para decidir si el proceso debe limitarse obligatoriamente a MIPYMES nacionales.",
-                subtasks: ["Si haces indagación de mercado previa, estructura las preguntas del RFI utilizando el **'06. Formato RFI - Solicitud de información'** del portafolio del Acuerdo.", "Analiza las manifestaciones de interés recibidas y elabora el concepto de limitación MIPYMES aplicando el Decreto 1860 de 2021."],
-                notePlaceholder: "Añadir notas sobre verificación jurídica de limitación a mipymes...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase4_publicar_la",
-                role: "ac",
-                fase: "Fase 4",
-                title: "Publicar la Solicitud de Cotización (RFQ)",
-                desc: "Configure el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico.",
-                subtasks: ["Configura el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico."],
-                notePlaceholder: "Añadir notas sobre publicar la solicitud de cotización (rfq)...",
-                blockedBy: ["ac_fase2_asegurar_orden"],
-                blockMessage: "Se sugiere firmar los Estudios Previos antes de publicar la RFQ.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "DT",
-                    actionLabel: "Notificar Publicación RFQ",
-                    emailSubject: "Solicitud de Cotización (RFQ) Publicada",
-                    emailBody: `Hola Dependencia Técnica,
-
-Les informo que la RFQ ha sido configurada y publicada exitosamente en la Tienda Virtual (TVEC) con los soportes de Estudios Previos y Anexo Técnico. Agradecemos estar atentos para la resolución de observaciones.
-
-Atentamente,
-Abogado de Contratos`
-                }
-            },
-            {
-                id: "ac_fase5_revisar_observaciones",
-                role: "ac",
-                fase: "Fase 5",
-                title: "Revisar observaciones jurídicas",
-                desc: "Consolide las respuestas técnicas y proyecte las respuestas legales en el foro oficial de la RFQ, publicando el cuadernillo definitivo a tiempo.",
-                subtasks: ["Consolida las respuestas técnicas y proyecta las respuestas legales en el foro oficial de la RFQ. Publica el cuadernillo consolidado antes de que venza el plazo del foro."],
-                notePlaceholder: "Añadir notas sobre revisar observaciones jurídicas...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase5_proyectar_acto",
-                role: "ac",
-                fase: "Fase 5",
-                title: "Proyectar Acto Administrativo de cancelación (Si aplica)",
-                desc: "Elabore el texto de la resolución motivada de cancelación del evento, explicando detalladamente la falla de planeación técnica.",
-                subtasks: ["Elabora el texto de la resolución motivada de cancelación del evento, explicando detalladamente la falla de planeación técnica fundamentado en la **'01. Minuta del Acuerdo'** de CCE."],
-                notePlaceholder: "Añadir notas sobre proyectar acto administrativo de cancelación (si aplica)...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase7_filtro_de",
-                role: "ac",
-                fase: "Fase 7",
-                title: "Filtro de Inhabilidades en tiempo real",
-                desc: "Descargue el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa de menor precio en el día de la evaluación.",
-                subtasks: ["Descarga el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa.", "Guarda los certificados PDF con la fecha y hora exacta del día de la evaluación para blindar el proceso.", "Revisa la **'11. Circular 001 2026 Ley de Garantías Electorales'** para asegurar que el proceso no contravenga restricciones de contratación pública electoral vigentes."],
-                notePlaceholder: "Añadir notas sobre filtro de inhabilidades en tiempo real...",
-                blockedBy: ["ac_fase4_publicar_la"],
-                blockMessage: "Se sugiere que el evento RFQ esté publicado antes de realizar el filtro.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase7_emitir_informe",
-                role: "ac",
-                fase: "Fase 7",
-                title: "Emitir informe jurídico",
-                desc: "Elabore la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firme la habilitación jurídica.",
-                subtasks: ["Elabora la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firma la habilitación jurídica."],
-                notePlaceholder: "Añadir notas sobre emitir informe jurídico...",
-                blockedBy: ["dt_fase8_evaluar_propuesta", "dt_fase8_verificación_de"],
-                blockMessage: "Se sugiere esperar la evaluación técnica y control de precios/IVA de la DT.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase8_acompañamiento_en",
-                role: "ac",
-                fase: "Fase 8",
-                title: "Acompañamiento en el control de precios bajos e IVA",
-                desc: "Apoye a la DT en la estructuración de solicitudes de aclaración legal ante exenciones del IVA no claras o indicios de precios artificiales.",
-                subtasks: ["Elabore el requerimiento legal para solicitar al proponente de menor costo la justificación del valor de sus ítems si se detecta un posible precio artificial."],
-                notePlaceholder: "Añadir notas sobre acompañamiento en el control de precios bajos e iva...",
-                blockedBy: ["dt_fase8_verificación_de"],
-                blockMessage: "Se sugiere esperar a que la DT realice la verificación de precios/IVA.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "ac_fase9_consolidación_y",
-                role: "ac",
-                fase: "Fase 9",
-                title: "Consolidación y traslado de evaluaciones",
-                desc: "Publique los informes de evaluación en la TVEC y habilite el plazo oficial de traslado para que los proponentes presenten sus observaciones.",
-                subtasks: ["Cargue en la plataforma de compras la evaluación jurídica y técnica y notifique formalmente a los proponentes el inicio del término de traslado."],
-                notePlaceholder: "Añadir notas sobre consolidación y traslado de evaluaciones...",
-                blockedBy: ["dt_fase8_firmar_informe"],
-                blockMessage: "Se sugiere que la DT firme el informe de evaluación técnica primero.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "DT",
-                    actionLabel: "Notificar Traslado",
-                    emailSubject: "Evaluaciones Publicadas - Inicio de Traslado",
-                    emailBody: `Hola Dependencia Técnica,
-
-Les informo que las evaluaciones jurídica y técnica han sido consolidadas y publicadas en la TVEC. Se da inicio al término de traslado para observaciones.
-
-Atentamente,
-Abogado de Contratos`
-                }
-            },
-            {
-                id: "ac_fase10_visto_bueno",
-                role: "ac",
-                fase: "Fase 10",
-                title: "Visto bueno de la Orden de Compra (OC)",
-                desc: "Envíe el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar.",
-                subtasks: ["Envía el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar."],
-                notePlaceholder: "Añadir notas sobre visto bueno de la orden de compra (oc)...",
-                blockedBy: ["ac_fase9_consolidación_y", "dt_fase8_firmar_informe"],
-                blockMessage: "Se recomienda consolidar las evaluaciones técnica y jurídica antes del visto bueno.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "request",
-                    target: "Ordenador",
-                    actionLabel: "Solicitar Firma de OC",
-                    emailSubject: "Visto Bueno de Orden de Compra Listo",
-                    emailBody: `Estimado Ordenador del Gasto,
-
-He proyectado y firmado el visto bueno de la Orden de Compra tras constatar la habilitación total del proponente de menor precio. Solicito amablemente la firma de la OC en la Tienda Virtual.
-
-Atentamente,
-Abogado de Contratos`
-                }
-            },
-            {
-                id: "ac_fase11_control_de",
-                role: "ac",
-                fase: "Fase 11",
-                title: "Control de Pólizas",
-                desc: "Revise en la Minuta las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo, y apruebe las garantías en plataforma.",
-                subtasks: ["Revisa en la **'01. Minuta del Acuerdo Marco'** las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo.", "Aprueba las garantías en plataforma una vez validadas."],
-                notePlaceholder: "Añadir notas sobre control de pólizas...",
-                blockedBy: ["og_fase10_firma_digital"],
-                blockMessage: "Se sugiere que la Orden de Compra esté firmada por el Ordenador para validar garantías.",
-                hasCalendar: true,
-                calendarTitle: "Vencimiento para entrega de Garantías - Contrato MHCP",
-                calendarDesc: "Recordatorio límite de 3 días para que el contratista suba garantías.",
-                coordination: null
-            },
-            {
-                id: "ac_fase12_proyectar_designación",
-                role: "ac",
-                fase: "Fase 12",
-                title: "Proyectar designación de supervisor",
-                desc: "Envíe la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software.",
-                subtasks: ["Envía la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software."],
-                notePlaceholder: "Añadir notas sobre proyectar designación de supervisor...",
-                blockedBy: ["og_fase12_firmar_designación"],
-                blockMessage: "Se aconseja contar con la firma de designación del Ordenador del Gasto.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "pr_fase1_verificar_acopio",
-                role: "pr",
-                fase: "Fase 1",
-                title: "Verificar acopio de recursos",
-                desc: "Verifique que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad.",
-                subtasks: ["Verifica que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad."],
-                notePlaceholder: "Añadir notas sobre verificar acopio de recursos...",
-                blockedBy: [],
-                blockMessage: "",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "pr_fase1_expedir_cdp",
-                role: "pr",
-                fase: "Fase 1",
-                title: "Expedir CDP (SIIF Nación)",
-                desc: "Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica.",
-                subtasks: ["Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica."],
-                notePlaceholder: "Añadir notas sobre expedir cdp (siif nación)...",
-                blockedBy: ["pr_fase1_verificar_acopio"],
-                blockMessage: "Se sugiere verificar el acopio de recursos en el Plan Anual antes de expedir el CDP.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "DT",
-                    actionLabel: "Notificar CDP Expedido",
-                    emailSubject: "Certificado de Disponibilidad Presupuestal (CDP) Expedido",
-                    emailBody: `Hola Dependencia Técnica,
-
-Les informo que el CDP correspondiente para el trámite de contratación ha sido expedido en el SIIF Nación y se encuentra en el expediente.
-
-Atentamente,
-Presupuesto`
-                }
-            },
-            {
-                id: "pr_fase11_validar_orden",
-                role: "pr",
-                fase: "Fase 11",
-                title: "Validar Orden de Compra firmada",
-                desc: "Reciba la notificación de la Orden de Compra firmada en la plataforma transaccional de compras.",
-                subtasks: ["Recibe la notificación de la Orden de Compra firmada en la plataforma transaccional de compras."],
-                notePlaceholder: "Añadir notas sobre validar orden de compra firmada...",
-                blockedBy: ["og_fase10_firma_digital"],
-                blockMessage: "Se requiere que la Orden de Compra esté firmada por el Ordenador y el contratista.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "pr_fase11_expedir_rp",
-                role: "pr",
-                fase: "Fase 11",
-                title: "Expedir RP (SIIF Nación)",
-                desc: "Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos.",
-                subtasks: ["Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos."],
-                notePlaceholder: "Añadir notas sobre expedir rp (siif nación)...",
-                blockedBy: ["pr_fase11_validar_orden"],
-                blockMessage: "Se sugiere validar la Orden de Compra antes de expedir el Registro Presupuestal (RP).",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "DT/Abogado",
-                    actionLabel: "Notificar RP Expedido",
-                    emailSubject: "Registro Presupuestal (RP) Expedido - Perfeccionamiento",
-                    emailBody: `Hola,
-
-Informo que he expedido el Registro Presupuestal (RP) definitivo en el SIIF Nación con cargo a la Orden de Compra formalizada. Quedan reservados en firme los fondos.
-
-Atentamente,
-Presupuesto`
-                }
-            },
-            {
-                id: "og_fase5_firmar_acto",
-                role: "og",
-                fase: "Fase 5",
-                title: "Firmar Acto Administrativo de cancelación",
-                desc: "Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma.",
-                subtasks: ["Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma."],
-                notePlaceholder: "Añadir notas sobre firmar acto administrativo de cancelación...",
-                blockedBy: ["ac_fase5_proyectar_acto"],
-                blockMessage: "Se sugiere que el Abogado proyecte la resolución motivada de cancelación.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "og_fase10_validación_concurrente",
-                role: "og",
-                fase: "Fase 10",
-                title: "Validación concurrente",
-                desc: "Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades.",
-                subtasks: ["Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades."],
-                notePlaceholder: "Añadir notas sobre validación concurrente...",
-                blockedBy: ["ac_fase10_visto_bueno"],
-                blockMessage: "Se sugiere esperar el visto bueno formal de Contratos.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: null
-            },
-            {
-                id: "og_fase10_firma_digital",
-                role: "og",
-                fase: "Fase 10",
-                title: "Firma digital de la OC",
-                desc: "Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra.",
-                subtasks: ["Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra."],
-                notePlaceholder: "Añadir notas sobre firma digital de la oc...",
-                blockedBy: ["og_fase10_validación_concurrente"],
-                blockMessage: "Se aconseja completar la validación de antecedentes antes de firmar.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "Presupuesto/Abogado",
-                    actionLabel: "Notificar OC Firmada",
-                    emailSubject: "Orden de Compra Firmada - MHCP",
-                    emailBody: `Hola,
-
-Les informo que he firmado digitalmente la Orden de Compra (OC) en la Tienda Virtual. Agradezco proceder con la expedición del RP y la legalización de pólizas.
-
-Atentamente,
-Ordenador del Gasto`
-                }
-            },
-            {
-                id: "og_fase12_firmar_designación",
-                role: "og",
-                fase: "Fase 12",
-                title: "Firmar designación de supervisión",
-                desc: "Firma el memorando de designación técnica proyectado por Contratos.",
-                subtasks: ["Firma el memorando de designación técnica proyectado por Contratos."],
-                notePlaceholder: "Añadir notas sobre firmar designación de supervisión...",
-                blockedBy: ["ac_fase12_proyectar_designación"],
-                blockMessage: "Se sugiere que el Abogado proyecte el memorando de designación.",
-                hasCalendar: false,
-                calendarTitle: "",
-                calendarDesc: "",
-                coordination: {
-                    type: "notify",
-                    target: "Abogado/DT",
-                    actionLabel: "Notificar Designación Firmada",
-                    emailSubject: "Designación de Supervisión Contractual Firmada",
-                    emailBody: `Hola,
-
-Informo que he firmado el memorando de designación de supervisión técnica. Se puede proceder con la firma del Acta de Inicio.
-
-Atentamente,
-Ordenador del Gasto`
-                }
-            }
-        ]
-        ];
-
-        // State structure for local-only storage
-        let autogestionState = {
-            contractId: "MIN-AM-2026-001",
-            lastUpdated: new Date().toISOString(),
-            currentRole: null,
-            completedTasks: {},
-            subtasks: {},
-            notes: {}
-        };
-
-        // LocalStorage Helpers
-        function loadFromLocalStorage() {
-            const saved = localStorage.getItem('contrato_autogestion_state');
-            if (saved) {
-                try {
-                    autogestionState = JSON.parse(saved);
-                } catch(e) {
-                    console.error("Error al cargar estado de autogestión:", e);
-                }
-            }
-        }
-
-        function saveToLocalStorage() {
-            autogestionState.lastUpdated = new Date().toISOString();
-            localStorage.setItem('contrato_autogestion_state', JSON.stringify(autogestionState));
-        }
-
-        // Enter view
-        function enterAutogestion(role) {
-            autogestionState.currentRole = role;
-            saveToLocalStorage();
-            
-            document.getElementById('auto-role-select-view').style.display = 'none';
-            document.getElementById('auto-workspace-view').style.display = 'block';
-            
-            const header = document.querySelector('.auto-workspace-header');
-            if (header) {
-                header.className = `auto-workspace-header card-glass ${role}-color`;
-            }
-            
-            renderAutogestion();
-        }
-
-        // Exit view
-        function backToRoleSelect() {
-            autogestionState.currentRole = null;
-            saveToLocalStorage();
-            
-            document.getElementById('auto-workspace-view').style.display = 'none';
-            document.getElementById('auto-role-select-view').style.display = 'flex';
-        }
-
-        // Block logic helper (Tasks are never disabled now)
-        function isTaskBlocked(task) {
-            return false;
-        }
-
-        // Advisory check for prerequisites
-        function hasPendingPrerequisites(task) {
-            if (!task.blockedBy || task.blockedBy.length === 0) return false;
-            return task.blockedBy.some(depId => !autogestionState.completedTasks[depId]);
-        }
-
-        // Toggle task
-        function toggleTask(taskId, isChecked) {
-            autogestionState.completedTasks[taskId] = isChecked;
-            
-            const task = autogestionTasks.find(t => t.id === taskId);
-            if (task && task.subtasks) {
-                task.subtasks.forEach((_, index) => {
-                    const subId = `${taskId}_sub${index}`;
-                    autogestionState.subtasks[subId] = isChecked;
-                });
-            }
-            
-            saveToLocalStorage();
-            renderAutogestion();
-        }
-
-        // Toggle subtask
-        function toggleSubtask(taskId, subIndex, isChecked) {
-            const subId = `${taskId}_sub${subIndex}`;
-            autogestionState.subtasks[subId] = isChecked;
-            
-            const task = autogestionTasks.find(t => t.id === taskId);
-            if (task && task.subtasks) {
-                const allCompleted = task.subtasks.every((_, index) => {
-                    return !!autogestionState.subtasks[`${taskId}_sub${index}`];
-                });
-                autogestionState.completedTasks[taskId] = allCompleted;
-            }
-            
-            saveToLocalStorage();
-            renderAutogestion();
-        }
-
-        // Update task note
-        function updateTaskNote(taskId, noteText) {
-            autogestionState.notes[taskId] = noteText;
-            saveToLocalStorage();
-        }
-
-        // Role progress computation
-        function getRoleProgress(role) {
-            const roleTasks = autogestionTasks.filter(t => t.role === role);
-            const completed = roleTasks.filter(t => !!autogestionState.completedTasks[t.id]).length;
-            return {
-                completed: completed,
-                total: roleTasks.length,
-                percentage: roleTasks.length > 0 ? Math.round((completed / roleTasks.length) * 100) : 0
-            };
-        }
-
-        // Render progress panel
-        function renderProgressPanel() {
-            const progressContainer = document.getElementById('auto-progress-bars');
-            if (!progressContainer) return;
-            progressContainer.innerHTML = '';
-            
-            const roles = [
-                { id: 'dt', name: 'Dependencia Técnica', icon: 'fa-laptop-code', colorHex: '#0f52ba' },
-                { id: 'ac', name: 'Abogado de Contratos', icon: 'fa-scale-balanced', colorHex: '#8b5cf6' },
-                { id: 'pr', name: 'Presupuesto', icon: 'fa-file-invoice-dollar', colorHex: '#f59e0b' },
-                { id: 'og', name: 'Ordenador del Gasto', icon: 'fa-user-tie', colorHex: '#ec4899' }
-            ];
-            
-            roles.forEach(r => {
-                const prog = getRoleProgress(r.id);
-                progressContainer.innerHTML += `
-                    <div class="role-progress-bar">
-                        <div class="role-progress-info">
-                            <span class="role-progress-label" style="color: ${r.colorHex}; font-weight: 700;">
-                                <i class="fa-solid ${r.icon}"></i> ${r.name}
-                            </span>
-                            <span class="role-progress-percentage" style="color: ${r.colorHex};">${prog.percentage}% (${prog.completed}/${prog.total})</span>
-                        </div>
-                        <div class="role-progress-bg">
-                            <div class="role-progress-fill" style="width: ${prog.percentage}%; background-color: ${r.colorHex};"></div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        // Render coordination alerts
-        function renderCoordinationAlerts() {
-            const alertsContainer = document.getElementById('auto-coordination-alerts');
-            if (!alertsContainer) return;
-            alertsContainer.innerHTML = '';
-            
-            const cState = autogestionState.completedTasks;
-            
-            const milestones = [
-                {
-                    name: "Fase 1: Asignación de Presupuesto (CDP)",
-                    desc: "Presupuesto expide CDP oficial en el SIIF.",
-                    icon: "fa-file-invoice-dollar",
-                    isCompleted: !!cState["pr_fase1_expedir_cdp"],
-                    isBlocked: false,
-                    get status() {
-                        return this.isCompleted ? "completed" : "pending";
-                    }
-                },
-                {
-                    name: "Fase 2: Co-diseño de Estudios Previos",
-                    desc: "DT y Abogado redactan pliegos y matriz de riesgos conjunta.",
-                    icon: "fa-scale-balanced",
-                    isCompleted: !!cState["dt_fase2_coredactar_estudios"] && !!cState["ac_fase2_asegurar_orden"],
-                    get isBlocked() {
-                        return !cState["pr_fase1_expedir_cdp"];
-                    },
-                    get status() {
-                        if (this.isCompleted) return "completed";
-                        return this.isBlocked ? "blocked" : "pending";
-                    }
-                },
-                {
-                    name: "Fase 4: Publicación en TVEC",
-                    desc: "Abogado publica evento RFQ oficial en la Tienda Virtual.",
-                    icon: "fa-paper-plane",
-                    isCompleted: !!cState["ac_fase4_publicar_la"],
-                    get isBlocked() {
-                        return !cState["dt_fase2_coredactar_estudios"] || !cState["ac_fase2_asegurar_orden"];
-                    },
-                    get status() {
-                        if (this.isCompleted) return "completed";
-                        return this.isBlocked ? "blocked" : "pending";
-                    }
-                },
-                {
-                    name: "Fase 7-8: Mitigación de Riesgos",
-                    desc: "DT valida exenciones e IVA; Abogado evalúa REDAM y antecedentes.",
-                    icon: "fa-shield-halved",
-                    isCompleted: !!cState["dt_fase8_verificación_de"] && !!cState["ac_fase7_filtro_de"],
-                    get isBlocked() {
-                        return !cState["ac_fase4_publicar_la"];
-                    },
-                    get status() {
-                        if (this.isCompleted) return "completed";
-                        return this.isBlocked ? "blocked" : "pending";
-                    }
-                },
-                {
-                    name: "Fase 10: Firma de Orden de Compra",
-                    desc: "El Ordenador del Gasto suscribe la OC con visto bueno técnico-legal.",
-                    icon: "fa-signature",
-                    isCompleted: !!cState["og_fase10_firma_digital"],
-                    get isBlocked() {
-                        return !cState["ac_fase9_consolidación_y"];
-                    },
-                    get status() {
-                        if (this.isCompleted) return "completed";
-                        return this.isBlocked ? "blocked" : "pending";
-                    }
-                },
-                {
-                    name: "Fase 11: Garantías y Afectación Presupuestal",
-                    desc: "Abogado aprueba pólizas; Presupuesto expide Registro Presupuestal RP.",
-                    icon: "fa-lock",
-                    isCompleted: !!cState["ac_fase11_control_de"] && !!cState["pr_fase11_expedir_rp"],
-                    get isBlocked() {
-                        return !cState["og_fase10_firma_digital"];
-                    },
-                    get status() {
-                        if (this.isCompleted) return "completed";
-                        return this.isBlocked ? "blocked" : "pending";
-                    }
-                },
-                {
-                    name: "Fase 12: Inicio de Contrato",
-                    desc: "Supervisor firma acta de inicio, se designa y notifica formalmente.",
-                    icon: "fa-play",
-                    isCompleted: !!cState["dt_fase12_coordinar_firma"] && !!cState["og_fase12_firmar_designación"] && !!cState["ac_fase12_proyectar_designación"],
-                    get isBlocked() {
-                        return !cState["ac_fase11_control_de"] || !cState["pr_fase11_expedir_rp"];
-                    },
-                    get status() {
-                        if (this.isCompleted) return "completed";
-                        return this.isBlocked ? "blocked" : "pending";
-                    }
-                }
-            ];
-            
-            milestones.forEach(m => {
-                let stateClass = "";
-                let stateIcon = "";
-                let stateText = "";
-                
-                if (m.status === "completed") {
-                    stateClass = "active";
-                    stateIcon = '<i class="fa-solid fa-circle-check"></i>';
-                    stateText = "Met";
-                } else if (m.status === "blocked") {
-                    stateClass = "blocked";
-                    stateIcon = '<i class="fa-solid fa-circle-minus"></i>';
-                    stateText = "Prerrequisito";
-                } else {
-                    stateClass = "pending";
-                    stateIcon = '<i class="fa-solid fa-circle-notch fa-spin"></i>';
-                    stateText = "Pendiente";
-                }
-                
-                alertsContainer.innerHTML += `
-                    <div class="coor-alert-item ${stateClass}">
-                        <div style="font-size: 1.1rem; margin-top: 2px;">
-                            ${stateIcon}
-                        </div>
-                        <div>
-                            <strong style="display: block; font-size: 0.82rem; margin-bottom: 2px;">${m.name}</strong>
-                            <span style="display: block; font-size: 0.72rem; opacity: 0.85; margin-bottom: 4px;">${m.desc}</span>
-                            <span class="locked-badge" style="background: rgba(255,255,255,0.4); border: 1px solid rgba(0,0,0,0.05);">${stateText}</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        // Copy coordination text to clipboard helper with tactile feedback
-        function copyCoordinationMessage(taskId, buttonEl) {
-            const task = autogestionTasks.find(t => t.id === taskId);
-            if (task && task.coordination) {
-                const message = task.coordination.emailBody;
-                navigator.clipboard.writeText(message).then(() => {
-                    const originalText = buttonEl.innerHTML;
-                    buttonEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> ¡Copiado!';
-                    buttonEl.style.borderColor = '#10b981';
-                    buttonEl.style.color = '#10b981';
-                    setTimeout(() => {
-                        buttonEl.innerHTML = originalText;
-                        buttonEl.style.borderColor = '';
-                        buttonEl.style.color = '';
-                    }, 1800);
-                }).catch(err => {
-                    console.error("Error al copiar texto: ", err);
-                    alert("No se pudo copiar automáticamente. Copia el texto manualmente.");
-                });
-            }
-        }
-
-        // Calendar links
-        function getGoogleCalendarUrl(task) {
-            const title = encodeURIComponent(task.calendarTitle || task.title);
-            const desc = encodeURIComponent(task.calendarDesc || task.desc);
-            const today = new Date();
-            const threeDaysLater = new Date(today);
-            threeDaysLater.setDate(today.getDate() + 3);
-            const formatDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g, "");
-            const dates = formatDate(today) + "/" + formatDate(threeDaysLater);
-            return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dates}&details=${desc}`;
-        }
-
-        // Outlook links
-        function getOutlookCalendarUrl(task) {
-            const title = encodeURIComponent(task.calendarTitle || task.title);
-            const desc = encodeURIComponent(task.calendarDesc || task.desc);
-            const today = new Date();
-            const threeDaysLater = new Date(today);
-            threeDaysLater.setDate(today.getDate() + 3);
-            const start = today.toISOString().split('.')[0] + 'Z';
-            const end = threeDaysLater.toISOString().split('.')[0] + 'Z';
-            return `https://outlook.office.com/calendar/0/deeplink/compose?subject=${title}&startdt=${start}&enddt=${end}&body=${desc}`;
-        }
-
-        // Save State JSON download
-        function saveAutogestionState() {
-            saveToLocalStorage();
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(autogestionState, null, 2));
-            const downloadAnchor = document.createElement('a');
-            downloadAnchor.setAttribute("href", dataStr);
-            downloadAnchor.setAttribute("download", `contrato-autogestion-${autogestionState.contractId}.json`);
-            document.body.appendChild(downloadAnchor);
-            downloadAnchor.click();
-            downloadAnchor.remove();
-        }
-
-        // Reset State confirmation
-        function resetAutogestionState() {
-            if (confirm("¿Estás seguro de que deseas reiniciar todo el progreso de autogestión? Esta acción borrará todas tus tareas y notas locales.")) {
-                autogestionState = {
-                    contractId: "MIN-AM-2026-001",
-                    lastUpdated: new Date().toISOString(),
-                    currentRole: null,
-                    completedTasks: {},
-                    subtasks: {},
-                    notes: {}
-                };
-                saveToLocalStorage();
-                backToRoleSelect();
-            }
-        }
-
-        // Import handlers
-        function triggerImportState() {
-            let fileInput = document.getElementById('auto-import-file');
-            if (!fileInput) {
-                fileInput = document.createElement('input');
-                fileInput.type = 'file';
-                fileInput.id = 'auto-import-file';
-                fileInput.accept = '.json';
-                fileInput.style.display = 'none';
-                fileInput.addEventListener('change', handleImportFile);
-                document.body.appendChild(fileInput);
-            }
-            fileInput.click();
-        }
-
-        function handleImportFile(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const imported = JSON.parse(e.target.result);
-                    if (!imported.completedTasks || !imported.subtasks) {
-                        alert("El archivo no tiene el formato válido de Autogestión.");
-                        return;
-                    }
-                    autogestionState = {
-                        contractId: imported.contractId || "MIN-AM-2026-001",
-                        lastUpdated: imported.lastUpdated || new Date().toISOString(),
-                        currentRole: imported.currentRole || null,
-                        completedTasks: imported.completedTasks || {},
-                        subtasks: imported.subtasks || {},
-                        notes: imported.notes || {}
-                    };
-                    saveToLocalStorage();
-                    if (autogestionState.currentRole) {
-                        enterAutogestion(autogestionState.currentRole);
-                    } else {
-                        backToRoleSelect();
-                    }
-                    alert("¡Estado cargado con éxito!");
-                } catch (err) {
-                    alert("Error al leer el archivo JSON: " + err.message);
-                }
-            };
-            reader.readAsText(file);
-            event.target.value = '';
-        }
-
-        // Render main workspace
-        function renderAutogestion() {
-            const role = autogestionState.currentRole;
-            if (!role) return;
-            
-            let roleName = "";
-            let roleIcon = "";
-            if (role === 'dt') {
-                roleName = "Dependencia Técnica";
-                roleIcon = '<i class="fa-solid fa-laptop-code"></i>';
-            } else if (role === 'ac') {
-                roleName = "Abogado de Contratos";
-                roleIcon = '<i class="fa-solid fa-scale-balanced"></i>';
-            } else if (role === 'pr') {
-                roleName = "Presupuesto";
-                roleIcon = '<i class="fa-solid fa-file-invoice-dollar"></i>';
-            } else if (role === 'og') {
-                roleName = "Ordenador del Gasto";
-                roleIcon = '<i class="fa-solid fa-user-tie"></i>';
-            }
-            
-            const miniIconEl = document.getElementById('active-role-icon');
-            if (miniIconEl) {
-                miniIconEl.innerHTML = roleIcon;
-                miniIconEl.className = `role-icon-mini ${role}-color`;
-            }
-            const activeRoleNameEl = document.getElementById('active-role-name');
-            if (activeRoleNameEl) {
-                activeRoleNameEl.textContent = roleName;
-            }
-            
-            const tasksListEl = document.getElementById('auto-tasks-list');
-            if (!tasksListEl) return;
-            tasksListEl.innerHTML = '';
-            
-            const roleTasks = autogestionTasks.filter(t => t.role === role);
-            
-            roleTasks.forEach(task => {
-                const hasPending = hasPendingPrerequisites(task);
-                const isCompleted = !!autogestionState.completedTasks[task.id];
-                
-                const taskCard = document.createElement('div');
-                taskCard.className = `auto-task-item ${isCompleted ? 'completed' : ''}`;
-                
-                let hexColor = role === 'dt' ? '#0f52ba' : role === 'ac' ? '#8b5cf6' : role === 'pr' ? '#f59e0b' : '#ec4899';
-                taskCard.style.setProperty('--role-color', hexColor);
-                
-                let subtasksHtml = '';
-                if (task.subtasks && task.subtasks.length > 0) {
-                    subtasksHtml = `<div class="auto-subtasks-wrapper">`;
-                    task.subtasks.forEach((sub, index) => {
-                        const subId = `${task.id}_sub${index}`;
-                        const subChecked = !!autogestionState.subtasks[subId];
-                        subtasksHtml += `
-                            <label class="auto-subtask-item">
-                                <input type="checkbox" ${subChecked ? 'checked' : ''} onchange="toggleSubtask('${task.id}', ${index}, this.checked)">
-                                <span>${sub}</span>
-                            </label>
-                        `;
-                    });
-                    subtasksHtml += `</div>`;
-                }
-                
-                const noteVal = autogestionState.notes[task.id] || '';
-                const noteHtml = `
-                    <div style="padding-left: 32px; margin-top: 6px;">
-                        <textarea style="width:100%; min-height:48px; font-size:0.75rem; padding:6px; border:1px solid rgba(0,0,0,0.1); border-radius:4px; font-family:var(--font-sans); background: rgba(255,255,255,0.8); resize:vertical;" placeholder="${task.notePlaceholder || 'Añadir notas locales o número de documento...'}" onblur="updateTaskNote('${task.id}', this.value)">${noteVal}</textarea>
-                    </div>
-                `;
-                
-                let coordinationHtml = '';
-                if (task.coordination) {
-                    const mailtoUrl = `mailto:?subject=${encodeURIComponent(task.coordination.emailSubject)}&body=${encodeURIComponent(task.coordination.emailBody)}`;
-                    coordinationHtml = `
-                        <div class="auto-task-actions" style="margin-top: 10px; display: flex; gap: 8px;">
-                            <button class="prod-btn" onclick="copyCoordinationMessage('${task.id}', this)">
-                                <i class="fa-solid fa-copy"></i> Copiar Mensaje (Teams/WA)
-                            </button>
-                            <a href="${mailtoUrl}" class="prod-btn prod-btn-outlook">
-                                <i class="fa-solid fa-envelope"></i> Enviar Correo
-                            </a>
-                        </div>
-                    `;
-                }
-                
-                let calendarHtml = '';
-                if (task.hasCalendar) {
-                    const googleUrl = getGoogleCalendarUrl(task);
-                    const outlookUrl = getOutlookCalendarUrl(task);
-                    calendarHtml = `
-                        <div class="auto-task-actions" style="margin-top: 8px;">
-                            <a href="${googleUrl}" target="_blank" class="prod-btn"><i class="fa-brands fa-google"></i> Agendar en Google</a>
-                            <a href="${outlookUrl}" target="_blank" class="prod-btn prod-btn-outlook"><i class="fa-solid fa-envelope"></i> Agendar en Outlook</a>
-                        </div>
-                    `;
-                }
-                
-                let blockWarningHtml = '';
-                if (hasPending) {
-                    blockWarningHtml = `
-                        <div style="margin-top: 6px; padding-left: 32px;">
-                            <span class="locked-badge" style="background: rgba(245, 158, 11, 0.08); color: #b45309; border: 1.5px solid rgba(245, 158, 11, 0.15);"><i class="fa-solid fa-circle-exclamation"></i> <strong>Sugerencia:</strong> ${task.blockMessage}</span>
-                        </div>
-                    `;
-                }
-                
-                taskCard.innerHTML = `
-                    <div class="auto-task-header">
-                        <div class="auto-task-checkbox ${isCompleted ? 'checked' : ''}" onclick="toggleTask('${task.id}', ${!isCompleted})">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <div class="auto-task-content">
-                            <div class="auto-task-fase">${task.fase}</div>
-                            <div class="auto-task-title">${task.title}</div>
-                            <div class="auto-task-desc">${task.desc}</div>
-                        </div>
-                    </div>
-                    ${blockWarningHtml}
-                    ${subtasksHtml}
-                    ${noteHtml}
-                    ${coordinationHtml}
-                    ${calendarHtml}
-                `;
-                
-                tasksListEl.appendChild(taskCard);
-            });
-            
-            renderProgressPanel();
-            renderCoordinationAlerts();
-        }
-
-
         // Initialize background circle repulsion and force initial repaint on load
         document.addEventListener('DOMContentLoaded', () => {
             const inners = document.querySelectorAll('.blur-circle-inner');
             let mouseX = 0;
             let mouseY = 0;
-            
+
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
@@ -2852,7 +1511,7 @@ Ordenador del Gasto`
                     const dx = circleX - mouseX;
                     const dy = circleY - mouseY;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    
+
                     const repelRadius = 750; // repel distance
                     if (distance < repelRadius && distance > 0) {
                         const force = (repelRadius - distance) / repelRadius;
@@ -2888,12 +1547,6 @@ Ordenador del Gasto`
             renderSimCases();
             renderSimSteps();
 
-            // Initialize autogestion system
-            loadFromLocalStorage();
-            if (autogestionState && autogestionState.currentRole) {
-                enterAutogestion(autogestionState.currentRole);
-            }
-
             // Bind simulation control buttons
             const btnIniciarSim = document.getElementById('btn-iniciar-sim');
             if (btnIniciarSim) {
@@ -2920,11 +1573,11 @@ Ordenador del Gasto`
             window.addEventListener('keydown', (e) => {
                 const panelAnterior = document.getElementById('panel-proc-anterior');
                 const panelMejorado = document.getElementById('panel-proc-mejorado');
-                
+
                 // Ignore keydown if focused on an input/textarea/editable
                 if (document.activeElement && (
-                    document.activeElement.tagName === 'INPUT' || 
-                    document.activeElement.tagName === 'TEXTAREA' || 
+                    document.activeElement.tagName === 'INPUT' ||
+                    document.activeElement.tagName === 'TEXTAREA' ||
                     document.activeElement.isContentEditable
                 )) {
                     return;
@@ -2975,4 +1628,5 @@ Ordenador del Gasto`
         });
     </script>
 </body>
+
 </html>
