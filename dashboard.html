@@ -372,7 +372,7 @@
                     <!-- 3. Dashboard de Proceso Activo (oculto por defecto) -->
                     <div class="autogestion-dashboard-container" id="autogestion-dashboard" style="display: none;">
                         <!-- Cabecera del Proceso -->
-                        <div class="autogestion-dashboard-header card-glass" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 24px; gap: 20px;">
+                        <div class="autogestion-dashboard-header card-glass" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; gap: 20px;">
                             <!-- Izquierda: Rol y botón de cambio -->
                             <div style="display: flex; align-items: center; gap: 12px;">
                                 <span class="details-role-badge" id="header-role-badge" style="margin-top: 0; font-size: 0.72rem; padding: 6px 12px; background: rgba(15, 82, 186, 0.08); color: var(--primary-blue); border-radius: 2px;">Rol: Área Técnica</span>
@@ -2038,18 +2038,21 @@
         function initActiveProcess() {
             if (!activeProcess) return;
 
-            // Set main page title to process name and hide subtitle to save space
-            document.getElementById('viewport-title').textContent = `Proceso: ${activeProcess.name}`;
-            document.getElementById('viewport-subtitle').style.display = 'none';
-            
-            const headerRight = document.getElementById('viewport-header-right');
-            if (headerRight) {
-                headerRight.innerHTML = `
-                    <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
-                        <span>Los cambios se guardan automáticamente en tu navegador</span>
-                    </div>
-                `;
+            // Only update the viewport header if the autogestion panel is currently active
+            const activePanel = document.querySelector('.dashboard-panel.active');
+            if (activePanel && activePanel.id === 'panel-sis-autogestion') {
+                document.getElementById('viewport-title').textContent = `Proceso: ${activeProcess.name}`;
+                document.getElementById('viewport-subtitle').style.display = 'none';
+                
+                const headerRight = document.getElementById('viewport-header-right');
+                if (headerRight) {
+                    headerRight.innerHTML = `
+                        <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+                            <span>Los cambios se guardan automáticamente en tu navegador</span>
+                        </div>
+                    `;
+                }
             }
 
             document.getElementById('autogestion-welcome').style.display = 'none';
