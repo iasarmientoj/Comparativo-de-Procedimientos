@@ -2759,13 +2759,13 @@
    ============================================================ */
 .autogestion-role-selection-container {
     max-width: 950px;
-    margin: 40px auto;
+    margin: 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 36px;
-    padding: 40px;
+    gap: 24px;
+    padding: 30px 40px;
     animation: fadeInContent 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 

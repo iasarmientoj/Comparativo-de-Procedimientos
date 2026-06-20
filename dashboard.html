@@ -344,8 +344,8 @@
                         </div>
 
                         <div class="role-selection-footer">
-                            <button class="footer-btn" onclick="exitActiveProcess()" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
-                                <i class="fa-solid fa-arrow-left"></i> Cambiar Proceso
+                            <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
+                                <i class="fa-solid fa-arrow-left" style="color: inherit;"></i> Regresar
                             </button>
                         </div>
                     </div>
@@ -2328,8 +2328,8 @@
         }
 
         // Exit active process and reset to welcome
-        function exitActiveProcess() {
-            if (confirm('¿Deseas cerrar el proceso actual? Los cambios guardados se mantendrán en este navegador.')) {
+        function exitActiveProcess(showConfirm = true) {
+            if (!showConfirm || confirm('¿Deseas cerrar el proceso actual? Los cambios guardados se mantendrán en este navegador.')) {
                 activeProcess = null;
                 localStorage.removeItem('autogestion_active_process');
 
