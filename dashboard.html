@@ -403,42 +403,80 @@
                             </div>
                         </div>
 
-                        <!-- Área de Trabajo -->
-                        <div class="autogestion-workspace">
-                            <!-- Columna 1: Lista de Actividades -->
-                            <div class="autogestion-tasks-panel card-glass">
-                                <div class="panel-section-header">
-                                    <h3><i class="fa-solid fa-list-check"></i> Checklist del Rol</h3>
-                                    <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona una tarea</span>
+                        <!-- Área de Trabajo Container (Vertical Flex) -->
+                        <div style="display: flex; flex-direction: column; gap: 20px; height: calc(100vh - 280px); min-height: 520px; overflow: hidden; margin-top: 20px;">
+                            
+                            <!-- Área de Trabajo (Fila Superior) -->
+                            <div class="autogestion-workspace" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex-grow: 1; min-height: 0; margin-top: 0; height: auto;">
+                                <!-- Columna 1: Lista de Actividades -->
+                                <div class="autogestion-tasks-panel card-glass" style="height: 100%; display: flex; flex-direction: column; overflow: hidden;">
+                                    <div class="panel-section-header">
+                                        <h3><i class="fa-solid fa-list-check"></i> Checklist del Rol</h3>
+                                        <span class="hint-text"><i class="fa-solid fa-hand-pointer"></i> Selecciona una tarea</span>
+                                    </div>
+                                    <div class="autogestion-tasks-list" id="autogestion-tasks-list" style="flex-grow: 1; overflow-y: auto; padding-right: 8px;">
+                                        <!-- Inyectado por JS -->
+                                    </div>
                                 </div>
-                                <div class="autogestion-tasks-list" id="autogestion-tasks-list">
+
+                                <!-- Columna 2: Detalles e Instrucciones -->
+                                <div class="autogestion-details-column" style="display: flex; flex-direction: column; gap: 16px; height: 100%; overflow: hidden;">
+                                    <!-- Panel 1: Tareas pendientes (flex-grow: 1 para ocupar el espacio restante) -->
+                                    <div class="card-glass" id="autogestion-details-panel" style="display: flex; flex-direction: column; gap: 12px; flex-grow: 1; overflow: hidden; min-height: 0; padding: 16px 20px;">
+                                        <!-- Inyectado por JS -->
+                                        <div class="panel-section-header" style="margin-bottom: 12px; padding-bottom: 8px; flex-shrink: 0;">
+                                            <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
+                                        </div>
+                                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; overflow-y: auto;">
+                                            <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 12px; display: block;"></i>
+                                            <p style="font-size: 0.82rem; color: var(--text-color-muted); max-width: 250px; margin: 0 auto; line-height: 1.5;">Selecciona una tarea de la lista para ver y completar sus tareas pendientes.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Panel 2: Fila de Dos Paneles (Recibir & Entregar) (flex-shrink: 0, altura fija adaptada) -->
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex-shrink: 0; min-height: 175px;">
+                                        <!-- Panel Lo que debo recibir -->
+                                        <div class="card-glass" id="autogestion-receiving-panel" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow: hidden; height: 100%;">
+                                            <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); flex-shrink: 0;">
+                                                <h3 style="font-size: 0.8rem; font-weight: 700; color: var(--primary-blue); margin: 0;"><i class="fa-solid fa-file-import"></i> Lo que debo recibir</h3>
+                                            </div>
+                                            <div id="autogestion-receiving-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; gap: 8px;">
+                                                <!-- Inyectado por JS -->
+                                                <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                    <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
+                                                    <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Panel Lo que debo entregar -->
+                                        <div class="card-glass" id="autogestion-delivering-panel" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow: hidden; height: 100%;">
+                                            <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); flex-shrink: 0;">
+                                                <h3 style="font-size: 0.8rem; font-weight: 700; color: var(--primary-blue); margin: 0;"><i class="fa-solid fa-file-export"></i> Lo que debo entregar</h3>
+                                            </div>
+                                            <div id="autogestion-delivering-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; gap: 8px;">
+                                                <!-- Inyectado por JS -->
+                                                <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                    <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
+                                                    <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Panel de avance en este proceso (Fila Inferior) -->
+                            <div class="card-glass" id="autogestion-summary-panel" style="flex-shrink: 0; display: flex; flex-direction: column; padding: 12px 20px; min-height: 95px; height: 95px; overflow: hidden;">
+                                <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; flex-shrink: 0;">
+                                    <h3 style="margin: 0; font-size: 0.85rem;"><i class="fa-solid fa-chart-line"></i> Tu avance en este proceso</h3>
+                                </div>
+                                <div id="autogestion-summary-content" style="overflow-x: auto; flex-grow: 1; display: flex; align-items: center; padding-bottom: 2px;">
                                     <!-- Inyectado por JS -->
                                 </div>
                             </div>
 
-                            <!-- Columna 2: Detalles e Instrucciones -->
-                            <div class="autogestion-details-column" style="display: flex; flex-direction: column; gap: 20px; height: 100%; overflow: hidden;">
-                                <!-- Panel 1: Tareas pendientes (sin scroll, se adapta a las tareas, flex-shrink: 0) -->
-                                <div class="card-glass" id="autogestion-details-panel" style="display: flex; flex-direction: column; gap: 16px; flex-shrink: 0;">
-                                    <!-- Inyectado por JS -->
-                                    <div class="panel-section-header" style="margin-bottom: 12px; padding-bottom: 8px;">
-                                        <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
-                                    </div>
-                                    <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center;">
-                                        <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 12px; display: block;"></i>
-                                        <p style="font-size: 0.82rem; color: var(--text-color-muted); max-width: 250px; margin: 0 auto; line-height: 1.5;">Selecciona una tarea de la lista para ver y completar sus tareas pendientes.</p>
-                                    </div>
-                                </div>
-                                <!-- Panel 2: Tu avance en este proceso (titulo independiente, contenido con scroll) -->
-                                <div class="card-glass" id="autogestion-summary-panel" style="display: flex; flex-direction: column; overflow: hidden; flex-grow: 1;">
-                                    <div class="panel-section-header" style="margin-bottom: 16px; padding-bottom: 8px; flex-shrink: 0;">
-                                        <h3><i class="fa-solid fa-chart-line"></i> Tu avance en este proceso</h3>
-                                    </div>
-                                    <div id="autogestion-summary-content" style="overflow-y: auto; flex-grow: 1; padding-right: 4px;">
-                                        <!-- Inyectado por JS -->
-                                    </div>
-                                </div>
-                            </div>
+                        </div>    </div>
                         </div>
                     </div>
                 </div>
@@ -1967,6 +2005,24 @@
         let currentAutogestionRole = 'tecnico';
         let currentSelectedTaskId = null;
 
+        // Safe localStorage helpers to handle sandboxed/file:// environments
+        function safeSaveProcessState() {
+            if (!activeProcess) return;
+            try {
+                localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+            } catch (e) {
+                console.warn("Storage access denied. State kept in memory only.", e);
+            }
+        }
+
+        function safeRemoveProcessState() {
+            try {
+                localStorage.removeItem('autogestion_active_process');
+            } catch (e) {
+                console.warn("Storage access denied.", e);
+            }
+        }
+
         // Toggle New Process Form
         function showNewProcessInput() {
             document.getElementById('btn-nuevo-proceso').classList.add('active');
@@ -2003,7 +2059,7 @@
             };
 
             // Save state in localStorage
-            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+            safeSaveProcessState();
 
             // Reset inputs
             nameInput.value = '';
@@ -2038,7 +2094,7 @@
                             completedInstructions: parsed.completedInstructions || {},
                             notes: parsed.notes || {}
                         };
-                        localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+                        safeSaveProcessState();
                         initActiveProcess();
                     } else {
                         alert('El archivo cargado no contiene un formato de proceso válido.');
@@ -2202,6 +2258,56 @@
             });
         }
 
+        // Parse delivery/reception text to extract target role and clean item description
+        function parseDeliveryDetails(text, isReceive) {
+            const roles = [
+                { name: "Abogado de Contratos", regex: /a\s+Abogado de Contratos|de\s+Abogado de Contratos/gi },
+                { name: "Dependencia Técnica", regex: /a\s+Dependencia Técnica|de\s+Dependencia Técnica/gi },
+                { name: "Presupuesto", regex: /a\s+Presupuesto|de\s+Presupuesto/gi },
+                { name: "Ordenador del Gasto", regex: /a\s+Ordenador del Gasto|de\s+Ordenador del Gasto/gi },
+                { name: "Contratista", regex: /al\s+contratista|por\s+el\s+contratista|con\s+el\s+contratista/gi }
+            ];
+
+            let cleanText = text || '';
+            let targetRole = "Responsable";
+
+            for (const r of roles) {
+                if (r.regex.test(cleanText)) {
+                    targetRole = r.name;
+                    cleanText = cleanText.replace(r.regex, '').replace(/\s+(de|a|al|con|por)\s*$/, '').trim();
+                    cleanText = cleanText.replace(/\.+$/, '').trim();
+                    break;
+                }
+            }
+
+            return {
+                targetRole: targetRole,
+                insumoText: cleanText
+            };
+        }
+
+        // Format role delivery text with highlighted gray badge
+        function formatRoleDelivery(text, isReceive) {
+            if (!text) return '';
+            const details = parseDeliveryDetails(text, isReceive);
+            const prefix = isReceive ? "Recibir de" : "Entregar a";
+            
+            let icon = "fa-user-tie";
+            if (details.targetRole.includes("Abogado")) icon = "fa-user-shield";
+            else if (details.targetRole.includes("Técnica")) icon = "fa-laptop-code";
+            else if (details.targetRole.includes("Presupuesto")) icon = "fa-file-invoice-dollar";
+            else if (details.targetRole.includes("Contratista")) icon = "fa-building";
+
+            return `
+                <div style="font-size: 0.85rem; color: var(--text-color-main); line-height: 1.45; text-align: left;">${details.insumoText}</div>
+                <div style="margin-top: 8px; text-align: left;">
+                    <span class="role-badge-highlight">
+                        <i class="fa-solid ${icon}"></i> ${prefix}: ${details.targetRole.toUpperCase()}
+                    </span>
+                </div>
+            `;
+        }
+
         // Select task
         function selectAutogestionTask(taskId) {
             currentSelectedTaskId = taskId;
@@ -2224,28 +2330,84 @@
             if (!task) return;
 
             const detailsPanel = document.getElementById('autogestion-details-panel');
-            if (!detailsPanel) return;
-
-            // Build the checklist of instructions as checkable items
-            detailsPanel.innerHTML = `
-                <div class="panel-section-header" style="margin-bottom: 16px; padding-bottom: 8px;">
-                    <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
-                    <span class="hint-text">Paso ${task.num}</span>
-                </div>
-                <div class="autogestion-instructions-list" style="display: flex; flex-direction: column; gap: 12px;">
-                    ${task.instructions.map((inst, index) => {
-                        const isInstCompleted = activeProcess.completedInstructions[`${task.id}_${index}`] === true;
-                        return `
-                            <div class="instruction-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 4px 0;" onclick="toggleInstruction('${task.id}', ${index})">
-                                <div class="task-checkbox" style="margin-top: 2px; border-color: ${isInstCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isInstCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
-                                    <i class="fa-solid fa-check" style="opacity: ${isInstCompleted ? '1' : '0'}; transform: scale(${isInstCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+            if (detailsPanel) {
+                // Build the checklist of instructions as checkable items
+                detailsPanel.innerHTML = `
+                    <div class="panel-section-header" style="margin-bottom: 16px; padding-bottom: 8px;">
+                        <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
+                        <span class="hint-text">Paso ${task.num}</span>
+                    </div>
+                    <div class="autogestion-instructions-list" style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex-grow: 1; padding-right: 4px;">
+                        ${task.instructions.map((inst, index) => {
+                            const isInstCompleted = activeProcess.completedInstructions[`${task.id}_${index}`] === true;
+                            return `
+                                <div class="instruction-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 6px 0;" onclick="toggleInstruction('${task.id}', ${index})">
+                                    <div class="task-checkbox" style="margin-top: 2px; border-color: ${isInstCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isInstCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                                        <i class="fa-solid fa-check" style="opacity: ${isInstCompleted ? '1' : '0'}; transform: scale(${isInstCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                                    </div>
+                                    <span style="font-size: 0.82rem; color: var(--text-color-main); line-height: 1.45; text-decoration: ${isInstCompleted ? 'line-through' : 'none'}; opacity: ${isInstCompleted ? 0.7 : 1}; transition: all 0.2s ease; text-align: left;">${inst}</span>
                                 </div>
-                                <span style="font-size: 0.85rem; color: var(--text-color-main); line-height: 1.45; text-decoration: ${isInstCompleted ? 'line-through' : 'none'}; opacity: ${isInstCompleted ? 0.7 : 1}; transition: all 0.2s ease; text-align: left;">${inst}</span>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
+
+            // Render "Lo que debo recibir" content
+            const recContent = document.getElementById('autogestion-receiving-content');
+            if (recContent) {
+                if (task.receiveFrom) {
+                    const isRecCompleted = activeProcess.completedInstructions[`rec_${task.id}`] === true;
+                    recContent.innerHTML = `
+                        <div class="receive-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;" onclick="toggleReceive('${task.id}')">
+                            <div class="task-checkbox" style="margin-top: 2px; border-color: ${isRecCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isRecCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                                <i class="fa-solid fa-check" style="opacity: ${isRecCompleted ? '1' : '0'}; transform: scale(${isRecCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
                             </div>
-                        `;
-                    }).join('')}
-                </div>
-            `;
+                            <div style="flex-grow: 1;">
+                                ${formatRoleDelivery(task.receiveFrom, true)}
+                            </div>
+                        </div>
+                        <button class="footer-btn" onclick="openEmailDraft(true, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; width: 100%; margin-top: 8px; font-weight: 600; cursor: pointer; border-radius: 0;">
+                            <i class="fa-solid fa-envelope"></i> Solicitar por correo
+                        </button>
+                    `;
+                } else {
+                    recContent.innerHTML = `
+                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <i class="fa-solid fa-circle-minus" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.1); margin-bottom: 6px; display: block;"></i>
+                            <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">No aplica recibir insumos en este paso.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Render "Lo que debo entregar" content
+            const delContent = document.getElementById('autogestion-delivering-content');
+            if (delContent) {
+                if (task.deliverable) {
+                    const isDelCompleted = activeProcess.completedInstructions[`del_${task.id}`] === true;
+                    delContent.innerHTML = `
+                        <div class="deliver-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;" onclick="toggleDeliver('${task.id}')">
+                            <div class="task-checkbox" style="margin-top: 2px; border-color: ${isDelCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isDelCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                                <i class="fa-solid fa-check" style="opacity: ${isDelCompleted ? '1' : '0'}; transform: scale(${isDelCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                            </div>
+                            <div style="flex-grow: 1;">
+                                ${formatRoleDelivery(task.deliverable, false)}
+                            </div>
+                        </div>
+                        <button class="footer-btn" onclick="openEmailDraft(false, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; width: 100%; margin-top: 8px; font-weight: 600; cursor: pointer; border-radius: 0;">
+                            <i class="fa-solid fa-envelope"></i> Notificar por correo
+                        </button>
+                    `;
+                } else {
+                    delContent.innerHTML = `
+                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <i class="fa-solid fa-circle-minus" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.1); margin-bottom: 6px; display: block;"></i>
+                            <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">No aplica entregar insumos en este paso.</p>
+                        </div>
+                    `;
+                }
+            }
         }
 
         // Clear details
@@ -2259,6 +2421,24 @@
                     <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center;">
                         <i class="fa-solid fa-circle-info" style="font-size: 2rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 12px; display: block;"></i>
                         <p style="font-size: 0.82rem; color: var(--text-color-muted); max-width: 250px; margin: 0 auto; line-height: 1.5;">Selecciona una tarea de la lista para ver y completar sus tareas pendientes.</p>
+                    </div>
+                `;
+            }
+            const recContent = document.getElementById('autogestion-receiving-content');
+            if (recContent) {
+                recContent.innerHTML = `
+                    <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
+                        <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
+                    </div>
+                `;
+            }
+            const delContent = document.getElementById('autogestion-delivering-content');
+            if (delContent) {
+                delContent.innerHTML = `
+                    <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
+                        <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
                     </div>
                 `;
             }
@@ -2291,6 +2471,34 @@
             renderProcedureSummary(); // refresh summary panel
         }
 
+        // Toggle receive checkbox complete
+        function toggleReceive(taskId) {
+            if (!activeProcess) return;
+            const key = `rec_${taskId}`;
+            const current = activeProcess.completedInstructions[key] === true;
+            activeProcess.completedInstructions[key] = !current;
+
+            // Save state
+            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+
+            // Refresh UI
+            selectAutogestionTask(taskId);
+        }
+
+        // Toggle deliver checkbox complete
+        function toggleDeliver(taskId) {
+            if (!activeProcess) return;
+            const key = `del_${taskId}`;
+            const current = activeProcess.completedInstructions[key] === true;
+            activeProcess.completedInstructions[key] = !current;
+
+            // Save state
+            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+
+            // Refresh UI
+            selectAutogestionTask(taskId);
+        }
+
         // Check if all tasks in a phase are completed
         function checkPhaseCompleted(phaseName) {
             if (!activeProcess) return false;
@@ -2305,7 +2513,7 @@
             });
         }
 
-        // Render the read-only procedure summary
+        // Render the read-only procedure summary horizontally
         function renderProcedureSummary() {
             const summaryContent = document.getElementById('autogestion-summary-content');
             if (!summaryContent) return;
@@ -2313,7 +2521,7 @@
             const currentRoleData = autogestionRolesData[currentAutogestionRole];
             if (!currentRoleData) {
                 summaryContent.innerHTML = `
-                    <div style="font-size: 0.82rem; color: var(--text-color-muted); text-align: center; padding: 12px 0;">
+                    <div style="font-size: 0.82rem; color: var(--text-color-muted); text-align: center; width: 100%; padding: 12px 0;">
                         Selecciona un rol para ver las fases.
                     </div>
                 `;
@@ -2328,23 +2536,154 @@
             });
 
             summaryContent.innerHTML = `
-                <div class="autogestion-phases-list" style="display: flex; flex-direction: column; gap: 10px;">
-                    ${phases.map(phase => {
+                <div class="autogestion-phases-horizontal" style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; padding: 4px 0;">
+                    ${phases.map((phase, idx) => {
                         const isPhaseCompleted = checkPhaseCompleted(phase);
+                        const displayName = phase.replace(/^Fase\s+\d+:\s*/i, '');
                         return `
-                            <div class="phase-summary-item ${isPhaseCompleted ? 'completed' : ''}" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 4px; border: 1.5px solid ${isPhaseCompleted ? 'rgba(16, 185, 129, 0.25)' : 'rgba(0, 0, 0, 0.06)'}; background: ${isPhaseCompleted ? 'rgba(16, 185, 129, 0.05)' : 'rgba(0, 0, 0, 0.02)'}; transition: all 0.3s ease; cursor: default;">
-                                <div style="display: flex; align-items: center; gap: 10px; text-align: left;">
-                                    <i class="${isPhaseCompleted ? 'fa-solid fa-check' : 'fa-solid fa-lock'}" style="color: ${isPhaseCompleted ? '#10b981' : 'var(--text-color-light)'}; font-size: ${isPhaseCompleted ? '0.85rem' : '0.75rem'}; flex-shrink: 0; width: 14px; text-align: center;"></i>
-                                    <span style="font-size: 0.82rem; font-weight: 600; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-muted)'}; line-height: 1.3;">${phase}</span>
+                            <div class="phase-horizontal-item ${isPhaseCompleted ? 'completed' : ''}" style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 100px; position: relative;" title="${phase}">
+                                <div style="display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.2)'}; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(255,255,255,0.7)'}; transition: all 0.3s ease; position: relative; z-index: 2;">
+                                    <i class="${isPhaseCompleted ? 'fa-solid fa-check' : 'fa-solid fa-circle'}" style="color: ${isPhaseCompleted ? '#ffffff' : 'rgba(15, 82, 186, 0.4)'}; font-size: ${isPhaseCompleted ? '0.6rem' : '0.4rem'};"></i>
                                 </div>
-                                <span style="font-size: 0.68rem; font-weight: 700; color: ${isPhaseCompleted ? '#10b981' : 'var(--text-color-light)'}; text-transform: uppercase; flex-shrink: 0; margin-left: 8px;">
-                                    ${isPhaseCompleted ? 'Completado' : 'Pendiente'}
-                                </span>
+                                <div class="phase-title-text" style="font-size: 0.7rem; font-weight: 700; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-muted)'}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+                                    Fase ${idx + 1}
+                                </div>
+                                <div style="font-size: 0.65rem; color: var(--text-color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;" title="${displayName}">
+                                    ${displayName}
+                                </div>
+                                ${idx < phases.length - 1 ? `
+                                    <div style="position: absolute; top: 11px; left: calc(50% + 11px); right: calc(-50% + 11px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
+                                ` : ''}
                             </div>
                         `;
                     }).join('')}
                 </div>
             `;
+        }
+
+        // Email modal draft opening
+        function openEmailDraft(isReceive, taskId) {
+            let task = null;
+            for (const rKey in autogestionRolesData) {
+                const found = autogestionRolesData[rKey].tasks.find(t => t.id === taskId);
+                if (found) {
+                    task = found;
+                    break;
+                }
+            }
+            if (!task) return;
+
+            const sourceText = isReceive ? task.receiveFrom : task.deliverable;
+            const details = parseDeliveryDetails(sourceText, isReceive);
+            
+            const processName = activeProcess ? activeProcess.name : "Proceso de Selección";
+            const senderRole = autogestionRolesData[currentAutogestionRole].roleName;
+            const targetRole = details.targetRole;
+            const insumoText = details.insumoText;
+
+            let emailBody = "";
+            let emailSubject = "";
+
+            if (isReceive) {
+                emailSubject = `Solicitud de Insumos - Proceso: ${processName}`;
+                emailBody = `Estimado(a) ${targetRole},\n\nJunto con saludarle cordialmente, le solicito amablemente el envío de la siguiente documentación/insumo correspondiente al proceso "${processName}":\n\n- ${insumoText}\n\nAgradezco de antemano su colaboración para continuar con el normal desarrollo del proceso de contratación.\n\nCordialmente,\n${senderRole}`;
+            } else {
+                emailSubject = `Entrega de Insumos / Notificación - Proceso: ${processName}`;
+                emailBody = `Estimado(a) ${targetRole},\n\nJunto con saludarle cordialmente, me permito notificar y hacer entrega de la siguiente documentación/insumo correspondiente al proceso "${processName}":\n\n- ${insumoText}\n\nAgradezco la confirmación de recibido y quedo atento a los siguientes pasos del proceso.\n\nCordialmente,\n${senderRole}`;
+            }
+
+            // Create and render modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.id = 'email-modal-overlay';
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.45);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeInModal 0.25s ease;
+            `;
+
+            modalOverlay.innerHTML = `
+                <div class="card-glass" style="width: 580px; max-width: 90%; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border-radius: 8px; background: rgba(255,255,255,0.85); font-family: 'Inter', sans-serif;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); padding-bottom: 10px;">
+                        <h3 style="margin: 0; font-size: 1rem; color: var(--primary-blue); font-weight: 700;">
+                            <i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i>
+                            ${isReceive ? 'Redactar Solicitud de Correo' : 'Redactar Notificación de Correo'}
+                        </h3>
+                        <button onclick="closeEmailModal()" style="background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-color-muted); line-height: 1; font-weight: 300;">&times;</button>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-color-muted); width: 85px;">Destinatario:</span>
+                            <span class="role-badge-highlight">
+                                ${targetRole.toUpperCase()}
+                            </span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <label for="modal-email-subject" style="font-size: 0.75rem; font-weight: 700; color: var(--text-color-muted);">Asunto:</label>
+                            <input type="text" id="modal-email-subject" value="${emailSubject}" style="width: 100%; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 4px; font-family: inherit; font-size: 0.82rem; background: rgba(255,255,255,0.7); outline: none; box-sizing: border-box;" />
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 4px;">
+                            <label for="modal-email-body" style="font-size: 0.75rem; font-weight: 700; color: var(--text-color-muted);">Cuerpo del mensaje:</label>
+                            <textarea id="modal-email-body" style="width: 100%; height: 220px; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 4px; font-family: inherit; font-size: 0.82rem; line-height: 1.5; resize: none; background: rgba(255,255,255,0.9); outline: none; box-sizing: border-box;">${emailBody}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
+                        <button class="footer-btn" id="btn-copy-email" onclick="copyEmailText()" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.78rem; font-weight: 600; cursor: pointer; box-sizing: border-box; border-radius: 0;">
+                            <i class="fa-regular fa-copy"></i> Copiar Texto
+                        </button>
+                        <button class="footer-btn" onclick="openInOutlook()" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; background-color: var(--primary-blue); color: white; border: 1px solid var(--primary-blue); font-size: 0.78rem; font-weight: 600; cursor: pointer; box-sizing: border-box; border-radius: 0;">
+                            <i class="fa-solid fa-envelope-open-text"></i> Abrir en Outlook
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modalOverlay);
+        }
+
+        function closeEmailModal() {
+            const modal = document.getElementById('email-modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function copyEmailText() {
+            const bodyText = document.getElementById('modal-email-body').value;
+            navigator.clipboard.writeText(bodyText).then(() => {
+                const btn = document.getElementById('btn-copy-email');
+                if (btn) {
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i> ¡Copiado!`;
+                    btn.style.borderColor = '#10b981';
+                    btn.style.color = '#10b981';
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.borderColor = 'rgba(15, 82, 186, 0.35)';
+                        btn.style.color = 'var(--primary-blue)';
+                    }, 2000);
+                }
+            }).catch(err => {
+                alert('No se pudo copiar el texto: ' + err);
+            });
+        }
+
+        function openInOutlook() {
+            const subject = document.getElementById('modal-email-subject').value;
+            const body = document.getElementById('modal-email-body').value;
+            const mailtoUrl = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
         }
 
         // Update progress indicators
@@ -2394,14 +2733,14 @@
         function saveNoteForTask(taskId, value) {
             if (!activeProcess) return;
             activeProcess.notes[taskId] = value;
-            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+            safeSaveProcessState();
         }
 
         // Exit active process and reset to welcome
         function exitActiveProcess(showConfirm = true) {
             if (!showConfirm || confirm('¿Deseas cerrar el proceso actual? Los cambios guardados se mantendrán en este navegador.')) {
                 activeProcess = null;
-                localStorage.removeItem('autogestion_active_process');
+                safeRemoveProcessState();
 
                 // Clean welcome forms
                 document.getElementById('new-process-name').value = '';
@@ -2421,6 +2760,26 @@
                 // Clean summary content
                 const summaryContent = document.getElementById('autogestion-summary-content');
                 if (summaryContent) summaryContent.innerHTML = '';
+
+                // Clean receiving and delivering contents
+                const recContent = document.getElementById('autogestion-receiving-content');
+                if (recContent) {
+                    recContent.innerHTML = `
+                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
+                            <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
+                        </div>
+                    `;
+                }
+                const delContent = document.getElementById('autogestion-delivering-content');
+                if (delContent) {
+                    delContent.innerHTML = `
+                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
+                            <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
+                        </div>
+                    `;
+                }
 
                 // Switch UI
                 document.getElementById('autogestion-dashboard').style.display = 'none';
@@ -2620,7 +2979,12 @@
         // Initialize background circle repulsion and force initial repaint on load
         document.addEventListener('DOMContentLoaded', () => {
             // Restore active autogestion process from localStorage if present
-            const saved = localStorage.getItem('autogestion_active_process');
+            let saved = null;
+            try {
+                saved = localStorage.getItem('autogestion_active_process');
+            } catch (e) {
+                console.warn("localStorage is not available:", e);
+            }
             if (saved) {
                 try {
                     activeProcess = JSON.parse(saved);

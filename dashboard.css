@@ -2938,3 +2938,42 @@
 .doc-link:hover {
     color: #0a3d8f;
 }
+
+/* Email modal & role highlights styles */
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOutModal {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.role-badge-highlight {
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1.5px dashed rgba(0, 0, 0, 0.15);
+    color: var(--text-color-main);
+    padding: 3px 8px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: 4px;
+}
+
+.receive-checkbox-item, .deliver-checkbox-item {
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(15, 82, 186, 0.08);
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.receive-checkbox-item:hover, .deliver-checkbox-item:hover {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(15, 82, 186, 0.18);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
