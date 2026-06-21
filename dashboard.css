@@ -2926,3 +2926,15 @@
 .autogestion-task-item.completed.selected:hover {
     background: linear-gradient(90deg, #ffffff 0%, rgba(209, 250, 229, 0.8) 100%);
 }
+
+/* Document download links style */
+.doc-link {
+    color: var(--primary-blue);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.doc-link:hover {
+    color: #0a3d8f;
+}
