@@ -2324,24 +2324,31 @@
             };
         }
 
-        // Format role delivery text with highlighted gray badge
+        // Format role delivery text with inline highlighted gray badge
         function formatRoleDelivery(text, isReceive) {
             if (!text) return '';
-            const details = parseDeliveryDetails(text, isReceive);
-            const prefix = isReceive ? "Recibir de" : "Entregar a";
             
-            let icon = "fa-user-tie";
-            if (details.targetRole.includes("Abogado")) icon = "fa-user-shield";
-            else if (details.targetRole.includes("Técnica")) icon = "fa-laptop-code";
-            else if (details.targetRole.includes("Presupuesto")) icon = "fa-file-invoice-dollar";
-            else if (details.targetRole.includes("Contratista")) icon = "fa-building";
+            const roles = [
+                { name: "Abogado de Contratos", regex: /Abogado de Contratos/gi, icon: "fa-user-shield" },
+                { name: "Dependencia Técnica", regex: /Dependencia Técnica/gi, icon: "fa-laptop-code" },
+                { name: "Presupuesto", regex: /Presupuesto/gi, icon: "fa-file-invoice-dollar" },
+                { name: "Ordenador del Gasto", regex: /Ordenador del Gasto/gi, icon: "fa-user-tie" },
+                { name: "Contratista", regex: /contratista/gi, icon: "fa-building" }
+            ];
+
+            let formattedText = text;
+            
+            for (const r of roles) {
+                formattedText = formattedText.replace(r.regex, (match) => {
+                    return `<span class="role-badge-highlight" style="display: inline-flex; align-items: center; gap: 4px; vertical-align: middle; margin: 0 2px;">
+                        <i class="fa-solid ${r.icon}" style="font-size: 0.65rem;"></i> ${match}
+                    </span>`;
+                });
+            }
 
             return `
-                <div style="font-size: 0.85rem; color: var(--text-color-main); line-height: 1.45; text-align: left;">${details.insumoText}</div>
-                <div style="margin-top: 8px; text-align: left;">
-                    <span class="role-badge-highlight">
-                        <i class="fa-solid ${icon}"></i> ${prefix}: ${details.targetRole.toUpperCase()}
-                    </span>
+                <div style="font-size: 0.85rem; color: var(--text-color-main); line-height: 1.5; text-align: left;">
+                    ${formattedText}
                 </div>
             `;
         }
@@ -2373,7 +2380,7 @@
                 detailsPanel.innerHTML = `
                     <div class="panel-section-header" style="margin-bottom: 16px; padding-bottom: 8px;">
                         <h3><i class="fa-solid fa-list-check"></i> Tareas pendientes</h3>
-                        <span class="hint-text">Paso ${task.num}</span>
+                        <span class="hint-text">${task.phase}</span>
                     </div>
                     <div class="autogestion-instructions-list" style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex-grow: 1; padding-right: 4px;">
                         ${task.instructions.map((inst, index) => {
@@ -2606,9 +2613,9 @@
                                 <div class="phase-title-text" style="font-size: 0.7rem; font-weight: 700; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-muted)'}; white-space: nowrap;">
                                     Fase ${idx + 1}
                                 </div>
-                                <div class="phase-tooltip">
-                                    <div style="font-weight: 700; font-size: 0.78rem; margin-bottom: 4px; color: #38bdf8;">Fase ${idx + 1}: ${titleText}</div>
-                                    <div style="font-weight: 400; font-size: 0.7rem; color: #e2e8f0; line-height: 1.35;">${descriptionText}</div>
+                                <div class="phase-tooltip ${idx === 0 ? 'align-left' : idx === 11 ? 'align-right' : ''}">
+                                    <div class="phase-tooltip-title">Fase ${idx + 1}: ${titleText}</div>
+                                    <div class="phase-tooltip-desc">${descriptionText}</div>
                                 </div>
                                 ${idx < 11 ? `
                                     <div style="position: absolute; top: 11px; left: 50%; width: calc(100% + 10px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
