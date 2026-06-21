@@ -3279,7 +3279,7 @@
 .autogestion-save-notice-text {
     font-size: 0.72rem;
     color: var(--text-color-muted);
-    max-width: 160px;
+    max-width: 320px;
     display: inline-block;
     line-height: 1.35;
     white-space: normal;
@@ -3316,6 +3316,11 @@
 
 /* Mobile responsive query overrides (Tablet and Mobile <= 1024px) */
 @media (max-width: 1024px) {
+    .autogestion-save-notice-text {
+        max-width: 120px !important;
+        text-align: left !important;
+    }
+
     .autogestion-phases-horizontal {
         flex-wrap: wrap !important;
         justify-content: center !important;
@@ -3380,6 +3385,6 @@
     
     .autogestion-save-notice-text {
         text-align: left !important;
-        max-width: 100% !important;
+        max-width: 120px !important;
     }
 }
