@@ -2297,8 +2297,8 @@
     grid-template-columns: 1fr 1fr; /* Dos columnas en lugar de tres */
     gap: 24px;
     margin-top: 24px;
-    height: calc(100vh - 190px);
-    min-height: 520px;
+    height: calc(100vh - 330px);
+    min-height: 400px;
 }
 
 .autogestion-sidebar {
