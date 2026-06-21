@@ -2287,9 +2287,14 @@
     transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.autogestion-header-actions {
+.autogestion-workspace-wrapper {
     display: flex;
-    gap: 12px;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(100vh - 280px);
+    min-height: 520px;
+    overflow: hidden;
+    margin-top: 20px;
 }
 
 .autogestion-workspace {
@@ -2712,6 +2717,12 @@
         max-width: 320px;
     }
 
+    .autogestion-workspace-wrapper {
+        height: auto !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+    }
+
     .autogestion-workspace {
         grid-template-columns: 1fr;
         height: auto !important;
@@ -2723,6 +2734,7 @@
     .autogestion-details-panel,
     .autogestion-details-column {
         height: auto !important;
+        overflow: visible !important;
     }
 
     .autogestion-tabs {
