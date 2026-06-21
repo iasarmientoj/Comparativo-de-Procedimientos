@@ -2977,3 +2977,49 @@
     border-color: rgba(15, 82, 186, 0.18);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 }
+
+/* Custom tooltips for horizontal timeline */
+.phase-horizontal-item {
+    position: relative;
+}
+
+.phase-horizontal-item .phase-tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(5px);
+    background: rgba(15, 23, 42, 0.95);
+    color: #ffffff;
+    text-align: left;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.4;
+    white-space: normal;
+    width: 280px;
+    z-index: 10;
+    opacity: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    pointer-events: none;
+}
+
+.phase-horizontal-item:hover .phase-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.phase-horizontal-item .phase-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
+}

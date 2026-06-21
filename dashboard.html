@@ -432,34 +432,28 @@
                                             <p style="font-size: 0.82rem; color: var(--text-color-muted); max-width: 250px; margin: 0 auto; line-height: 1.5;">Selecciona una tarea de la lista para ver y completar sus tareas pendientes.</p>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Panel 2: Fila de Dos Paneles (Recibir & Entregar) (flex-shrink: 0, altura fija adaptada) -->
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex-shrink: 0; min-height: 175px;">
-                                        <!-- Panel Lo que debo recibir -->
-                                        <div class="card-glass" id="autogestion-receiving-panel" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow: hidden; height: 100%;">
-                                            <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); flex-shrink: 0;">
-                                                <h3 style="font-size: 0.8rem; font-weight: 700; color: var(--primary-blue); margin: 0;"><i class="fa-solid fa-file-import"></i> Lo que debo recibir</h3>
-                                            </div>
-                                            <div id="autogestion-receiving-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; gap: 8px;">
-                                                <!-- Inyectado por JS -->
-                                                <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                                    <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
-                                                    <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
-                                                </div>
+                                    <!-- Panel 2: Lo que debo recibir (flex-shrink: 0, ancho completo) -->
+                                    <div class="card-glass" id="autogestion-receiving-panel" style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; flex-shrink: 0; min-height: 90px;">
+                                        <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); flex-shrink: 0;">
+                                            <h3 style="font-size: 0.8rem; font-weight: 700; color: var(--primary-blue); margin: 0;"><i class="fa-solid fa-file-import"></i> Lo que debo recibir</h3>
+                                        </div>
+                                        <div id="autogestion-receiving-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; gap: 8px;">
+                                            <!-- Inyectado por JS -->
+                                            <div class="autogestion-details-placeholder" style="padding: 6px 0; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <!-- Panel Lo que debo entregar -->
-                                        <div class="card-glass" id="autogestion-delivering-panel" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; overflow: hidden; height: 100%;">
-                                            <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); flex-shrink: 0;">
-                                                <h3 style="font-size: 0.8rem; font-weight: 700; color: var(--primary-blue); margin: 0;"><i class="fa-solid fa-file-export"></i> Lo que debo entregar</h3>
-                                            </div>
-                                            <div id="autogestion-delivering-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; gap: 8px;">
-                                                <!-- Inyectado por JS -->
-                                                <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                                    <i class="fa-solid fa-circle-info" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.15); margin-bottom: 6px; display: block;"></i>
-                                                    <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
-                                                </div>
+                                    <!-- Panel 3: Lo que debo entregar (flex-shrink: 0, ancho completo) -->
+                                    <div class="card-glass" id="autogestion-delivering-panel" style="display: flex; flex-direction: column; gap: 10px; padding: 16px 20px; flex-shrink: 0; min-height: 90px;">
+                                        <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); flex-shrink: 0;">
+                                            <h3 style="font-size: 0.8rem; font-weight: 700; color: var(--primary-blue); margin: 0;"><i class="fa-solid fa-file-export"></i> Lo que debo entregar</h3>
+                                        </div>
+                                        <div id="autogestion-delivering-content" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center; overflow: hidden; gap: 8px;">
+                                            <!-- Inyectado por JS -->
+                                            <div class="autogestion-details-placeholder" style="padding: 6px 0; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">Selecciona una tarea.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -469,7 +463,7 @@
                             <!-- Panel de avance en este proceso (Fila Inferior) -->
                             <div class="card-glass" id="autogestion-summary-panel" style="flex-shrink: 0; display: flex; flex-direction: column; padding: 12px 20px; min-height: 95px; height: 95px; overflow: hidden;">
                                 <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; flex-shrink: 0;">
-                                    <h3 style="margin: 0; font-size: 0.85rem;"><i class="fa-solid fa-chart-line"></i> Tu avance en este proceso</h3>
+                                    <h3 style="margin: 0; font-size: 0.85rem;"><i class="fa-solid fa-chart-line"></i> Avance general del proceso</h3>
                                 </div>
                                 <div id="autogestion-summary-content" style="overflow-x: auto; flex-grow: 1; display: flex; align-items: center; padding-bottom: 2px;">
                                     <!-- Inyectado por JS -->
@@ -2005,6 +1999,44 @@
         let currentAutogestionRole = 'tecnico';
         let currentSelectedTaskId = null;
 
+        const globalPhasesList = [
+            "Fase 1: Planificación e Indagación Inicial",
+            "Fase 2: Co-diseño de Estudios y Control",
+            "Fase 3: Análisis de Mercado y Filtro MIPYMES",
+            "Fase 4: Configuración y Publicación del Evento (RFQ)",
+            "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
+            "Fase 6: Cierre de Cotizaciones y Apertura de Plataforma",
+            "Fase 7: Evaluación Jurídica y Filtro de Inhabilidades",
+            "Fase 8: Evaluación Técnica y Control de Precios Bajos",
+            "Fase 9: Consolidación y Publicación de Evaluaciones",
+            "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
+            "Fase 11: Legalización: Pólizas y Registro Presupuestal",
+            "Fase 12: Notificación de Supervisión y Acta de Inicio"
+        ];
+
+        function isTaskCompleted(task) {
+            if (!activeProcess) return false;
+            // 1. Check all instructions
+            const instsDone = task.instructions.every((_, idx) => activeProcess.completedInstructions[`${task.id}_${idx}`] === true);
+            if (!instsDone) return false;
+
+            // 2. Check receive checkbox if exists
+            if (task.receiveFrom) {
+                if (activeProcess.completedInstructions[`rec_${task.id}`] !== true) {
+                    return false;
+                }
+            }
+
+            // 3. Check deliver checkbox if exists
+            if (task.deliverable) {
+                if (activeProcess.completedInstructions[`del_${task.id}`] !== true) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         // Safe localStorage helpers to handle sandboxed/file:// environments
         function safeSaveProcessState() {
             if (!activeProcess) return;
@@ -2094,6 +2126,12 @@
                             completedInstructions: parsed.completedInstructions || {},
                             notes: parsed.notes || {}
                         };
+                        // Recalculate completedTasks
+                        for (const rKey in autogestionRolesData) {
+                            autogestionRolesData[rKey].tasks.forEach(t => {
+                                activeProcess.completedTasks[t.id] = isTaskCompleted(t);
+                            });
+                        }
                         safeSaveProcessState();
                         initActiveProcess();
                     } else {
@@ -2236,7 +2274,7 @@
 
             const roleTasks = autogestionRolesData[roleKey].tasks;
             roleTasks.forEach((task, index) => {
-                const isCompleted = task.instructions.every((_, idx) => activeProcess.completedInstructions[`${task.id}_${idx}`] === true);
+                const isCompleted = isTaskCompleted(task);
                 const isSelected = currentSelectedTaskId === task.id;
 
                 const item = document.createElement('div');
@@ -2359,22 +2397,24 @@
                 if (task.receiveFrom) {
                     const isRecCompleted = activeProcess.completedInstructions[`rec_${task.id}`] === true;
                     recContent.innerHTML = `
-                        <div class="receive-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;" onclick="toggleReceive('${task.id}')">
-                            <div class="task-checkbox" style="margin-top: 2px; border-color: ${isRecCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isRecCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
-                                <i class="fa-solid fa-check" style="opacity: ${isRecCompleted ? '1' : '0'}; transform: scale(${isRecCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; flex-wrap: nowrap;">
+                            <div class="receive-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; flex-grow: 1; border: none; background: transparent; padding: 0; margin: 0;" onclick="toggleReceive('${task.id}')">
+                                <div class="task-checkbox" style="margin-top: 2px; border-color: ${isRecCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isRecCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                                    <i class="fa-solid fa-check" style="opacity: ${isRecCompleted ? '1' : '0'}; transform: scale(${isRecCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    ${formatRoleDelivery(task.receiveFrom, true)}
+                                </div>
                             </div>
-                            <div style="flex-grow: 1;">
-                                ${formatRoleDelivery(task.receiveFrom, true)}
-                            </div>
+                            <button class="footer-btn" onclick="openEmailDraft(true, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; flex-shrink: 0; font-weight: 600; cursor: pointer; border-radius: 0; margin: 0;">
+                                <i class="fa-solid fa-envelope"></i> Solicitar por correo
+                            </button>
                         </div>
-                        <button class="footer-btn" onclick="openEmailDraft(true, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; width: 100%; margin-top: 8px; font-weight: 600; cursor: pointer; border-radius: 0;">
-                            <i class="fa-solid fa-envelope"></i> Solicitar por correo
-                        </button>
                     `;
                 } else {
                     recContent.innerHTML = `
-                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                            <i class="fa-solid fa-circle-minus" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.1); margin-bottom: 6px; display: block;"></i>
+                        <div class="autogestion-details-placeholder" style="padding: 6px 0; text-align: center; flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 8px; flex-direction: row; min-height: auto;">
+                            <i class="fa-solid fa-circle-minus" style="font-size: 1rem; color: rgba(15, 82, 186, 0.2); margin: 0;"></i>
                             <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">No aplica recibir insumos en este paso.</p>
                         </div>
                     `;
@@ -2387,22 +2427,24 @@
                 if (task.deliverable) {
                     const isDelCompleted = activeProcess.completedInstructions[`del_${task.id}`] === true;
                     delContent.innerHTML = `
-                        <div class="deliver-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;" onclick="toggleDeliver('${task.id}')">
-                            <div class="task-checkbox" style="margin-top: 2px; border-color: ${isDelCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isDelCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
-                                <i class="fa-solid fa-check" style="opacity: ${isDelCompleted ? '1' : '0'}; transform: scale(${isDelCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; flex-wrap: nowrap;">
+                            <div class="deliver-checkbox-item" style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; flex-grow: 1; border: none; background: transparent; padding: 0; margin: 0;" onclick="toggleDeliver('${task.id}')">
+                                <div class="task-checkbox" style="margin-top: 2px; border-color: ${isDelCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.4)'}; background-color: ${isDelCompleted ? '#10b981' : '#ffffff'}; flex-shrink: 0; width: 18px; height: 18px; border-radius: 0px; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;">
+                                    <i class="fa-solid fa-check" style="opacity: ${isDelCompleted ? '1' : '0'}; transform: scale(${isDelCompleted ? '1' : '0.5'}); color: #ffffff; font-size: 0.65rem; transition: all 0.2s ease;"></i>
+                                </div>
+                                <div style="flex-grow: 1;">
+                                    ${formatRoleDelivery(task.deliverable, false)}
+                                </div>
                             </div>
-                            <div style="flex-grow: 1;">
-                                ${formatRoleDelivery(task.deliverable, false)}
-                            </div>
+                            <button class="footer-btn" onclick="openEmailDraft(false, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; flex-shrink: 0; font-weight: 600; cursor: pointer; border-radius: 0; margin: 0;">
+                                <i class="fa-solid fa-envelope"></i> Notificar por correo
+                            </button>
                         </div>
-                        <button class="footer-btn" onclick="openEmailDraft(false, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; width: 100%; margin-top: 8px; font-weight: 600; cursor: pointer; border-radius: 0;">
-                            <i class="fa-solid fa-envelope"></i> Notificar por correo
-                        </button>
                     `;
                 } else {
                     delContent.innerHTML = `
-                        <div class="autogestion-details-placeholder" style="padding: 12px 0; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                            <i class="fa-solid fa-circle-minus" style="font-size: 1.5rem; color: rgba(15, 82, 186, 0.1); margin-bottom: 6px; display: block;"></i>
+                        <div class="autogestion-details-placeholder" style="padding: 6px 0; text-align: center; flex-grow: 1; display: flex; align-items: center; justify-content: center; gap: 8px; flex-direction: row; min-height: auto;">
+                            <i class="fa-solid fa-circle-minus" style="font-size: 1rem; color: rgba(15, 82, 186, 0.2); margin: 0;"></i>
                             <p style="font-size: 0.75rem; color: var(--text-color-muted); margin: 0;">No aplica entregar insumos en este paso.</p>
                         </div>
                     `;
@@ -2456,13 +2498,12 @@
             if (currentRoleData) {
                 const task = currentRoleData.tasks.find(t => t.id === taskId);
                 if (task) {
-                    const allDone = task.instructions.every((_, idx) => activeProcess.completedInstructions[`${taskId}_${idx}`] === true);
-                    activeProcess.completedTasks[taskId] = allDone;
+                    activeProcess.completedTasks[taskId] = isTaskCompleted(task);
                 }
             }
 
             // Save state
-            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+            safeSaveProcessState();
 
             // Refresh UI
             renderAutogestionTasks(currentAutogestionRole);
@@ -2478,11 +2519,23 @@
             const current = activeProcess.completedInstructions[key] === true;
             activeProcess.completedInstructions[key] = !current;
 
+            // Recalculate if the main task is completed
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (currentRoleData) {
+                const task = currentRoleData.tasks.find(t => t.id === taskId);
+                if (task) {
+                    activeProcess.completedTasks[taskId] = isTaskCompleted(task);
+                }
+            }
+
             // Save state
-            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+            safeSaveProcessState();
 
             // Refresh UI
+            renderAutogestionTasks(currentAutogestionRole);
+            updateAutogestionProgress();
             selectAutogestionTask(taskId);
+            renderProcedureSummary();
         }
 
         // Toggle deliver checkbox complete
@@ -2492,25 +2545,43 @@
             const current = activeProcess.completedInstructions[key] === true;
             activeProcess.completedInstructions[key] = !current;
 
+            // Recalculate if the main task is completed
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (currentRoleData) {
+                const task = currentRoleData.tasks.find(t => t.id === taskId);
+                if (task) {
+                    activeProcess.completedTasks[taskId] = isTaskCompleted(task);
+                }
+            }
+
             // Save state
-            localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+            safeSaveProcessState();
 
             // Refresh UI
+            renderAutogestionTasks(currentAutogestionRole);
+            updateAutogestionProgress();
             selectAutogestionTask(taskId);
+            renderProcedureSummary();
         }
 
         // Check if all tasks in a phase are completed
         function checkPhaseCompleted(phaseName) {
             if (!activeProcess) return false;
-            const currentRoleData = autogestionRolesData[currentAutogestionRole];
-            if (!currentRoleData) return false;
 
-            const phaseTasks = currentRoleData.tasks.filter(t => t.phase === phaseName);
-            if (phaseTasks.length === 0) return false;
+            // Special case: Phase 6 (Cierre de Cotizaciones) is automatic and has 0 tasks, so it is completed by default.
+            if (phaseName.includes("Fase 6")) {
+                return true;
+            }
 
-            return phaseTasks.every(task => {
-                return task.instructions.every((_, idx) => activeProcess.completedInstructions[`${task.id}_${idx}`] === true);
-            });
+            let allTasksForPhase = [];
+            for (const roleKey in autogestionRolesData) {
+                const roleTasks = autogestionRolesData[roleKey].tasks.filter(t => t.phase === phaseName);
+                allTasksForPhase.push(...roleTasks);
+            }
+
+            if (allTasksForPhase.length === 0) return false;
+
+            return allTasksForPhase.every(task => isTaskCompleted(task));
         }
 
         // Render the read-only procedure summary horizontally
@@ -2518,40 +2589,29 @@
             const summaryContent = document.getElementById('autogestion-summary-content');
             if (!summaryContent) return;
 
-            const currentRoleData = autogestionRolesData[currentAutogestionRole];
-            if (!currentRoleData) {
-                summaryContent.innerHTML = `
-                    <div style="font-size: 0.82rem; color: var(--text-color-muted); text-align: center; width: 100%; padding: 12px 0;">
-                        Selecciona un rol para ver las fases.
-                    </div>
-                `;
-                return;
-            }
-
-            const phases = [];
-            currentRoleData.tasks.forEach(task => {
-                if (!phases.includes(task.phase)) {
-                    phases.push(task.phase);
-                }
-            });
-
             summaryContent.innerHTML = `
                 <div class="autogestion-phases-horizontal" style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; padding: 4px 0;">
-                    ${phases.map((phase, idx) => {
+                    ${globalPhasesList.map((phase, idx) => {
                         const isPhaseCompleted = checkPhaseCompleted(phase);
-                        const displayName = phase.replace(/^Fase\s+\d+:\s*/i, '');
+                        const phaseNameOnly = phase.replace(/^Fase\s+\d+:\s*/i, '');
+                        // Get description from newProcedureSteps if it exists
+                        const phaseStepData = newProcedureSteps[idx];
+                        const descriptionText = phaseStepData ? phaseStepData.description : '';
+                        const titleText = phaseStepData ? phaseStepData.title : phaseNameOnly;
+
                         return `
-                            <div class="phase-horizontal-item ${isPhaseCompleted ? 'completed' : ''}" style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 100px; position: relative;" title="${phase}">
-                                <div style="display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.2)'}; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(255,255,255,0.7)'}; transition: all 0.3s ease; position: relative; z-index: 2;">
+                            <div class="phase-horizontal-item ${isPhaseCompleted ? 'completed' : ''}" style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 50px; position: relative;">
+                                <div style="display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.2)'}; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(255,255,255,0.7)'}; transition: all 0.3s ease; position: relative; z-index: 2; cursor: pointer;">
                                     <i class="${isPhaseCompleted ? 'fa-solid fa-check' : 'fa-solid fa-circle'}" style="color: ${isPhaseCompleted ? '#ffffff' : 'rgba(15, 82, 186, 0.4)'}; font-size: ${isPhaseCompleted ? '0.6rem' : '0.4rem'};"></i>
                                 </div>
-                                <div class="phase-title-text" style="font-size: 0.7rem; font-weight: 700; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-muted)'}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;">
+                                <div class="phase-title-text" style="font-size: 0.7rem; font-weight: 700; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-muted)'}; white-space: nowrap;">
                                     Fase ${idx + 1}
                                 </div>
-                                <div style="font-size: 0.65rem; color: var(--text-color-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;" title="${displayName}">
-                                    ${displayName}
+                                <div class="phase-tooltip">
+                                    <div style="font-weight: 700; font-size: 0.78rem; margin-bottom: 4px; color: #38bdf8;">Fase ${idx + 1}: ${titleText}</div>
+                                    <div style="font-weight: 400; font-size: 0.7rem; color: #e2e8f0; line-height: 1.35;">${descriptionText}</div>
                                 </div>
-                                ${idx < phases.length - 1 ? `
+                                ${idx < 11 ? `
                                     <div style="position: absolute; top: 11px; left: calc(50% + 11px); right: calc(-50% + 11px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
                                 ` : ''}
                             </div>
@@ -2988,8 +3048,19 @@
             if (saved) {
                 try {
                     activeProcess = JSON.parse(saved);
-                    if (activeProcess && !activeProcess.completedInstructions) {
-                        activeProcess.completedInstructions = {};
+                    if (activeProcess) {
+                        if (!activeProcess.completedInstructions) {
+                            activeProcess.completedInstructions = {};
+                        }
+                        if (!activeProcess.completedTasks) {
+                            activeProcess.completedTasks = {};
+                        }
+                        // Recalculate completedTasks
+                        for (const rKey in autogestionRolesData) {
+                            autogestionRolesData[rKey].tasks.forEach(t => {
+                                activeProcess.completedTasks[t.id] = isTaskCompleted(t);
+                            });
+                        }
                     }
                     initActiveProcess();
                 } catch (err) {
