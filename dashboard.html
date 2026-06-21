@@ -375,8 +375,8 @@
                         <div class="autogestion-dashboard-header card-glass" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; gap: 20px;">
                             <!-- Izquierda: Rol y botón de cambio -->
                             <div style="display: flex; align-items: center; gap: 12px;">
-                                <span class="details-role-badge" id="header-role-badge" style="margin-top: 0; font-size: 0.72rem; padding: 6px 12px; background: rgba(15, 82, 186, 0.08); color: var(--primary-blue); border-radius: 2px;">Rol: Área Técnica</span>
-                                <button class="calendar-action-btn" onclick="openRoleSelection()" style="padding: 5px 10px; font-size: 0.72rem; border-color: rgba(15, 82, 186, 0.35); border-radius: 0px;">
+                                <span class="details-role-badge" id="header-role-badge" style="margin-top: 0; font-size: 0.72rem; padding: 0 12px; background: rgba(15, 82, 186, 0.08); color: var(--primary-blue); border-radius: 2px; height: 32px; display: inline-flex; align-items: center; gap: 8px; box-sizing: border-box;">Rol: Área Técnica</span>
+                                <button class="calendar-action-btn" onclick="openRoleSelection()" style="padding: 0 12px; font-size: 0.72rem; border-color: rgba(15, 82, 186, 0.35); border-radius: 0px; height: 32px; display: inline-flex; align-items: center; gap: 8px; box-sizing: border-box;">
                                     <i class="fa-solid fa-user-gear"></i> Cambiar Rol
                                 </button>
                             </div>
@@ -394,11 +394,11 @@
                             
                             <!-- Derecha: Acciones -->
                             <div class="autogestion-header-actions" style="display: flex; gap: 10px;">
-                                <button class="footer-btn" onclick="saveProcessState()" style="padding: 6px 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.75rem;">
+                                <button class="footer-btn" onclick="saveProcessState()" style="display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box;">
                                     <i class="fa-solid fa-download"></i> Exportar
                                 </button>
-                                <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 6px 12px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; font-size: 0.75rem;">
-                                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Salir de este proceso
+                                <button class="footer-btn" onclick="exitActiveProcess(false)" style="display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; font-size: 0.72rem; box-sizing: border-box;">
+                                    <i class="fa-solid fa-plus"></i> Iniciar nuevo proceso
                                 </button>
                             </div>
                         </div>
