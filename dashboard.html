@@ -356,8 +356,8 @@
                             </div>
 
                             <div class="role-selection-footer" style="border-top: 1.5px solid rgba(15, 82, 186, 0.1); padding-top: 20px; width: 100%; display: flex; justify-content: center;">
-                                <button class="footer-btn" onclick="exitActiveProcess(false)" style="padding: 10px 16px; border: 1.5px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; margin-top: 10px;">
-                                    <i class="fa-solid fa-arrow-left" style="color: inherit;"></i> Regresar
+                                <button class="autogestion-action-btn btn-secondary" onclick="exitActiveProcess(false)" style="margin-top: 10px; padding: 0 16px;">
+                                    <i class="fa-solid fa-arrow-left"></i> Regresar
                                 </button>
                             </div>
                         </div>
@@ -394,10 +394,10 @@
                             
                             <!-- Derecha: Acciones -->
                             <div class="autogestion-header-actions" style="display: flex; gap: 10px;">
-                                <button class="footer-btn" onclick="saveProcessState()" style="display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box;">
+                                <button class="autogestion-action-btn btn-small" onclick="saveProcessState()">
                                     <i class="fa-solid fa-download"></i> Exportar
                                 </button>
-                                <button class="footer-btn" onclick="exitActiveProcess(false)" style="display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border: 1px solid rgba(0, 0, 0, 0.25); color: var(--text-color-main); background: transparent; font-size: 0.72rem; box-sizing: border-box;">
+                                <button class="autogestion-action-btn btn-secondary btn-small" onclick="exitActiveProcess(false)">
                                     <i class="fa-solid fa-plus"></i> Iniciar nuevo proceso
                                 </button>
                             </div>
@@ -2413,7 +2413,7 @@
                                     ${formatRoleDelivery(task.receiveFrom, true)}
                                 </div>
                             </div>
-                            <button class="footer-btn" onclick="openEmailDraft(true, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; flex-shrink: 0; font-weight: 600; cursor: pointer; border-radius: 0; margin: 0;">
+                            <button class="autogestion-action-btn" onclick="openEmailDraft(true, '${task.id}')">
                                 <i class="fa-solid fa-envelope"></i> Solicitar por correo
                             </button>
                         </div>
@@ -2443,7 +2443,7 @@
                                     ${formatRoleDelivery(task.deliverable, false)}
                                 </div>
                             </div>
-                            <button class="footer-btn" onclick="openEmailDraft(false, '${task.id}')" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.72rem; box-sizing: border-box; flex-shrink: 0; font-weight: 600; cursor: pointer; border-radius: 0; margin: 0;">
+                            <button class="autogestion-action-btn" onclick="openEmailDraft(false, '${task.id}')">
                                 <i class="fa-solid fa-envelope"></i> Notificar por correo
                             </button>
                         </div>
@@ -2678,7 +2678,7 @@
             `;
 
             modalOverlay.innerHTML = `
-                <div class="card-glass" style="width: 580px; max-width: 90%; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border-radius: 8px; background: rgba(255,255,255,0.85); font-family: 'Inter', sans-serif;">
+                <div class="card-glass" style="width: 680px; max-width: 90%; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border-radius: 8px; background: rgba(255,255,255,0.85); font-family: 'Inter', sans-serif;">
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); padding-bottom: 10px;">
                         <h3 style="margin: 0; font-size: 1rem; color: var(--primary-blue); font-weight: 700;">
                             <i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i>
@@ -2705,7 +2705,7 @@
                     </div>
                     
                     <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
-                        <button class="footer-btn" id="btn-copy-email" onclick="copyEmailText()" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; border: 1px solid rgba(15, 82, 186, 0.35); color: var(--primary-blue); background: transparent; font-size: 0.78rem; font-weight: 600; cursor: pointer; box-sizing: border-box; border-radius: 0;">
+                        <button class="autogestion-action-btn" id="btn-copy-email" onclick="copyEmailText()">
                             <i class="fa-regular fa-copy"></i> Copiar Texto
                         </button>
                         <button class="footer-btn" onclick="openInOutlook()" style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 16px; background-color: var(--primary-blue); color: white; border: 1px solid var(--primary-blue); font-size: 0.78rem; font-weight: 600; cursor: pointer; box-sizing: border-box; border-radius: 0;">
@@ -2736,8 +2736,8 @@
                     btn.style.color = '#10b981';
                     setTimeout(() => {
                         btn.innerHTML = originalHTML;
-                        btn.style.borderColor = 'rgba(15, 82, 186, 0.35)';
-                        btn.style.color = 'var(--primary-blue)';
+                        btn.style.borderColor = '';
+                        btn.style.color = '';
                     }, 2000);
                 }
             }).catch(err => {

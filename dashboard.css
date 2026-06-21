@@ -3066,3 +3066,89 @@
     right: 50px;
     margin-left: 0;
 }
+
+/* ============================================================
+   AUTOGESTION PREMIUM ACTION BUTTONS
+   ============================================================ */
+.autogestion-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 16px;
+    border: 1.5px solid var(--primary-blue);
+    color: var(--primary-blue);
+    background-color: transparent;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.autogestion-action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-blue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+.autogestion-action-btn:hover {
+    color: #ffffff !important;
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(15, 82, 186, 0.15);
+}
+
+.autogestion-action-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.autogestion-action-btn i {
+    font-size: 0.85rem;
+    color: inherit !important;
+    transition: color 0.4s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+}
+
+.autogestion-action-btn:hover i {
+    color: #ffffff !important;
+    transform: scale(1.05);
+}
+
+/* Secondary Action Button Variant */
+.autogestion-action-btn.btn-secondary {
+    color: var(--text-color-main);
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.autogestion-action-btn.btn-secondary::before {
+    background-color: var(--text-color-main);
+}
+
+.autogestion-action-btn.btn-secondary:hover {
+    border-color: var(--text-color-main);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Small Button Variant */
+.autogestion-action-btn.btn-small {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 0.68rem;
+}
