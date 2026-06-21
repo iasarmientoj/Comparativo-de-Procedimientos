@@ -2651,11 +2651,11 @@
             let emailSubject = "";
 
             if (isReceive) {
-                emailSubject = `Solicitud de Insumos - Proceso: ${processName}`;
-                emailBody = `Estimado(a) ${targetRole},\n\nJunto con saludarle cordialmente, le solicito amablemente el envío de la siguiente documentación/insumo correspondiente al proceso "${processName}":\n\n- ${insumoText}\n\nAgradezco de antemano su colaboración para continuar con el normal desarrollo del proceso de contratación.\n\nCordialmente,\n${senderRole}`;
+                emailSubject = `Solicitud de insumo - Proceso: ${processName}`;
+                emailBody = `Hola ${targetRole},\n\nPara avanzar con el proceso de contratación "${processName}", te solicito el envío del siguiente insumo:\n\n- ${insumoText}\n\nQuedo atento. Muchas gracias.\n\nSaludos cordiales,\n${senderRole}`;
             } else {
-                emailSubject = `Entrega de Insumos / Notificación - Proceso: ${processName}`;
-                emailBody = `Estimado(a) ${targetRole},\n\nJunto con saludarle cordialmente, me permito notificar y hacer entrega de la siguiente documentación/insumo correspondiente al proceso "${processName}":\n\n- ${insumoText}\n\nAgradezco la confirmación de recibido y quedo atento a los siguientes pasos del proceso.\n\nCordialmente,\n${senderRole}`;
+                emailSubject = `Entrega de insumo - Proceso: ${processName}`;
+                emailBody = `Hola ${targetRole},\n\nTe hago entrega del siguiente insumo correspondiente al proceso de contratación "${processName}":\n\n- ${insumoText}\n\nPor favor, me confirmas el recibido. Quedo atento a los siguientes pasos.\n\nSaludos cordiales,\n${senderRole}`;
             }
 
             // Create and render modal overlay
@@ -2678,13 +2678,13 @@
             `;
 
             modalOverlay.innerHTML = `
-                <div class="card-glass" style="width: 680px; max-width: 90%; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border-radius: 8px; background: rgba(255,255,255,0.85); font-family: 'Inter', sans-serif;">
+                <div class="card-glass email-modal-card">
                     <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); padding-bottom: 10px;">
                         <h3 style="margin: 0; font-size: 1rem; color: var(--primary-blue); font-weight: 700;">
                             <i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i>
                             ${isReceive ? 'Redactar Solicitud de Correo' : 'Redactar Notificación de Correo'}
                         </h3>
-                        <button onclick="closeEmailModal()" style="background: transparent; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-color-muted); line-height: 1; font-weight: 300;">&times;</button>
+                        <button class="modal-close-btn" onclick="closeEmailModal()">&times;</button>
                     </div>
                     
                     <div style="display: flex; flex-direction: column; gap: 12px; text-align: left;">
@@ -2696,11 +2696,11 @@
                         </div>
                         <div style="display: flex; flex-direction: column; gap: 4px;">
                             <label for="modal-email-subject" style="font-size: 0.75rem; font-weight: 700; color: var(--text-color-muted);">Asunto:</label>
-                            <input type="text" id="modal-email-subject" value="${emailSubject}" style="width: 100%; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 4px; font-family: inherit; font-size: 0.82rem; background: rgba(255,255,255,0.7); outline: none; box-sizing: border-box;" />
+                            <input type="text" id="modal-email-subject" class="modal-input-field" value="${emailSubject}" />
                         </div>
                         <div style="display: flex; flex-direction: column; gap: 4px;">
                             <label for="modal-email-body" style="font-size: 0.75rem; font-weight: 700; color: var(--text-color-muted);">Cuerpo del mensaje:</label>
-                            <textarea id="modal-email-body" style="width: 100%; height: 220px; padding: 12px; border: 1px solid rgba(0,0,0,0.15); border-radius: 4px; font-family: inherit; font-size: 0.82rem; line-height: 1.5; resize: none; background: rgba(255,255,255,0.9); outline: none; box-sizing: border-box;">${emailBody}</textarea>
+                            <textarea id="modal-email-body" class="modal-textarea-field">${emailBody}</textarea>
                         </div>
                     </div>
                     
