@@ -630,9 +630,9 @@
                         subtitleEl.style.display = 'none';
                         if (headerRight) {
                             headerRight.innerHTML = `
-                                <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
-                                    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
-                                    <span>Los cambios se guardan automáticamente en tu navegador</span>
+                                <div class="autogestion-save-notice-container">
+                                    <i class="fa-solid fa-circle-check" style="color: #10b981; flex-shrink: 0; font-size: 0.72rem;"></i>
+                                    <span class="autogestion-save-notice-text">Los cambios se guardan automáticamente en tu navegador</span>
                                 </div>
                             `;
                         }
@@ -2231,9 +2231,9 @@
                 const headerRight = document.getElementById('viewport-header-right');
                 if (headerRight) {
                     headerRight.innerHTML = `
-                        <div style="font-size: 0.72rem; color: var(--text-color-muted); display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
-                            <span>Los cambios se guardan automáticamente en tu navegador</span>
+                        <div class="autogestion-save-notice-container">
+                            <i class="fa-solid fa-circle-check" style="color: #10b981; flex-shrink: 0; font-size: 0.72rem;"></i>
+                            <span class="autogestion-save-notice-text">Los cambios se guardan automáticamente en tu navegador</span>
                         </div>
                     `;
                 }
@@ -2482,8 +2482,8 @@
                                     ${formatRoleDelivery(task.receiveFrom, true)}
                                 </div>
                             </div>
-                            <button class="autogestion-action-btn" onclick="openEmailDraft(true, '${task.id}')">
-                                <i class="fa-solid fa-envelope"></i> Solicitar por correo
+                            <button class="autogestion-action-btn autogestion-email-btn" onclick="openEmailDraft(true, '${task.id}')">
+                                <i class="fa-solid fa-envelope"></i> <span class="btn-text-wrap"><span class="btn-text-main">Solicitar</span> <span class="btn-text-sub">por correo</span></span>
                             </button>
                         </div>
                     `;
@@ -2512,8 +2512,8 @@
                                     ${formatRoleDelivery(task.deliverable, false)}
                                 </div>
                             </div>
-                            <button class="autogestion-action-btn" onclick="openEmailDraft(false, '${task.id}')">
-                                <i class="fa-solid fa-envelope"></i> Notificar por correo
+                            <button class="autogestion-action-btn autogestion-email-btn" onclick="openEmailDraft(false, '${task.id}')">
+                                <i class="fa-solid fa-envelope"></i> <span class="btn-text-wrap"><span class="btn-text-main">Notificar</span> <span class="btn-text-sub">por correo</span></span>
                             </button>
                         </div>
                     `;
@@ -2687,7 +2687,7 @@
                                     <div class="phase-tooltip-desc">${descriptionText}</div>
                                 </div>
                                 ${idx < 11 ? `
-                                    <div style="position: absolute; top: 11px; left: 50%; width: calc(100% + 10px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
+                                    <div class="phase-connecting-line" style="position: absolute; top: 11px; left: 50%; width: calc(100% + 10px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
                                 ` : ''}
                             </div>
                         `;

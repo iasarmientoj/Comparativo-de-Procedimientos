@@ -3264,3 +3264,122 @@
     color: #ef4444;
     transform: scale(1.1);
 }
+
+/* ============================================================
+   AUTOGESTION RESPONSIVE ADJUSTMENTS & FIXES
+   ============================================================ */
+
+/* Save notice wrapping on desktop/mobile */
+.autogestion-save-notice-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.autogestion-save-notice-text {
+    font-size: 0.72rem;
+    color: var(--text-color-muted);
+    max-width: 160px;
+    display: inline-block;
+    line-height: 1.35;
+    white-space: normal;
+    text-align: right;
+}
+
+/* Email action button defaults */
+.autogestion-email-btn {
+    flex-shrink: 0;
+}
+
+.autogestion-email-btn .btn-text-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.autogestion-email-btn .btn-text-sub {
+    display: inline;
+}
+
+/* Stepper horizontal timeline layout defaults */
+.autogestion-phases-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+    padding: 4px 0;
+    overflow: visible;
+    position: relative;
+}
+
+/* Mobile responsive query overrides (Tablet and Mobile <= 1024px) */
+@media (max-width: 1024px) {
+    .autogestion-phases-horizontal {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 14px 8px !important;
+    }
+    
+    .phase-horizontal-item {
+        flex: 0 1 calc(16.66% - 8px) !important; /* 6 per row on tablet sizes */
+        min-width: 54px !important;
+    }
+    
+    .phase-connecting-line {
+        display: none !important;
+    }
+    
+    .autogestion-email-btn {
+        flex-direction: column !important;
+        width: 105px !important;
+        height: 52px !important;
+        padding: 4px 6px !important;
+        gap: 2px !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+    
+    .autogestion-email-btn i {
+        font-size: 0.8rem !important;
+        margin: 0 !important;
+    }
+    
+    .autogestion-email-btn .btn-text-wrap {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0px !important;
+        text-align: center !important;
+        line-height: 1.15 !important;
+        white-space: normal !important;
+    }
+    
+    .autogestion-email-btn .btn-text-main {
+        font-size: 0.65rem !important;
+        font-weight: 700 !important;
+    }
+    
+    .autogestion-email-btn .btn-text-sub {
+        display: block !important;
+        font-size: 0.55rem !important;
+        text-transform: lowercase !important;
+    }
+}
+
+/* Smaller mobile viewports <= 600px */
+@media (max-width: 600px) {
+    .phase-horizontal-item {
+        flex: 0 1 calc(25% - 8px) !important; /* 4 per row on mobile phones */
+    }
+    
+    .autogestion-save-notice-container {
+        justify-content: flex-start !important;
+        margin-top: 4px;
+    }
+    
+    .autogestion-save-notice-text {
+        text-align: left !important;
+        max-width: 100% !important;
+    }
+}
