@@ -461,11 +461,11 @@
                             </div>
 
                             <!-- Panel de avance en este proceso (Fila Inferior) -->
-                            <div class="card-glass" id="autogestion-summary-panel" style="flex-shrink: 0; display: flex; flex-direction: column; padding: 12px 20px; min-height: 95px; height: 95px; overflow: hidden;">
+                            <div class="card-glass" id="autogestion-summary-panel" style="flex-shrink: 0; display: flex; flex-direction: column; padding: 12px 20px; min-height: 110px; height: auto; overflow: visible;">
                                 <div class="panel-section-header" style="margin-bottom: 4px; padding-bottom: 4px; flex-shrink: 0;">
                                     <h3 style="margin: 0; font-size: 0.85rem;"><i class="fa-solid fa-chart-line"></i> Avance general del proceso</h3>
                                 </div>
-                                <div id="autogestion-summary-content" style="overflow-x: auto; flex-grow: 1; display: flex; align-items: center; padding-bottom: 2px;">
+                                <div id="autogestion-summary-content" style="overflow: visible; flex-grow: 1; display: flex; align-items: center; padding-bottom: 2px;">
                                     <!-- Inyectado por JS -->
                                 </div>
                             </div>
@@ -2567,21 +2567,20 @@
         // Check if all tasks in a phase are completed
         function checkPhaseCompleted(phaseName) {
             if (!activeProcess) return false;
+            const currentRoleData = autogestionRolesData[currentAutogestionRole];
+            if (!currentRoleData) return false;
 
-            // Special case: Phase 6 (Cierre de Cotizaciones) is automatic and has 0 tasks, so it is completed by default.
-            if (phaseName.includes("Fase 6")) {
-                return true;
+            const idx = globalPhasesList.indexOf(phaseName);
+            if (idx === -1) return false;
+
+            const phaseTasks = currentRoleData.tasks.filter(t => t.phase === phaseName);
+            if (phaseTasks.length > 0) {
+                return phaseTasks.every(task => isTaskCompleted(task));
+            } else {
+                if (idx === 0) return true;
+                const prevPhase = globalPhasesList[idx - 1];
+                return checkPhaseCompleted(prevPhase);
             }
-
-            let allTasksForPhase = [];
-            for (const roleKey in autogestionRolesData) {
-                const roleTasks = autogestionRolesData[roleKey].tasks.filter(t => t.phase === phaseName);
-                allTasksForPhase.push(...roleTasks);
-            }
-
-            if (allTasksForPhase.length === 0) return false;
-
-            return allTasksForPhase.every(task => isTaskCompleted(task));
         }
 
         // Render the read-only procedure summary horizontally
@@ -2590,7 +2589,7 @@
             if (!summaryContent) return;
 
             summaryContent.innerHTML = `
-                <div class="autogestion-phases-horizontal" style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; padding: 4px 0;">
+                <div class="autogestion-phases-horizontal" style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; padding: 4px 0; overflow: visible; position: relative;">
                     ${globalPhasesList.map((phase, idx) => {
                         const isPhaseCompleted = checkPhaseCompleted(phase);
                         const phaseNameOnly = phase.replace(/^Fase\s+\d+:\s*/i, '');
@@ -2600,7 +2599,7 @@
                         const titleText = phaseStepData ? phaseStepData.title : phaseNameOnly;
 
                         return `
-                            <div class="phase-horizontal-item ${isPhaseCompleted ? 'completed' : ''}" style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 50px; position: relative;">
+                            <div class="phase-horizontal-item ${isPhaseCompleted ? 'completed' : ''}" style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; min-width: 50px; position: relative; overflow: visible;">
                                 <div style="display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; border: 2px solid ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.2)'}; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(255,255,255,0.7)'}; transition: all 0.3s ease; position: relative; z-index: 2; cursor: pointer;">
                                     <i class="${isPhaseCompleted ? 'fa-solid fa-check' : 'fa-solid fa-circle'}" style="color: ${isPhaseCompleted ? '#ffffff' : 'rgba(15, 82, 186, 0.4)'}; font-size: ${isPhaseCompleted ? '0.6rem' : '0.4rem'};"></i>
                                 </div>
@@ -2612,7 +2611,7 @@
                                     <div style="font-weight: 400; font-size: 0.7rem; color: #e2e8f0; line-height: 1.35;">${descriptionText}</div>
                                 </div>
                                 ${idx < 11 ? `
-                                    <div style="position: absolute; top: 11px; left: calc(50% + 11px); right: calc(-50% + 11px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
+                                    <div style="position: absolute; top: 11px; left: 50%; width: calc(100% + 10px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
                                 ` : ''}
                             </div>
                         `;
