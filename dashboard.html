@@ -269,48 +269,62 @@
 
                 <!-- PANEL: SISTEMA DE AUTOGESTIÓN -->
                 <div class="dashboard-panel" id="panel-sis-autogestion">
-                    <!-- 1. Pantalla de Bienvenida (Nuevo o Cargar) -->
+                    <!-- 1. Pantalla de Bienvenida (Nuevo o Cargar y Procesos Guardados) -->
                     <div class="autogestion-welcome-container" id="autogestion-welcome"
-                        style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-                        <div class="card-glass"
-                            style="width: 100%; max-width: 700px; display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 40px; text-align: center;">
-                            <div class="autogestion-welcome-header">
-                                <i class="fa-solid fa-laptop-code autogestion-welcome-icon"></i>
-                                <h3>Sistema de Autogestión</h3>
-                                <p>Asistente interactivo estructurado por roles para el seguimiento de actividades,
-                                    control de hitos clave y mitigación de riesgos durante el proceso de contratación.
-                                </p>
-                            </div>
-
-                            <div class="autogestion-options">
-                                <button class="autogestion-opt-btn" id="btn-nuevo-proceso"
-                                    onclick="showNewProcessInput()">
-                                    <i class="fa-solid fa-file-circle-plus"></i>
-                                    <span>Nuevo Proceso</span>
-                                </button>
-                                <button class="autogestion-opt-btn" id="btn-cargar-proceso"
-                                    onclick="triggerLoadProcess()">
-                                    <i class="fa-solid fa-file-arrow-up"></i>
-                                    <span>Cargar Proceso</span>
-                                </button>
-                            </div>
-
-                            <!-- Buscador de archivos oculto -->
-                            <input type="file" id="autogestion-file-input" accept=".json" style="display: none;"
-                                onchange="handleLoadProcessFile(event)">
-
-                            <!-- Formulario para Nuevo Proceso (oculto por defecto) -->
-                            <div class="autogestion-new-form" id="autogestion-new-form" style="display: none;">
-                                <div class="form-group">
-                                    <label for="new-process-name">Nombre del Proceso Contractual:</label>
-                                    <input type="text" id="new-process-name"
-                                        placeholder="Ej. Adquisición Licenciamiento Software CCE-2026"
-                                        class="autogestion-input" onkeyup="checkNewProcessName(event)">
+                        style="display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 1200px; margin: 0 auto;">
+                        <div class="autogestion-welcome-columns">
+                            <!-- Left Panel: Create / Load Process -->
+                            <div class="card-glass" style="display: flex; flex-direction: column; align-items: center; gap: 36px; padding: 40px; text-align: center; box-sizing: border-box;">
+                                <div class="autogestion-welcome-header">
+                                    <i class="fa-solid fa-laptop-code autogestion-welcome-icon"></i>
+                                    <h3>Sistema de Autogestión</h3>
+                                    <p>Asistente interactivo estructurado por roles para el seguimiento de actividades,
+                                        control de hitos clave y mitigación de riesgos durante el proceso de contratación.
+                                    </p>
                                 </div>
-                                <button class="autogestion-submit-btn" id="btn-submit-nuevo"
-                                    onclick="createNewProcess()" disabled>
-                                    <span>Crear Proceso</span> <i class="fa-solid fa-arrow-right"></i>
-                                </button>
+
+                                <div class="autogestion-options">
+                                    <button class="autogestion-opt-btn" id="btn-nuevo-proceso"
+                                        onclick="showNewProcessInput()">
+                                        <i class="fa-solid fa-file-circle-plus"></i>
+                                        <span>Nuevo Proceso</span>
+                                    </button>
+                                    <button class="autogestion-opt-btn" id="btn-cargar-proceso"
+                                        onclick="triggerLoadProcess()">
+                                        <i class="fa-solid fa-file-arrow-up"></i>
+                                        <span>Cargar Proceso</span>
+                                    </button>
+                                </div>
+
+                                <!-- Buscador de archivos oculto -->
+                                <input type="file" id="autogestion-file-input" accept=".json" style="display: none;"
+                                    onchange="handleLoadProcessFile(event)">
+
+                                <!-- Formulario para Nuevo Proceso (oculto por defecto) -->
+                                <div class="autogestion-new-form" id="autogestion-new-form" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="new-process-name">Nombre del Proceso Contractual:</label>
+                                        <input type="text" id="new-process-name"
+                                            placeholder="Ej. Adquisición Licenciamiento Software CCE-2026"
+                                            class="autogestion-input" onkeyup="checkNewProcessName(event)">
+                                    </div>
+                                    <button class="autogestion-submit-btn" id="btn-submit-nuevo"
+                                        onclick="createNewProcess()" disabled>
+                                        <span>Crear Proceso</span> <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Panel: Saved Processes -->
+                            <div class="card-glass autogestion-saved-panel" style="display: flex; flex-direction: column; gap: 20px; padding: 30px 24px; text-align: left; height: 100%; min-height: 420px; box-sizing: border-box; width: 100%;">
+                                <div class="panel-section-header" style="border-bottom: 1.5px solid rgba(15, 82, 186, 0.1); padding-bottom: 12px; margin-bottom: 4px;">
+                                    <h3 style="font-size: 1.15rem; color: var(--primary-blue); display: flex; align-items: center; gap: 10px; margin: 0; font-family: var(--font-serif); font-style: italic;">
+                                        <i class="fa-solid fa-folder-open"></i> Procesos Guardados
+                                    </h3>
+                                </div>
+                                <div id="autogestion-saved-list" style="display: flex; flex-direction: column; gap: 12px; overflow-y: auto; max-height: 380px; flex-grow: 1; padding-right: 4px;">
+                                    <!-- Inyectado por JS -->
+                                </div>
                             </div>
                         </div>
 
@@ -640,6 +654,8 @@
                         titleEl.textContent = 'Sistema de Autogestión';
                         subtitleEl.textContent = 'Guía interactiva de actividades, hitos y mitigación de riesgos por roles';
                         subtitleEl.style.display = 'block';
+                        loadAllProcesses();
+                        renderSavedProcessesList();
                     }
                     break;
             }
@@ -2106,22 +2122,162 @@
             return true;
         }
 
-        // Safe localStorage helpers to handle sandboxed/file:// environments
+        let savedProcesses = [];
+
+        function loadAllProcesses() {
+            try {
+                const listStr = localStorage.getItem('autogestion_processes');
+                if (listStr) {
+                    savedProcesses = JSON.parse(listStr);
+                } else {
+                    const oldStr = localStorage.getItem('autogestion_active_process');
+                    if (oldStr) {
+                        try {
+                            const oldActive = JSON.parse(oldStr);
+                            if (oldActive && oldActive.name) {
+                                savedProcesses = [oldActive];
+                                localStorage.setItem('autogestion_processes', JSON.stringify(savedProcesses));
+                                localStorage.setItem('autogestion_active_process_name', oldActive.name);
+                            }
+                        } catch (e) {
+                            savedProcesses = [];
+                        }
+                    } else {
+                        savedProcesses = [];
+                    }
+                }
+            } catch (e) {
+                console.warn("Storage read error:", e);
+                savedProcesses = [];
+            }
+        }
+
+        function saveAllProcesses() {
+            try {
+                localStorage.setItem('autogestion_processes', JSON.stringify(savedProcesses));
+            } catch (e) {
+                console.warn("Storage write error:", e);
+            }
+        }
+
         function safeSaveProcessState() {
             if (!activeProcess) return;
+            loadAllProcesses();
+            const idx = savedProcesses.findIndex(p => p.name.toLowerCase() === activeProcess.name.toLowerCase());
+            if (idx !== -1) {
+                savedProcesses[idx] = activeProcess;
+            } else {
+                savedProcesses.push(activeProcess);
+            }
+            saveAllProcesses();
             try {
+                localStorage.setItem('autogestion_active_process_name', activeProcess.name);
                 localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
             } catch (e) {
-                console.warn("Storage access denied. State kept in memory only.", e);
+                console.warn("Storage active process update error:", e);
             }
         }
 
         function safeRemoveProcessState() {
             try {
+                localStorage.removeItem('autogestion_active_process_name');
                 localStorage.removeItem('autogestion_active_process');
             } catch (e) {
-                console.warn("Storage access denied.", e);
+                console.warn("Storage active process clear error:", e);
             }
+        }
+
+        function loadProcessByName(name) {
+            loadAllProcesses();
+            const found = savedProcesses.find(p => p.name === name);
+            if (found) {
+                activeProcess = found;
+                
+                // Recalculate completedTasks
+                for (const rKey in autogestionRolesData) {
+                    autogestionRolesData[rKey].tasks.forEach(t => {
+                        activeProcess.completedTasks[t.id] = isTaskCompleted(t);
+                    });
+                }
+                
+                try {
+                    localStorage.setItem('autogestion_active_process', JSON.stringify(activeProcess));
+                    localStorage.setItem('autogestion_active_process_name', activeProcess.name);
+                } catch (e) {}
+
+                initActiveProcess();
+            }
+        }
+
+        function deleteProcessByName(name, event) {
+            if (event) event.stopPropagation();
+            if (!confirm(`¿Estás seguro de que deseas eliminar el proceso "${name}"?`)) {
+                return;
+            }
+            loadAllProcesses();
+            savedProcesses = savedProcesses.filter(p => p.name.toLowerCase() !== name.toLowerCase());
+            saveAllProcesses();
+            
+            if (activeProcess && activeProcess.name.toLowerCase() === name.toLowerCase()) {
+                activeProcess = null;
+                safeRemoveProcessState();
+                exitActiveProcess(false);
+            } else {
+                renderSavedProcessesList();
+            }
+        }
+
+        function renderSavedProcessesList() {
+            const listContainer = document.getElementById('autogestion-saved-list');
+            if (!listContainer) return;
+
+            if (savedProcesses.length === 0) {
+                listContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--text-color-muted); display: flex; flex-direction: column; align-items: center; gap: 12px; justify-content: center; height: 100%;">
+                        <i class="fa-regular fa-folder-open" style="font-size: 2.2rem; opacity: 0.15; color: var(--primary-blue);"></i>
+                        <p style="font-size: 0.85rem; margin: 0; line-height: 1.5; color: var(--text-color-main);">No hay procesos guardados en este navegador.</p>
+                        <p style="font-size: 0.72rem; margin: 0; opacity: 0.8;">Crea un nuevo proceso o carga un archivo para comenzar.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = savedProcesses.map(proc => {
+                let compPct = 0;
+                let totalTasks = 0;
+                let completed = 0;
+                for (const rKey in autogestionRolesData) {
+                    totalTasks += autogestionRolesData[rKey].tasks.length;
+                    autogestionRolesData[rKey].tasks.forEach(t => {
+                        const isTaskDone = proc.completedTasks && proc.completedTasks[t.id] === true;
+                        if (isTaskDone) completed++;
+                    });
+                }
+                if (totalTasks > 0) {
+                    compPct = Math.round((completed / totalTasks) * 100);
+                }
+
+                const dateStr = proc.createdAt ? new Date(proc.createdAt).toLocaleDateString('es-ES', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                }) : 'Sin fecha';
+
+                return `
+                    <div class="saved-process-item" onclick="loadProcessByName('${proc.name}')">
+                        <div style="flex-grow: 1; overflow: hidden; display: flex; flex-direction: column; gap: 4px;">
+                            <span class="saved-proc-name" style="font-size: 0.85rem; font-weight: 700; color: var(--text-color-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;" title="${proc.name}">${proc.name}</span>
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.7rem; color: var(--text-color-muted);">
+                                <span><i class="fa-regular fa-calendar" style="margin-right: 4px;"></i>${dateStr}</span>
+                                <span><i class="fa-solid fa-chart-pie" style="margin-right: 4px;"></i>${compPct}% completado</span>
+                            </div>
+                        </div>
+                        <button class="saved-proc-delete-btn" onclick="deleteProcessByName('${proc.name}', event)" title="Eliminar proceso">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
         }
 
         // Toggle New Process Form
@@ -2150,6 +2306,15 @@
             const nameInput = document.getElementById('new-process-name');
             const name = nameInput.value.trim();
             if (!name) return;
+
+            loadAllProcesses();
+            // Check if process already exists
+            const exists = savedProcesses.some(p => p.name.toLowerCase() === name.toLowerCase());
+            if (exists) {
+                alert(`Ya existe un proceso llamado "${name}". Por favor usa un nombre diferente.`);
+                nameInput.focus();
+                return;
+            }
 
             activeProcess = {
                 name: name,
@@ -2188,6 +2353,15 @@
                 try {
                     const parsed = JSON.parse(e.target.result);
                     if (parsed && parsed.name) {
+                        loadAllProcesses();
+                        const existsIdx = savedProcesses.findIndex(p => p.name.toLowerCase() === parsed.name.toLowerCase());
+                        if (existsIdx !== -1) {
+                            if (!confirm(`Ya existe un proceso llamado "${parsed.name}". ¿Deseas reemplazarlo con la versión del archivo?`)) {
+                                return;
+                            }
+                        }
+
+                        // Temp assign to activeProcess to run isTaskCompleted recalculations
                         activeProcess = {
                             name: parsed.name,
                             createdAt: parsed.createdAt || new Date().toISOString(),
@@ -2195,14 +2369,25 @@
                             completedInstructions: parsed.completedInstructions || {},
                             notes: parsed.notes || {}
                         };
+
                         // Recalculate completedTasks
                         for (const rKey in autogestionRolesData) {
                             autogestionRolesData[rKey].tasks.forEach(t => {
                                 activeProcess.completedTasks[t.id] = isTaskCompleted(t);
                             });
                         }
+
+                        // Save / add to savedProcesses list
+                        if (existsIdx !== -1) {
+                            savedProcesses[existsIdx] = activeProcess;
+                        } else {
+                            savedProcesses.push(activeProcess);
+                        }
+
+                        saveAllProcesses();
                         safeSaveProcessState();
                         initActiveProcess();
+                        renderSavedProcessesList();
                     } else {
                         alert('El archivo cargado no contiene un formato de proceso válido.');
                     }
@@ -2927,6 +3112,8 @@
                 document.getElementById('autogestion-dashboard').style.display = 'none';
                 document.getElementById('autogestion-role-selection').style.display = 'none';
                 document.getElementById('autogestion-welcome').style.display = 'flex';
+                loadAllProcesses();
+                renderSavedProcessesList();
             }
         }
 
@@ -3120,6 +3307,9 @@
 
         // Initialize background circle repulsion and force initial repaint on load
         document.addEventListener('DOMContentLoaded', () => {
+            loadAllProcesses();
+            renderSavedProcessesList();
+
             // Restore active autogestion process from localStorage if present
             let saved = null;
             try {
@@ -3130,7 +3320,13 @@
             if (saved) {
                 try {
                     activeProcess = JSON.parse(saved);
-                    if (activeProcess) {
+                    if (activeProcess && activeProcess.name) {
+                        const exists = savedProcesses.some(p => p.name.toLowerCase() === activeProcess.name.toLowerCase());
+                        if (!exists) {
+                            savedProcesses.push(activeProcess);
+                            saveAllProcesses();
+                        }
+                        
                         if (!activeProcess.completedInstructions) {
                             activeProcess.completedInstructions = {};
                         }
@@ -3143,8 +3339,8 @@
                                 activeProcess.completedTasks[t.id] = isTaskCompleted(t);
                             });
                         }
+                        initActiveProcess();
                     }
-                    initActiveProcess();
                 } catch (err) {
                     console.error("Error loading saved process:", err);
                 }
