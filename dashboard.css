@@ -3279,7 +3279,7 @@
 .autogestion-save-notice-text {
     font-size: 0.72rem;
     color: var(--text-color-muted);
-    max-width: 320px;
+    max-width: none;
     display: inline-block;
     line-height: 1.35;
     white-space: normal;
