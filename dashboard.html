@@ -2963,11 +2963,11 @@
         // Parse delivery/reception text to extract target role and clean item description
         function parseDeliveryDetails(text, isReceive) {
             const roles = [
-                { name: "Abogado de Contratos", regex: /a\s+Abogado de Contratos|de\s+Abogado de Contratos/gi },
-                { name: "Dependencia Técnica", regex: /a\s+Dependencia Técnica|de\s+Dependencia Técnica/gi },
-                { name: "Presupuesto", regex: /a\s+Presupuesto|de\s+Presupuesto/gi },
-                { name: "Ordenador del Gasto", regex: /a\s+Ordenador del Gasto|de\s+Ordenador del Gasto/gi },
-                { name: "Contratista", regex: /al\s+contratista|por\s+el\s+contratista|con\s+el\s+contratista/gi }
+                { name: "Abogado de Contratos", regex: /\b(a|de|al|del)\s+(la\s+|el\s+)?Abogado de Contratos/gi },
+                { name: "Dependencia Técnica", regex: /\b(a|de|al|del)\s+(la\s+|el\s+)?Dependencia Técnica/gi },
+                { name: "Presupuesto", regex: /\b(a|de|al|del)\s+(la\s+|el\s+)?Presupuesto/gi },
+                { name: "Ordenador del Gasto", regex: /\b(a|de|al|del)\s+(la\s+|el\s+)?Ordenador del Gasto/gi },
+                { name: "Contratista", regex: /\b(a|de|al|del|por|con)\s+(la\s+|el\s+)?Contratista/gi }
             ];
 
             let cleanText = text || '';
