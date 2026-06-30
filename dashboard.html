@@ -1847,9 +1847,9 @@
         }
 
         /* ==========================================================================
-           AUTOGESTION DATA STRUCTURES (39 TASKS)
+           AUTOGESTION DATA STRUCTURES (49 TASKS)
            ========================================================================== */
-        const autogestionRolesData = {
+                        const autogestionRolesData = {
             "tecnico": {
                 roleName: "Dependencia Técnica",
                 roleIcon: "fa-laptop-code",
@@ -1857,204 +1857,256 @@
                     {
                         id: "tec_1",
                         num: 1,
-                        title: "Definir el requerimiento técnico",
-                        phase: "Fase 1: Planificación e Indagación Inicial",
-                        desc: "Escriba detalladamente las especificaciones del bien o servicio y seleccione los catálogos correspondientes que se encuentren vigentes en la Tienda Virtual.",
+                        title: "Solicitar Asesoría y Cargar Insumos Preliminares",
+                        phase: "Paso 1: Recibir, radicar y asignar trámite de la solicitud de asesoría",
+                        desc: "Escriba la necesidad preliminar y solicite formalmente el inicio de asesoría técnica y legal al GLPE por correo institucional.",
+                        deliverable: "Solicitud formal de asesoría con el proyecto de estudio previo, consulta PAA y minuta del AMP.",
                         instructions: [
-                            "Consulta el listado de marcas y catálogos vigentes del Acuerdo en el <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>portal de CCE</a>.",
-                            "Redacta el Anexo Técnico de especificaciones utilizando como plantilla el archivo <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'03. Anexo Técnico 02 - Especificaciones técnicas transversales'</a>.",
-                            "Si estás adquiriendo suites de oficina o colaboración corporativa, incorpora las exigencias del documento <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'04. Anexo Técnico 03 - Suplementos Suite Corporativa'</a>."
+                            "Redacte el borrador técnico de necesidades y verifique en la plataforma SECOP II que la adquisición esté cargada en el Plan Anual de Adquisiciones (PAA). Tome captura de pantalla de la línea PAA.",
+                            "Adjunte la minuta técnica del AMP y la consulta efectuada al Grupo de Bienes y Suministros que certifique la no existencia de elementos en inventario.",
+                            "Remita toda la documentación al correo institucional del GLPE."
                         ]
                     },
                     {
                         id: "tec_2",
                         num: 2,
-                        title: "Verificar vigencia del AMP",
-                        phase: "Fase 1: Planificación e Indagación Inicial",
-                        desc: "Consulte el catálogo oficial en SECOP/Colombia Compra Eficiente para validar que el Acuerdo Marco sigue activo.",
+                        title: "Subsanar Observaciones de Estudios Preliminares",
+                        phase: "Paso 2: Analizar los estudios y documentos previos del área solicitante",
+                        desc: "Reciba las observaciones del abogado asignado y ajuste el proyecto de estudios previos y anexos técnicos.",
+                        receiveFrom: "Memorando de observaciones jurídicas o devolución de Abogado de Contratos.",
+                        deliverable: "Estudios y documentos previos corregidos con firma digital de la Dependencia Técnica.",
                         instructions: [
-                            "Ingresa a <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>Colombia Compra Eficiente</a> y constata que la fecha de terminación del Acuerdo Marco de Software II no haya expirado y que esté habilitada la colocación de Órdenes de Compra."
+                            "Revise los puntos críticos observados por el abogado (alcance del catálogo, cantidades y plazos de entrega).",
+                            "Realice las modificaciones técnicas pertinentes en el borrador de estudios previos y firme digitalmente los documentos corregidos."
                         ]
                     },
                     {
                         id: "tec_3",
                         num: 3,
-                        title: "Ejecutar el simulador oficial de costos",
-                        phase: "Fase 1: Planificación e Indagación Inicial",
-                        desc: "Utilice el simulador oficial de costos para calcular el valor estimado de la contratación, asegurando incluir retenciones y estampillas territoriales.",
-                        deliverable: "Solicitud de CDP (memorando con ficha y simulador preliminar) a Presupuesto.",
+                        title: "Configurar e Indagar el Mercado en RFI (Si Aplica)",
+                        phase: "Paso 3: Configurar el evento RFI (cuando sea obligatorio)",
+                        desc: "Configure el evento de Solicitud de Información (RFI) en la plataforma transaccional TVEC en compañía del abogado responsable.",
+                        deliverable: "Evento RFI configurado y publicado en la Tienda Virtual (TVEC).",
                         instructions: [
-                            "Descarga el archivo Excel <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'08. Simulador'</a> oficial de la Tienda Virtual (recuerda hacer clic en 'Habilitar Edición' y 'Desbloquear contenido' en Excel).",
-                            "Digita las cantidades y perfiles requeridos para obtener el costo base oficial del catálogo.",
-                            "Realiza el cálculo manual de la contribución MHCP (Estampillas y Timbre) guiándote con el <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'10. Comunicado Impuesto de timbre'</a> y súmalo al presupuesto estimado final (esta adición es obligatoria para el MHCP y no la realiza el simulador de <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>CCE</a> automáticamente)."
+                            "Diligencie el formato '06. Formato RFI - Solicitud de información' detallando las especificaciones técnicas sobre las cuales se quiere indagar el mercado.",
+                            "Cárguelo y configúrelo en la plataforma TVEC, asignando el término de publicación según indique la guía del AMP."
                         ]
                     },
                     {
                         id: "tec_4",
                         num: 4,
-                        title: "Enviar insumos a Contratos",
-                        phase: "Fase 2: Co-diseño de Estudios y Control",
-                        desc: "Remita la ficha técnica con las especificaciones y la cotización preliminar al Abogado de Contratos asignado para iniciar el proceso.",
-                        deliverable: "Ficha técnica y simulador definitivo firmado digitalmente a Abogado de Contratos.",
+                        title: "Consolidar Observaciones Recibidas en RFI",
+                        phase: "Paso 4: Consolidar y revisar observaciones a la Ficha RFI",
+                        desc: "Revise y consolide las consultas de naturaleza técnica enviadas por los proveedores interesados durante la publicación del RFI.",
+                        receiveFrom: "Reporte de observaciones descargado de la TVEC (apoyado por Abogado de Contratos).",
+                        deliverable: "Matriz técnica de consolidación de observaciones y respuestas.",
                         instructions: [
-                            "Valida que el Anexo Técnico y el cuadro de cotización preliminar definitivo se encuentren firmados digitalmente por ti.",
-                            "Remite la documentación al Abogado de Contratos asignado mediante memorando oficial interno adjuntando el simulador en Excel y el soporte PDF."
+                            "Descargue el listado de dudas del foro del RFI.",
+                            "Separe las consultas: resuelva directamente las de contenido técnico e identifique las de naturaleza jurídica para remitirlas al abogado del GLPE."
                         ]
                     },
                     {
                         id: "tec_5",
                         num: 5,
-                        title: "Co-redactar Estudios Previos",
-                        phase: "Fase 2: Co-diseño de Estudios y Control",
-                        desc: "Redacte activamente junto con el abogado el documento de Estudios Previos y la Matriz de Riesgos que justificarán la contratación.",
-                        deliverable: "Borrador de Estudios Previos y Matriz de Riesgos co-redactados a Abogado de Contratos.",
+                        title: "Apoyo en el Análisis de Solicitudes de Limitación MIPYME",
+                        phase: "Paso 5: Analizar solicitudes de limitación a MIPYMES",
+                        desc: "Revise técnicamente a las empresas que solicitan la limitación a MIPYMES para verificar la pertinencia de sus portafolios.",
+                        receiveFrom: "Manifestaciones de interés y RUES de oferentes de Abogado de Contratos.",
+                        deliverable: "Concepto técnico de validación de idoneidad MIPYME.",
                         instructions: [
-                            "Redacta el documento definitivo de Estudios Previos de la entidad, estructurando la justificación e idoneidad basándote en el contenido exigido en el <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'07. Formato RFQ - Justificación de Compra'</a> de <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>CCE</a>.",
-                            "Co-diseña con el abogado la Matriz de Riesgos de ejecución, estableciendo los riesgos técnicos de soporte y actualización tecnológica."
+                            "Revise si las MIPYMES solicitantes cuentan con capacidad para ofertar las marcas y perfiles de software requeridos.",
+                            "Suministre al abogado los insumos técnicos necesarios para la proyección del acta de limitación."
                         ]
                     },
                     {
                         id: "tec_6",
                         num: 6,
-                        title: "Recibir CDP (Certificado de Disponibilidad)",
-                        phase: "Fase 2: Co-diseño de Estudios y Control",
-                        desc: "Verifique que el área de presupuesto haya expedido y cargado el CDP antes de que el proceso inicie en la TVEC.",
-                        receiveFrom: "CDP (Certificado de Disponibilidad Presupuestal) firmado de Presupuesto.",
+                        title: "Publicar Aviso de Decisión MIPYME",
+                        phase: "Paso 6: Publicar el aviso de limitación o no limitación a MIPYMES",
+                        desc: "Publique formalmente en el evento RFI de la TVEC el aviso que determina si la convocatoria se limita o no a MIPYMES.",
+                        receiveFrom: "Aviso oficial firmado por Abogado de Contratos.",
+                        deliverable: "Confirmación de publicación en el foro del RFI.",
                         instructions: [
-                            "Confirma que el área de presupuesto haya expedido el Certificado de Disponibilidad Presupuestal (CDP) en SIIF Nación y lo haya cargado al expediente.",
-                            "Comprueba que el valor del CDP cubra la totalidad de la cotización final simulada."
+                            "Acceda a la TVEC, ingrese al módulo de mensajes del RFI correspondiente y publique el archivo firmado de la decisión."
                         ]
                     },
                     {
                         id: "tec_7",
                         num: 7,
-                        title: "Apoyo técnico en RFI / Indagación de Mercado",
-                        phase: "Fase 3: Análisis de Mercado y Filtro MIPYMES",
-                        desc: "Participe en la resolución de dudas técnicas planteadas por los proveedores durante la fase de RFI y aporte insumos para definir la conveniencia de la limitación MIPYME.",
-                        deliverable: "Concepto de aclaraciones técnicas de RFI a Abogado de Contratos.",
-                        receiveFrom: "Formato RFI con observaciones de los proponentes de Abogado de Contratos.",
+                        title: "Ajustar la Necesidad Técnica y Emitir Estudios Definitivos",
+                        phase: "Paso 7: Respuesta a las observaciones de los proveedores del RFI",
+                        desc: "Ajuste la necesidad conforme a los aportes viables del RFI, elabore el documento definitivo de estudios previos y remita la solicitud del CDP.",
+                        deliverable: "Estudios previos definitivos firmados digitalmente y solicitud de CDP a Presupuesto.",
                         instructions: [
-                            "Acompañe al abogado en la revisión técnica de las consultas del RFI cargadas por los interesados en el <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>portafolio de CCE</a> utilizando el <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'06. Formato RFI - Solicitud de información'</a>.",
-                            "Valide que los requerimientos técnicos analizados en esta fase pre-contractual se mantengan estables y no generen direccionamientos de mercado."
+                            "Si las respuestas del RFI alteraron sustancialmente la necesidad inicial o el objeto del contrato, suspenda el trámite y reinicie desde el Paso 1.",
+                            "Si los cambios son menores, elabore el cuadernillo definitivo de respuestas RFI, ajuste las especificaciones en el formato '03. Anexo Técnico 02 - Especificaciones técnicas transversales' y firme digitalmente los Estudios Previos.",
+                            "Remita memorando de solicitud de CDP adjuntando los estudios previos definitivos."
                         ]
                     },
                     {
                         id: "tec_8",
                         num: 8,
-                        title: "Acompañamiento técnico en la publicación de la RFQ",
-                        phase: "Fase 4: Configuración y Publicación del Evento (RFQ)",
-                        desc: "Revise la parametrización definitiva del evento en la Tienda Virtual (TVEC) antes de su publicación para asegurar que coincida con las especificaciones técnicas autorizadas.",
-                        receiveFrom: "Notificación de publicación de la RFQ de Abogado de Contratos.",
+                        title: "Configurar Evento de Cotización RFQ y Publicar Pliegos",
+                        phase: "Paso 8: Configurar evento de cotización (RFQ) y publicar documentos previos",
+                        desc: "Configure el Evento de Solicitud de Cotización (RFQ) en la TVEC y publique el expediente completo.",
+                        receiveFrom: "CDP (Certificado de Disponibilidad Presupuestal) firmado de Presupuesto.",
+                        deliverable: "Evento RFQ publicado en la TVEC con código asignado.",
                         instructions: [
-                            "Verifique que los anexos técnicos, el simulador de costos y las especificaciones finales cargadas por el abogado en la plataforma coincidan exactamente con la ficha técnica co-diseñada.",
-                            "Confirme que los plazos de entrega y las condiciones técnicas del servicio no hayan sufrido modificaciones en la configuración del evento."
+                            "Acceda a la TVEC y configure el evento RFQ. Si el proceso fue limitado en el Paso 5, aplique la plantilla de MIPYMES del AMP.",
+                            "Cargue y asocie obligatoriamente al evento: Estudios Previos definitivos, anexos técnicos y el CDP expedido por Presupuesto.",
+                            "Asigne al evento el número de días hábiles indicado en el AMP, contando a partir del día siguiente a la publicación."
                         ]
                     },
                     {
                         id: "tec_9",
                         num: 9,
-                        title: "Responder observaciones técnicas",
-                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
-                        desc: "Resuelva de manera objetiva las dudas técnicas que los oferentes publiquen en el foro oficial de la plataforma, evitando todo chat informal directo.",
-                        deliverable: "Respuestas técnicas unificadas a Abogado de Contratos para publicación del cuadernillo.",
-                        receiveFrom: "Observaciones técnicas cargadas por oferentes de Abogado de Contratos.",
+                        title: "Analizar Observaciones Técnicas formuladas al RFQ",
+                        phase: "Paso 10: Analizar observaciones formuladas al evento de cotización",
+                        desc: "Analice las sugerencias y observaciones de los oferentes que ingresen al foro del evento de cotización en materia técnica o de precios.",
+                        receiveFrom: "Compilación de observaciones al RFQ (apoyado por Abogado de Contratos).",
+                        deliverable: "Respuestas técnicas unificadas para el cuadernillo de aclaraciones.",
                         instructions: [
-                            "Descarga del foro oficial de la RFQ de la Tienda Virtual (TVEC) las dudas remitidas por los proponentes.",
-                            "Redacta las respuestas técnicas ciñéndose estrictamente a lo establecido en los <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>Anexos Técnicos de CCE</a>, evitando acuerdos informales con proveedores por chat."
+                            "Descargue y analice las solicitudes de aclaración técnica de pliegos y proyecte su respuesta motivada.",
+                            "Evite absolver dudas por canales externos o de forma directa. Todo debe unificarse en el documento del cuadernillo."
                         ]
                     },
                     {
                         id: "tec_10",
                         num: 10,
-                        title: "Gestión de Cancelación (Si aplica)",
-                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
-                        desc: "Absténgase de usar el botón de cancelación de la plataforma hasta no contar con el Acto Administrativo de cancelación firmado por el Ordenador.",
-                        deliverable: "Justificación técnica de cancelación a Abogado de Contratos.",
-                        receiveFrom: "Acto Administrativo de cancelación firmado de Ordenador del Gasto.",
+                        title: "Acompañar Publicación de Respuestas y Gestión de Cancelación",
+                        phase: "Paso 11: Publicar el cuadernillo de observaciones y respuestas",
+                        desc: "Co-publique el cuadernillo de respuestas RFQ. En caso de detectarse un error técnico que impida continuar, tramite la cancelación del evento.",
+                        receiveFrom: "(En caso de cancelación) Acto Administrativo firmado de Ordenador del Gasto (a través de Abogado de Contratos).",
+                        deliverable: "Cuadernillo publicado en la TVEC, o Acto de Cancelación cargado en la plataforma.",
                         instructions: [
-                            "En caso de error en cantidades o especificaciones en la RFQ, remite de inmediato la justificación técnica al abogado para que se proceda a formular la resolución de cancelación.",
-                            "No presiones el botón de cancelación de la plataforma TVEC si la resolución firmada por la Directora no ha sido expedida y cargada."
+                            "Si el proceso sigue con normalidad, apoye al abogado en la publicación del cuadernillo en la TVEC antes del vencimiento del plazo de cotizar.",
+                            "Si se detecta un error de estructuración insubsanable, solicite la cancelación al abogado. No use el botón directo de cancelación en TVEC hasta que la Directora firme el acto administrativo."
                         ]
                     },
                     {
                         id: "tec_11",
                         num: 11,
-                        title: "Evaluar propuesta de menor precio",
-                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
-                        desc: "Compruebe que la oferta de menor costo cumpla al 100% con los requerimientos y la ficha técnica.",
-                        receiveFrom: "Propuesta técnica del oferente de menor precio de Abogado de Contratos.",
+                        title: "Analizar Cotizaciones y Aplicar Criterios de Desempate",
+                        phase: "Paso 12: Analizar las cotizaciones recibidas en el Evento de Cotización",
+                        desc: "Revisar la apertura de cotizaciones en la TVEC e identifique la oferta de menor costo. Aplique criterios de desempate si hay empate.",
+                        receiveFrom: "Reporte de precios oficiales de la TVEC de Abogado de Contratos.",
+                        deliverable: "Acta de desempate firmada (si aplica) o cuadro comparativo de costos validado.",
                         instructions: [
-                            "Descarga el sobre técnico del proveedor con la oferta de menor costo al cierre del evento.",
-                            "Compara ítem por ítem el cumplimiento de los requerimientos técnicos y las certificaciones del fabricante exigidas en el anexo técnico del proceso."
+                            "Identifique si las dos cotizaciones más bajas tienen un valor idéntico.",
+                            "Si hay empate, aplique estrictamente las reglas de desempate de la Ley 2069 de 2020 y su guía anexa para definir el proveedor a evaluar."
                         ]
                     },
                     {
                         id: "tec_12",
                         num: 12,
-                        title: "Verificación de precios artificiales / IVA",
-                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
-                        desc: "Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención.",
-                        deliverable: "Solicitud de aclaración por precios bajos o exención de IVA a Abogado de Contratos.",
+                        title: "Evaluar Requisitos Técnicos y Analizar Precios Bajos",
+                        phase: "Paso 13: Evaluar requisitos técnicos, jurídicos y viabilidad económica de la menor cotización",
+                        desc: "Evalúe el cumplimiento técnico del catálogo de la menor cotización y descarte la existencia de precios artificialmente bajos.",
+                        receiveFrom: "Carpeta con oferta técnica del proveedor preseleccionado de Abogado de Contratos.",
+                        deliverable: "Acta de Evaluación Técnica preliminar y análisis económico de precios bajos.",
                         instructions: [
-                            "Revisa la oferta económica; si el oferente presenta IVA del 0% en licenciamiento local (no en la nube), exige aclaración formal inmediata sobre la exención bajo las directrices de la Minuta."
+                            "Verifique que los licenciamientos y servicios coticen marcas y perfiles homologados en el catálogo de CCE.",
+                            "Analice la viabilidad económica bajo la Guía de Ofertas Artificialmente Bajas de CCE. Si detecta IVA del 0% en software local o valores inviables, prepare requerimiento de aclaración."
                         ]
                     },
                     {
                         id: "tec_13",
                         num: 13,
-                        title: "Firmar informe técnico",
-                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
-                        desc: "Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación.",
-                        deliverable: "Acta de Evaluación Técnica firmada digitalmente a Abogado de Contratos.",
+                        title: "Publicar Informe de Evaluación Preliminar",
+                        phase: "Paso 14: Consolidar el Informe de Evaluación y publicarlo en la TVEC",
+                        desc: "Firme y publique el informe preliminar de evaluación técnica y jurídica en la TVEC para observaciones de los proponentes.",
+                        receiveFrom: "Evaluación jurídica preliminar de Abogado de Contratos.",
+                        deliverable: "Informe publicado en la TVEC y traslado de ley (mínimo 1 día hábil).",
                         instructions: [
-                            "Firma el informe definitivo de evaluación técnica (Acta de Evaluación Técnica) y remítelo al abogado para su cargue y publicación en la TVEC."
+                            "Unifique su acta de evaluación técnica con la jurídica e ingrese a la TVEC.",
+                            "Publique el documento habilitando formalmente el plazo de observaciones en la plataforma."
                         ]
                     },
                     {
                         id: "tec_14",
                         num: 14,
-                        title: "Acompañamiento en traslado de evaluaciones",
-                        phase: "Fase 9: Consolidación y Publicación de Evaluaciones",
-                        desc: "Acompañe al abogado de contratos en la respuesta y justificación de las observaciones técnicas realizadas por los oferentes.",
-                        deliverable: "Respuestas a observaciones de traslado a Abogado de Contratos.",
-                        receiveFrom: "Observaciones de oferentes a la evaluación técnica de Abogado de Contratos.",
+                        title: "Responder Observaciones al Informe de Evaluación Preliminar",
+                        phase: "Paso 15: Analizar observaciones al informe de evaluación y hacer informe final",
+                        desc: "Resuelva técnicamente las objeciones y reclamaciones que los proveedores formulen contra el informe de evaluación en la TVEC.",
+                        receiveFrom: "Observaciones de proponentes al informe de evaluación de Abogado de Contratos.",
+                        deliverable: "Respuestas técnicas definitivas para el cuadernillo de evaluación.",
                         instructions: [
-                            "Revise las observaciones técnicas cargadas en la TVEC por los oferentes y proyecte la justificación técnica de aceptación o rechazo."
+                            "Descargue y analice los escritos de reclamo técnico presentados por los oferentes.",
+                            "Redacte la justificación de aceptación o rechazo técnico, y remítala al abogado del GLPE para visto bueno del Coordinador."
                         ]
                     },
                     {
                         id: "tec_15",
                         num: 15,
-                        title: "Verificación técnica de la Orden de Compra",
-                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
-                        desc: "Valide que el borrador de la Orden de Compra contenga los ítems, marcas y licenciamientos acordes a la evaluación final.",
-                        deliverable: "Visto bueno técnico de la Orden de Compra a Abogado de Contratos.",
-                        receiveFrom: "Borrador de la Orden de Compra de Abogado de Contratos.",
+                        title: "Publicar Informe Final de Evaluación",
+                        phase: "Paso 16: Publicar informe de evaluación de ofertas y respuestas definitivas",
+                        desc: "Cargue en la plataforma de compras de la TVEC el informe de evaluación definitivo y las respuestas consolidadas.",
+                        receiveFrom: "Aprobación del informe final del Coordinador de GLPE (vía Abogado de Contratos).",
+                        deliverable: "Informe Final de Evaluación y respuestas publicados en la TVEC.",
                         instructions: [
-                            "Revise que el borrador de la Orden de Compra en la TVEC concuerde técnicamente con lo cotizado por el proveedor seleccionado."
+                            "Publique el informe final en el módulo oficial del evento RFQ en la TVEC."
                         ]
                     },
                     {
                         id: "tec_16",
                         num: 16,
-                        title: "Recibir designación de supervisión",
-                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
-                        desc: "Reciba el memorando de designación de supervisión contractual emitido por Contratos y asuma formalmente el rol y las responsabilidades del control contractual.",
-                        receiveFrom: "Memorando de designación de supervisión firmado de Ordenador del Gasto (remitido por Abogado de Contratos).",
+                        title: "Configurar Solicitud de Orden de Compra (OC)",
+                        phase: "Paso 17: Configurar la solicitud de orden de compra",
+                        desc: "Estructure en la interfaz de la TVEC el borrador de solicitud de la Orden de Compra a favor del proponente ganador.",
+                        deliverable: "Solicitud de Orden de Compra configurada y guardada en la TVEC.",
                         instructions: [
-                            "Recibe el memorando de designación de supervisión contractual emitido por Contratos y asume formalmente el rol y las responsabilidades del control contractual."
+                            "Configure la solicitud de OC en la plataforma en presencia del abogado.",
+                            "Verifique que los valores, marcas, cantidades, perfiles, ANS y vigencias coincidan exactamente con la cotización evaluada."
                         ]
                     },
                     {
                         id: "tec_17",
                         num: 17,
-                        title: "Coordinar firma de Acta de Inicio",
-                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
-                        desc: "Firme digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido.",
-                        deliverable: "Acta de Inicio firmada digitalmente (junto con el contratista) a Abogado de Contratos.",
-                        receiveFrom: "Garantías (póliza) aprobadas de Abogado de Contratos y Registro Presupuestal (RP) firmado de Presupuesto.",
+                        title: "Requerir Garantías y Remitir Expediente Presupuestal",
+                        phase: "Paso 21: Remitir Orden de Compra para registro presupuestal y requerir garantías",
+                        desc: "Exija formalmente al contratista el cargue de las pólizas de garantía y remita el expediente contractual a la Subdirección Financiera.",
+                        receiveFrom: "Orden de Compra firmada por el contratista y Ordenador del Gasto.",
+                        deliverable: "Correo oficial de requerimiento de pólizas al contratista y memorando de solicitud de RP a Presupuesto.",
                         instructions: [
-                            "Firma digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes y remítela al expediente compartido."
+                            "Envíe correo al contratista solicitando la póliza de cumplimiento con los amparos del AMP.",
+                            "Remita memorando de solicitud de Registro Presupuestal (RP) a Presupuesto adjuntando la Orden de Compra y RUT."
+                        ]
+                    },
+                    {
+                        id: "tec_18",
+                        num: 18,
+                        title: "Publicar Aprobación de Garantías en la TVEC",
+                        phase: "Paso 22: Revisión, aprobación y publicación de las garantías del proveedor",
+                        desc: "Una vez aprobadas las garantías por Licitaciones, publique el certificado formal de aprobación en el módulo de la orden de compra en la TVEC.",
+                        receiveFrom: "Certificado de aprobación de garantías de Abogado de Contratos.",
+                        deliverable: "Certificado de aprobación de pólizas publicado en la TVEC.",
+                        instructions: [
+                            "Cargue el certificado de pólizas aprobado en el portal de la TVEC para formalizar la legalización de la orden de compra."
+                        ]
+                    },
+                    {
+                        id: "tec_19",
+                        num: 19,
+                        title: "Asumir Supervisión Contractual y Firmar Acta de Inicio",
+                        phase: "Paso 24: Notificación al Supervisor del contrato",
+                        desc: "Asuma el rol de supervisor y firme digitalmente el Acta de Inicio con el contratista dentro de los 5 días hábiles siguientes.",
+                        receiveFrom: "Memorando de designación firmado de Ordenador del Gasto (a través de Abogado de Contratos).",
+                        deliverable: "Acta de Inicio suscrita digitalmente y cargada en el expediente.",
+                        instructions: [
+                            "Reciba el memorando de designación y coordine la suscripción del Acta de Inicio con el representante legal del proveedor.",
+                            "Nota: En caso de cambio de supervisor, el jefe de la dependencia debe enviar comunicación escrita al competente sugiriendo el cargo de reemplazo."
+                        ]
+                    },
+                    {
+                        id: "tec_20",
+                        num: 20,
+                        title: "Publicar Documentos de Legalización en la TVEC",
+                        phase: "Paso 26: Publicar los documentos de legalización de la Orden de Compra",
+                        desc: "Publique en el módulo de 'documentos adicionales' de la Orden de Compra en la TVEC todo el expediente de legalización.",
+                        receiveFrom: "Registro Presupuestal (RP) firmado de Presupuesto y Certificado de Garantías de Abogado de Contratos.",
+                        deliverable: "Publicación del expediente de legalización completado en la TVEC.",
+                        instructions: [
+                            "Carguen en la plataforma la póliza de seguros aprobada, el RP y el memorando de designación del supervisor."
                         ]
                     }
                 ]
@@ -2066,163 +2118,267 @@
                     {
                         id: "abo_1",
                         num: 1,
-                        title: "Asesoría jurídica preliminar sobre el AMP",
-                        phase: "Fase 1: Planificación e Indagación Inicial",
-                        desc: "Brinde acompañamiento jurídica inicial a la Dependencia Técnica para validar que el objeto a contratar se enmarque en el alcance y vigencia del Acuerdo Marco de Software II.",
-                        receiveFrom: "Requerimiento de contratación y consulta de viabilidad de Dependencia Técnica.",
+                        title: "Radicación y Asignación del Trámite",
+                        phase: "Paso 1: Recibir, radicar y asignar trámite de la solicitud de asesoría",
+                        desc: "Reciba la solicitud de inicio de asesoría enviada por la DT y asuma el caso para control de términos en el GLPE.",
+                        receiveFrom: "Caso asignado por Coordinador del GLPE.",
                         instructions: [
-                            "Revise el alcance de las marcas y categorías autorizadas en la <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'01. Minuta del Acuerdo'</a> para confirmar que la necesidad de la DT puede contratarse por esta vía."
+                            "Registre el caso en la planilla de asignaciones internas del GLPE.",
+                            "Revise la solicitud de inicio de asesoría enviada por correo oficial para identificar el objeto y alcance."
                         ]
                     },
                     {
                         id: "abo_2",
                         num: 2,
-                        title: "Revisión jurídica de insumos",
-                        phase: "Fase 2: Co-diseño de Estudios y Control",
-                        desc: "Verifique que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados.",
-                        receiveFrom: "Ficha técnica y simulador de costos definitivo de Dependencia Técnica.",
+                        title: "Revisión Jurídica y Control de Alcance del AMP",
+                        phase: "Paso 2: Analizar los estudios y documentos previos del área solicitante",
+                        desc: "Verifique que el requerimiento técnico y simulador se enmarquen en el AMP. Expida memorando de observaciones en caso de hallarse inconsistencias.",
+                        receiveFrom: "Estudios previos iniciales, simulador y anexos de Dependencia Técnica.",
+                        deliverable: "Memorando de observaciones jurídicas o devolución de expediente.",
                         instructions: [
-                            "Verifica que las especificaciones técnicas y el simulador de costos aportados por el ingeniero correspondan a las marcas y licenciamientos autorizados en la <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'01. Minuta del Acuerdo'</a> (evitando compras por fuera del alcance del AMP)."
+                            "Verifique que los licenciamientos y servicios solicitados correspondan a las marcas y perfiles de la minuta del AMP de Software II.",
+                            "Constate la existencia de la certificación de inexistencia de bienes MHCP."
                         ]
                     },
                     {
                         id: "abo_3",
                         num: 3,
-                        title: "Asegurar orden legal de estudios",
-                        phase: "Fase 2: Co-diseño de Estudios y Control",
-                        desc: "Confirme que los Estudios Previos estén firmados digitalmente por el líder técnico y por usted antes de cualquier configuración o cargue en la plataforma de compras.",
-                        receiveFrom: "Estudios Previos firmados por el líder de Dependencia Técnica y CDP firmado de Presupuesto.",
+                        title: "Acompañamiento en Configuración del RFI",
+                        phase: "Paso 3: Configurar el evento RFI (cuando sea obligatorio)",
+                        desc: "Asesore a la DT en la estructuración de la Ficha RFI en la Tienda Virtual (TVEC).",
+                        receiveFrom: "Proyecto de Ficha RFI de Dependencia Técnica.",
                         instructions: [
-                            "Confirma que los Estudios Previos estén firmados digitalmente por el líder técnico y por ti antes de realizar cualquier configuración o cargue en la plataforma de compras."
+                            "Revise que las consultas del formato RFI no presenten direccionamientos de mercado ni violen la libre concurrencia."
                         ]
                     },
                     {
                         id: "abo_4",
                         num: 4,
-                        title: "Verificación jurídica de limitación a MIPYMES",
-                        phase: "Fase 3: Análisis de Mercado y Filtro MIPYMES",
-                        desc: "Estructure las preguntas del RFI y analice las manifestaciones de interés recibidas para decidir si el proceso debe limitarse obligatoriamente a MIPYMES nacionales.",
-                        deliverable: "Concepto de limitación a MIPYMES a Dependencia Técnica.",
-                        receiveFrom: "Manifestaciones de interés y RUES de proponentes (vía RFI).",
+                        title: "Control Legal de Observaciones RFI",
+                        phase: "Paso 4: Consolidar y revisar observaciones a la Ficha RFI",
+                        desc: "Apoye a la DT en el análisis jurídico de las consultas planteadas por los proveedores en el foro del RFI.",
+                        receiveFrom: "Consultas legales del RFI (apoyado por Dependencia Técnica).",
                         instructions: [
-                            "Si haces indagación de mercado previa, estructura las preguntas del RFI utilizando el <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'06. Formato RFI - Solicitud de información'</a> del portafolio del Acuerdo.",
-                            "Analiza las manifestaciones de interés recibidas y elabora el concepto de limitación MIPYMES aplicando el Decreto 1860 de 2021."
+                            "Redacte las aclaraciones legales ciñéndose estrictamente a la minuta del AMP de Software II."
                         ]
                     },
                     {
                         id: "abo_5",
                         num: 5,
-                        title: "Publicar la Solicitud de Cotización (RFQ)",
-                        phase: "Fase 4: Configuración y Publicación del Evento (RFQ)",
-                        desc: "Configure el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico.",
-                        deliverable: "Notificación de publicación de la RFQ a Dependencia Técnica.",
+                        title: "Análisis de Limitación MIPYME (Decreto 1860)",
+                        phase: "Paso 5: Analizar solicitudes de limitación a MIPYMES",
+                        desc: "Verifique en RUES y RUP la habilitación de las empresas que solicitan la limitación MIPYME.",
+                        deliverable: "Concepto de limitación MIPYME conforme al Decreto 1860 de 2021.",
+                        receiveFrom: "Manifestaciones de limitación enviadas al RFI.",
                         instructions: [
-                            "Configura el evento RFQ en la Tienda Virtual utilizando el usuario institucional del MHCP, cargando como soporte los estudios previos definitivos y el anexo técnico."
+                            "Valide el registro en RUES y RUP de las empresas para clasificar su categoría de micro, pequeña o mediana empresa.",
+                            "Formule la recomendación legal sobre limitar o no el proceso RFQ."
                         ]
                     },
                     {
                         id: "abo_6",
                         num: 6,
-                        title: "Revisar observaciones jurídicas",
-                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
-                        desc: "Consolide las respuestas técnicas y proyecte las respuestas legales en el foro oficial de la RFQ, publicando el cuadernillo definitivo a tiempo.",
-                        receiveFrom: "Respuestas a observaciones técnicas de Dependencia Técnica.",
+                        title: "Aprobación de Publicación de Aviso MIPYME",
+                        phase: "Paso 6: Publicar el aviso de limitación o no limitación a MIPYMES",
+                        desc: "Revise el aviso formal de limitación MIPYMES antes de su cargue en la TVEC.",
+                        deliverable: "Aviso oficial firmado de limitación MIPYME para cargue de la DT.",
                         instructions: [
-                            "Consolida las respuestas técnicas y proyecte las respuestas legales en el foro oficial de la RFQ. Publica el cuadernillo consolidado antes de que venza el plazo del foro."
+                            "Valide la redacción del aviso motivado sobre la decisión de limitar el proceso."
                         ]
                     },
                     {
                         id: "abo_7",
                         num: 7,
-                        title: "Proyectar Acto Administrativo de cancelación (Si aplica)",
-                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
-                        desc: "Elabore el texto de la resolución motivada de cancelación del evento, explaining detalladamente la falla de planeación técnica.",
-                        deliverable: "Proyecto de Acto Administrativo de cancelación a Ordenador del Gasto.",
-                        receiveFrom: "Justificación técnica de cancelación de Dependencia Técnica.",
+                        title: "Control Jurídico en Respuestas RFI",
+                        phase: "Paso 7: Respuesta a las observaciones de los proveedores del RFI",
+                        desc: "Valide que las respuestas al RFI no vulneren principios contractuales ni direccionen la necesidad.",
+                        receiveFrom: "Cuadernillo definitivo de respuestas RFI de Dependencia Técnica.",
                         instructions: [
-                            "Elabora el texto de la resolución motivada de cancelación del evento, explicando detalladamente la falla de planeación técnica fundamentado en la <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'01. Minuta del Acuerdo'</a> de <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>CCE</a>."
+                            "Asegure que los ajustes técnicos resultantes del RFI no direccionen el contrato. Si hay cambio sustancial del objeto, ordene el reinicio desde el Paso 1."
                         ]
                     },
                     {
                         id: "abo_8",
                         num: 8,
-                        title: "Filtro de Inhabilidades en tiempo real",
-                        phase: "Fase 7: Evaluación Jurídica y Filtro de Inhabilidades",
-                        desc: "Descargue el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa de menor precio en el día de la evaluación.",
+                        title: "Acompañamiento en Configuración RFQ",
+                        phase: "Paso 8: Configurar evento de cotización (RFQ) y publicar documentos previos",
+                        desc: "Asesore en la apertura de la RFQ en la TVEC y exija el bloqueo de comunicaciones directas.",
+                        receiveFrom: "Estudios previos definitivos firmados de Dependencia Técnica.",
                         instructions: [
-                            "Descarga el RUES y los antecedentes disciplinarios, penales, fiscales y REDAM (mora alimentaria) del representante legal y de la empresa.",
-                            "Guarda los certificados PDF con la fecha y hora exacta del día de la evaluación para blindar el proceso.",
-                            "Revisa la <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'11. Circular 001 2026 Ley de Garantías Electorales'</a> para asegurar que el proceso no contravenga restricciones de contratación pública electoral vigentes."
+                            "Verifique la carga de estudios, anexos y el CDP. Bloquee todo canal de comunicación externa o chat por fuera del foro oficial."
                         ]
                     },
                     {
                         id: "abo_9",
                         num: 9,
-                        title: "Emitir informe jurídico",
-                        phase: "Fase 7: Evaluación Jurídica y Filtro de Inhabilidades",
-                        desc: "Elabore la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firme la habilitación jurídica.",
-                        deliverable: "Planilla de cumplimiento legal y habilitación jurídica a Dependencia Técnica.",
+                        title: "Analizar Observaciones Jurídicas al RFQ",
+                        phase: "Paso 10: Analizar observaciones formuladas al evento de cotización",
+                        desc: "Resuelva reclamaciones legales de oferentes en el foro y formule el borrador de respuestas.",
+                        receiveFrom: "Observaciones de proponentes al RFQ.",
+                        deliverable: "Respuestas jurídicas unificadas para el cuadernillo.",
                         instructions: [
-                            "Elabora la planilla de cumplimiento legal basándose en los requisitos de la Minuta del AMP y firma la habilitación jurídica."
+                            "Formule respuestas motivadas, garantizando el principio de igualdad en los pliegos."
                         ]
                     },
                     {
                         id: "abo_10",
                         num: 10,
-                        title: "Acompañamiento en el control de precios bajos e IVA",
-                        phase: "Fase 8: Evaluación Técnica y Control de Precios Bajos",
-                        desc: "Apoye a la DT en la estructuración de solicitudes de aclaración legal ante exenciones del IVA no claras o indicios de precios artificiales.",
-                        deliverable: "Requerimiento legal de aclaración económica enviado al oferente de menor precio (con copia a Dependencia Técnica).",
-                        receiveFrom: "Alerta técnica de precio bajo o IVA 0% de Dependencia Técnica.",
+                        title: "Acompañamiento en Publicación de Respuestas RFQ",
+                        phase: "Paso 11: Publicar el cuadernillo de observaciones y respuestas",
+                        desc: "Acompañe en la publicación del cuadernillo. Proyecte el Acto de Cancelación ante error insubsanable.",
+                        receiveFrom: "Petición técnica de cancelación de Dependencia Técnica.",
+                        deliverable: "Cuadernillo de respuestas publicado o Proyecto de Acto de Cancelación.",
                         instructions: [
-                            "Elabore el requerimiento legal para solicitar al proponente de menor costo la justificación del valor de sus ítems si se detecta un posible precio artificial."
+                            "En caso de cancelación, redacte la resolución motivada para firma de la Directora."
                         ]
                     },
                     {
                         id: "abo_11",
                         num: 11,
-                        title: "Consolidación y traslado de evaluaciones",
-                        phase: "Fase 9: Consolidación y Publicación de Evaluaciones",
-                        desc: "Publique los informes de evaluación en la TVEC y habilite el plazo oficial de traslado para que los proponentes presenten sus observaciones.",
-                        receiveFrom: "Informe técnico de evaluación firmado de Dependencia Técnica.",
+                        title: "Asesorar en Criterios de Desempate",
+                        phase: "Paso 12: Analizar las cotizaciones recibidas en el Evento de Cotización",
+                        desc: "Valide la aplicación de los desempates legales de la Ley 2069 de 2020 en la TVEC.",
+                        receiveFrom: "Solicitud de desempate del Comité Evaluador.",
+                        deliverable: "Acta de desempate legal revisada y avalada.",
                         instructions: [
-                            "Cargue en la plataforma de compras la evaluación jurídica y técnica y notifique formalmente a los proponentes el inicio del término de traslado."
+                            "Constate la aplicación rigurosa de las reglas de desempate de la Ley 2069 de 2020 en el acta."
                         ]
                     },
                     {
                         id: "abo_12",
                         num: 12,
-                        title: "Visto bueno de la Orden de Compra (OC)",
-                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
-                        desc: "Envíe el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar.",
-                        deliverable: "Memorando de visto bueno de adjudicación a Ordenador del Gasto.",
-                        receiveFrom: "Visto bueno técnico de la Orden de Compra de Dependencia Técnica.",
+                        title: "Evaluación de Capacidad Jurídica e Inhabilidades",
+                        phase: "Paso 13: Evaluar requisitos técnicos, jurídicos y viabilidad económica de la menor cotización",
+                        desc: "Descargue y revise REDAM y antecedentes en el día exacto de la evaluación.",
+                        receiveFrom: "Oferta de menor costo.",
+                        deliverable: "Verificación de antecedentes y certificado de capacidad jurídica del oferente.",
                         instructions: [
-                            "Envía el visto bueno formal (memorando de visto bueno) a la Directora una vez vencido el traslado de evaluaciones sin observaciones sin subsanar."
+                            "Descargue y anexe al expediente: RUES, REDAM, certificados de Contraloría, Procuraduría, Policía, medidas correctivas e inhabilidades.",
+                            "Constate la fecha y hora de descarga y valide restricciones de la Circular de Garantías Electorales."
                         ]
                     },
                     {
                         id: "abo_13",
                         num: 13,
-                        title: "Control de Pólizas",
-                        phase: "Fase 11: Legalización: Pólizas y Registro Presupuestal",
-                        desc: "Revise en la Minuta las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo, y apruebe las garantías en plataforma.",
-                        deliverable: "Certificado de aprobación de garantías en plataforma a Dependencia Técnica.",
-                        receiveFrom: "Póliza de seguros constituida por el contratista.",
+                        title: "Consolidar Informe de Evaluación Preliminar",
+                        phase: "Paso 14: Consolidar el Informe de Evaluación y publicarlo en la TVEC",
+                        desc: "Consolide las actas técnica y jurídica en el informe preliminar para traslado.",
+                        receiveFrom: "Evaluación técnica de Dependencia Técnica.",
+                        deliverable: "Informe consolidado de evaluación técnica y jurídica.",
                         instructions: [
-                            "Revisa en la <a href='https://www.colombiacompra.gov.co/archivos/portfolio-item/iad-sda-de-software-por-catalogo-ii' target='_blank' onclick='event.stopPropagation()' class='doc-link'>'01. Minuta del Acuerdo Marco'</a> las sumas y vigencias exigidas para los amparos de cumplimiento, calidad y buen manejo del anticipo.",
-                            "Aprueba las garantías en plataforma una vez validadas."
+                            "Redacte el documento final integrando el chequeo técnico de la DT y la evaluación de capacidad del GLPE."
                         ]
                     },
                     {
                         id: "abo_14",
                         num: 14,
-                        title: "Proyectar designación de supervisor",
-                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
-                        desc: "Envíe la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software.",
+                        title: "Responder Observaciones Jurídicas de Traslado de Evaluaciones",
+                        phase: "Paso 15: Analizar observaciones al informe de evaluación y hacer informe final",
+                        desc: "Resuelva reclamaciones de proponentes al informe de evaluación preliminar.",
+                        receiveFrom: "Observaciones jurídicas presentadas al informe.",
+                        deliverable: "Cuadernillo definitivo de respuestas a observaciones de evaluación.",
+                        instructions: [
+                            "Proyecte la justificación motivada para el rechazo o aceptación de las objeciones."
+                        ]
+                    },
+                    {
+                        id: "abo_15",
+                        num: 15,
+                        title: "Consolidar Informe Final de Evaluación",
+                        phase: "Paso 16: Publicar informe de evaluación de ofertas y respuestas definitivas",
+                        desc: "Estructure el informe definitivo y obtenga el visto bueno del Coordinador de GLPE.",
+                        deliverable: "Informe final de evaluación consolidado y aprobado.",
+                        instructions: [
+                            "Asegure firmas del Comité Evaluador y validación del Coordinador del GLPE."
+                        ]
+                    },
+                    {
+                        id: "abo_16",
+                        num: 16,
+                        title: "Acompañar en Configuración de Solicitud de OC",
+                        phase: "Paso 17: Configurar la solicitud de orden de compra",
+                        desc: "Valide legalmente el borrador de solicitud de OC en la plataforma en presencia del ingeniero.",
+                        receiveFrom: "Solicitud de OC de Dependencia Técnica.",
+                        instructions: [
+                            "Verifique coincidencia de marcas, perfiles, ANS y valores con la oferta calificada."
+                        ]
+                    },
+                    {
+                        id: "abo_17",
+                        num: 17,
+                        title: "Emitir Memorando de Viabilidad de la OC",
+                        phase: "Paso 18: Elaboración del Memorando de Viabilidad de la Orden de Compra",
+                        desc: "Proyecte el memorando de viabilidad para firma del Coordinador y entrega al competente.",
+                        deliverable: "Memorando de viabilidad firmado enviado a Ordenador del Gasto.",
+                        instructions: [
+                            "Valide el cumplimiento de toda la lista de chequeo de viabilidad (informe final, antecedentes actualizados, etc.) y firme."
+                        ]
+                    },
+                    {
+                        id: "abo_18",
+                        num: 18,
+                        title: "Gestión de Publicación de OC o Cancelación",
+                        phase: "Paso 20: Publicación de la Orden de Compra o Acto Administrativo de Cancelación",
+                        desc: "Apoye en la publicación en TVEC de la Orden firmada o el Acto Administrativo de Cancelación.",
+                        receiveFrom: "Orden de Compra suscrita digitalmente de Ordenador del Gasto.",
+                        instructions: [
+                            "Si se cancela la RFQ, cargue de inmediato la resolución de cancelación en el foro. Si se adjudica, verifique la publicación automática."
+                        ]
+                    },
+                    {
+                        id: "abo_19",
+                        num: 19,
+                        title: "Requerir Garantías y RP",
+                        phase: "Paso 21: Remitir Orden de Compra para registro presupuestal y requerir garantías",
+                        desc: "Solicite pólizas al proveedor y remita la solicitud de RP con expediente a Presupuesto.",
+                        receiveFrom: "Póliza constituida de Contratista y RUT del proveedor.",
+                        deliverable: "Memorando de solicitud de Registro Presupuestal a Presupuesto.",
+                        instructions: [
+                            "Verifique el envío de la solicitud de RP con todos los soportes del proveedor (RUT, RIT, cuenta bancaria)."
+                        ]
+                    },
+                    {
+                        id: "abo_20",
+                        num: 20,
+                        title: "Revisión y Aprobación de Garantías",
+                        phase: "Paso 22: Revisión, aprobación y publicación de las garantías del proveedor",
+                        desc: "Valide pólizas con corredor de seguros y emita el Certificado de Aprobación.",
+                        receiveFrom: "Concepto de suficiencia del corredor de seguros.",
+                        deliverable: "Certificado de aprobación de garantías firmado a Dependencia Técnica.",
+                        instructions: [
+                            "Verifique coberturas frente a las exigencias de la minuta del AMP de Software II.",
+                            "Proyecte el Certificado de Aprobación para firma del Coordinador de GLPE."
+                        ]
+                    },
+                    {
+                        id: "abo_21",
+                        num: 21,
+                        title: "Proyectar Designación de Supervisión",
+                        phase: "Paso 24: Notificación al Supervisor del contrato",
+                        desc: "Elabora el memorando de designación del supervisor conforme al Manual de Supervisión.",
                         deliverable: "Proyecto de memorando de designación de supervisor a Ordenador del Gasto.",
                         instructions: [
-                            "Envía la designación al supervisor técnico y reporte sus datos al contratista para coordinar la ejecución del software."
+                            "Verifique la designación del supervisor técnico en la OC y proyecte el memorando de asignación."
+                        ]
+                    },
+                    {
+                        id: "abo_22",
+                        num: 22,
+                        title: "Registrar Contrato en la Plataforma ORACLE",
+                        phase: "Paso 25: Incluir en la plataforma interna ORACLE la información contractual",
+                        desc: "Incorpore los datos y valores de la Orden de Compra en el ERP ORACLE del Ministerio.",
+                        instructions: [
+                            "Ingrese a ORACLE y cargue los datos de la OC (NIT, valor, CDP, RP y fechas) para planeación e inventario."
+                        ]
+                    },
+                    {
+                        id: "abo_23",
+                        num: 23,
+                        title: "Reportar Contrato en RUES",
+                        phase: "Paso 27: Reportar el contrato en el Registro Único Empresarial - RUES",
+                        desc: "Realice el reporte mensual de contratos celebrados a las Cámaras de Comercio via RUES.",
+                        instructions: [
+                            "Ingrese a RUES y reporte la Orden de Compra MHCP dentro de la valla legal de 1 mes."
                         ]
                     }
                 ]
@@ -2234,45 +2390,27 @@
                     {
                         id: "pre_1",
                         num: 1,
-                        title: "Verificar acopio de recursos",
-                        phase: "Fase 1: Planificación e Indagación Inicial",
-                        desc: "Verifique que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad.",
-                        receiveFrom: "Ficha de necesidad y solicitud de CDP de Dependencia Técnica.",
+                        title: "Verificar Recursos y Expedir CDP",
+                        phase: "Paso 7: Respuesta a las observaciones de los proveedores del RFI",
+                        desc: "Verifique disponibilidad de recursos en PAA y expida el CDP en SIIF Nación.",
+                        receiveFrom: "Memorando de solicitud de CDP y proyecto de estudios previos de Dependencia Técnica.",
+                        deliverable: "Certificado de Disponibilidad Presupuestal (CDP) firmado digitalmente.",
                         instructions: [
-                            "Verifica que la solicitud técnica se encuentre debidamente contemplada y cargada en el Plan Anual de Adquisiciones de la entidad."
+                            "Verifique que la necesidad esté en el PAA publicado.",
+                            "Ingrese a SIIF Nación y expida el CDP firmado digitalmente."
                         ]
                     },
                     {
                         id: "pre_2",
                         num: 2,
-                        title: "Expedir CDP (SIIF Nación)",
-                        phase: "Fase 1: Planificación e Indagación Inicial",
-                        desc: "Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica.",
-                        deliverable: "CDP (Certificado de Disponibilidad Presupuestal) firmado digitalmente a Dependencia Técnica y Abogado de Contratos.",
+                        title: "Expedir el Registro Presupuestal (RP)",
+                        phase: "Paso 23: Emitir el Registro Presupuestal (RP)",
+                        desc: "Procese solicitud contractual y expide el Registro Presupuestal definitivo en SIIF.",
+                        receiveFrom: "Memorando de solicitud de RP y Orden de Compra firmada de Dependencia Técnica.",
+                        deliverable: "Certificado de Registro Presupuestal (RP) firmado en SIIF Nación.",
                         instructions: [
-                            "Expide el CDP en SIIF Nación y remite el archivo firmado al área técnica."
-                        ]
-                    },
-                    {
-                        id: "pre_3",
-                        num: 3,
-                        title: "Validar Orden de Compra firmada",
-                        phase: "Fase 11: Legalización: Pólizas y Registro Presupuestal",
-                        desc: "Reciba la notificación de la Orden de Compra firmada en la plataforma transaccional de compras.",
-                        receiveFrom: "Notificación de la Orden de Compra firmada de Ordenador del Gasto.",
-                        instructions: [
-                            "Recibe la notificación de la Orden de Compra firmada en la plataforma transaccional de compras."
-                        ]
-                    },
-                    {
-                        id: "pre_4",
-                        num: 4,
-                        title: "Expedir RP (SIIF Nación)",
-                        phase: "Fase 11: Legalización: Pólizas y Registro Presupuestal",
-                        desc: "Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos.",
-                        deliverable: "Registro Presupuestal (RP) firmado digitalmente a Dependencia Técnica y Abogado de Contratos.",
-                        instructions: [
-                            "Con la Orden de Compra suscrita por el Ordenador y el contratista en plataforma, genera el Registro Presupuestal definitivo en SIIF Nación para comprometer los fondos."
+                            "Constate la firma y perfeccionamiento de la Orden de Compra en TVEC.",
+                            "Expida el certificado de RP en SIIF Nación comprometiendo los fondos."
                         ]
                     }
                 ]
@@ -2284,48 +2422,50 @@
                     {
                         id: "ord_1",
                         num: 1,
-                        title: "Firmar Acto Administrativo de cancelación",
-                        phase: "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
-                        desc: "Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma.",
-                        deliverable: "Acto Administrativo de cancelación firmado a Abogado de Contratos y Dependencia Técnica.",
-                        receiveFrom: "Proyecto de resolución motivada de cancelación de Abogado de Contratos.",
+                        title: "Designar a los Miembros del Comité Evaluador",
+                        phase: "Paso 9: Designar a los miembros del Comité Asesor y Evaluador",
+                        desc: "Suscriba memorando interno de designación de evaluadores del proceso.",
+                        receiveFrom: "Proyecto de memorando de designación de evaluadores de Abogado de Contratos.",
+                        deliverable: "Memorando de designación de evaluadores firmado.",
                         instructions: [
-                            "Revisa y firma digitalmente el acto administrativo de cancelación para que el técnico proceda en la plataforma."
+                            "Valide idoneidad de los evaluadores y firme el memorando de designación."
                         ]
                     },
                     {
                         id: "ord_2",
                         num: 2,
-                        title: "Validación concurrente",
-                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
-                        desc: "Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades.",
-                        receiveFrom: "Memorando de visto bueno de Abogado de Contratos e Informe Técnico de Dependencia Técnica.",
+                        title: "Firmar Acto de Cancelación (Si Aplica)",
+                        phase: "Paso 11: Publicar el cuadernillo de observaciones y respuestas",
+                        desc: "Suscriba la resolución de cancelación de la RFQ ante errores insubsanables.",
+                        receiveFrom: "Borrador de Acto de Cancelación y justificación de Abogado de Contratos.",
+                        deliverable: "Acto Administrativo de Cancelación firmado digitalmente.",
                         instructions: [
-                            "Constata que obre en el expediente digital el visto bueno jurídico de Contratos y que las planillas de antecedentes estén actualizadas y libres de inhabilidades."
+                            "Valide justificación técnica de la cancelación de pliegos y firme."
                         ]
                     },
                     {
                         id: "ord_3",
                         num: 3,
-                        title: "Firma digital de la OC",
-                        phase: "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
-                        desc: "Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra.",
-                        deliverable: "Orden de Compra firmada digitalmente en la Tienda Virtual a Presupuesto y Abogado de Contratos.",
-                        receiveFrom: "Visto bueno jurídico de Contratos y planilla de antecedentes libres de inhabilidades.",
+                        title: "Suscripción Electrónica de la Orden de Compra",
+                        phase: "Paso 19: Suscripción electrónica de la Orden de Compra",
+                        desc: "Firme digitalmente la Orden de Compra en la TVEC previa validación de viabilidad.",
+                        receiveFrom: "Memorando de viabilidad de suscripción de la OC firmado de Abogado de Contratos (Coordinador GLPE).",
+                        deliverable: "Orden de Compra firmada en la Tienda Virtual (TVEC).",
                         instructions: [
-                            "Accede con el token criptográfico a la Tienda Virtual y firma digitalmente la Orden de Compra."
+                            "Acceda a la TVEC y firme digitalmente con su token institucional.",
+                            "No firme sin la viabilidad jurídica previa emitida por Licitaciones."
                         ]
                     },
                     {
                         id: "ord_4",
                         num: 4,
-                        title: "Firmar designación de supervisión",
-                        phase: "Fase 12: Notificación de Supervisión y Acta de Inicio",
-                        desc: "Firma el memorando de designación técnica proyectado por Contratos.",
-                        deliverable: "Memorando de designación firmado a Abogado de Contratos.",
-                        receiveFrom: "Borrador de memorando de designación de Abogado de Contratos.",
+                        title: "Suscribir Designación de Supervisión",
+                        phase: "Paso 24: Notificación al Supervisor del contrato",
+                        desc: "Firme memorando de asignación de supervisión técnica y administrativa.",
+                        receiveFrom: "Proyecto de memorando de designación de supervisor de Abogado de Contratos.",
+                        deliverable: "Memorando de designación de supervisor firmado.",
                         instructions: [
-                            "Firma el memorando de designación técnica proyectado por Contratos."
+                            "Firme el memorando de designación del supervisor y notifíquese."
                         ]
                     }
                 ]
@@ -2340,18 +2480,33 @@
         let currentSelectedTaskId = null;
 
         const globalPhasesList = [
-            "Fase 1: Planificación e Indagación Inicial",
-            "Fase 2: Co-diseño de Estudios y Control",
-            "Fase 3: Análisis de Mercado y Filtro MIPYMES",
-            "Fase 4: Configuración y Publicación del Evento (RFQ)",
-            "Fase 5: Aclaraciones, Observaciones y Cancelaciones",
-            "Fase 6: Cierre de Cotizaciones y Apertura de Plataforma",
-            "Fase 7: Evaluación Jurídica y Filtro de Inhabilidades",
-            "Fase 8: Evaluación Técnica y Control de Precios Bajos",
-            "Fase 9: Consolidación y Publicación de Evaluaciones",
-            "Fase 10: Adjudicación y Firma Digital de Orden de Compra",
-            "Fase 11: Legalización: Pólizas y Registro Presupuestal",
-            "Fase 12: Notificación de Supervisión y Acta de Inicio"
+            "Paso 1: Recibir, radicar y asignar trámite de la solicitud de asesoría",
+            "Paso 2: Analizar los estudios y documentos previos del área solicitante",
+            "Paso 3: Configurar el evento RFI (cuando sea obligatorio)",
+            "Paso 4: Consolidar y revisar observaciones a la Ficha RFI",
+            "Paso 5: Analizar solicitudes de limitación a MIPYMES",
+            "Paso 6: Publicar el aviso de limitación o no limitación a MIPYMES",
+            "Paso 7: Respuesta a las observaciones de los proveedores del RFI",
+            "Paso 8: Configurar evento de cotización (RFQ) y publicar documentos previos",
+            "Paso 9: Designar a los miembros del Comité Asesor y Evaluador",
+            "Paso 10: Analizar observaciones formuladas al evento de cotización",
+            "Paso 11: Publicar el cuadernillo de observaciones y respuestas",
+            "Paso 12: Analizar las cotizaciones recibidas en el Evento de Cotización",
+            "Paso 13: Evaluar requisitos técnicos, jurídicos y viabilidad económica de la menor cotización",
+            "Paso 14: Consolidar el Informe de Evaluación y publicarlo en la TVEC",
+            "Paso 15: Analizar observaciones al informe de evaluación y hacer informe final",
+            "Paso 16: Publicar informe de evaluación de ofertas y respuestas definitivas",
+            "Paso 17: Configurar la solicitud de orden de compra",
+            "Paso 18: Elaboración del Memorando de Viabilidad de la Orden de Compra",
+            "Paso 19: Suscripción electrónica de la Orden de Compra",
+            "Paso 20: Publicación de la Orden de Compra o Acto Administrativo de Cancelación",
+            "Paso 21: Remitir Orden de Compra para registro presupuestal y requerir garantías",
+            "Paso 22: Revisión, aprobación y publicación de las garantías del proveedor",
+            "Paso 23: Emitir el Registro Presupuestal (RP)",
+            "Paso 24: Notificación al Supervisor del contrato",
+            "Paso 25: Incluir en la plataforma interna ORACLE la información contractual",
+            "Paso 26: Publicar los documentos de legalización de la Orden de Compra",
+            "Paso 27: Reportar el contrato en el Registro Único Empresarial - RUES"
         ];
 
         function isTaskCompleted(task) {
@@ -3105,7 +3260,7 @@
             if (!summaryContent) return;
 
             summaryContent.innerHTML = `
-                <div class="autogestion-phases-horizontal" style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; padding: 4px 0; overflow: visible; position: relative;">
+                <div class="autogestion-phases-horizontal" style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; width: 100%; gap: 14px 8px; padding: 4px 0; overflow: visible; position: relative;">
                     ${globalPhasesList.map((phase, idx) => {
                 const isPhaseCompleted = checkPhaseCompleted(phase);
                 const phaseNameOnly = phase.replace(/^Fase\s+\d+:\s*/i, '');
@@ -3120,13 +3275,13 @@
                                     <i class="${isPhaseCompleted ? 'fa-solid fa-check' : 'fa-solid fa-circle'}" style="color: ${isPhaseCompleted ? '#ffffff' : 'rgba(15, 82, 186, 0.4)'}; font-size: ${isPhaseCompleted ? '0.6rem' : '0.4rem'};"></i>
                                 </div>
                                 <div class="phase-title-text" style="font-size: 0.7rem; font-weight: 700; color: ${isPhaseCompleted ? '#065f46' : 'var(--text-color-muted)'}; white-space: nowrap;">
-                                    Fase ${idx + 1}
+                                    Paso ${idx + 1}
                                 </div>
-                                <div class="phase-tooltip ${idx === 0 ? 'align-left' : idx === 11 ? 'align-right' : ''}">
-                                    <div class="phase-tooltip-title">Fase ${idx + 1}: ${titleText}</div>
+                                <div class="phase-tooltip ${idx === 0 ? 'align-left' : idx === 26 ? 'align-right' : ''}">
+                                    <div class="phase-tooltip-title">Paso ${idx + 1}: ${titleText}</div>
                                     <div class="phase-tooltip-desc">${descriptionText}</div>
                                 </div>
-                                ${idx < 11 ? `
+                                ${idx < 26 ? `
                                     <div class="phase-connecting-line" style="position: absolute; top: 11px; left: 50%; width: calc(100% + 10px); height: 2px; background-color: ${isPhaseCompleted ? '#10b981' : 'rgba(15, 82, 186, 0.1)'}; z-index: 1; transition: background-color 0.3s ease;"></div>
                                 ` : ''}
                             </div>
