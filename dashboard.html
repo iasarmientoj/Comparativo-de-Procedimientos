@@ -905,194 +905,434 @@
         const newProcedureSteps = [
             {
                 letter: "1",
-                title: "Definición de Necesidad, Catálogo y Simulación",
+                title: "Recibir, radicar y asignar trámite de la solicitud de asesoría",
                 phva: "p",
                 phvaLabel: "Planear",
-                summary: "Definición técnica del requerimiento y simulación oficial de costos en el catálogo.",
-                description: "La dependencia que origina la necesidad define el requerimiento técnico y los bienes o servicios a contratar. Verifica la vigencia del Acuerdo Marco de Precios aplicable y ejecuta el simulador oficial de costos para estructurar las cantidades e ítems, estimando el presupuesto máximo del proceso.",
-                control: "Verificación de correspondencia de ítems frente a las categorías autorizadas en la Minuta y el catálogo vigente del AMP para evitar adquisiciones por fuera de su alcance.",
-                records: "Ficha interna de necesidad, simulador preliminar de precios del catálogo.",
+                summary: "Asignación de un abogado del GLPE responsable de la asesoría del trámite.",
+                description: "Recibida la solicitud de inicio de asesoría a través del correo electrónico institucional, el Coordinador del GLPE lo asigna a un abogado del Grupo, el cual será el responsable de la asesoría hasta la colocación de la orden de compra o la cancelación del evento RFQ. Tiempo: 1 día hábil.",
+                control: "Control de oportunidad. Asignación inmediata del caso para asegurar trazabilidad en el GLPE.",
+                records: "Correo de radicación y registro interno de asignación del GLPE.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Líder Técnico 🔧", score: 70, class: "success" },
-                    { name: "Abogado de Contratos", status: "Asesoría Inicial ⚖️", score: 10, class: "warning" },
-                    { name: "Presupuesto", status: "Verificar PAA y CDP 🪙", score: 20, class: "success" },
+                    { name: "Dependencia Técnica", status: "Solicitante ✉️", score: 20, class: "warning" },
+                    { name: "Abogado de Contratos", status: "Líder Asignador ⚖️", score: 80, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "2",
-                title: "Co-diseño de Estudios Previos y Matriz de Riesgos",
+                title: "Analizar los estudios y documentos previos del área solicitante",
                 phva: "p",
                 phvaLabel: "Planear",
-                summary: "Elaboración conjunta de estudios previos, matriz de riesgos y garantías aplicables.",
-                description: "El Coordinador del Grupo de Contratos asigna un abogado responsable al trámite. El abogado asesora y co-redacta junto con el área técnica los Estudios Previos definitivos, estructurando la justificación del proceso, la matriz de riesgos y el análisis de garantías exigibles antes de ingresar a la plataforma TVEC.",
-                control: "Control de oportunidad jurídica. Se garantiza que los estudios y análisis de conveniencia precedan formalmente al inicio de cualquier etapa de selección en plataforma.",
-                records: "Estudios previos definitivos firmados, matriz de riesgos del proceso.",
+                summary: "Revisión legal preliminar del proyecto de estudios previos y anexos.",
+                description: "El abogado responsable del proceso analiza los estudios y documentos previos allegados por el área de origen de la necesidad para indicar sus observaciones y sugerencias. Si existen inconsistencias o falta información, debe devolver el trámite mediante comunicación en la cual se indiquen los ajustes requeridos para su corrección. Tiempo: 2 días hábiles.",
+                control: "Control de legalidad. Verificación estricta del cumplimiento de requisitos y concordancia con el catálogo del AMP.",
+                records: "Memorando o comunicación de observaciones jurídicas.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Co-Diseño 📝", score: 50, class: "success" },
-                    { name: "Abogado de Contratos", status: "Co-Diseño ⚖️", score: 50, class: "success" },
+                    { name: "Dependencia Técnica", status: "Apoyo Técnico 🔧", score: 30, class: "warning" },
+                    { name: "Abogado de Contratos", status: "Evaluador Legal ⚖️", score: 70, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "3",
-                title: "Indagación de Mercado (RFI) y Filtro MIPYMES",
-                phva: "h",
-                phvaLabel: "Hacer",
-                summary: "Publicación de RFI en la TVEC y análisis legal de limitación a MIPYMES nacionales.",
-                description: "En caso de que la Guía del AMP lo exija o sea necesario precisar aspectos de la solución, se publica el RFI en la TVEC. El abogado analiza el RUP, RUES y las solicitudes recibidas para decidir si el proceso debe limitarse obligatoriamente a MIPYMES nacionales de conformidad con el Decreto 1860 de 2021.",
-                control: "Verificación jurídica del cumplimiento de condiciones del RUES para habilitar la limitación legal y blindar la convocatoria de impugnaciones.",
-                records: "Solicitud de Información (RFI) en TVEC, informe de análisis de limitación de MIPYMES.",
+                title: "Configurar el evento RFI (cuando sea obligatorio)",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Parametrización y publicación del evento de solicitud de información en la TVEC.",
+                description: "El usuario comprador, con acompañamiento del abogado responsable del proceso, configura el Evento de Solicitud de Información (RFI) en la TVEC. Tiempo: 1 día. Plazo del evento RFI: Según lo establecido por el AMP o IAD.",
+                control: "Control operativo. Verificación de parametrización correcta según las guías de utilización de la ANCP-CCE.",
+                records: "Configuración y publicación del RFI en la Tienda Virtual (TVEC).",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Apoyo Técnico 🔧", score: 20, class: "success" },
-                    { name: "Abogado de Contratos", status: "Evaluador Legal ⚖️", score: 80, class: "success" },
+                    { name: "Dependencia Técnica", status: "Comprador TVEC 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesor Legal ⚖️", score: 50, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "4",
-                title: "Configuración y Publicación del Evento (RFQ)",
-                phva: "h",
-                phvaLabel: "Hacer",
-                summary: "Parametrización de la RFQ en la TVEC a través de la cuenta oficial institucional.",
-                description: "Configuración y parametrización de la solicitud de cotización (RFQ) en la plataforma TVEC utilizando una cuenta institucional de la entidad. Se cargan los estudios previos como equivalentes a los pliegos de condiciones y se publican las reglas de evaluación.",
-                control: "Uso de canales oficiales y centralizados de la TVEC. Queda estrictamente prohibida toda comunicación directa o negociación externa con proveedores (Minuta CCE).",
-                records: "Solicitud de cotización publicada en TVEC.",
+                title: "Consolidar y revisar observaciones a la Ficha RFI",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Análisis y clasificación de observaciones de los proveedores al RFI.",
+                description: "El equipo de trabajo del área técnica verifica y analiza las observaciones enviadas por los proveedores al evento RFI, para su análisis y respuesta. En los asuntos jurídicos, deberá contarse con el apoyo del abogado responsable del GLPE. Tiempo: 1 día.",
+                control: "Control de pertenencia técnica y legal de las sugerencias del mercado.",
+                records: "Matriz técnica de consolidación de observaciones recibidas.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Cargue Técnico 📝", score: 40, class: "success" },
-                    { name: "Abogado de Contratos", status: "Cargador Principal ⚙️", score: 60, class: "success" },
+                    { name: "Dependencia Técnica", status: "Analista Técnico 🔧", score: 60, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesor Jurídico ⚖️", score: 40, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "5",
-                title: "Aclaraciones, Observaciones y Cancelaciones",
-                phva: "v",
-                phvaLabel: "Verificar",
-                summary: "Resolución de observaciones del foro y control estricto de cancelaciones por acto administrativo.",
-                description: "Se recopilan las observaciones enviadas por los proveedores and el Comité Evaluador emite un Cuadernillo de Respuestas consolidado. En caso de detectarse errores insubsanables en la RFQ que impidan continuar, se tramita su revocación formal.",
-                control: "Si se requiere cancelar el evento en plataforma, se prohíbe el uso del botón directo de cancelación. Exige la expedición obligatoria de un Acto Administrativo motivado del Ordenador del Gasto para prevenir reclamaciones indemnizatorias.",
-                records: "Respuestas cargadas en el foro de la TVEC, Acto Administrativo de cancelación (si aplica).",
+                title: "Analizar solicitudes de limitación a MIPYMES",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Estudio de las condiciones legales para limitar el proceso a MIPYMES nacionales.",
+                description: "Si se recibieron dos o más solicitudes de limitación de la convocatoria a MIPYMES, se deberá analizar si cumplen con los requisitos exigidos en el Decreto 1860 de 2021 o el que lo sustituya o adicione. Si cumple los requisitos, se deberá limitar la convocatoria a MIPYMES. Tiempo: 1 día.",
+                control: "Verificación de cumplimiento de requisitos legales en RUES para proceder con la limitación.",
+                records: "Acta de análisis legal de solicitudes de MIPYMES.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Respuestas Técnicas 📝", score: 45, class: "success" },
-                    { name: "Abogado de Contratos", status: "Respuestas Jurídicas ⚖️", score: 45, class: "success" },
+                    { name: "Dependencia Técnica", status: "Apoyo Técnico 🔧", score: 20, class: "warning" },
+                    { name: "Abogado de Contratos", status: "Analista Legal ⚖️", score: 80, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
-                    { name: "Ordenador del Gasto", status: "Firma Cancelación ✍️", score: 10, class: "warning" }
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "6",
-                title: "Cierre de Cotizaciones y Apertura de Plataforma",
-                phva: "v",
-                phvaLabel: "Verificar",
-                summary: "Cierre automático de la TVEC y generación oficial del listado de ofertas.",
-                description: "Cumplido el plazo del evento (mínimo 5 días hábiles), la plataforma TVEC realiza de forma automática el cierre y apertura de cotizaciones a las 17:00 horas, generando el listado de ofertas ordenadas de menor a mayor precio.",
-                control: "Garantía tecnológica de transparencia. Imposibilidad de manipulación humana o visualización anticipada de las propuestas económicas.",
-                records: "Listado oficial de cotizaciones emitido por la plataforma TVEC.",
+                title: "Publicar el aviso de limitación o no limitación a MIPYMES",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Publicación formal de la decisión sobre limitación en la plataforma TVEC.",
+                description: "De acuerdo con el análisis de las solicitudes de limitación a Mipymes, se deberá emitir y publicar un aviso que informe esa circunstancia en el módulo de mensajes del evento RFI. Tiempo: 1 día.",
+                control: "Publicación obligatoria en canales oficiales para garantizar publicidad y transparencia.",
+                records: "Aviso de limitación o no limitación cargado y visible en TVEC.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Automático 🤖", score: 0, class: "muted" },
-                    { name: "Abogado de Contratos", status: "Automático 🤖", score: 0, class: "muted" },
-                    { name: "Presupuesto", status: "Automático 🤖", score: 0, class: "muted" },
-                    { name: "Ordenador del Gasto", status: "Automático 🤖", score: 0, class: "muted" }
+                    { name: "Dependencia Técnica", status: "Usuario Comprador 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Redactor Jurídico ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "7",
-                title: "Evaluación Jurídica y Filtro de Inhabilidades",
-                phva: "v",
-                phvaLabel: "Verificar",
-                summary: "Validación legal de la propuesta de menor precio y chequeo de antecedentes (REDAM/RUES).",
-                description: "El abogado realiza la evaluación jurídica de la propuesta de menor precio. Verifica personería, RUES y realiza búsquedas de antecedentes fiscales (Contraloría), penales (Policía), disciplinarios (Procuraduría) e inhabilidades por deudas de alimentos (REDAM) del representante legal y la empresa.",
-                control: "Prevención de nulidad absoluta del contrato (Art. 44 Ley 80) e inhabilitación por mora alimentaria (Cláusulas 6.11 y 6.17 de la Minuta).",
-                records: "Certificados oficiales de antecedentes y RUES descargados con fecha y hora del día de la evaluación.",
+                title: "Respuesta a las observaciones de los proveedores del RFI",
+                phva: "p",
+                phvaLabel: "Planear",
+                summary: "Emisión de respuestas a observaciones y ajustes definitivos a la necesidad.",
+                description: "El área de origen de la necesidad emitirá un documento de análisis técnico, en el cual se analizan y contestan cada una de las observaciones y solicitudes recibidas en el evento RFI. Conforme a este documento ajustará su necesidad y emitirá los documentos previos definitivos. Nota: si la necesidad cambia sustancialmente, se reinicia el proceso. Tiempo: 2 días.",
+                control: "Verificación de viabilidad técnica y mantenimiento de la selección objetiva en los ajustes.",
+                records: "Cuadernillo de respuestas firmado y estudios previos definitivos aprobados.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
-                    { name: "Abogado de Contratos", status: "Evaluador Único ⚖️", score: 100, class: "success" },
+                    { name: "Dependencia Técnica", status: "Responsable Técnico 🔧", score: 90, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesor Legal ⚖️", score: 10, class: "warning" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "8",
-                title: "Evaluación Técnica y Control de Precios Bajos",
-                phva: "v",
-                phvaLabel: "Verificar",
-                summary: "Verificación de cumplimiento de catálogo y requerimiento de aclaración por precios artificiales.",
-                description: "El evaluador técnico verifica que la propuesta de menor valor cumpla con las fichas técnicas del catálogo. Si la oferta presenta un precio sospechosamente bajo o excluye cargas tributarias (como el IVA en bienes/servicios gravados), el comité solicita aclaración al proveedor siguiendo la Guía de Colombia Compra Eficiente.",
-                control: "Descarte motivado de ofertas técnicamente inviables o con precios artificialmente bajos que comprometan el suministro del bien o servicio (Cláusula 6.14 de la Minuta).",
-                records: "Informe de cumplimiento técnico y análisis económico de costos.",
+                title: "Configurar evento de cotización (RFQ) y publicar documentos previos",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Apertura formal de la RFQ en la TVEC y publicación de CDP y Estudios Previos.",
+                description: "El Usuario Comprador, con el acompañamiento del abogado responsable y el equipo técnico, configura el Evento RFQ en la TVEC. Se publica el estudio previo definitivo, anexos y el CDP. Plazo del evento según indique el AMP/IAD. Tiempo: 1 día.",
+                control: "Validación de correspondencia de ítems con CDP vigente y bloqueo de comunicaciones externas directas.",
+                records: "Evento RFQ publicado y CDP asociado en la plataforma TVEC.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Evaluador Técnico 🔧", score: 80, class: "success" },
-                    { name: "Abogado de Contratos", status: "Apoyo Legal ⚖️", score: 20, class: "warning" },
+                    { name: "Dependencia Técnica", status: "Configurador Técnico 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Controlador Legal ⚖️", score: 50, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "9",
-                title: "Publicación de Evaluaciones y Término de Traslado",
+                title: "Designar a los miembros del Comité Asesor y Evaluador",
                 phva: "h",
                 phvaLabel: "Hacer",
-                summary: "Publicación de informes de evaluación para observaciones de los oferentes.",
-                description: "Consolidación y publicación del informe de evaluación técnica y jurídica en la plataforma TVEC. Se otorga un término de traslado mínimo de 1 día hábil para que los demás proponentes presenten sus observaciones.",
-                control: "Respeto al derecho de defensa, debido proceso y principio de publicidad de las actuaciones administrativas.",
-                records: "Informe de evaluación publicado en la TVEC.",
+                summary: "Suscripción del memorando interno de designación de evaluadores.",
+                description: "Mediante memorando interno, suscrito por el Competente Contractual, se deberá designar al Comité Asesor y Evaluador que analizará las observaciones, emitirá respuesta, y evaluará las cotizaciones y documentos de los proveedores correspondientes. Tiempo: 1 día.",
+                control: "Control de idoneidad. Designación de perfiles técnicos, económicos y jurídicos habilitados para evaluar.",
+                records: "Memorando interno de designación firmado por el competente.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Firma Evaluación 📝", score: 50, class: "success" },
-                    { name: "Abogado de Contratos", status: "Firma Evaluación ⚖️", score: 50, class: "success" },
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ordenador Firmante ✍️", score: 100, class: "success" }
+                ]
+            },
+            {
+                letter: "10",
+                title: "Analizar observaciones formuladas al evento de cotización",
+                phva: "h",
+                phvaLabel: "Hacer",
+                summary: "Estudio de las sugerencias y observaciones de los proponentes a la RFQ.",
+                description: "El abogado analiza observaciones jurídicas, y el equipo técnico las técnicas y económicas, elaborando un cuadernillo consolidado de observaciones y respuestas. Tiempo: El establecido en el Acuerdo Marco de Precios o IAD.",
+                control: "Análisis técnico-jurídico riguroso para asegurar que las reglas del pliego/RFQ no violen el principio de igualdad.",
+                records: "Cuadernillo de observaciones y respuestas en borrador.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Evaluador Técnico 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Evaluador Jurídico ⚖️", score: 50, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
-                letter: "10",
-                title: "Adjudicación y Firma Digital de Orden de Compra",
-                phva: "h",
-                phvaLabel: "Hacer",
-                summary: "Visto bueno del Coordinador jurídico y suscripción digital de la OC por la Directora.",
-                description: "Cierre de la etapa de traslado y resolución de observaciones. Previa aprobación y visto bueno del Coordinador de Contratos, el Ordenador del Gasto firma digitalmente la Orden de Compra (OC) en la TVEC a favor del proveedor seleccionado.",
-                control: "Co-responsabilidad institucional y control concurrente de firmas en plataforma, eliminando el riesgo de firmas 'a ciegas' por fe técnica.",
-                records: "Orden de Compra perfeccionada y firmada digitalmente en TVEC.",
-                roles: [
-                    { name: "Dependencia Técnica", status: "Visto Bueno 🔧", score: 10, class: "success" },
-                    { name: "Abogado de Contratos", status: "Visto Bueno ⚖️", score: 40, class: "success" },
-                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
-                    { name: "Ordenador del Gasto", status: "Firma Digital ✍️", score: 50, class: "success" }
-                ]
-            },
-            {
                 letter: "11",
-                title: "Legalización: Pólizas y Registro Presupuestal",
+                title: "Publicar el cuadernillo de observaciones y respuestas",
                 phva: "h",
                 phvaLabel: "Hacer",
-                summary: "Revisión/aprobación de garantías por el abogado y expedición del RP por Presupuesto.",
-                description: "El contratista constituye y envía las garantías (póliza de seguros) dentro del plazo estipulado (máximo 3 días). El abogado revisa la suficiencia y vigencia de las pólizas y expide la aprobación. Simultáneamente, el Grupo de Presupuesto genera el Registro Presupuestal (RP) en el sistema SIIF Nación.",
-                control: "Verificación de suficiencia de pólizas según los amparos del AMP (Cláusula 6.29) y cálculo de retenciones territoriales aplicables al valor (Cláusula 6.9).",
-                records: "Certificado de aprobación de garantías en la TVEC, Registro Presupuestal expedido.",
+                summary: "Publicación oficial de las aclaraciones al RFQ en la Tienda Virtual.",
+                description: "El usuario comprador, con el acompañamiento del abogado responsable, publica el cuadernillo de observaciones y respuestas. Nota: si se detecta un error insubsanable, se cancela la RFQ mediante acto administrativo. Tiempo: El establecido en el AMP/IAD.",
+                control: "Publicidad de respuestas en plataforma antes del vencimiento del plazo de cotizar.",
+                records: "Cuadernillo publicado y visible en el foro del evento RFQ en TVEC.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
-                    { name: "Abogado de Contratos", status: "Aprobación Pólizas ⚖️", score: 50, class: "success" },
-                    { name: "Presupuesto", status: "Expedición RP 📄", score: 50, class: "success" },
+                    { name: "Dependencia Técnica", status: "Usuario Comprador 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesor de Carga ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
                     { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             },
             {
                 letter: "12",
-                title: "Notificación de Supervisión y Acta de Inicio",
+                title: "Analizar las cotizaciones recibidas en el Evento de Cotización",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Ordenación de propuestas por precio y aplicación de desempates.",
+                description: "El Comité Evaluador analiza las cotizaciones recibidas para determinar la del menor precio y proceder a evaluar los aspectos jurídicos, técnicos y económicos. Si hay empate, se aplican los criterios de la Ley 2069 de 2020. Tiempo: 2 días.",
+                control: "Verificación de orden de cotización generado en TVEC y aplicación legal de criterios de desempate.",
+                records: "Acta de apertura de cotizaciones y reporte de precios.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Evaluador de Precios 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesor Legal ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "13",
+                title: "Evaluar requisitos técnicos, jurídicos y viabilidad económica de la menor cotización",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Verificación del cumplimiento de pliegos y análisis de precios artificialmente bajos.",
+                description: "Evaluación de cumplimiento técnico del catálogo, viabilidad económica de la oferta de menor valor (Guía CCE), capacidad jurídica e inhabilidades del proveedor de menor costo. Tiempo: 2 días.",
+                control: "Análisis y descarte motivado de ofertas artificialmente bajas e inhabilidades del oferente.",
+                records: "Certificados de antecedentes y RUES, formatos de chequeo técnico diligenciados.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Evaluador Técnico 🔧", score: 55, class: "success" },
+                    { name: "Abogado de Contratos", status: "Evaluador Jurídico ⚖️", score: 45, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "14",
+                title: "Consolidar el Informe de Evaluación y publicarlo en la TVEC",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Consolidación de las actas de evaluación y publicación con traslado de ley.",
+                description: "El abogado responsable procede a consolidar el informe de Evaluación, el cual debe ser publicado por el usuario comprador en la plataforma TVEC. Debe indicarse plazo para recepción de observaciones (Mínimo 1 día). Tiempo: 1 día.",
+                control: "Publicidad de las evaluaciones preliminares garantizando el debido proceso (traslado).",
+                records: "Informe de evaluación firmado por evaluadores y publicado en TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Firma Evaluación 🔧", score: 40, class: "success" },
+                    { name: "Abogado de Contratos", status: "Consolidador GLPE ⚖️", score: 60, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "15",
+                title: "Analizar observaciones al informe de evaluación y hacer informe final",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Análisis de observaciones al informe de evaluación y elaboración del informe final.",
+                description: "Los miembros del Comité analizan las observaciones recibidas y emiten un cuadernillo de respuestas y el informe final de evaluación, previa revisión del Coordinador del GLPE. Tiempo: 2 días.",
+                control: "Análisis estricto de objeciones para ratificar o modificar la evaluación y blindar la selección.",
+                records: "Cuadernillo de respuesta a observaciones, informe final de evaluación firmado.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Evaluador Técnico 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Evaluador Jurídico ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "16",
+                title: "Publicar informe de evaluación de ofertas y respuestas definitivas",
+                phva: "v",
+                phvaLabel: "Verificar",
+                summary: "Cargue oficial de las evaluaciones definitivas en la plataforma de la TVEC.",
+                description: "El usuario comprador, con el acompañamiento del abogado responsable del proceso, publicará el informe final de evaluación y las respuestas definitivas. Tiempo: El establecido en el AMP/IAD.",
+                control: "Garantía de transparencia. Publicación de la evaluación final previo a la solicitud de orden de compra.",
+                records: "Informe final de evaluación publicado en la TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Carga Técnica 🔧", score: 50, class: "success" },
+                    { name: "Abogado de Contratos", status: "Apoyo Carga ⚖️", score: 50, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "17",
+                title: "Configurar la solicitud de orden de compra",
                 phva: "a",
                 phvaLabel: "Actuar",
-                summary: "Designación del supervisor, notificación al proveedor y firma del acta de inicio.",
-                description: "El Coordinador de Contratos notifica la designación de supervisión al funcionario técnico y remite los datos de contacto y enlace al proveedor seleccionado (Cláusula 6.23). El supervisor y el proveedor firman formalmente el Acta de Inicio dentro de los 5 días hábiles siguientes (Cláusula 6.26).",
-                control: "Garantizar que la prestación del servicio o entrega de los bienes no comience sin las garantías aprobadas ni el acta de inicio debidamente perfeccionada (prevención de hechos cumplidos).",
-                records: "Oficio de designación de supervisor notificado, Acta de Inicio suscrita.",
+                summary: "Estructuración en la TVEC de la solicitud de Orden de Compra definitiva.",
+                description: "Conforme al informe final de evaluación, el usuario comprador, con el acompañamiento del abogado y en presencia del área técnica, configurará la solicitud de orden de compra en la plataforma de la TVEC e informará su número. Tiempo: 1 día.",
+                control: "Verificación de coincidencia exacta de cantidades, valores y catálogo seleccionado con la oferta.",
+                records: "Formulario de solicitud de Orden de Compra guardado en TVEC.",
                 roles: [
-                    { name: "Dependencia Técnica", status: "Supervisión Activa 🔍", score: 50, class: "success" },
-                    { name: "Abogado de Contratos", status: "Notificación Formal ⚖️", score: 30, class: "success" },
+                    { name: "Dependencia Técnica", status: "Comprador TVEC 🔧", score: 60, class: "success" },
+                    { name: "Abogado de Contratos", status: "Asesor Técnico ⚖️", score: 40, class: "success" },
                     { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
-                    { name: "Ordenador del Gasto", status: "Firma Designación ✍️", score: 20, class: "success" }
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "18",
+                title: "Elaboración del Memorando de Viabilidad de la Orden de Compra",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Proyección del memorando de recomendación jurídica para firma de la Orden.",
+                description: "El abogado responsable proyectará para firma del Coordinador del GLPE el memorando interno dirigido al Competente Contractual, con el fin de informar la viabilidad de suscribir la Orden de Compra en la TVEC. Tiempo: 1 día.",
+                control: "Control previo. Certificación jurídica de que el proceso cumplió con todas las etapas de ley.",
+                records: "Memorando de viabilidad firmado por el Coordinador del GLPE.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Redactor y Firma ⚖️", score: 100, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "19",
+                title: "Suscripción electrónica de la Orden de Compra",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Firma digital de la Orden de Compra en la TVEC por el Competente Contractual.",
+                description: "El Competente Contractual suscribirá la orden de compra de manera electrónica en la Tienda Virtual del Estado Colombiano, previa recepción del memorando de viabilidad emitido por el Coordinador del GLPE. Tiempo: 1 día.",
+                control: "Firma digital en plataforma asociada a la viabilidad jurídica emitida por el GLPE.",
+                records: "Orden de Compra suscrita digitalmente por el Ordenador y visible en TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ordenador del Gasto ✍️", score: 100, class: "success" }
+                ]
+            },
+            {
+                letter: "20",
+                title: "Publicación de la Orden de Compra o Acto Administrativo de Cancelación",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Envío oficial al contratista o publicación del acto de revocación.",
+                description: "Suscrita la orden de compra, la plataforma TVEC la enviará automáticamente al proveedor. Para el caso de cancelación del evento RFQ, el Competente suscribe el Acto Administrativo y el Usuario lo publica en el foro del evento. Tiempo: El establecido en el AMP.",
+                control: "Control administrativo. Cierre formal del proceso en plataforma para evitar duplicidad de solicitudes.",
+                records: "Orden de Compra pública en TVEC o Acto Administrativo de Cancelación publicado.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Cargador Comprador 🔧", score: 20, class: "warning" },
+                    { name: "Abogado de Contratos", status: "Apoyo Trámite ⚖️", score: 30, class: "warning" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firmante Acto ✍️", score: 50, class: "success" }
+                ]
+            },
+            {
+                letter: "21",
+                title: "Remitir Orden de Compra para registro presupuestal y requerir garantías",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Requerimiento de pólizas al proveedor y envío a Presupuesto para Registro Presupuestal.",
+                description: "El funcionario de legalización del GLPE, con apoyo del área solicitante, solicitará al contratista el envío de las garantías. Al mismo tiempo, enviará la solicitud de registro presupuestal con la Orden de Compra al Grupo de Presupuesto. Tiempo: 1 día.",
+                control: "Control de celeridad. Envío inmediato del expediente para registro presupuestal legal.",
+                records: "Correo de requerimiento de garantías, comunicación a Presupuesto.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Apoyo 🔧", score: 20, class: "warning" },
+                    { name: "Abogado de Contratos", status: "Trámite GLPE ⚖️", score: 80, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "22",
+                title: "Revisión, aprobación y publicación de las garantías del proveedor",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Validación de pólizas por corredor de seguros y firma de aprobación del GLPE.",
+                description: "El corredor de seguros verifica condiciones de suficiencia y vigencia. De estar conforme, se emite certificado de aprobación suscrito por el Coordinador de GLPE y el Usuario Comprador lo publica en la TVEC. Tiempo: 1 día.",
+                control: "Verificación de suficiencia de pólizas frente a los amparos obligatorios del AMP.",
+                records: "Certificado de aprobación de garantías firmado y publicado en TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Publicador TVEC 🔧", score: 20, class: "warning" },
+                    { name: "Abogado de Contratos", status: "Coordinador Aprobador ⚖️", score: 80, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "23",
+                title: "Emitir el Registro Presupuestal (RP)",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Expedición del certificado de compromiso presupuestal en el sistema SIIF Nación.",
+                description: "El Grupo de Presupuesto procederá a emitir el (los) certificados de Registro Presupuestal de la Orden de Compra, por el valor de esta y a favor del proveedor seleccionado. Tiempo: 1 día.",
+                control: "Verificación de saldo presupuestal y registro exacto del compromiso en SIIF Nación.",
+                records: "Registro Presupuestal (RP) firmado y numerado.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Presupuesto", status: "Responsable Financiero 🪙", score: 100, class: "success" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "24",
+                title: "Notificación al Supervisor del contrato",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Elaboración y suscripción de memorando de designación de supervisión.",
+                description: "El GLPE elabora y remite el memorando de designación para firma del Competente Contractual. La designación del supervisor se realiza y comunica mediante la suscripción del memorando. Tiempo: 1 día.",
+                control: "Asignación de responsabilidad de supervisión a un funcionario con perfil técnico adecuado.",
+                records: "Memorando de designación de supervisión firmado y notificado.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Supervisor Técnico 🔧", score: 40, class: "success" },
+                    { name: "Abogado de Contratos", status: "Elaborador GLPE ⚖️", score: 40, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Firmante Competente ✍️", score: 20, class: "success" }
+                ]
+            },
+            {
+                letter: "25",
+                title: "Incluir en la plataforma interna ORACLE la información contractual",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Cargue de la Orden de Compra y sus datos en la ERP institucional ORACLE.",
+                description: "La persona asignada del GLPE para la alimentación de la plataforma ORACLE, incorpora en la misma los datos de la Orden de Compra. Tiempo: 1 día.",
+                control: "Control de integración de datos para seguimiento y planeación institucional.",
+                records: "Registro de transacción contractual en sistema ORACLE.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Auxiliar de Cargue ⚖️", score: 100, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "26",
+                title: "Publicar los documentos de legalización de la Orden de Compra",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Cargue de RP, garantías y designación en la plataforma TVEC.",
+                description: "Se deberá publicar en el módulo de 'documentos adicionales' de la Orden de Compra: RP, Garantías y su aprobación, y el memorando de designación. Tiempo: 1 día.",
+                control: "Verificación de completitud documental en la TVEC previo al inicio de la ejecución contractual.",
+                records: "Documentación cargada visible en el portal de la TVEC.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Cargador Técnico 🔧", score: 30, class: "success" },
+                    { name: "Abogado de Contratos", status: "Auxiliar GLPE ⚖️", score: 70, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
+                ]
+            },
+            {
+                letter: "27",
+                title: "Reportar el contrato en el Registro Único Empresarial - RUES",
+                phva: "a",
+                phvaLabel: "Actuar",
+                summary: "Reporte mensual en línea de contratos celebrados a las Cámaras de Comercio.",
+                description: "La persona responsable en el GLPE realiza el reporte en línea de los contratos suscritos por el MHCP, a las Cámaras de Comercio - plataforma RUES (cuando haya lugar a ello). Tiempo: 1 mes.",
+                control: "Control de reporte obligatorio para dar publicidad mercantil a los contratos estatales.",
+                records: "Radicado de reporte en línea de la plataforma RUES.",
+                roles: [
+                    { name: "Dependencia Técnica", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Abogado de Contratos", status: "Auxiliar GLPE ⚖️", score: 100, class: "success" },
+                    { name: "Presupuesto", status: "Ausente ❌", score: 0, class: "muted" },
+                    { name: "Ordenador del Gasto", status: "Ausente ❌", score: 0, class: "muted" }
                 ]
             }
         ];
