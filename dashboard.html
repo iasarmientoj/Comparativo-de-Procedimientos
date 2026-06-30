@@ -3845,6 +3845,7 @@
             window.addEventListener('keydown', (e) => {
                 const panelAnterior = document.getElementById('panel-proc-anterior');
                 const panelMejorado = document.getElementById('panel-proc-mejorado');
+                const panelAutogestion = document.getElementById('panel-sis-autogestion');
 
                 // Ignore keydown if focused on an input/textarea/editable
                 if (document.activeElement && (
@@ -3890,6 +3891,37 @@
                         if (currentNewStepIndex > 0) {
                             selectNewStep(currentNewStepIndex - 1);
                             const activeItem = document.getElementById(`new-step-item-${currentNewStepIndex}`);
+                            if (activeItem) {
+                                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                            }
+                        }
+                    }
+                } else if (panelAutogestion && panelAutogestion.classList.contains('active')) {
+                    const roleTasks = autogestionRolesData[currentAutogestionRole].tasks;
+                    if (roleTasks.length > 0) {
+                        let targetIndex = -1;
+                        const currentIndex = roleTasks.findIndex(t => t.id === currentSelectedTaskId);
+
+                        if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            if (currentIndex === -1) {
+                                targetIndex = 0;
+                            } else if (currentIndex < roleTasks.length - 1) {
+                                targetIndex = currentIndex + 1;
+                            }
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            if (currentIndex === -1) {
+                                targetIndex = roleTasks.length - 1;
+                            } else if (currentIndex > 0) {
+                                targetIndex = currentIndex - 1;
+                            }
+                        }
+
+                        if (targetIndex !== -1) {
+                            const targetTask = roleTasks[targetIndex];
+                            selectAutogestionTask(targetTask.id);
+                            const activeItem = document.getElementById('autogestion-task-item-' + targetTask.id);
                             if (activeItem) {
                                 activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                             }
