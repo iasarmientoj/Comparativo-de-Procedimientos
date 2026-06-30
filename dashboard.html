@@ -1358,18 +1358,33 @@
         ];
 
         const SIM_NEW_STEPS = [
-            { id: 'sim-new-0', number: 1, phva: 'P', phvaLabel: 'Planear', title: 'Definición de Necesidad, Catálogo y Simulación' },
-            { id: 'sim-new-1', number: 2, phva: 'P', phvaLabel: 'Planear', title: 'Co-diseño de Estudios Previos y Matriz de Riesgos' },
-            { id: 'sim-new-2', number: 3, phva: 'H', phvaLabel: 'Hacer', title: 'Indagación de Mercado (RFI) y Filtro MIPYMES' },
-            { id: 'sim-new-3', number: 4, phva: 'H', phvaLabel: 'Hacer', title: 'Configuración y Publicación del Evento (RFQ)' },
-            { id: 'sim-new-4', number: 5, phva: 'V', phvaLabel: 'Verificar', title: 'Aclaraciones, Observaciones y Cancelaciones' },
-            { id: 'sim-new-5', number: 6, phva: 'V', phvaLabel: 'Verificar', title: 'Cierre de Cotizaciones y Apertura de Plataforma' },
-            { id: 'sim-new-6', number: 7, phva: 'V', phvaLabel: 'Verificar', title: 'Evaluación Jurídica y Filtro de Inhabilidades' },
-            { id: 'sim-new-7', number: 8, phva: 'V', phvaLabel: 'Verificar', title: 'Evaluación Técnica y Control de Precios Bajos' },
-            { id: 'sim-new-8', number: 9, phva: 'H', phvaLabel: 'Hacer', title: 'Publicación de Evaluaciones y Término de Traslado' },
-            { id: 'sim-new-9', number: 10, phva: 'H', phvaLabel: 'Hacer', title: 'Adjudicación y Firma Digital de Orden de Compra' },
-            { id: 'sim-new-10', number: 11, phva: 'H', phvaLabel: 'Hacer', title: 'Legalización: Pólizas y Registro Presupuestal' },
-            { id: 'sim-new-11', number: 12, phva: 'A', phvaLabel: 'Actuar', title: 'Notificación de Supervisión y Acta de Inicio' }
+            { id: 'sim-new-0', number: 1, phva: 'P', phvaLabel: 'Planear', title: 'Recibir, radicar y asignar trámite de la solicitud de asesoría' },
+            { id: 'sim-new-1', number: 2, phva: 'P', phvaLabel: 'Planear', title: 'Analizar los estudios y documentos previos del área solicitante' },
+            { id: 'sim-new-2', number: 3, phva: 'P', phvaLabel: 'Planear', title: 'Configurar el evento RFI (cuando sea obligatorio)' },
+            { id: 'sim-new-3', number: 4, phva: 'P', phvaLabel: 'Planear', title: 'Consolidar y revisar observaciones a la Ficha RFI' },
+            { id: 'sim-new-4', number: 5, phva: 'P', phvaLabel: 'Planear', title: 'Analizar solicitudes de limitación a MIPYMES' },
+            { id: 'sim-new-5', number: 6, phva: 'P', phvaLabel: 'Planear', title: 'Publicar el aviso de limitación o no limitación a MIPYMES' },
+            { id: 'sim-new-6', number: 7, phva: 'P', phvaLabel: 'Planear', title: 'Respuesta a las observaciones de los proveedores del RFI' },
+            { id: 'sim-new-7', number: 8, phva: 'H', phvaLabel: 'Hacer', title: 'Configurar evento de cotización (RFQ) y publicar documentos previos' },
+            { id: 'sim-new-8', number: 9, phva: 'H', phvaLabel: 'Hacer', title: 'Designar a los miembros del Comité Asesor y Evaluador' },
+            { id: 'sim-new-9', number: 10, phva: 'H', phvaLabel: 'Hacer', title: 'Analizar observaciones formuladas al evento de cotización' },
+            { id: 'sim-new-10', number: 11, phva: 'H', phvaLabel: 'Hacer', title: 'Publicar el cuadernillo de observaciones y respuestas' },
+            { id: 'sim-new-11', number: 12, phva: 'V', phvaLabel: 'Verificar', title: 'Analizar las cotizaciones recibidas en el Evento de Cotización' },
+            { id: 'sim-new-12', number: 13, phva: 'V', phvaLabel: 'Verificar', title: 'Evaluar requisitos técnicos, jurídicos y viabilidad económica de la menor cotización' },
+            { id: 'sim-new-13', number: 14, phva: 'V', phvaLabel: 'Verificar', title: 'Consolidar el Informe de Evaluación y publicarlo en la TVEC' },
+            { id: 'sim-new-14', number: 15, phva: 'V', phvaLabel: 'Verificar', title: 'Analizar observaciones al informe de evaluación y hacer informe final' },
+            { id: 'sim-new-15', number: 16, phva: 'V', phvaLabel: 'Verificar', title: 'Publicar informe de evaluación de ofertas y respuestas definitivas' },
+            { id: 'sim-new-16', number: 17, phva: 'A', phvaLabel: 'Actuar', title: 'Configurar la solicitud de orden de compra' },
+            { id: 'sim-new-17', number: 18, phva: 'A', phvaLabel: 'Actuar', title: 'Elaboración del Memorando de Viabilidad de la Orden de Compra' },
+            { id: 'sim-new-18', number: 19, phva: 'A', phvaLabel: 'Actuar', title: 'Suscripción electrónica de la Orden de Compra' },
+            { id: 'sim-new-19', number: 20, phva: 'A', phvaLabel: 'Actuar', title: 'Publicación de la Orden de Compra o Acto Administrativo de Cancelación' },
+            { id: 'sim-new-20', number: 21, phva: 'A', phvaLabel: 'Actuar', title: 'Remitir Orden de Compra para registro presupuestal y requerir garantías' },
+            { id: 'sim-new-21', number: 22, phva: 'A', phvaLabel: 'Actuar', title: 'Revisión, aprobación y publicación de las garantías del proveedor' },
+            { id: 'sim-new-22', number: 23, phva: 'A', phvaLabel: 'Actuar', title: 'Emitir el Registro Presupuestal (RP)' },
+            { id: 'sim-new-23', number: 24, phva: 'A', phvaLabel: 'Actuar', title: 'Notificación al Supervisor del contrato' },
+            { id: 'sim-new-24', number: 25, phva: 'A', phvaLabel: 'Actuar', title: 'Incluir en la plataforma interna ORACLE la información contractual' },
+            { id: 'sim-new-25', number: 26, phva: 'A', phvaLabel: 'Actuar', title: 'Publicar los documentos de legalización de la Orden de Compra' },
+            { id: 'sim-new-26', number: 27, phva: 'A', phvaLabel: 'Actuar', title: 'Reportar el contrato en el Registro Único Empresarial - RUES' }
         ];
 
         const SIM_CASES = [
@@ -1386,9 +1401,9 @@
                     { stepIndex: 7, msg: 'Estudios previos elaborados de forma posterior, validando la cotización con 0% de IVA de manera retroactiva y sin control legal.' },
                     { stepIndex: 10, msg: 'Firma y aprobación de la Orden de Compra sin verificar que la exención de IVA sea legalmente aplicable.' }
                 ],
-                newBlockIndex: 7, // Fase 8: Evaluación Técnica y Control de Precios Bajos
-                newBlockMsg: 'El Comité Evaluador detectó que la propuesta de menor precio excluyó el IVA del 19% simulando una exención de servicios en la nube que no aplica para soporte local de software.',
-                newBlockNorm: 'Cláusula 6.14 de la Minuta CCE-SNG-IAD-002-2024'
+                newBlockIndex: 12, // Paso 13: Evaluar requisitos técnicos, jurídicos y viabilidad económica
+                newBlockMsg: 'El Comité Evaluador detectó que la propuesta de menor precio excluyó el IVA del 19% simulando una exención de servicios en la nube que no aplica para soporte local de software, resultando en un precio artificialmente bajo.',
+                newBlockNorm: 'Cláusula 6.14 de la Minuta CCE-SNG-IAD-002-2024 y Guía de Ofertas Artificialmente Bajas de CCE'
             },
             {
                 id: 2,
@@ -1403,9 +1418,9 @@
                     { stepIndex: 2, msg: 'Preparación aislada del requerimiento técnico evadiendo el Acuerdo Marco obligatorio.' },
                     { stepIndex: 8, msg: 'Radicación tardía en Licitaciones. El proceso se cae tras meses de planeación al detectarse la obligatoriedad del Acuerdo.' }
                 ],
-                newBlockIndex: 1, // Fase 2: Co-diseño de Estudios Previos y Matriz de Riesgos
-                newBlockMsg: 'El Abogado del Grupo de Contratos asignado detectó que el área técnica omitió realizar el estudio formal de cobertura geográfica obligatorio.',
-                newBlockNorm: 'Decreto 1082 de 2015 - Principio de Selección Objetiva'
+                newBlockIndex: 1, // Paso 2: Analizar los estudios y documentos previos
+                newBlockMsg: 'El Abogado del Grupo de Contratos asignado detectó que el área técnica omitió realizar el estudio formal de cobertura geográfica obligatorio y devolvió el trámite para su corrección.',
+                newBlockNorm: 'Decreto 1082 de 2015 - Principio de Selección Objetiva y Paso 2 del Procedimiento'
             },
             {
                 id: 3,
@@ -1420,9 +1435,9 @@
                     { stepIndex: 9, msg: 'La revisión jurídica formal del Grupo de Licitaciones es estática, basada en documentos físicos presentados días antes.' },
                     { stepIndex: 10, msg: 'La Directora aprueba y firma la Orden de Compra a ciegas con el proponente inhabilitado, configurando Nulidad Absoluta.' }
                 ],
-                newBlockIndex: 6, // Fase 7: Evaluación Jurídica y Filtro de Inhabilidades
-                newBlockMsg: 'El Abogado de Contratos detectó en vivo en las bases de datos del Estado que el representante legal del oferente cuenta con una inhabilidad activa en el registro REDAM.',
-                newBlockNorm: 'Artículo 44 de la Ley 80 de 1993 y Ley 2097 de 2021'
+                newBlockIndex: 12, // Paso 13: Evaluar requisitos técnicos, jurídicos y viabilidad económica
+                newBlockMsg: 'El Abogado de Contratos detectó en vivo en las consultas de bases de datos del Estado (REDAM) que el representante legal del oferente cuenta con una inhabilidad activa por deudas alimentarias, bloqueando la adjudicación.',
+                newBlockNorm: 'Ley 2097 de 2021 (Registro de Deudores Alimentarios Morosos - REDAM) y Artículo 44 de la Ley 80 de 1993'
             },
             {
                 id: 4,
@@ -1437,9 +1452,9 @@
                     { stepIndex: 6, msg: 'El ingeniero técnico presiona de forma autónoma el botón Cancelar Evento de la Tienda Virtual.' },
                     { stepIndex: 10, msg: 'Se reinicia el trámite sin acto administrativo motivado, exponiendo al Ministerio a demandas de oferentes.' }
                 ],
-                newBlockIndex: 4, // Fase 5: Aclaraciones, Observaciones y Cancelaciones
-                newBlockMsg: 'Se detecta error en cantidades. El Comité frena la cancelación por botón en plataforma y exige la expedición obligatoria de un Acto Administrativo motivado firmado por el ordenador.',
-                newBlockNorm: 'Cláusula 6.13 de la Minuta CCE-SNG-IAD-002-2024'
+                newBlockIndex: 10, // Paso 11: Publicar el cuadernillo de observaciones y respuestas
+                newBlockMsg: 'Se detecta un error técnico en cantidades. El Comité detiene la cancelación autónoma directa por botón en plataforma y exige la expedición obligatoria de un Acto Administrativo motivado firmado por el Competente Contractual.',
+                newBlockNorm: 'Cláusula 6.13 de la Minuta CCE y Paso 11 del Procedimiento'
             },
             {
                 id: 5,
@@ -1454,7 +1469,7 @@
                     { stepIndex: 12, msg: 'Designación de supervisor y entrega formal de la carpeta autorizando iniciar labores.' },
                     { stepIndex: 13, msg: 'El supervisor permite el inicio de labores físicas sin contar con la aprobación y vigencia formal de las pólizas de cumplimiento.' }
                 ],
-                newBlockIndex: 10, // Fase 11: Legalización: Garantías y Registro Presupuestal
+                newBlockIndex: 21, // Paso 22: Revisión, aprobación y publicación de las garantías del proveedor
                 newBlockMsg: 'El contratista cargó pólizas con amparos insuficientes. El Abogado de Contratos frena el avance del proceso, prohibiendo el Acta de Inicio física hasta la aprobación formal de la Garantía.',
                 newBlockNorm: 'Artículo 41 de la Ley 80 de 1993 y Cláusula 6.29 de la Minuta CCE'
             }
