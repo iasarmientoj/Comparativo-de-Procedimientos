@@ -2942,6 +2942,7 @@
                 const isSelected = currentSelectedTaskId === task.id;
 
                 const item = document.createElement('div');
+                item.id = 'autogestion-task-item-' + task.id;
                 item.className = `autogestion-task-item ${isCompleted ? 'completed' : ''} ${isSelected ? 'selected' : ''}`;
                 item.setAttribute('onclick', `selectAutogestionTask('${task.id}')`);
 
@@ -3921,10 +3922,13 @@
                         if (targetIndex !== -1) {
                             const targetTask = roleTasks[targetIndex];
                             selectAutogestionTask(targetTask.id);
-                            const activeItem = document.getElementById('autogestion-task-item-' + targetTask.id);
-                            if (activeItem) {
-                                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                            }
+                            // Defer scroll until after DOM reflow
+                            setTimeout(() => {
+                                const activeItem = document.getElementById('autogestion-task-item-' + targetTask.id);
+                                if (activeItem) {
+                                    activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                                }
+                            }, 50);
                         }
                     }
                 }
